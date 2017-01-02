@@ -1,0 +1,17 @@
+{
+ "address": "12MVkvYGcRW6u2NYbpfwVad1oQeyG4s9Er",
+ "cert_auth_type": "web",
+ "cert_sign": "G2i9+gmq0hXQ2oyA++WgPU1F5La7sx9GZe+V1HSRa64saeu4GREg7rNWQM1QOWHtj8x9xIShHalNPMsZYRFrAnQ=",
+ "cert_user_id": "maggi@zeroid.bit",
+ "files": {
+  "channel.json": {
+   "sha512": "730aa0a2fc13585ced91ffdf3e77907a4414e4f4b9cf580ee413e4013a33ce55",
+   "size": 499
+  }
+ },
+ "inner_path": "data/users/1212SPpgKYaJqMKhN9AWd7whQeEViV5G9q/content.json",
+ "modified": 1483364512.101653,
+ "signs": {
+  "12MVkvYGcRW6u2NYbpfwVad1oQeyG4s9Er": "G4k9OqjnIH+C5vIEtg/F98xs5ebfav3xgEItxGUnuMWgxlSnvdbeVOO9IZq0v2vxsSftCU0tm1wdCS7VGsLcMIs="
+ }
+}

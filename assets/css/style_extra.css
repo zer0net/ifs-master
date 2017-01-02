@@ -1,0 +1,64 @@
+.sidebar {
+    position : absolute;
+    top : 0;
+    left : -160px;;
+    transition : 100ms left;
+}
+#navigation-toggle {
+        position : absolute;
+        left : 160px;
+        background : rgba(3,159,244,.95);
+        color : white;
+        text-decoration : none;
+        padding : 20px;
+}
+.show {
+    left : 0;
+}
+.navigation {
+    list-style : none;
+    padding : 0;
+    margin : 0;
+}
+.navigation-items a {
+    display : block;
+    background-color : #444;
+    color : white;
+    line-height : 2em;
+    text-decoration : none;
+    padding : 10px 30px;
+    width : 100px;
+
+}
+.navigation-items a:hover {
+    background-color : #222;
+}
+
+
+.imgFilehubLogo
+{
+    border: 1px solid #dbdbdb;
+    border-radius: 999px;
+    width: 50px;
+    height:50px;
+    margin-right: 10px;
+    
+}
+
+.imgFilehubLogoBig
+{
+    width: 100px;
+    height:100px;
+}
+.description
+{
+    margin: 0 auto;
+    display: block;
+    width: 300px;
+}
+
+.itemLoaded 
+{    
+   border: 3px solid #32cf32;
+}
+

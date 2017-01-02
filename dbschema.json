@@ -1,0 +1,77 @@
+{
+    "db_name": "PPLOAD",
+    "db_file": "data/ifs.db",
+    "version": 3,
+    "maps": {
+        "users/.+/content.json": {
+            "to_keyvalue": [ "cert_user_id" ]
+        },
+        "users/.+/channel.json":{
+            "to_table": ["channel"],
+            "to_keyvalue": ["next_channel_id"]
+        },        
+        "users/.+/comment.json":{
+            "to_table": ["comment"],
+            "to_keyvalue": ["next_comment_id"]
+        },
+        "users/.+/view.json":{
+            "to_table": ["view"],
+            "to_keyvalue": ["next_view_id"]
+        },
+        "users/.+/vote.json":{
+            "to_table": ["vote"],
+            "to_keyvalue": ["next_vote_id"]
+        }
+    },
+    "tables": {
+        "channel": {
+            "cols": [
+                ["channel_id", "TEXT"],
+                ["channel_address", "TEXT"],
+                ["channel_name", "TEXT"],
+                ["date_added", "INTEGER"],
+                ["json_id", "INTEGER REFERENCES json (json_id)"]
+            ],
+            "indexes": ["CREATE UNIQUE INDEX channel_key ON channel(json_id, date_added)"],
+            "schema_changed": 1
+        },
+        "comment": {
+            "cols": [
+                ["comment_id", "INTEGER"],
+                ["item_id", "INTEGER"],
+                ["channel", "TEXT"],
+                ["user_id", "INTEGER"],
+                ["comment", "TEXT"],
+                ["date_added", "INTEGER"],
+                ["json_id", "INTEGER REFERENCES json (json_id)"]
+            ],
+            "indexes": ["CREATE UNIQUE INDEX comment_key ON comment(json_id, date_added)"],
+            "schema_changed": 1
+        },
+        "view": {
+            "cols": [
+                ["view_id", "INTEGER"],
+                ["item_id", "INTEGER"],
+                ["channel", "TEXT"],
+                ["user_id", "TEXT"],
+                ["date_added", "INTEGER"],
+                ["json_id", "INTEGER REFERENCES json (json_id)"]
+            ],
+            "indexes": ["CREATE UNIQUE INDEX view_key ON view(json_id, date_added)"],
+            "schema_changed": 1
+        },
+        "vote": {
+            "cols": [
+                ["vote_id", "INTEGER"],
+                ["item_id", "INTEGER"],
+                ["channel", "TEXT"],
+                ["user_id", "INTEGER"],
+                ["vote", "INTEGER"],
+                ["date_added", "INTEGER"],
+                ["json_id", "INTEGER REFERENCES json (json_id)"]
+            ],
+            "indexes": ["CREATE UNIQUE INDEX vote_key ON vote(json_id, date_added)"],
+            "schema_changed": 1
+        }
+    }
+}

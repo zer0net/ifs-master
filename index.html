@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html ng-app="PPLOAD_MASTER" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+	<!-- CSS -->
+
+		<!-- lib -->
+		<link href="assets/lib/angular-material/angular-material.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+
+	
+		<!-- app -->
+		<link href="assets/css/simple-sidebar.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/css/style_extra.css" rel="stylesheet" type="text/css"/>
+
+	<!-- /CSS -->
+
+	<!-- HTML5 Shim -->
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<!--<base href="/">-->
+
+</head>
+
+<body class="ng-cloak" ng-controller="MainCtrl" ng-init="init()">
+
+<div id="wrapper" class="toggled">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand" style="font-size: 20px; font-weight: bold; color: #fff; ">
+                
+                    EXPLORE  <span class="glyphicon glyphicon-refresh"  ng-click="filerMediaTypeRemove()" ></span>
+                
+            </li>
+            <li ng-if="games" ng-click="filterMediaType('game')">
+                <span style="color: #fff">Games&nbsp;[{{games.length}}]</span>
+            </li>
+            <li ng-if="videos" ng-click="filterMediaType('video')">
+                <span style="color: #fff">Videos&nbsp;[{{videos.length}}]</span>
+            </li>    
+          
+           <div channel-register ng-if="channels.length > 0"  style="border-top: 1px solid #fff">     
+            
+           <li class="sidebar-brand" style="font-size: 20px; font-weight: bold; color: #fff; ">               
+                   Channels  <span class="glyphicon glyphicon-refresh"  ng-click="filerChannelRemove()" ></span>                              
+           </li>      
+                <li ng-repeat="channel in channels | orderBy:'-date_added'" ng-init="getChannelInfo(channel)"  ng-click="filerChannel(channel)" >                                                                     
+                    
+                <img ng-if="channel.logo" ng-src="/{{channel_master_address}}/merged-{{merger_name}}/{{channel.channel_address}}/uploads/images/{{channel.logo}}" class="imgFilehubLogo" />   
+                <img ng-hide="channel.logo" src="assets/img/x-avatar.png" class="imgFilehubLogo"/>          
+                
+                <a href="#">{{channel.channel_name}}&nbsp;[{{channel.filesLen}}]</a>                            
+                </li>            
+            </div> 
+        </ul>                              
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid" style="padding-left: 0px">
+            <div class="row">
+                <div class="col-lg-12">                                       
+
+                        
+
+                    <!-- HEADER -->
+                    <site-header></site-header>
+                    <!-- /HEADER -->	
+					
+                    <!-- MAIN -->
+                    <section flex layout="column" layout-padding class="container" style="padding-top: 50px;">  
+                        <div id="channelInfo">  </div>                
+                       <!-- loading -->
+                    	<div layout="column" ng-show="loading" flex>
+                    		<div layout="column" flex="100" style="text-align:center;">
+                    			<span><b ng-bind="msg"></b></span>
+                    		</div>
+                    		<div layout="row" flex="100" layout-align="space-around">
+                    			<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                    		</div>
+                    	</div>
+                    	<!-- /loading -->
+
+                        <!-- home page items section -->
+                        <md-content ng-hide="loading" flex layout-padding class="section" id="hp-items-section">
+
+                        	<!-- games -->
+                        	<div  ng-if="(games|filter:ppFilter).length"  id="game-list-container">
+                    	    	<h2>Games</h2>
+                    	    	<hr/>
+                    			<game-list></game-list>
+                    		</div>
+                    	    <!-- /games -->		    
+                    	    <!-- videos -->
+                    	    <div ng-if="(videos|filter:ppFilter).length" id="video-list-container">
+                    	    	<h2>Videos</h2>
+                    	    	<hr/>
+                    	    	<video-list ng-if="videos"></video-list>
+                    	    </div>
+                    	    <!-- /videos -->
+                        </md-content>
+                        <!-- / home page items section -->
+
+                    </section>
+                    <!-- /MAIN -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /#page-content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+	
+
+	<!-- JS -->
+
+		<!-- zeronet -->
+		<script type="text/javascript" src="assets/lib/zeronet/Class.js"></script>
+		<script type="text/javascript" src="assets/lib/zeronet/ZeroFrame.js"></script>
+		<script type="text/javascript" src="assets/lib/zeronet/ZeroChat.js"></script>
+    
+		<!-- jquery -->
+		<script type="text/javascript" src="assets/lib/jquery/jquery.min.js"></script>
+
+		<!-- angular -->		
+		<script type="text/javascript" src="assets/lib/angular/angular.min.js"></script>
+	    <script type="text/javascript" src="assets/lib/angular/angular-route.min.js"></script>
+	    <script type="text/javascript" src="assets/lib/angular/angular-animate.min.js"></script>
+	    <script type="text/javascript" src="assets/lib/angular/angular-aria.min.js"></script>
+		<script type="text/javascript" src="assets/lib/angular-sanitize/angular-sanitize.min.js"></script>
+		<script type="text/javascript" src="assets/lib/angular-material/angular-material.min.js"></script>
+		<script type="text/javascript" src="assets/lib/moment/moment.js"></script>
+		<script type="text/javascript" src="assets/lib/angular-moment/angular-moment.min.js"></script>
+	    <script type="text/javascript" src="assets/lib/identicon/pnglib.js"></script>
+	    <script type="text/javascript" src="assets/lib/identicon/identicon.js"></script>
+	    <script type="text/javascript" src="assets/lib/angular-identicon/angular-identicon.min.js"></script>
+	    <script type="text/javascript" src="assets/lib/angular-fullscreen/angular-fullscreen.js"></script>
+
+		<!-- videogular -->
+		<script type="text/javascript" src="assets/lib/videos/videogular/videogular.js"></script>
+		<script type="text/javascript" src="assets/lib/videos/videogular-controls/vg-controls.js"></script>
+		<script type="text/javascript" src="assets/lib/videos/videogular-buffering/vg-buffering.js"></script>
+		<script type="text/javascript" src="assets/lib/videos/videogular-overlay-play/vg-overlay-play.js"></script>
+		<script type="text/javascript" src="assets/lib/videos/videogular-poster/vg-poster.js"></script>
+
+		<!-- app core -->
+		<script type="text/javascript" src="app/application.js"></script>		
+		<script type="text/javascript" src="app/core/controllers/main.ctrl.js"></script>
+		<script type="text/javascript" src="app/core/directives/site-config.directive.js"></script>
+		<script type="text/javascript" src="app/core/directives/site-header.directive.js"></script>
+		
+		<script type="text/javascript" src="app/core/util/dirPagination.js"></script>
+		
+		<script type="text/javascript" src="app/core/directives/comments.directive.js"></script>
+		<script type="text/javascript" src="app/core/directives/votes.directive.js"></script>
+		<script type="text/javascript" src="app/core/directives/views.directive.js"></script>
+		<script type="text/javascript" src="app/core/filters/file-size.filter.js"></script>
+
+		<!-- app games -->	
+		<script type="text/javascript" src="app/games/directives/game-list.directive.js"></script>
+
+		<!-- app videos -->	
+		<script type="text/javascript" src="app/videos/directives/video-list.directive.js"></script>
+
+        <script type="text/javascript" src="app/core/directives/channel-register.directive.js"></script>
+
+	<!-- /JS -->  
+    <script>
+       
+
+    </script>
+</body>
+
+</html>

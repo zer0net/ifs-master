@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html ng-app="PPLOAD_MASTER" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+	<!-- CSS -->
+		<!-- lib -->
+		<link href="assets/lib/angular-material/angular-material.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+		<!-- app -->
+		<link href="assets/css/simple-sidebar.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/css/style_extra.css" rel="stylesheet" type="text/css"/>
+	<!-- /CSS -->
+
+	<!-- HTML5 Shim -->
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<!--<base href="/">-->
+
+</head>
+
+<body class="ng-cloak" ng-controller="MainCtrl" ng-init="init()">
+
+
+<div id="wrapper" class="toggled">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+            <li class="sidebar-brand" style="font-size: 20px; font-weight: bold; color: #fff; ">
+                
+                    EXPLORE  <span class="glyphicon glyphicon-refresh"  ng-click="filerMediaTypeRemove()" ></span>
+                
+            </li>
+            <li ng-if="games" ng-click="filterMediaType('game')">
+                <span style="color: #fff">Games&nbsp;[{{games.length}}]</span>
+            </li>
+            <li ng-if="videos" ng-click="filterMediaType('video')">
+                <span style="color: #fff">Videos&nbsp;[{{videos.length}}]</span>
+            </li>    
+          
+           <div channel-register ng-if="channels.length > 0"  style="border-top: 1px solid #fff">     
+            
+           <li class="sidebar-brand" style="font-size: 20px; font-weight: bold; color: #fff; ">               
+                   Channels  <span class="glyphicon glyphicon-refresh"  ng-click="filerChannelRemove()" ></span>                              
+           </li>      
+                <li ng-repeat="channel in channels | orderBy:'-date_added'" ng-init="getChannelInfo(channel)"  ng-click="filerChannel(channel)" >                                                                     
+                    
+                <img ng-if="channel.logo" ng-src="/{{channel_master_address}}/merged-{{merger_name}}/{{channel.channel_address}}/uploads/images/{{channel.logo}}" class="imgFilehubLogo" />   
+                <img ng-hide="channel.logo" src="assets/img/x-avatar.png" class="imgFilehubLogo"/>          
+                
+                <a href="#">{{channel.channel_name}}&nbsp;[{{channel.filesLen}}]</a>                            
+                </li>            
+            </div> 
+        </ul>                             
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid" style="padding-left: 0px">
+            <div class="row">
+              <div class="col-lg-12">   
+	<!-- HEADER -->
+	<site-header></site-header>
+	<!-- /HEADER -->
+
+	<!-- MAIN -->
+	<section flex layout="row" layout-padding class="container" style="padding-top: 50px;">
+
+		<!-- loading -->
+		<div layout="column" ng-show="loading" flex>
+			<div layout="column" flex="100" style="text-align:center;">
+				<span><b ng-bind="msg"></b></span>
+			</div>
+			<div layout="row" flex="100" layout-align="space-around">
+				<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+			</div>
+		</div>
+		<!-- /loading -->
+
+	    <main ng-hide="loading" item-view ng-init="initItemView()" flex layout="column" class="section games-section">
+		    <div ng-if="item_type === 'game'" layout="row" layout-padding >
+		    	<!-- game -->
+				<md-content game-view flex="65" class="item-view" ng-if="games" ng-init="initGameView()">
+
+					<!-- dosbox -->
+					<dosbox ng-if="game.file_type === 'zip'"></dosbox>
+					<!-- /dosbox -->
+
+					<!-- nes -->
+					<nes-emulator ng-if="game.file_type === 'nes'"></nes-emulator>
+					<!-- /nes ->
+
+					<hr class="divider"/>
+						
+					<!-- info -->
+					<section class="section md-whiteframe-1dp item-info">
+						<div class="section-header item-info-header">
+							<h3 ng-bind="game.title"></h3>
+							<a href="/{{game.channel.address}}">{{game.channel.content.title}}</a>
+							<div class="item-views" views ng-init="getViews(game)">
+								<!--<span>{{game.views.length}} Views</span>-->
+								<span>{{game.channel.peers}} Peers </span>
+							</div>
+						</div>
+						<hr/>
+						<div class="item-details">
+							<div class="votes" votes ng-init="getVotes(game)">
+								<a class="up-vote" ng-click="onUpVote(game)">
+									<span class="glyphicon glyphicon-thumbs-up"></span>
+									<span class="number">{{game.upVotes}}</span>									
+								</a>
+								<a class="down-vote" ng-click="onDownVote(game)">
+									<span class="glyphicon glyphicon-thumbs-down"></span>
+									<span class="number">{{game.downVotes}}</span>
+								</a>
+							</div>
+							<ul>
+								<li><b>size:</b> {{game.zip_size|filesize}}</li>
+								<li><b>date added:</b> <span am-time-ago="game.date_added"></span>							
+							</ul>
+							<article layout-padding ng-show="game.description">
+								<hr/>
+								<p ng-bind="game.description"></p>
+							</article>
+						</li>
+					</section>
+					<!-- /info -->
+
+					<hr class="divider"/>
+
+					<!-- comments -->
+					<comments ng-init="getComments(game)">
+						<div class="item-comments">
+							<!-- comment form -->
+							<section class="comment-form section md-whiteframe-1dp"  style="margin-top:16px;">
+								<div class="section-header" layout-padding>
+									<h2>Comments</h2>
+									<span class="comment-counter">
+										<span class="glyphicon glyphicon-comment"></span>
+										<span class="number">{{comments.length}}</span>
+									</span>
+								</div>
+							    <hr/>
+								<form layout="row" layout-padding>
+									<div flex="10">
+					                	<identicon class="md-whiteframe-1dp" username="user" size="64"></identicon>
+									</div>
+									<div flex="90">
+										<md-input-container class="md-block" flex-gt-sm>
+							              	<label>Add comment as {{user}}...</label>
+											<textarea ng-model="comment" ng-focus="onTextAreaFocus()"></textarea>
+							            </md-input-container>
+								        <md-button class="md-primary md-raised edgePadding pull-right" ng-click="onPostComment(comment,game)">
+								        	<label>Post</label>
+								        </md-button>
+								    </div>
+							    </form>
+							</section>
+							<!-- /comment form -->
+							<!-- comment list -->
+							<section class="comment-list md-whiteframe-1dp" id="comments-section" layout-padding ng-show="comments.length > 0">
+								<ul>
+									<li ng-repeat="comment in comments | orderBy:'-date_added'" layout="row">
+										<div flex="10">
+						                	<identicon class="md-whiteframe-1dp" username="comment.user_id" size="56"></identicon>
+										</div>
+										<div flex="90">
+											<span ng-bind="comment.user_id" class="user-name"></span> • 
+											<span am-time-ago="comment.date_added" class="time-ago"></span>
+											<p ng-bind="comment.comment"></p>
+									    </div>
+									</li>
+								</ul>
+							</section>
+							<!-- comment list -->
+						</div>
+					</comments>
+					<!-- /comments -->
+
+				</md-content>
+				<!-- /game -->
+				<!-- game list -->
+				<md-content class="game-list" flex="35" ng-if="games">
+					<div class="md-whiteframe-1dp" layout="column">
+						<ul>
+					    	<li ng-repeat="game in games|limitTo:15 | orderBy:'-date_added' track by $index" layout="row" layout-padding>
+								<figure flex="35" class="game-img">
+									<a href="/{{site_address}}/view.html?type=game-c={{game.channel.address}}g={{game.game_id}}">
+										<img src="{{game.img}}"/>
+									</a>
+								</figure>
+								<div flex="65" class="game-info">
+						    		<h3><a href="/{{site_address}}/view.html?type=game-c={{game.channel.address}}g={{game.game_id}}">{{game.title}}</a></h3>
+						    		<span><b>size:</b> {{game.zip_size|filesize}}</span><br/>
+						    		<span><b>date added:</b> <span am-time-ago="game.date_added"></span></span>
+						    	</div>
+						    	<hr/>
+					    	</li>
+						</ul>
+					</div>
+				</md-content>
+				<!-- /game list -->
+			</div>
+			<div ng-if="item_type === 'video'"  layout="row" layout-padding >
+				<!-- VIDEO  -->
+				<md-content class="item-view video-view" video-view ng-if="videos" ng-init="initVideoView()" flex="65">
+					
+					<!-- loading -->
+					<div layout="row" ng-show="videoLoading"  layout-sm="column" layout-align="space-around">
+						<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+					</div>
+					<!-- loading -->
+
+					<div ng-if="video" ng-show="API.finishedLoading" ng-init="loadVideo(video)">
+						<!-- player -->
+						<section class="md-whiteframe-1dp">
+							<videogular ng-if="player"
+								vg-auto-play="player.autoPlay" 
+								vg-player-ready="onPlayerReady($API)" 
+								vg-complete="onPlayerComplete($API)"
+								vg-error="onPlayerError($event)"
+								vg-theme="player.theme" 
+								class="{{screenSize}}"
+								style="width:100%; height:400px;">
+								<vg-media vg-src="player.sources" vg-tracks="player.tracks"></vg-media>
+								<vg-controls ng-if="!player.error"  ng-show="API.totalTime">
+									<vg-play-pause-button></vg-play-pause-button>
+									<vg-time-display>{{ currentTime | date:"mm:ss" }}</vg-time-display>
+									<vg-scrub-bar>
+										<vg-scrub-bar-buffer ng-if="!player.Buffer"></vg-scrub-bar-buffer>
+										<div class="vg-scrub-bar-buffered" ng-if="player.Buffer" style="width:{{video.loadingPercent}}%;"></div>
+										<vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+									</vg-scrub-bar>
+									<vg-time-display>{{ timeLeft | date:"mm:ss" }}</vg-time-display>
+									<div class="vg-download-button">
+										<a href="/{{video.channel.address}}/uploads/videos/{{video.file_name}}" download>
+											<span class="glyphicon glyphicon-arrow-down"></span>
+										</a>
+									</div>
+									<vg-volume>
+										<vg-mute-button></vg-mute-button>
+										<vg-volume-bar></vg-volume-bar>
+									</vg-volume>
+									<vg-fullscreen-button ng-click="onFullScreenClick()"></vg-fullscreen-button>
+								</vg-controls>
+								<vg-poster vg-url="player.plugins.poster" ng-if="player.plugins"></vg-poster>
+								<vg-overlay-play ng-hide="player.error"></vg-overlay-play>
+								<vg-buffering></vg-buffering>
+								<div class="vg-error-message" ng-if="player.error">
+									{{player.message}}
+								</div>
+								<div class="vg-loading-message" ng-hide="player.done">
+									Now loading... Connecting to {{video.channel.peers}} peers<br/>
+									(Takes approx. 1 minute / 10mb)
+								</div>
+							</videogular>
+						</section>
+						<!-- /player -->
+						<hr class="divider"/>
+						<!-- info -->
+						<section class="section md-whiteframe-1dp item-info">
+							<div class="section-header item-info-header">
+								<h3 ng-bind="video.title"></h3>
+								<a href="/{{video.channel.address}}">{{video.channel.content.title}}</a>
+								<div class="video-views item-views" views ng-init="getViews(video)">
+									<!--<span>{{video.views.length}} Views</span>-->
+									<span>{{video.channel.peers}} Peers</span>
+								</div>
+							</div>
+							<hr/>
+							<div class="item-details">
+								<div class="votes" votes ng-init="getVotes(video)">
+									<a class="up-vote" ng-click="onUpVote(video)">
+										<span class="glyphicon glyphicon-thumbs-up"></span>
+										<span class="number">{{video.upVotes}}</span>
+									</a>
+									<a class="down-vote" ng-click="onDownVote(video)">
+										<span class="glyphicon glyphicon-thumbs-down"></span>
+										<span class="number">{{video.downVotes}}</span>
+									</a>
+								</div>
+								<ul>
+									<!--<li><b>peers:</b> {{video.channel.peers}}</li>-->
+									<li><b>size:</b> {{video.file_size|filesize}}</li>
+									<li><b>date added:</b> <span am-time-ago="video.date_added"></span>
+									
+								</ul>
+								<article layout-padding ng-show="video.description">
+									<hr/>
+									<p ng-bind="video.description"></p>
+								</article>
+							</li>
+						</section>
+						<!-- /info -->
+
+						<hr class="divider"/>
+						
+						<!-- COMMENTS -->
+						<comments ng-init="getComments(video)">
+							<div class="item-comments">
+								<!-- comment form -->
+								<section class="comment-form section md-whiteframe-1dp"  style="margin-top:16px;">
+									<div class="section-header" layout-padding>
+										<h2>Comments</h2>
+										<span class="comment-counter">
+											<span class="glyphicon glyphicon-comment"></span>
+											<span class="number">{{comments.length}}</span>
+										</span>
+									</div>
+								    <hr/>
+									<form layout="row" layout-padding>
+										<div flex="10">
+						                	<identicon class="md-whiteframe-1dp" username="user" size="64"></identicon>
+										</div>
+										<div flex="90">
+											<md-input-container class="md-block" flex-gt-sm>
+								              	<label>Add comment as {{user}}...</label>
+												<textarea ng-model="comment" ng-focus="onTextAreaFocus()"></textarea>
+								            </md-input-container>
+									        <md-button class="md-primary md-raised edgePadding pull-right" ng-click="onPostComment(comment,video)">
+									        	<label>Post</label>
+									        </md-button>
+									    </div>
+								    </form>
+								</section>
+								<!-- /comment form -->
+								<!-- comment list -->
+								<section class="comment-list md-whiteframe-1dp" id="comments-section" layout-padding ng-show="comments.length > 0">
+									<ul>
+										<li ng-repeat="comment in comments | orderBy:'-date_added'" layout="row">
+											<div flex="10">
+							                	<identicon class="md-whiteframe-1dp" username="comment.user_id" size="56"></identicon>
+											</div>
+											<div flex="90">
+												<span ng-bind="comment.user_id" class="user-name"></span> • 
+												<span am-time-ago="comment.date_added" class="time-ago"></span>
+												<p ng-bind="comment.comment"></p>
+										    </div>
+										</li>
+									</ul>
+								</section>
+								<!-- comment list -->
+							</div>
+						</comments>
+						<!-- /COMMENTS -->
+
+					</div>
+				</md-content>
+				<!-- /VIDEO -->
+				<!-- VIDEO LIST -->
+				<md-content class="video-list" flex="35"  ng-if="videos" style="background-color: transparent;">
+					<div class="md-whiteframe-1dp" layout="column">
+						<ul ng-if="videos">
+					    	<li ng-repeat="vid in videos | orderBy:'-date_added' track by $index">
+						    	<a href="/{{site_address}}/view.html?type=video-c={{vid.channel.address}}v={{vid.video_id}}">{{vid.title}}</a>
+						    	<hr/>
+					    	</li>
+						</ul>
+					</div>
+				</md-content>
+				<!-- /VIDEO LIST -->
+			</div>
+	    </main>
+
+	</section>
+	<!-- /MAIN -->
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	    <!-- /#page-content-wrapper -->
+
+	</div>
+	<!-- JS -->
+
+		<!-- zeronet -->
+		<script type="text/javascript" src="assets/lib/zeronet/Class.js"></script>
+		<script type="text/javascript" src="assets/lib/zeronet/ZeroFrame.js"></script>
+		<script type="text/javascript" src="assets/lib/zeronet/ZeroChat.js"></script>
+    
+		<!-- jquery -->
+		<script type="text/javascript" src="assets/lib/jquery/jquery.min.js"></script>
+
+		<!-- angular -->		
+		<script type="text/javascript" src="assets/lib/angular/angular.min.js"></script>
+	    <script type="text/javascript" src="assets/lib/angular/angular-route.min.js"></script>
+	    <script type="text/javascript" src="assets/lib/angular/angular-animate.min.js"></script>
+	    <script type="text/javascript" src="assets/lib/angular/angular-aria.min.js"></script>
+		<script type="text/javascript" src="assets/lib/angular-sanitize/angular-sanitize.min.js"></script>
+		<script type="text/javascript" src="assets/lib/angular-material/angular-material.min.js"></script>
+		<script type="text/javascript" src="assets/lib/moment/moment.js"></script>
+		<script type="text/javascript" src="assets/lib/angular-moment/angular-moment.min.js"></script>
+	    <script type="text/javascript" src="assets/lib/identicon/pnglib.js"></script>
+	    <script type="text/javascript" src="assets/lib/identicon/identicon.js"></script>
+	    <script type="text/javascript" src="assets/lib/angular-identicon/angular-identicon.min.js"></script>
+	    <script type="text/javascript" src="assets/lib/angular-fullscreen/angular-fullscreen.js"></script>
+
+		<script type="text/javascript" src="app/core/util/dirPagination.js"></script>
+		<!-- videogular -->
+		<script type="text/javascript" src="assets/lib/videos/videogular/videogular.js"></script>
+		<script type="text/javascript" src="assets/lib/videos/videogular-controls/vg-controls.js"></script>
+		<script type="text/javascript" src="assets/lib/videos/videogular-buffering/vg-buffering.js"></script>
+		<script type="text/javascript" src="assets/lib/videos/videogular-overlay-play/vg-overlay-play.js"></script>
+		<script type="text/javascript" src="assets/lib/videos/videogular-poster/vg-poster.js"></script>
+
+		<!-- dosbox -->
+		<script type="text/javascript" src="assets/lib/js-dos/js-dos.js"></script>
+
+		<!-- nes emulator -->
+		<script src="assets/lib/games/nes/lib/dynamicaudio-min.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="assets/lib/games/nes/nes.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="assets/lib/games/nes/utils.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="assets/lib/games/nes/cpu.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="assets/lib/games/nes/keyboard.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="assets/lib/games/nes/mappers.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="assets/lib/games/nes/papu.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="assets/lib/games/nes/ppu.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="assets/lib/games/nes/rom.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="assets/lib/games/nes/ui.js" type="text/javascript" charset="utf-8"></script>
+
+		<!-- app core -->
+		<script type="text/javascript" src="app/application.js"></script>		
+		<script type="text/javascript" src="app/core/controllers/main.ctrl.js"></script>
+		<script type="text/javascript" src="app/core/directives/site-config.directive.js"></script>		
+		<script type="text/javascript" src="app/core/directives/site-header.directive.js"></script>		
+		<script type="text/javascript" src="app/core/directives/item-view.directive.js"></script>
+		<script type="text/javascript" src="app/core/directives/comments.directive.js"></script>
+		<script type="text/javascript" src="app/core/directives/votes.directive.js"></script>
+		<script type="text/javascript" src="app/core/directives/views.directive.js"></script>
+		<script type="text/javascript" src="app/core/filters/file-size.filter.js"></script>
+
+		<!-- app games -->
+		<script type="text/javascript" src="app/games/directives/game-view.directive.js"></script>
+		<script type="text/javascript" src="app/games/directives/dosbox.directive.js"></script>
+		<script type="text/javascript" src="app/games/directives/nes-emulator.directive.js"></script>
+
+		<!-- app videos -->
+		<script type="text/javascript" src="app/videos/directives/video-view.directive.js"></script>
+		<script type="text/javascript" src="app/core/directives/channel-register.directive.js"></script>
+
+	<!-- /JS -->  
+
+</body>
+
+</html>
