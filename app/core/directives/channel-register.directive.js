@@ -101,10 +101,11 @@ app.directive('channelRegister', [
 						// check if channel exists in sites array
 						var channelExists = false;
 						if ($scope.channels){
+						
 							// loop though channel array
 							$scope.channels.forEach(function(channel,index){
 								// if channel exists in channel array
-								if (channel.channel_address === $scope.channel_id){
+								if (channel.channel_address == $scope.channel_id){
 									channelExists = true;
 									Page.cmd("wrapperNotification", ["info", "Channel "+$scope.channel.channel_name+" ("+$scope.channel_id+") already exists in database", 10000]);
 								}
@@ -147,7 +148,10 @@ app.directive('channelRegister', [
 						channel_id:data.next_channel_id,
 						channel_address:$scope.channel_id,
 						channel_name:$scope.channel.channel_name,
-						date_added: +(new Date)
+						date_added: +(new Date),
+						user:Page.site_info.auth_address,
+						hide:0
+
 					};
 					// update data
 					data.channel.push(channel);
@@ -162,7 +166,13 @@ app.directive('channelRegister', [
 								Page.cmd("wrapperNotification", ["done", "Channel Added!", 10000]);
 								channel.new = true;
 								// apply channel to channels array
-								$scope.channels.push(channel);
+								if($scope.channels){
+									$scope.channels.push(channel);
+								}else
+								{
+									$scope.channels = new Array();
+									$scope.channels.push(channel);
+								}
 							});
 						});
 					});
@@ -172,18 +182,24 @@ app.directive('channelRegister', [
 			// delete channel
 			$scope.deleteChannel = function(channel,cIndex){
 				// get file
-				var inner_path = "data/users/"+Page.site_info.auth_address+"/channel.json";			
+				//var inner_path = "data/users/"+Page.site_info.auth_address+"/channel.json";			
+				var inner_path = "data/users/"+channel.user+"/channel.json";			
 				Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(data) {
-					data = JSON.parse(data);
+					data = JSON.parse(data);					
+
 					// find channel's id in user's channels.json 
 					var channelIndex;
-					data.channels.forEach(function(ch,index){
-						if (ch.channel_id === channel.channel_id){
+					data.channel.forEach(function(ch,index){
+						if (ch.channel_id == channel.channel_id){
 							channelIndex = index;
 						}
-					});
+					});					
+
 					// remove channel from user's channels.json
-					data.channels.splice(channelIndex,1);
+					//data.channel.splice(channelIndex,1);
+					// hide channel
+					data.channel[channelIndex].hide=1;
+
 					// write to file
 					var json_raw = unescape(encodeURIComponent(JSON.stringify(data, void 0, '\t')));
 					Page.cmd("fileWrite", [inner_path, btoa(json_raw)], function(res) {
@@ -197,6 +213,8 @@ app.directive('channelRegister', [
 						});
 					});
 			    });
+				
+				
 			};
 
 		}

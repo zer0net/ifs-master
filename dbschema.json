@@ -1,5 +1,5 @@
 {
-    "db_name": "PPLOAD",
+    "db_name": "IFS",
     "db_file": "data/ifs.db",
     "version": 3,
     "maps": {
@@ -30,6 +30,8 @@
                 ["channel_address", "TEXT"],
                 ["channel_name", "TEXT"],
                 ["date_added", "INTEGER"],
+                ["user", "TEXT"],
+                ["hide", "INTEGER"],
                 ["json_id", "INTEGER REFERENCES json (json_id)"]
             ],
             "indexes": ["CREATE UNIQUE INDEX channel_key ON channel(json_id, date_added)"],

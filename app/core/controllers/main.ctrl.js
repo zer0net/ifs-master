@@ -135,7 +135,7 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 				// loading
 				$scope.showLoadingMessage('Loading Channels');				
 				// get channels				
-				var query = ["SELECT * FROM channel ORDER BY date_added"];
+				var query = ["SELECT * FROM channel where hide=0 ORDER BY date_added"];
 				Page.cmd("dbQuery", query, function(channels) {	
 								
 					if (channels.length > 0){
@@ -277,6 +277,7 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 				      							// finish loading
 				      							$scope.finishLoadingChannels(cIndex);
 				      						}
+				      						
 				      					});
 				      				}
 				      			}
