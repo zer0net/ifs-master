@@ -5,8 +5,8 @@
  "cert_user_id": "ppload3@zeroid.bit",
  "files": {
   "channel.json": {
-   "sha512": "5a1e136d4c644c08caff679985e550453c47d5b7479bef02af14077acea91711",
-   "size": 43
+   "sha512": "16619431d02a19ec6599e69ccf70c1cdb04ba5fb5ca40f2f1a132bbc5772d95e",
+   "size": 259
   },
   "vote.json": {
    "sha512": "eb3c89c6c08b263b720d3ae5f1c519cc8fa411de34da921766cb684c599ced8c",
@@ -14,8 +14,8 @@
   }
  },
  "inner_path": "data/users/1R67TfYzNkCnh89EFfGmXn5LMb4hXaMRQ/content.json",
- "modified": 1482406349.7726,
+ "modified": 1483451135.35356,
  "signs": {
-  "12MVkvYGcRW6u2NYbpfwVad1oQeyG4s9Er": "HJuT9kmSK7WGbFTbTh8VOtFcZDfQFIWOdyk9JXnqLn5PL1ezjXrZFJvyQ3ApmcZ4cThg+GRwTJ3/17tZiTohsdg="
+  "12MVkvYGcRW6u2NYbpfwVad1oQeyG4s9Er": "G78sxcu3cDAHbUUVwbgmxvgbX+WZihYlyLCO/tgPgNd8uINlFswyQk3QfIPGpKwleL/IwnIp6mdee72vFLxg1FA="
  }
 }

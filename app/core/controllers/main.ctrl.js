@@ -24,6 +24,10 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 					Page.site_info = site_info;
 					// owner					
 					$scope.owner = site_info.settings.own;
+
+					// update site
+					Page.cmd('siteUpdate',{"address":$scope.site_address})
+
 					// apply auth address to scope
 					if (Page.site_info.cert_user_id) { $scope.user = Page.site_info.cert_user_id; } 
 					else { $scope.user = Page.site_info.auth_address; }
