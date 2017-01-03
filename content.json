@@ -22,8 +22,8 @@
    "size": 366
   },
   "app/core/directives/channel-register.directive.js": {
-   "sha512": "8f91c0688300867fb853724808bbdea41a0d636ef981208d93dc9d4574d45638",
-   "size": 7121
+   "sha512": "d34067d7eeecf4e946957f4fcb95030f3518d8e9006a012ae0af4cbf1e25a407",
+   "size": 7206
   },
   "app/core/directives/comments.directive.js": {
    "sha512": "178935a6bdb18bdb6ecd26de75aef2db85678797a9a59e1c3abc3f0e884d5c58",
@@ -774,12 +774,20 @@
    "size": 506
   },
   "data/ifs.db": {
-   "sha512": "93648b98ed99fd4d65d224a35c85f5cc0773850ce2d7d9e6b70aae2e51710c16",
+   "sha512": "6d888787f17b51833b1fc02d4cd24886cc91c5e0b47c26e30540e589632cb60a",
    "size": 16384
   },
   "data/users/1212SPpgKYaJqMKhN9AWd7whQeEViV5G9q/channel.json": {
-   "sha512": "2a8a890a90a6729799d9e4aec6aaca1bfcf3f0f388779d16187f7cd381c2754b",
-   "size": 470
+   "sha512": "6774d7f57d18d61db13c2afa946ce202ac7dfba263d5bc78712b91418ac53276",
+   "size": 688
+  },
+  "data/users/1R67TfYzNkCnh89EFfGmXn5LMb4hXaMRQ/channel.json": {
+   "sha512": "16619431d02a19ec6599e69ccf70c1cdb04ba5fb5ca40f2f1a132bbc5772d95e",
+   "size": 259
+  },
+  "data/users/1R67TfYzNkCnh89EFfGmXn5LMb4hXaMRQ/vote.json": {
+   "sha512": "eb3c89c6c08b263b720d3ae5f1c519cc8fa411de34da921766cb684c599ced8c",
+   "size": 407
   },
   "dbschema.json": {
    "sha512": "03c7f777e604238c6b6e571a0a9c83faada45825bfcc4eb8ea80e53fdb687828",
@@ -807,15 +815,15 @@
  },
  "inner_path": "content.json",
  "merger_name": "IFS",
- "modified": 1483448751.580226,
+ "modified": 1483451664.485082,
  "postmessage_nonce_security": true,
  "sign": [
-  105151711100577877212794080833097257534250686452611290838197417987690013054549,
-  22370428396299124716093655511788653749492891978941631934022604785555822961085
+  48869913695001721984903525786263867127691323133805710432581368098318707463811,
+  115009125568690828497124982311813507253822713754317432252808097094356670449471
  ],
  "signers_sign": "HC/miR5hB96ZCvNL2endq/9EXuNX+Y4Ycmnx0MQWGwPpyFdHopJwp0/+0l+m98qhtKPa0cSCwrXSBjOZd950Y2A=",
  "signs": {
-  "12MVkvYGcRW6u2NYbpfwVad1oQeyG4s9Er": "HHr4oZeFOV3Sce8TmHRAVADK9iCk9mVQ+lyY+uLtD/L7kCIIBTHi4eLSB7h07pbRQINtyPNWrqAR3nkQU24iRm8="
+  "12MVkvYGcRW6u2NYbpfwVad1oQeyG4s9Er": "G9I0sTh6DEzRa59RL9nKgvQXBYGhgGQTbA2mccBmmdS2DV91twKJvWWvFNvxCmjVETrfNXcOZh9uKpDG3t0OkCA="
  },
  "signs_required": 1,
  "title": "IFS",

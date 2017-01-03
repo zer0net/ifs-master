@@ -5,13 +5,13 @@
  "cert_user_id": "maggi@zeroid.bit",
  "files": {
   "channel.json": {
-   "sha512": "6774d7f57d18d61db13c2afa946ce202ac7dfba263d5bc78712b91418ac53276",
-   "size": 688
+   "sha512": "6c9120c7005d316e823126758e01737c69dd50ab521a48536ed16345ef03536b",
+   "size": 906
   }
  },
  "inner_path": "data/users/1212SPpgKYaJqMKhN9AWd7whQeEViV5G9q/content.json",
- "modified": 1483449508.493434,
+ "modified": 1483451912.774017,
  "signs": {
-  "1212SPpgKYaJqMKhN9AWd7whQeEViV5G9q": "G+ddxeZjgWX/a8UxcVvA2yh+5Hzje5KCE5rETY1BAm6Y8aEaSqmhQBre2ylM8KN8lmQbWx8BRN1rZCld+pPzLFY="
+  "1212SPpgKYaJqMKhN9AWd7whQeEViV5G9q": "HJuyk8D7z/EY3LfTtXg2n9vVroYQO4m4qtxqTilScqzIiJhd3jiyvtLwLK9WhJqyjLZScV5gI2JyZL1gbJ5iAqI="
  }
 }

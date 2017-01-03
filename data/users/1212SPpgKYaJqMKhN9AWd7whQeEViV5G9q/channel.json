@@ -1,5 +1,5 @@
 {
-	"next_channel_id": 4,
+	"next_channel_id": 5,
 	"channel": [
 		{
 			"channel_id": 1,
@@ -22,6 +22,14 @@
 			"channel_address": "1DMQLZL7riRMAegd5jms2ai5fcpNnJHCNb",
 			"channel_name": "MegaCluster5",
 			"date_added": 1483449429668,
+			"user": "1212SPpgKYaJqMKhN9AWd7whQeEViV5G9q",
+			"hide": 1
+		},
+		{
+			"channel_id": 4,
+			"channel_address": "1DMQLZL7riRMAegd5jms2ai5fcpNnJHCNb",
+			"channel_name": "MegaCluster5",
+			"date_added": 1483451874407,
 			"user": "1212SPpgKYaJqMKhN9AWd7whQeEViV5G9q",
 			"hide": 1
 		}

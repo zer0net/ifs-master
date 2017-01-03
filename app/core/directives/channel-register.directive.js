@@ -183,7 +183,8 @@ app.directive('channelRegister', [
 			$scope.deleteChannel = function(channel,cIndex){
 				// get file
 				//var inner_path = "data/users/"+Page.site_info.auth_address+"/channel.json";			
-				var inner_path = "data/users/"+channel.user+"/channel.json";			
+				var inner_path_content = "data/users/"+channel.user+"/content.json";	
+				var inner_path = "data/users/"+channel.user+"/channel.json";						
 				Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(data) {
 					data = JSON.parse(data);					
 
@@ -204,7 +205,7 @@ app.directive('channelRegister', [
 					var json_raw = unescape(encodeURIComponent(JSON.stringify(data, void 0, '\t')));
 					Page.cmd("fileWrite", [inner_path, btoa(json_raw)], function(res) {
 						// sign & publish site
-						Page.cmd("sitePublish",{"inner_path":inner_path}, function(res) {
+						Page.cmd("sitePublish",{"inner_path":inner_path_content}, function(res) {
 							// apply to scope
 							$scope.channels.splice(cIndex,1);
 							$scope.$apply(function() {
