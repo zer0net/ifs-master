@@ -15,14 +15,12 @@ app.directive('videoView', ['$location',
 
 			// get ref video
 			$scope.getRefVideo = function(channelId,videoId){
-				console.log(channelId,videoId);
 				$scope.showLoadingMessage('Loading Video');
 				var inner_path = 'merged-'+$scope.merger_name+'/'+channelId+'/data/channel.json';
 				Page.cmd("fileGet",{"inner_path":inner_path},function(data){
 					data = JSON.parse(data);
 					data.videos.forEach(function(video,index){
 						if (video.video_id === videoId){
-							console.log(video);
 							$scope.sites.forEach(function(site,index){
 								if (site.address === video.channel){
 									video.channel = site;
@@ -38,6 +36,7 @@ app.directive('videoView', ['$location',
 
 		    // load video
 		    $scope.loadVideo = function(video){
+		    	if (video.file_type === 'ogv'){video.file_type = 'ogg'}
 		    	$scope.playerErrors = 0;
 		    	$scope.video = video;
 		    	$scope.screenSize = 'normal';
