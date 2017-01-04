@@ -158,7 +158,7 @@
 				<div class="section-body">
 					<div class="channels-list" ng-if="channelsAll.length > 0">
 						<div class="channel-item" ng-repeat="channel in channelsAll | orderBy:'-date_added'" ng-init="getChannelInfo(channel)">
-							<h4><a href="/{{channel.channel_address}}/">{{channel.channel_name}}</a></h4>
+							<h4 ng-class="channel.hide?'clsChannelHidden':''"><a href="/{{channel.channel_address}}/">{{channel.channel_name}}</a></h4>
 							<ul class="channel-info">
 								<li><span am-time-ago="channel.date_added"></li>
 								<li ng-if="channel.channel_desciprtion"><span ng-bind="channel.channel_description"></li>

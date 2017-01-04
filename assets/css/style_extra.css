@@ -62,3 +62,7 @@
    border: 3px solid #32cf32;
 }
 
+.clsChannelHidden
+{
+    text-decoration: line-through;
+}
