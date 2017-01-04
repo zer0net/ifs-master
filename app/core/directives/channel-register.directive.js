@@ -1,7 +1,19 @@
 app.directive('channelRegister', [
 	function() {
 
+
+
 		var controller = function($scope,$element) {
+				
+			var query = ["SELECT * FROM channel ORDER BY date_added"];
+			Page.cmd("dbQuery", query, function(channels) {										
+				if (channels.length > 0){
+					$scope.channelsAll = channels;
+					
+				} 
+			});
+			
+			
 
 			// get channel info
 			$scope.getChannelInfo = function(channel){
@@ -53,6 +65,17 @@ app.directive('channelRegister', [
 		    $scope.showChannel = function() {
 				if ($scope.channel_id.length === 34){
 					$scope.nonValid = false;
+					$scope.isExist = false;
+
+					// check if channel exist in db
+					var query = ["SELECT * FROM channel where channel_address='"+$scope.channel_id+"'"];
+					Page.cmd("dbQuery", query, function(channels) {										
+						if (channels.length > 0){
+							$scope.isExist = true;
+							return;
+						} 
+					});
+
 					// get channel's content.json
 			    	var inner_path = 'merged-'+$scope.merger_name+'/'+$scope.channel_id+'/content.json';
 					Page.cmd("fileGet",{"inner_path":inner_path},function(data){
@@ -166,12 +189,12 @@ app.directive('channelRegister', [
 								Page.cmd("wrapperNotification", ["done", "Channel Added!", 10000]);
 								channel.new = true;
 								// apply channel to channels array
-								if($scope.channels){
-									$scope.channels.push(channel);
+								if($scope.channelsAll){
+									$scope.channelsAll.push(channel);								
 								}else
 								{
-									$scope.channels = new Array();
-									$scope.channels.push(channel);
+									$scope.channelsAll = new Array();
+									$scope.channelsAll.push(channel);
 								}
 							});
 						});
@@ -179,15 +202,14 @@ app.directive('channelRegister', [
 			    });
 			};
 
-			// delete channel
-			$scope.deleteChannel = function(channel,cIndex){
+			// toggleChannel channel
+			$scope.toggleChannel = function(channel,cIndex){
 				// get file
 				//var inner_path = "data/users/"+Page.site_info.auth_address+"/channel.json";			
 				var inner_path_content = "data/users/"+channel.user+"/content.json";	
 				var inner_path = "data/users/"+channel.user+"/channel.json";						
 				Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(data) {
 					data = JSON.parse(data);					
-
 					// find channel's id in user's channels.json 
 					var channelIndex;
 					data.channel.forEach(function(ch,index){
@@ -195,21 +217,26 @@ app.directive('channelRegister', [
 							channelIndex = index;
 						}
 					});					
-
 					// remove channel from user's channels.json
 					//data.channel.splice(channelIndex,1);
-					// hide channel
-					data.channel[channelIndex].hide=1;
-
+					// toggle channel
+					if(data.channel[channelIndex].hide==0)
+					{
+						data.channel[channelIndex].hide=1;
+					}else
+					{
+						data.channel[channelIndex].hide=0;
+					}
 					// write to file
 					var json_raw = unescape(encodeURIComponent(JSON.stringify(data, void 0, '\t')));
 					Page.cmd("fileWrite", [inner_path, btoa(json_raw)], function(res) {
 						// sign & publish site
 						Page.cmd("sitePublish",{"inner_path":inner_path_content}, function(res) {
-							// apply to scope
-							$scope.channels.splice(cIndex,1);
+							// apply to scope							
+							//$scope.channels.splice(cIndex,1);
+							$scope.channelsAll[channelIndex].hide = !($scope.channelsAll[channelIndex].hide);
 							$scope.$apply(function() {
-								Page.cmd("wrapperNotification", ["done", "Channel Deleted!", 10000]);
+								Page.cmd("wrapperNotification", ["done", "Done!", 10000]);
 							});
 						});
 					});

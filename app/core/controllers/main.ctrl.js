@@ -139,7 +139,7 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 				// loading
 				$scope.showLoadingMessage('Loading Channels');				
 				// get channels				
-				var query = ["SELECT * FROM channel where hide=0 ORDER BY date_added"];
+				var query = ["SELECT * FROM channel where hide = 0 ORDER BY date_added"];
 				Page.cmd("dbQuery", query, function(channels) {	
 								
 					if (channels.length > 0){
@@ -160,25 +160,28 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 				$scope[$scope.media_type] = [];
 				// for each channel
 				$scope.channels.forEach(function(channel,cIndex){
-	 				// check if site exists
-					var siteExists = false;
-					// loop through sites array
-					$scope.sites.forEach(function(site,sIndex){
-						// if channel's id exists in merged sites array
-						if (site.address === channel.channel_address){
-							siteExists = true;
-							channel = site;
+
+		 				// check if site exists
+						var siteExists = false;
+						// loop through sites array
+						$scope.sites.forEach(function(site,sIndex){
+							// if channel's id exists in merged sites array
+							if (site.address === channel.channel_address){
+								siteExists = true;
+								channel = site;
+							}
+						});
+						// if site exists get channel, if not add merged site
+						if (siteExists === true){
+							// get channel
+							$scope.getChannel(channel,cIndex);
+						} else {						
+							console.log('site ' + channel.channel_address + ' doesnt exists! adding site...');
+							// add merger site
+							$scope.addSite(channel,cIndex);
 						}
-					});
-					// if site exists get channel, if not add merged site
-					if (siteExists === true){
-						// get channel
-						$scope.getChannel(channel,cIndex);
-					} else {						
-						console.log('site ' + channel.channel_address + ' doesnt exists! adding site...');
-						// add merger site
-						$scope.addSite(channel,cIndex);
-					}
+
+
 				});
 			};
 

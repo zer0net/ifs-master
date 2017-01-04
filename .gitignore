@@ -1,2 +1,3 @@
 data/*
+!data/users/content.json
 content.json
