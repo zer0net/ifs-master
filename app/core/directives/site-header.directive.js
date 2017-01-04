@@ -1,5 +1,5 @@
 app.directive('siteHeader', ['$mdDialog', '$mdMedia',
-	function($mdDialog,$mdMedia) {
+	function($mdDialog,$mdMedia) {		
 
 		// header directive controller
 		var controller = function($scope,$element) {
@@ -13,9 +13,21 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
 			    	}
 			    else{
 			    	$("#navbar-fixed-top").css({left:0});
-			    };
+			    };			    
+			}
 
-			    
+			$scope.showInfoModal_ = function(ev)
+			{
+				$scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
+			    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+				 $mdDialog.show({					
+					template: 'dialogTemplate',
+					parent: angular.element(document.body),
+					targetEvent: ev,
+					clickOutsideToClose:true,
+					fullscreen: useFullScreen,
+			    });
+
 			}
 		    // show info modal
 			$scope.showInfoModal = function(ev) {
@@ -43,7 +55,7 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
 					'</md-dialog>';
 				// show dialog
 			    $mdDialog.show({
-					controller: DialogController,
+					
 					template: dialogTemplate,
 					parent: angular.element(document.body),
 					targetEvent: ev,
@@ -126,7 +138,7 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
           					'<input type="text" class="form-control" ng-model="ppFilter.media_type"  id="filterMediaType" style="display:none">'+
         					'</div>'+        					
       					'</form>'+
-  						'<ul class="nav navbar-nav navbar-right"  > <li><a ng-click="showInfoModal($event)" >HOW TO UPLOAD?</a></li>'+  
+  						'<ul class="nav navbar-nav navbar-right"> <li><a ng-click="showInfoModal($event)" >HOW TO JOIN?</a></li>'+  
 						'<li><a href="register.html">REGISTER</button></a></li>'+  												
 						'</ul>'+    					
   						'</div></div>'+

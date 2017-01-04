@@ -42,7 +42,7 @@
                 <span style="color: #fff">Videos&nbsp;[{{videos.length}}]</span>
             </li>    
           
-           <div channel-register ng-if="channels.length > 0"  style="border-top: 1px solid #fff">     
+           <div channel-register ng-if="channels.length > 0"  style="border-top: 1px solid #fff" >     
             
            <li class="sidebar-brand" style="font-size: 20px; font-weight: bold; color: #fff; ">               
                    Channels  <span class="glyphicon glyphicon-refresh"  ng-click="filerChannelRemove()" ></span>                              
@@ -105,8 +105,13 @@
 							    </div>
 						    </div>
 							<div ng-message="min">
+							<!--
 								<b color="red" ng-hide="nonValid">*channel operator only permits non-adult {{media_type}} channels</b>
+								-->
 								<b color="red" ng-show="nonValid">not a valid channel address!</b>
+
+								<b color="red" ng-show="isExist">channel address existing!</b>
+								
 							</div>
 			            </md-input-container>
 		            </div>
@@ -114,10 +119,11 @@
 				<!-- /channel input -->
 
 				<!-- /channel -->
-			    <md-content ng-if="channel" class="md-whiteframe-1dp section">
+			    <md-content ng-if="channel && !isExist" class="md-whiteframe-1dp section">
 			 		<h2 ng-bind="channel.channel_name"></h2>
 			 		<p ng-bind="channel.description"></p>
 			    	<hr/>
+
 			    	<!-- channel items -->
 				    <ul class="item-list">
 				    	<li ng-repeat="game in channel.items track by $index | orderBy:'-date_added'">
@@ -147,18 +153,20 @@
 					<h2>Channels</h2>
 					<span class="label" ng-hide="loading">total: <span ng-bind="channels.length"></span></span>
 					<hr/>
+
 				</div>
 				<div class="section-body">
-					<div class="channels-list" ng-if="channels.length > 0">
-						<div class="channel-item" ng-repeat="channel in channels | orderBy:'-date_added'" ng-init="getChannelInfo(channel)">
-							<h4><a href="/{{channel.channel_address}}/">{{channel.channel_name}}</a></h4>
+					<div class="channels-list" ng-if="channelsAll.length > 0">
+						<div class="channel-item" ng-repeat="channel in channelsAll | orderBy:'-date_added'" ng-init="getChannelInfo(channel)">
+							<h4 ng-class="channel.hide?'clsChannelHidden':''"><a href="/{{channel.channel_address}}/">{{channel.channel_name}}</a></h4>
 							<ul class="channel-info">
 								<li><span am-time-ago="channel.date_added"></li>
 								<li ng-if="channel.channel_desciprtion"><span ng-bind="channel.channel_description"></li>
 							</ul>
 
-							<a class="pull-right" ng-if="owner" ng-click="deleteChannel(channel,$index)">
-								<span class="glyphicon glyphicon-remove">DELETE</span>
+							<a class="pull-right" ng-if="owner" ng-click="toggleChannel(channel,$index)">
+								<button class="btn btn-primary" ng-if="channel.hide==0"><span class="glyphicon glyphicon-minus">Hide</span></button>
+								<button class="btn btn-primary" ng-if="channel.hide==1" ><span class="glyphicon glyphicon-plus">Show</span></button>
 							</a>
 
 							<span class="pull-right" ng-if="channel.games">{{channel.games.length}} games</span>
