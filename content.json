@@ -1,5 +1,5 @@
 {
- "address": "12MVkvYGcRW6u2NYbpfwVad1oQeyG4s9Er",
+ "address": "1DGYnMF5nFN3JX5DQbVFXwy4qtkxgYH6Nw",
  "address_index": 13040682,
  "cloneable": true,
  "cloned_from": "1HPbR1zp6hsvrqgTSVdsEC5VWw7MEMGPTR",
@@ -78,7 +78,7 @@
    "size": 2730
   },
   "app/videos/directives/video-view.directive.js": {
-   "sha512": "573b2f28e6a3f12b5698200d37059dfc55b514cb754598a10dae78ebf134a5ac",
+   "sha512": "94f971f77fc8475c73d357ad1b98309e550a2ec905249ddee485fd1d041f0010",
    "size": 2466
   },
   "assets/css/elements.css": {
@@ -774,20 +774,16 @@
    "size": 506
   },
   "data/ifs.db": {
-   "sha512": "6d888787f17b51833b1fc02d4cd24886cc91c5e0b47c26e30540e589632cb60a",
+   "sha512": "fb6a6a0b8d213cb8728aa96fe0ce4e7734e2eedabba5be3129ef7026df8bdb35",
    "size": 16384
   },
   "data/users/1212SPpgKYaJqMKhN9AWd7whQeEViV5G9q/channel.json": {
-   "sha512": "6774d7f57d18d61db13c2afa946ce202ac7dfba263d5bc78712b91418ac53276",
-   "size": 688
+   "sha512": "6c9120c7005d316e823126758e01737c69dd50ab521a48536ed16345ef03536b",
+   "size": 906
   },
-  "data/users/1R67TfYzNkCnh89EFfGmXn5LMb4hXaMRQ/channel.json": {
-   "sha512": "16619431d02a19ec6599e69ccf70c1cdb04ba5fb5ca40f2f1a132bbc5772d95e",
-   "size": 259
-  },
-  "data/users/1R67TfYzNkCnh89EFfGmXn5LMb4hXaMRQ/vote.json": {
-   "sha512": "eb3c89c6c08b263b720d3ae5f1c519cc8fa411de34da921766cb684c599ced8c",
-   "size": 407
+  "data/users/1LL6XLrNeciQaqkeXJqkCcN4Ea4haccmVc/channel.json": {
+   "sha512": "359b816a06b42f336f8c17ae16a9b29cc4ca42f6a66e2a23c6c96a58f14d641d",
+   "size": 255
   },
   "dbschema.json": {
    "sha512": "03c7f777e604238c6b6e571a0a9c83faada45825bfcc4eb8ea80e53fdb687828",
@@ -815,15 +811,15 @@
  },
  "inner_path": "content.json",
  "merger_name": "IFS",
- "modified": 1483451664.485082,
+ "modified": 1483515065.437471,
  "postmessage_nonce_security": true,
  "sign": [
-  48869913695001721984903525786263867127691323133805710432581368098318707463811,
-  115009125568690828497124982311813507253822713754317432252808097094356670449471
+  15948382327866884755432945728720303030052258012806530533194471706884684923125,
+  37418956577487830785827667426180645796182334479714212277927790288954050046116
  ],
- "signers_sign": "HC/miR5hB96ZCvNL2endq/9EXuNX+Y4Ycmnx0MQWGwPpyFdHopJwp0/+0l+m98qhtKPa0cSCwrXSBjOZd950Y2A=",
+ "signers_sign": "GwPSjvcGYTL0rGczCdxo/V6vx30UqBP9VM8z0j2kB1wnifHM/RvDiT8EpTAwCWKZVzEVEp7BPrgDykC0ylPafKc=",
  "signs": {
-  "12MVkvYGcRW6u2NYbpfwVad1oQeyG4s9Er": "G9I0sTh6DEzRa59RL9nKgvQXBYGhgGQTbA2mccBmmdS2DV91twKJvWWvFNvxCmjVETrfNXcOZh9uKpDG3t0OkCA="
+  "1DGYnMF5nFN3JX5DQbVFXwy4qtkxgYH6Nw": "G3qj98c7ATMy358lpcWGHv2+OC23SN168SuT2RUctC0BvcodzQLNJo+ZPpNuKx5lVGeOXEU/jBjp6ytu8NRd8QY="
  },
  "signs_required": 1,
  "title": "IFS",
