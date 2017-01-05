@@ -1,5 +1,5 @@
 {
- "address": "1DGYnMF5nFN3JX5DQbVFXwy4qtkxgYH6Nw",
+ "address": "12MVkvYGcRW6u2NYbpfwVad1oQeyG4s9Er",
  "address_index": 13040682,
  "cloneable": true,
  "cloned_from": "1HPbR1zp6hsvrqgTSVdsEC5VWw7MEMGPTR",
@@ -14,16 +14,16 @@
    "size": 382
   },
   "app/core/controllers/main.ctrl.js": {
-   "sha512": "87a1aadb51862c3d345687b7b0ee82d200d3fa271888eda981e6a1f89893df8c",
-   "size": 12007
+   "sha512": "c09a12aa9c40d30e039d426f2a3bd40f467e6f54bd6b39a49739882ebc075a80",
+   "size": 12031
   },
   "app/core/directives/channel-input.directive.js": {
    "sha512": "b52299e55855004da0cc587daf5a7065b3cdc4713ec29c138bd92c0f1f2d9560",
    "size": 366
   },
   "app/core/directives/channel-register.directive.js": {
-   "sha512": "d34067d7eeecf4e946957f4fcb95030f3518d8e9006a012ae0af4cbf1e25a407",
-   "size": 7206
+   "sha512": "45322022b19a509a5ba2b430c517ff21b3e03ade1f65d5ce8e701f4d66b1c6cd",
+   "size": 7977
   },
   "app/core/directives/comments.directive.js": {
    "sha512": "178935a6bdb18bdb6ecd26de75aef2db85678797a9a59e1c3abc3f0e884d5c58",
@@ -38,8 +38,8 @@
    "size": 1749
   },
   "app/core/directives/site-header.directive.js": {
-   "sha512": "5b38cf4320075132326dc5b9906fe3e21684a7ff4a653215c91416ccd9aad902",
-   "size": 6716
+   "sha512": "66cfc9f950ca63395211c5dadadab7b578a039a4e7cd4cbc0d7906c0caf75f94",
+   "size": 7091
   },
   "app/core/directives/views.directive.js": {
    "sha512": "b60f39ae8b19b9fac06e6bd4a88a07f4f22ec6be76f4e0c52e4a1df4eb269083",
@@ -94,8 +94,8 @@
    "size": 20785
   },
   "assets/css/style_extra.css": {
-   "sha512": "49be9139f3efa3070dcf354b1d9675e047707bc0d0ee2469acf2fe8fed9023b5",
-   "size": 969
+   "sha512": "aff9ce29687a3c5305981580245d9135eddd2cf32488fff51805dd6927ebdcb5",
+   "size": 1026
   },
   "assets/img/logo.png": {
    "sha512": "9c9e69f469ceda38e2e86aa59c0c9532ea9b41b47eb84812b4e96cc82bc1d38b",
@@ -774,16 +774,20 @@
    "size": 506
   },
   "data/ifs.db": {
-   "sha512": "fb6a6a0b8d213cb8728aa96fe0ce4e7734e2eedabba5be3129ef7026df8bdb35",
+   "sha512": "89f3fa28221249654a3a8c200f8a65ef67aa3df985267e6ce4e0a05c9a0bd23c",
    "size": 16384
   },
   "data/users/1212SPpgKYaJqMKhN9AWd7whQeEViV5G9q/channel.json": {
-   "sha512": "6c9120c7005d316e823126758e01737c69dd50ab521a48536ed16345ef03536b",
-   "size": 906
+   "sha512": "0f4335415e4d2fbe3882d93cefcea76e8724cbe36eebdb59d31225879a413066",
+   "size": 688
   },
-  "data/users/1LL6XLrNeciQaqkeXJqkCcN4Ea4haccmVc/channel.json": {
-   "sha512": "359b816a06b42f336f8c17ae16a9b29cc4ca42f6a66e2a23c6c96a58f14d641d",
-   "size": 255
+  "data/users/1R67TfYzNkCnh89EFfGmXn5LMb4hXaMRQ/channel.json": {
+   "sha512": "fc6f341649b8c72d521348846602a8acd6d65e76703424abf6eb34b62caa52f0",
+   "size": 43
+  },
+  "data/users/1R67TfYzNkCnh89EFfGmXn5LMb4hXaMRQ/vote.json": {
+   "sha512": "eb3c89c6c08b263b720d3ae5f1c519cc8fa411de34da921766cb684c599ced8c",
+   "size": 407
   },
   "dbschema.json": {
    "sha512": "03c7f777e604238c6b6e571a0a9c83faada45825bfcc4eb8ea80e53fdb687828",
@@ -794,8 +798,8 @@
    "size": 8311
   },
   "register.html": {
-   "sha512": "5b01a90512d7367900fab9a9bcab2f1d2dee41963559d02bec121dbdae4eb2fa",
-   "size": 10131
+   "sha512": "cd4eefdbb2af652703db5ed923cfd0e0056e68c2f02753a08bb929caae7efa1f",
+   "size": 10444
   },
   "view.html": {
    "sha512": "290a90ab97697493f20f39066b054216e7a0a746c9d3f8adc52e3fdd50eeaf08",
@@ -811,15 +815,15 @@
  },
  "inner_path": "content.json",
  "merger_name": "IFS",
- "modified": 1483515065.437471,
+ "modified": 1483607905.666407,
  "postmessage_nonce_security": true,
  "sign": [
-  15948382327866884755432945728720303030052258012806530533194471706884684923125,
-  37418956577487830785827667426180645796182334479714212277927790288954050046116
+  62592814681219914635953845475401404161761180604863858007314488124278254920744,
+  6817155459468865514470088774023369436212368887792279515774695441370836272831
  ],
- "signers_sign": "GwPSjvcGYTL0rGczCdxo/V6vx30UqBP9VM8z0j2kB1wnifHM/RvDiT8EpTAwCWKZVzEVEp7BPrgDykC0ylPafKc=",
+ "signers_sign": "HC/miR5hB96ZCvNL2endq/9EXuNX+Y4Ycmnx0MQWGwPpyFdHopJwp0/+0l+m98qhtKPa0cSCwrXSBjOZd950Y2A=",
  "signs": {
-  "1DGYnMF5nFN3JX5DQbVFXwy4qtkxgYH6Nw": "G3qj98c7ATMy358lpcWGHv2+OC23SN168SuT2RUctC0BvcodzQLNJo+ZPpNuKx5lVGeOXEU/jBjp6ytu8NRd8QY="
+  "12MVkvYGcRW6u2NYbpfwVad1oQeyG4s9Er": "HLkdGHMDAJL4RZWOPSefdXTDPKKY4XRvVLaFEUGd2gKTuUZZNj9uI8Ra1b2uKTm/b6HQbjN4dDPz3WSF7jhykWM="
  },
  "signs_required": 1,
  "title": "IFS",
