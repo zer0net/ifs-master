@@ -119,7 +119,7 @@
 								</a>
 							</div>
 							<ul>
-								<li><b>size:</b> {{game.zip_size|filesize}}</li>
+								<li><b>size:</b> {{game.file_size|filesize}}</li>
 								<li><b>date added:</b> <span am-time-ago="game.date_added"></span>							
 							</ul>
 							<article layout-padding ng-show="game.description">
@@ -195,7 +195,7 @@
 								</figure>
 								<div flex="65" class="game-info">
 						    		<h3><a href="/{{site_address}}/view.html?type=game-c={{game.channel.address}}g={{game.game_id}}">{{game.title}}</a></h3>
-						    		<span><b>size:</b> {{game.zip_size|filesize}}</span><br/>
+						    		<span><b>size:</b> {{game.file_size|filesize}}</span><br/>
 						    		<span><b>date added:</b> <span am-time-ago="game.date_added"></span></span>
 						    	</div>
 						    	<hr/>
