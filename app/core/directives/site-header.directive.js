@@ -1,6 +1,22 @@
 app.directive('siteHeader', ['$mdDialog', '$mdMedia',
 	function($mdDialog,$mdMedia) {		
 
+	
+		// dialog controller
+		var DialogController= function($scope, $mdDialog,items) {
+			// items
+			$scope.items = items;			
+			$scope.hide = function() {
+				$mdDialog.hide();
+			};
+			$scope.cancel = function() {
+				$mdDialog.cancel();
+			};
+			$scope.answer = function(answer) {
+				$mdDialog.hide(answer);
+			};
+		};
+
 		// header directive controller
 		var controller = function($scope,$element) {
 
@@ -16,7 +32,7 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
 			    };			    
 			}
 
-			/*
+			
 		    // show info modal
 			$scope.showInfoModal = function(ev) {
 				// dialog vars
@@ -25,33 +41,41 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
 			    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
 			    // dialog template
 			    var dialogTemplate = 
-			    	'<md-dialog aria-label="Mango (Fruit)">' +
+			    	'<md-dialog class="fullscreen-dialog" aria-label="Mango (Fruit)">' +
 					    '<md-toolbar>' +
 					    	'<div class="md-toolbar-tools">' +
+					    	  '<md-button class="md-icon-button" ng-click="hide()">'+
+					            '<span class="glyphicon glyphicon-remove"></span>'+
+					          '</md-button>'+
 						        '<h2>How to upload?</h2>' +
 						        '<span flex></span>' +
-						        '<md-button class="md-icon-button" ng-click="cancel()">' +
+						        '<md-button class="md-icon-button" ng-click="hide()">' +
 						            '<md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>' +
 						        '</md-button>' +
 					    	'</div>' +
 					    '</md-toolbar>' +
-					    '<md-dialog-content style="width:400px;height:100px; ">' +
-							'<ol style="padding: 8px 24px;"><li>clone your own Video Channel from <a href="/'+$scope.channel_master_address+'">here</a></li>' +
-							'<li>register your site <a href="/'+$scope.site_address+'/register.html">here</a></li>' +
-							'<li>upload videos!</li></ol>' +
+					    '<md-dialog-content >' +
+							'<ol style="padding: 8px 24px;"><li>Go to Filehub site: <a href="/1FHtDQ8i5NFFeuo7Fux6TeLpwmmeUGvdc8">1FHtDQ8i5NFFeuo7Fux6TeLpwmmeUGvdc8</a></li>' +
+							'<li>Clone that site</li>' +
+							'<li>Add stuff</li>' +
+							'<li>Register site</li></ol>'+
 					    '</md-dialog-content>' +
 					'</md-dialog>';
 				// show dialog
 			    $mdDialog.show({
-					
+					controller: DialogController,
 					template: dialogTemplate,
 					parent: angular.element(document.body),
 					targetEvent: ev,
 					clickOutsideToClose:true,
-					fullscreen: useFullScreen,
+					fullscreen: true,
+					locals:{
+						items:{}
+					}		
+
 			    });
 			};
-			*/
+			
 			// open site config dialog
 			$scope.openSiteConfigDialog = function(ev){
 				console.log($scope.config);
@@ -101,20 +125,6 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
 
 
 
-		// dialog controller
-		var DialogController = function($scope, $mdDialog,items) {
-			// items
-			$scope.items = items;			
-			$scope.hide = function() {
-				$mdDialog.hide();
-			};
-			$scope.cancel = function() {
-				$mdDialog.cancel();
-			};
-			$scope.answer = function(answer) {
-				$mdDialog.hide(answer);
-			};
-		};
 
 		var template ='<nav class="navbar navbar-default navbar-fixed-top" id="navbar-fixed-top">'+
   						'<div class="container-fluid" style="background-color:#041b2c">'+
@@ -126,48 +136,12 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
           					'<input type="text" class="form-control" ng-model="ppFilter.media_type"  id="filterMediaType" style="display:none">'+
         					'</div>'+        					
       					'</form>'+
-  						'<ul class="nav navbar-nav navbar-right"> <li><a href="howto.html" >HOW TO JOIN?</a></li>'+  
+  						'<ul class="nav navbar-nav navbar-right"> <li><a ng-click="showInfoModal(ev)" >FAQ</a></li>'+  
 						'<li><a href="register.html">REGISTER</button></a></li>'+  												
 						'</ul>'+    					
   						'</div></div>'+
 					'</nav>';
-		// html template
-		var template_= 	
-		'<md-toolbar layout-padding class="header" layout="row" style="min-height:50px;position:fixed; ">' +
-			'<div class="col-xs-4">' +
-				'<h3>' +
-					'<span class="glyphicon glyphicon-menu-hamburger" id="menu-toggle" ng-click="toggleMenu($event)"></span>'+
-					'<a href="/{{site_address}}">{{merger_name}}</a>' +
-					'<small ng-if="owner">' + 
-						'<a ng- ng-click="openSiteConfigDialog()">' + 
-							'<span class="glyphicon glyphicon-pencil"></span>' + 
-						'</a>' + 
-					'</small>' + 				
-				'</h3>' +
-			'</div>' +
-			'<div class="col-xs-4">' +
-				'<div class="search-container" flex>' +
-		            '<form>' +
-						'<input placeholder="search..." />' +
-		            '</form>' +
-	            '</div>' +
-			'</div>' +
-			'<div class="col-xs-4">' +
-				'<ul>' +
-					'<li>' +
-					    '<md-button class="md-primary md-raised" ng-click="showInfoModal($event)">' +
-					    	'HOW TO UPLOAD?' +
-					    '</md-button>' +
-				    '</li>' +
-				    '<li>' +
-				    	'<a href="register.html">' +
-				    		'<md-button class="md-primary md-raised">REGISTER</md-button>' +
-				    	'</a>		    	' +
-				    '</li>' +
-				'</ul>' +
-	        '</div>' +
-		'</md-toolbar>';
-
+		
 		return {
 			restrict: 'AE',
 			replace:false,
