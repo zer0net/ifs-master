@@ -36,7 +36,11 @@ app.directive('videoView', ['$location',
 
 		    // load video
 		    $scope.loadVideo = function(video){
-		    	if (video.file_type === 'ogv'){video.file_type = 'ogg'}
+		    	
+		    	if (video.file_type === 'ogv'){
+		    		video.file_type = 'ogg';
+		    	}
+
 		    	$scope.playerErrors = 0;
 		    	$scope.video = video;
 		    	$scope.screenSize = 'normal';
