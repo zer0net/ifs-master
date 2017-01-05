@@ -16,19 +16,7 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
 			    };			    
 			}
 
-			$scope.showInfoModal_ = function(ev)
-			{
-				$scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
-			    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
-				 $mdDialog.show({					
-					template: 'dialogTemplate',
-					parent: angular.element(document.body),
-					targetEvent: ev,
-					clickOutsideToClose:true,
-					fullscreen: useFullScreen,
-			    });
-
-			}
+			/*
 		    // show info modal
 			$scope.showInfoModal = function(ev) {
 				// dialog vars
@@ -63,7 +51,7 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
 					fullscreen: useFullScreen,
 			    });
 			};
-
+			*/
 			// open site config dialog
 			$scope.openSiteConfigDialog = function(ev){
 				console.log($scope.config);
@@ -138,7 +126,7 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
           					'<input type="text" class="form-control" ng-model="ppFilter.media_type"  id="filterMediaType" style="display:none">'+
         					'</div>'+        					
       					'</form>'+
-  						'<ul class="nav navbar-nav navbar-right"> <li><a ng-click="showInfoModal($event)" >HOW TO JOIN?</a></li>'+  
+  						'<ul class="nav navbar-nav navbar-right"> <li><a href="howto.html" >HOW TO JOIN?</a></li>'+  
 						'<li><a href="register.html">REGISTER</button></a></li>'+  												
 						'</ul>'+    					
   						'</div></div>'+
