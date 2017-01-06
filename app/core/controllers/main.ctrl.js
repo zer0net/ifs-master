@@ -236,9 +236,7 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 			};
 
 			// get channels items
-			$scope.addChannelItems = function(data,channel,cIndex){				
-
-
+			$scope.addChannelItems = function(data,channel,cIndex){
 				Page.cmd("optionalFileList", {
 				        address: channel.address,
 				        limit:2000
@@ -282,6 +280,7 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 				      						// if last item in channels items array
 				      						if ((itemIndex + 1) === data[media_type].length){
 				      							// finish loading
+				      							console.log($scope);
 				      							$scope.finishLoadingChannels(cIndex);
 				      						}
 				      						
