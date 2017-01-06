@@ -13,6 +13,10 @@
 		<link href="assets/css/style_extra.css" rel="stylesheet" type="text/css"/>
 
 
+		<link rel="stylesheet" type="text/css" href="assets/css/cpcbox.style.css" />
+		<link rel="stylesheet" type="text/css" href="assets/css/volume-slider.css" />
+		
+
 	<!-- /CSS -->
 
 	<!-- HTML5 Shim -->
@@ -20,7 +24,7 @@
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 	<![endif]-->
 	<!--<base href="/">-->
-
+		
 </head>
 
 <body class="ng-cloak" ng-controller="MainCtrl" ng-init="init()">
@@ -66,7 +70,7 @@
             <div class="row">
               <div class="col-lg-12">   
 	<!-- HEADER -->
-	<site-header></site-header>
+		<site-header></site-header>
 	<!-- /HEADER -->
 
 	<!-- MAIN -->
@@ -95,6 +99,15 @@
 					<!-- nes -->
 					<nes-emulator ng-if="game.file_type === 'nes'"></nes-emulator>
 					<!-- /nes ->
+
+					<!-- cpc sna -->
+					<div id="error-log" class="error-output" style="display:none"></div>
+					<canvas id="screen" width="768" height="272" style="display:none"></canvas>
+					
+					<sna-emulator ng-if="game.file_type === 'sna'"></sna-emulator>
+					<!-- /cpc sna ->
+					
+					
 
 					<hr class="divider"/>
 						
@@ -384,8 +397,9 @@
 		<script type="text/javascript" src="assets/lib/zeronet/ZeroFrame.js"></script>
 		<script type="text/javascript" src="assets/lib/zeronet/ZeroChat.js"></script>
     
-		<!-- jquery -->
-		<script type="text/javascript" src="assets/lib/jquery/jquery.min.js"></script>
+		<!--<script type="text/javascript" src="assets/lib/cpcbox/jquery-1.8.3.min.js"></script>
+			<script type="text/javascript" src="assets/lib/jquery/jquery.min.js"></script>	
+		-->
 
 		<!-- angular -->		
 		<script type="text/javascript" src="assets/lib/angular/angular.min.js"></script>
@@ -409,21 +423,7 @@
 		<script type="text/javascript" src="assets/lib/videos/videogular-overlay-play/vg-overlay-play.js"></script>
 		<script type="text/javascript" src="assets/lib/videos/videogular-poster/vg-poster.js"></script>
 
-		<!-- dosbox -->
-		<script type="text/javascript" src="assets/lib/js-dos/js-dos.js"></script>
-
-		<!-- nes emulator -->
-		<script src="assets/lib/games/nes/lib/dynamicaudio-min.js" type="text/javascript" charset="utf-8"></script>
-	    <script src="assets/lib/games/nes/nes.js" type="text/javascript" charset="utf-8"></script>
-	    <script src="assets/lib/games/nes/utils.js" type="text/javascript" charset="utf-8"></script>
-	    <script src="assets/lib/games/nes/cpu.js" type="text/javascript" charset="utf-8"></script>
-	    <script src="assets/lib/games/nes/keyboard.js" type="text/javascript" charset="utf-8"></script>
-	    <script src="assets/lib/games/nes/mappers.js" type="text/javascript" charset="utf-8"></script>
-	    <script src="assets/lib/games/nes/papu.js" type="text/javascript" charset="utf-8"></script>
-	    <script src="assets/lib/games/nes/ppu.js" type="text/javascript" charset="utf-8"></script>
-	    <script src="assets/lib/games/nes/rom.js" type="text/javascript" charset="utf-8"></script>
-	    <script src="assets/lib/games/nes/ui.js" type="text/javascript" charset="utf-8"></script>
-
+		
 		<!-- app core -->
 		<script type="text/javascript" src="app/application.js"></script>		
 		<script type="text/javascript" src="app/core/controllers/main.ctrl.js"></script>
@@ -439,13 +439,22 @@
 		<script type="text/javascript" src="app/games/directives/game-view.directive.js"></script>
 		<script type="text/javascript" src="app/games/directives/dosbox.directive.js"></script>
 		<script type="text/javascript" src="app/games/directives/nes-emulator.directive.js"></script>
+		<script type="text/javascript" src="app/games/directives/sna-emulator.directive.js"></script>
 
 		<!-- app videos -->
 		<script type="text/javascript" src="app/videos/directives/video-view.directive.js"></script>
 		<script type="text/javascript" src="app/core/directives/channel-register.directive.js"></script>
 
+	<!-- CPCBOX -->
+			<!-- jquery -->
+		
+		<script type="text/javascript" src="assets/lib/cpcbox/jquery-1.8.3.min.js">
+		<script type="text/javascript" src="assets/lib/cpcbox/cpcbox.decrypted.js"></script>
+		<script type="text/javascript" src="assets/lib/cpcbox/jquerytools.rangeinput.js"></script>
+		<script type="text/javascript" src="assets/lib/cpcbox/inflate.js"></script>
+		<script type="text/javascript" src="assets/lib/cpcbox/cpcbox.sysroms.js"></script>
 	
-
+		
 	<!-- /JS -->  
 
 </body>

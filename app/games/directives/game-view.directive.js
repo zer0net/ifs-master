@@ -16,7 +16,7 @@ app.directive('gameView', ['$location',
 						$scope.game = game;
 					}
 				});
-
+				
 			};
 
 		};
