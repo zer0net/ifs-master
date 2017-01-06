@@ -8,14 +8,8 @@ app.directive('snaEmulator', ['$location','$rootScope',
 				// init jsnes
 		        $("#snapshot").val('fruity_frank.sna');
 				// sna file
-				var snaFile  = "/"+$scope.site_address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/uploads/games/"+$scope.game.file_name;
-				
-				$( "#snapshot" ).trigger( "change" );
-				
-			
-				 $("#button-run").removeAttr("disabled");
-				$( "#button-run" ).trigger( "click" );
-
+				var snaFile  = "/"+$scope.site_address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/uploads/games/"+$scope.game.file_name;				
+				//$( "#snapshot" ).trigger( "change" );				
 
 			};
 
@@ -50,8 +44,41 @@ app.directive('snaEmulator', ['$location','$rootScope',
 					'<div id="checkbox-settings" title="Settings"></div>'+
 					'<div id="checkbox-fullscreen" title="Fullscreen"></div>'+
 					'<div id="checkbox-joystick" title="Disable CPC joystick"></div>'+
-					'<div id="checkbox-sound" title="Unmute"></div>'+	
-				'</div>'+			
+					'<div id="checkbox-sound" title="Unmute"></div>'+
+					'<input type="range" name="sound-volume" min="1" max="100" value="75" style="display:none" />'+
+				'</div>'+	
+				'<fieldset id="fieldset-tape" style="display:none">'+
+				'<legend>Tape deck</legend>'+
+				'<div id="tape-choose" class="button-size2 button" onclick="$(\'#tape-input\').click();"><img src="img/Open_16x16.png" /></div>'+
+				'<div id="tape-filename"><i>Empty</i></div>'+
+				'<select id="tape-zipselect" style="display:none"></select>'+
+				'<input type="file" id="tape-input" />'+
+				'<div id="tape-counter">000</div>'+
+				'<div id="tape-record"class="button-size2 disabled-button guifx2">4</div>'+
+				'<div id="tape-play"class="button-size2 disabled-button guifx2">1</div>'+
+				'<div id="tape-rewind"class="button-size2 disabled-button guifx2">5</div>'+
+				'<div id="tape-forward"class="button-size2 disabled-button guifx2">6</div>'+
+				'<div id="tape-stop"class="button-size2 disabled-button guifx2">3</div>'+
+				'<div id="tape-eject" class="button-size2 disabled-button guifx2">\'</div>'+
+				'</fieldset>'+
+				'<fieldset id="fieldset-drivea" style="display:none">'+
+				'<legend>Drive A:</legend>'+
+				'<div id="drivea-choose" class="button-size2 button" onclick="$(\'#drivea-input\').click();"><img src="img/Open_16x16.png" /></div>'+
+				'<div id="drivea-filename"><i>Empty</i></div>'+
+				'<select id="drivea-zipselect" style="display:none"></select>'+
+				'<input type="file" id="drivea-input" />'+
+				'<div id="drivea-led" class="led"></div>'+
+				'<div id="drivea-eject" class="button-size2 disabled-button guifx2">\'</div>'+
+			'</fieldset>'+
+			'<fieldset id="fieldset-driveb" style="display:none">'+
+				'<legend>Drive B:</legend>'+
+				'<div id="driveb-choose" class="button-size2 button" onclick="$(\'#driveb-input\').click();"><img src="img/Open_16x16.png" /></div>'+
+				'<div id="driveb-filename"><i>Empty</i></div>'+
+				'<select id="driveb-zipselect" style="display:none"></select>'+
+				'<input type="file" id="driveb-input" />'+
+				'<div id="driveb-led" class="led"></div>'+
+				'<div id="driveb-eject" class="button-size2 disabled-button guifx2">\'</div>'+
+				'</fieldset>'+
 				'<div id="browser-nfo" class="nfo">'+
 				'<div>CPC joystick mapped to <i>Ctrl, Alt and arrow keys.</i><br />'+
 				'Another fine release by h.p.tuttle.'+
