@@ -27,13 +27,13 @@ app.directive('gameList', ['$location',
 							'<md-grid-tile class="list-item" dir-paginate="game in games|filter:ppFilter| orderBy:\'-date_added\' |itemsPerPage:15 track by $index"  ng-class="chooseStyle(game.x_is_load)">' +
 								'<div class="inner-wrap md-whiteframe-1dp" ng-init="renderGame(game)">' +
 									'<!-- img -->' +
-									'<div class="item-img md-whiteframe-1dp" style="background-position: right;background-repeat: no-repeat;background-size: contain;background-image:url(\'{{game.img}}\');">' +
-										'<a href="/{{site_address}}/{{game.file_type==\'sna\'?\'view_cpcbox\':\'view\'}}.html?type=game-c={{game.channel.address}}g={{game.game_id}}"><span ng-if="game.genre" ng-bind="game.genre" class="game-genre {{game.genre}}"></span></a>' +
+									'<div class="item-img md-whiteframe-1dp" style="background-position: center;background-repeat: no-repeat;background-size: contain;background-image:url(\'{{game.img}}\');">' +
+										'<a href="/{{site_address}}/{{game.file_type==\'sna\'?\'view_cpc\':\'view\'}}.html?type=game-c={{game.channel.address}}g={{game.game_id}}z={{game.zip_name}}f={{game.file_name}}"><span ng-if="game.genre" ng-bind="game.genre" class="game-genre {{game.genre}}"></span></a>' +
 									'</div>' +
 									'<!-- img -->' +
 									'<!-- info -->' +
 									'<md-grid-tile-footer>' +
-										'<h3><a href="/{{site_address}}/{{game.file_type==\'sna\'?\'view_cpcbox\':\'view\'}}.html?type=game-c={{game.channel.address}}g={{game.game_id}}z={{game.zip_name}}f={{game.file_name}}">{{game.title}}</a></h3>' +
+										'<h3><a href="/{{site_address}}/{{game.file_type==\'sna\'?\'view_cpc\':\'view\'}}.html?type=game-c={{game.channel.address}}g={{game.game_id}}z={{game.zip_name}}f={{game.file_name}}">{{game.title}}</a></h3>' +
 										'<ul class="video-info">' +
 						    				'<li><span>{{game.channel.content.title}}</span></li>' +
 						    				'<li><span><i am-time-ago="game.date_added"></i></span></li>' +

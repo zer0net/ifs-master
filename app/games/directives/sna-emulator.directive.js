@@ -9,17 +9,19 @@ app.directive('snaEmulator', ['$location','$rootScope',
 		        $("#snapshot").val('fruity_frank.sna');
 				// sna file
 				var snaFile  = "/"+$scope.site_address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/uploads/games/"+$scope.game.file_name;				
-				//$( "#snapshot" ).trigger( "change" );				
+				
+				$( "#snapshot" ).trigger( "change" );	
+				console.log(snaFile);		
 
 			};
 
 
 		};
 
-		var template = '<div id="error-log" class="error-output" style="display:none"></div><div class="main-panel" ng-init="initSnaEmulator()">'+
+		var template = '<div class="main-panel" ng-init="initSnaEmulator()">'+
 				'<div id="screen-placeholder">'+
-				'<div id="logo"></div>'+
-				'<canvas id="screen" width="768" height="272" style="display:none"></canvas>'+
+				/*'<canvas id="screen" width="768" height="272" style="display:none"></canvas>'+*/
+				'<div id="logo"></div>'+				
 				'<div id="option-panel-overlay" style="display:none"></div>'+
 				'<div id="option-panel" style="display:none">'+
 					'<div id="option-panel-header">'+

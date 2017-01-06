@@ -5,6 +5,10 @@ app.directive('gameView', ['$location',
 
 			// init game view
 			$scope.initGameView = function(){
+
+				console.log("--------------------initGameView log scope.games");		
+				console.log($scope.games);
+
 				// get channels & game id from url
 				var channelId = window.location.href.split('&')[0].split('c=')[1].split('g')[0];
 				var gameId = parseInt(window.location.href.split('&')[0].split('g=')[1].split('z')[0]);
@@ -16,7 +20,8 @@ app.directive('gameView', ['$location',
 						$scope.game = game;
 					}
 				});
-				
+
+
 			};
 
 		};
