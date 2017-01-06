@@ -18,8 +18,112 @@ app.directive('snaEmulator', ['$location','$rootScope',
 
 		var template = '<div class="main-panel" ng-init="initSnaEmulator()">'+
 				'<div id="screen-placeholder">'+
-					'<div id="logo"></div>'+					
+				'<div id="logo"></div>'+
+				'<canvas id="screen" width="768" height="272" style="display:none"></canvas>'+
+				'<div id="option-panel-overlay" style="display:none"></div>'+
+				'<div id="option-panel" style="display:none">'+
+					'<div id="option-panel-header">'+
+						'Settings'+
+						'<div id="settings-close">X</div>'+
+					'</div>'+
+					'<div id="option-panel-content">'+
+						'<div class="option-heading">Brand name</div>'+
+						'<div class="option-list">'+
+							'<input type="radio" id="brand1" name="brand" value="amstrad">'+
+							'<label for="brand1" class="option-label">'+
+								'<div class="option-name">Amstrad</div>'+
+								'<div class="option-comment">Worldwide distributor</div>'+
+							'</label>'+
+							'<input type="radio" id="brand2" name="brand" value="schneider">'+
+							'<label for="brand2" class="option-label">'+
+								'<div class="option-name">Schneider</div>'+
+								'<div class="option-comment">German distributor</div>'+
+							'</label>'+
+							'<input type="radio" id="brand3" name="brand" value="awa">'+
+							'<label for="brand3" class="option-label">'+
+								'<div class="option-name">AWA</div>'+
+								'<div class="option-comment">Australian distributor</div>'+
+							'</label>'+
+						'</div>'+
+						'<div class="option-heading">Keyboard</div>'+
+						'<div class="option-list">'+
+							'<input type="radio" id="keyboard1" name="firmware" value="english">'+
+							'<label for="keyboard1" class="option-label">'+
+								'<img src="img/flag_uk.png" class="option-flag" />'+
+								'<div class="option-comment">English layout</div>'+
+							'</label>'+
+							'<input type="radio" id="keyboard2" name="firmware" value="french">'+
+							'<label for="keyboard2" class="option-label">'+
+								'<img src="img/flag_france.png" class="option-flag" />'+
+								'<div class="option-comment">French layout</div>'+
+							'</label>'+
+							'<input type="radio" id="keyboard3" name="firmware" value="spanish">'+
+							'<label for="keyboard3" class="option-label">'+
+								'<img src="img/flag_spain.png" class="option-flag" />'+
+								'<div class="option-comment">Spanish layout</div>'+
+							'</label>'+
+						'</div>'+
+						'<div class="option-heading">CRTC</div>'+
+						'<div class="option-list">'+
+							'<input type="radio" id="crtc0" name="crtc" value="type0">'+
+							'<label for="crtc0" class="option-label">'+
+								'<div class="option-name">Type 0</div>'+
+								'<div class="option-comment">Hitachi HD6845S</div>'+
+							'</label>'+
+							'<input type="radio" id="crtc1" name="crtc" value="type1">'+
+							'<label for="crtc1" class="option-label">'+
+								'<div class="option-name">Type 1</div>'+
+								'<div class="option-comment">UMC UM6845R</div>'+
+							'</label>'+
+							'<input type="radio" id="crtc2" name="crtc" value="type2">'+
+							'<label for="crtc2" class="option-label">'+
+								'<div class="option-name">Type 2</div>'+
+								'<div class="option-comment">Motorola MC6845</div>'+
+							'</label>'+
+						'</div>'+
+						'<div class="option-heading">Monitor</div>'+
+						'<div class="option-list">'+
+							'<input type="radio" id="monitor1" name="monitor" value="colour">'+
+							'<label for="monitor1" class="option-label">'+
+								'<div class="option-name"><span style="color:red">Co</span><span style="color:green">lo</span><span style="color:blue">ur</span></div>'+
+								'<div class="option-comment">RGB CPC/Plus</div>'+
+							'</label>'+
+							'<input type="radio" id="monitor2" name="monitor" value="green">'+
+							'<label for="monitor2" class="option-label">'+
+								'<div class="option-name"><span style="color:#090">Gr</span><span style="color:#0C0">e</span><span style="color:#060">en</span></div>'+
+								'<div class="option-comment">Monochrome CPC</div>'+
+							'</label>'+
+							'<input type="radio" id="monitor3" name="monitor" value="grayscale">'+
+							'<label for="monitor3" class="option-label">'+
+								'<div class="option-name"><span style="color:#666">Gre</span><span style="color:#999">ysc</span><span style="color:#333">ale</span></div>'+
+								'<div class="option-comment">Monochrome Plus</div>'+
+							'</label>'+
+						'</div>'+
+						'<div class="option-heading">Audio mixer</div>'+
+						'<div class="option-list">'+
+							'<input type="radio" id="audio1" name="audio" value="mono">'+
+							'<label for="audio1" class="option-label">'+
+								'<div class="option-name">Mono</div>'+
+								'<div class="option-comment">CPC internal speaker</div>'+
+							'</label>'+
+							'<input type="radio" id="audio2" name="audio" value="stereo">'+
+							'<label for="audio2" class="option-label">'+
+								'<div class="option-name">Stereo</div>'+
+								'<div class="option-comment">CPC external & Plus speakers</div>'+
+							'</label>'+
+						'</div>'+
+						'<div class="option-heading">Peripherals</div>'+
+						'<div class="option-list">'+
+							'<input type="checkbox" id="floppy-option">'+
+							'<label for="floppy-option" class="option-label option-name">Extra floppy drive</label>'+
+							'<input type="checkbox" id="tape-option">'+
+							'<label for="tape-option" class="option-label option-name">Tape deck</label>'+
+							'<input type="checkbox" id="ram-option">'+
+							'<label for="ram-option" class="option-label option-name">512KB RAM expansion</label>'+
+						'</div>'+
+					'</div>'+
 				'</div>'+
+			'</div>'+
 				'<div id="status">Paused</div>'+
 				'<div class="control-panel">'+
 					'<select id="snapshot" rows="1" autocomplete="off">'+
