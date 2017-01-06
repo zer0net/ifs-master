@@ -127,7 +127,6 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 					    // push site to sites array
 					    $scope.sites.push(site);
 					}
-					//console.log($scope.sites);
 					$scope.$apply(function(){
 						// get channels
 						$scope.getChannels();
@@ -237,9 +236,7 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 			};
 
 			// get channels items
-			$scope.addChannelItems = function(data,channel,cIndex){				
-
-
+			$scope.addChannelItems = function(data,channel,cIndex){
 				Page.cmd("optionalFileList", {
 				        address: channel.address,
 				        limit:2000
