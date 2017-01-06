@@ -16,7 +16,7 @@ app.directive('snaEmulator', ['$location','$rootScope',
 
 		};
 
-		var template = '<div class="main-panel" ng-init="initSnaEmulator()">'+
+		var template = '<div id="error-log" class="error-output" style="display:none"></div><div class="main-panel" ng-init="initSnaEmulator()">'+
 				'<div id="screen-placeholder">'+
 				'<div id="logo"></div>'+
 				'<canvas id="screen" width="768" height="272" style="display:none"></canvas>'+
