@@ -19,7 +19,7 @@ app.directive('gameView', ['$location',
 						console.log(game);
 					}
 				});
-
+				
 			};
 
 		};

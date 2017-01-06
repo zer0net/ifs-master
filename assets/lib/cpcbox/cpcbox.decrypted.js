@@ -7451,7 +7451,7 @@ var qz = {
     ay: null,
     bS: null,
     q: function() {
-        var a = document.getElementById("screen");
+        var a = document.getElementById("screen");        
         if ("undefined" == typeof a.getContext) return $("#error-log").append($Kyk3LdzJw$kGSuWuqv5(195)), !1;
         this.oB = a.getContext("2d");
         if ("undefined" == typeof this.oB.createImageData) return $("#error-log").append($Kyk3LdzJw$kGSuWuqv5(23)), !1;
@@ -7685,6 +7685,7 @@ var qB, qC, qD, qE, qF, qG, qH = {
                     qG = 3, qM.innerHTML = $Kyk3LdzJw$kGSuWuqv5(15), $($Kyk3LdzJw$kGSuWuqv5(202)).fadeIn()
             }
             pu.G();
+           
             3 == qG ? pK("snapshots/", a, this.oP) : $($Kyk3LdzJw$kGSuWuqv5(200)).is(":checked") ? launch_debugger() : this.oL()
         }
     },
@@ -7795,10 +7796,12 @@ var qN = {
         $("#snapshot").val("none");
         $($Kyk3LdzJw$kGSuWuqv5(200)).removeAttr("checked");
         $("#snapshot").change(function() {
+            alert('changed');
             $(this).blur();
             qH.ez()
         });
         $("#button-run").click(function() {
+           
             $(this).hasClass("button") && qH.oL()
         });
         $($Kyk3LdzJw$kGSuWuqv5(9)).click(function() {
