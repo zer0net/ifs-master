@@ -126,7 +126,6 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 					    // push site to sites array
 					    $scope.sites.push(site);
 					}
-					//console.log($scope.sites);
 					$scope.$apply(function(){
 						// get channels
 						$scope.getChannels();
@@ -280,7 +279,6 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 				      						// if last item in channels items array
 				      						if ((itemIndex + 1) === data[media_type].length){
 				      							// finish loading
-				      							console.log($scope);
 				      							$scope.finishLoadingChannels(cIndex);
 				      						}
 				      						
