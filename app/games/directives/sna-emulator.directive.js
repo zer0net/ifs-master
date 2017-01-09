@@ -6,7 +6,7 @@ app.directive('snaEmulator', ['$location','$rootScope',
 			// init nes emulator
 			$scope.initSnaEmulator = function(){
 				// init jsnes
-		        $("#snapshot").val('fruity_frank.sna');
+		        $("#snapshot").val('snapshots/fruity_frank.sna');
 				// sna file
 				var snaFile  = "/"+$scope.site_address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/uploads/games/"+$scope.game.file_name;				
 				//$( "#snapshot" ).trigger( "change" );				

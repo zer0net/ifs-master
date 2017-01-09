@@ -20,14 +20,15 @@ app.directive('dosbox', ['$location',
 				});
 			*/
 				var emulatorPath = "/assets/lib/emulators/em-dosbox/dosbox-sync.js";
-				var gamePath = "/"+$scope.site_address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/uploads/games/"+$scope.game.zip_name;
-				var emulator =  new Emulator(document.querySelector("#canvas"), null,
-				              	new DosBoxLoader(DosBoxLoader.emulatorJS(emulatorPath),
+				var gamePath = "/merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/uploads/games/"+$scope.game.zip_name;
+				var dosBoxLoader = new DosBoxLoader(DosBoxLoader.emulatorJS(emulatorPath),
 									DosBoxLoader.locateAdditionalEmulatorJS(locateAdditionalFiles),
 									DosBoxLoader.nativeResolution(640, 480),
 									DosBoxLoader.mountZip("c",
 	                                    DosBoxLoader.fetchFile("Game File",gamePath)),
-	                                    	DosBoxLoader.startExe($scope.game.file_name)))
+	                                    	DosBoxLoader.startExe($scope.game.file_name));
+				console.log(dosBoxLoader);
+				var emulator =  new Emulator(document.querySelector("#canvas"), null, dosBoxLoader);
 				emulator.start({ waitAfterDownloading: true });
 				console.log(emulator);
 

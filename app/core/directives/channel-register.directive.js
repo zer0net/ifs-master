@@ -12,16 +12,11 @@ app.directive('channelRegister', [
 					
 				} 
 			});
-			
-			
 
 			// get channel info
 			$scope.getChannelInfo = function(channel){
-				
 				// get channel's content.json
 				var inner_path = 'merged-'+$scope.merger_name+'/'+channel.channel_address+'/content.json';
-
-
 				Page.cmd("fileGet",{"inner_path":inner_path},function(data){
 					// check if site has content.json
 				
@@ -202,7 +197,7 @@ app.directive('channelRegister', [
 			    });
 			};
 
-			// toggleChannel channel
+			// toggle channel
 			$scope.toggleChannel = function(channel,cIndex){
 				// get file
 				//var inner_path = "data/users/"+Page.site_info.auth_address+"/channel.json";			
