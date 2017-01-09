@@ -34,6 +34,7 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 					// merger site permission
 					$scope.getConfig();
 		    	});
+				
 			};
 
 			// get config json
@@ -239,7 +240,8 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 				Page.cmd("optionalFileList", {
 				        address: channel.address,
 				        limit:2000
-				      },function(site_files){				      						      						      	
+				      },function(site_files){
+				      	      						      						      	
 				      		for (var media_type in data){
 				      			if (Object.prototype.toString.call(data[media_type]) === '[object Array]'){
 				      				if ($scope.config.media_types.indexOf(media_type) > -1){
@@ -270,7 +272,14 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 				      							item.img = '/'+$scope.site_address+'/merged-'+$scope.merger_name+'/'+item.channel.address+'/'+item.imgPath;
 				      						}else
 				      						{
-				      							item.img = '/'+$scope.site_address+'/assets/img/logo.png';
+				      							if(item.file_type=='sna')
+				      							{
+				      								item.img = '/'+$scope.site_address+'/assets/img/logo_sna.jpg';	
+				      							}else
+				      							{
+				      								item.img = '/'+$scope.site_address+'/assets/img/logo.png';
+				      							}
+				      							
 				      						}
 
 				      						// apply to scope items array						
@@ -287,6 +296,7 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 				      			}
 				      		}
 
+							
 				      });	
 
 				

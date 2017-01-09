@@ -7685,8 +7685,9 @@ var qB, qC, qD, qE, qF, qG, qH = {
                     qG = 3, qM.innerHTML = $Kyk3LdzJw$kGSuWuqv5(15), $($Kyk3LdzJw$kGSuWuqv5(202)).fadeIn()
             }
             pu.G();
-           
-            3 == qG ? pK("snapshots/", a, this.oP) : $($Kyk3LdzJw$kGSuWuqv5(200)).is(":checked") ? launch_debugger() : this.oL()
+            
+            //3 == qG ? pK("snapshots/", a, this.oP) : $($Kyk3LdzJw$kGSuWuqv5(200)).is(":checked") ? launch_debugger() : this.oL() 
+            3 == qG ? pK("", a, this.oP) : $($Kyk3LdzJw$kGSuWuqv5(200)).is(":checked") ? launch_debugger() : this.oL()
         }
     },
     oP: function(a) {
@@ -7795,13 +7796,12 @@ var qN = {
         });
         $("#snapshot").val("none");
         $($Kyk3LdzJw$kGSuWuqv5(200)).removeAttr("checked");
-        $("#snapshot").change(function() {
-            alert('changed');
+        $("#snapshot").change(function() {           
             $(this).blur();
             qH.ez()
         });
         $("#button-run").click(function() {
-           
+
             $(this).hasClass("button") && qH.oL()
         });
         $($Kyk3LdzJw$kGSuWuqv5(9)).click(function() {

@@ -24,8 +24,7 @@ app.directive('channelRegister', [
 						console.log('No content.json found for '+$scope.channel_address+'!');
 					} else {
 						data = JSON.parse(data);
-						console.log(data);
-
+						
 						channel.channel_name = data.title;
 						channel.channel_description = data.description;
 						

@@ -9,19 +9,20 @@
 
 		<title>CPCBox - Amstrad CPC emulator in Javascript</title>
 		<!-- lib -->
-		<link href="assets/lib/angular-material/angular-material.css" rel="stylesheet" type="text/css"/>
-		<link href="assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-		<!-- app -->
-		<link href="assets/css/simple-sidebar.css" rel="stylesheet" type="text/css"/>
-		<link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
-		<link href="assets/css/style_extra.css" rel="stylesheet" type="text/css"/>
+		<!-- app -->		
 
 		<link rel="stylesheet" type="text/css" href="assets/css/cpcbox.style.css" />
 		<link rel="stylesheet" type="text/css" href="assets/css/volume-slider.css" />
 	
+
+			<script type="text/javascript" src="assets/lib/cpcbox/jquery-1.8.3.min.js"></script>
+			<script type="text/javascript" src="assets/lib/cpcbox/jquerytools.rangeinput.js"></script>
+			<script type="text/javascript" src="assets/lib/cpcbox/inflate.js"></script>
+			<script type="text/javascript" src="assets/lib/cpcbox/cpcbox.sysroms.js"></script>
+			<script type="text/javascript" src="assets/lib/cpcbox/cpcbox.decrypted.js"></script>
 	</head>
 
-<body  ng-controller="MainCtrl" ng-init="init()">
+<body >
 
 		<noscript>
 			<div class="error-output">CPCBox makes use of Javascript. Please check your browser settings to enable Javascript.</div>
@@ -141,22 +142,7 @@
 			<div id="status">Paused</div>
 
 			<div class="control-panel">
-				<select id="snapshot" rows="1" autocomplete="off">
-					<option value="none">Choose configuration...</option>
-					<optgroup label="Boot">
-						<option value="boot_cpc464">CPC 464</option>
-						<option value="boot_cpc664">CPC 664</option>
-						<option value="boot_cpc6128">CPC 6128</option>
-					</optgroup>
-					<optgroup label="Games">
-						<option value="bomb_jack.sna">Bomb Jack</option>
-						<option value="boulder_dash.sna">Boulder Dash</option>
-						<option value="buggy_boy.sna">Buggy Boy</option>
-						<option value="cybernoid.sna">Cybernoid</option>
-						<option value="donkey_kong.sna">Donkey Kong</option>
-						<option value="fruity_frank.sna">Fruity Frank</option>
-						<option value="archon.sna">Archon</option>
-					</optgroup>
+				<select id="snapshot" rows="1" autocomplete="off" style="display: none">										
 				</select
 
 				><div id="button-run" class="button-size1 disabled-button"><span class="guifx2">d </span> Resume</div>
@@ -208,79 +194,22 @@
 		</div>
 
 
-		<!-- zeronet -->
-		<script type="text/javascript" src="assets/lib/zeronet/Class.js"></script>
-		<script type="text/javascript" src="assets/lib/zeronet/ZeroFrame.js"></script>
-		<script type="text/javascript" src="assets/lib/zeronet/ZeroChat.js"></script>
-    
-		<!-- jquery -->
-		<!--<script type="text/javascript" src="assets/lib/jquery/jquery.min.js"></script>-->
-		<script type="text/javascript" src="assets/lib/cpcbox/jquery-1.8.3.min.js"></script>
-		<!-- angular -->		
-		<script type="text/javascript" src="assets/lib/angular/angular.min.js"></script>
-	    <script type="text/javascript" src="assets/lib/angular/angular-route.min.js"></script>
-	    <script type="text/javascript" src="assets/lib/angular/angular-animate.min.js"></script>
-	    <script type="text/javascript" src="assets/lib/angular/angular-aria.min.js"></script>
-		<script type="text/javascript" src="assets/lib/angular-sanitize/angular-sanitize.min.js"></script>
-		<script type="text/javascript" src="assets/lib/angular-material/angular-material.min.js"></script>
-		<script type="text/javascript" src="assets/lib/moment/moment.js"></script>
-		<script type="text/javascript" src="assets/lib/angular-moment/angular-moment.min.js"></script>
-	    <script type="text/javascript" src="assets/lib/identicon/pnglib.js"></script>
-	    <script type="text/javascript" src="assets/lib/identicon/identicon.js"></script>
-	    <script type="text/javascript" src="assets/lib/angular-identicon/angular-identicon.min.js"></script>
-	    <script type="text/javascript" src="assets/lib/angular-fullscreen/angular-fullscreen.js"></script>
-
-		<script type="text/javascript" src="app/core/util/dirPagination.js"></script>
-		<!-- videogular -->
-		<script type="text/javascript" src="assets/lib/videos/videogular/videogular.js"></script>
-		<script type="text/javascript" src="assets/lib/videos/videogular-controls/vg-controls.js"></script>
-		<script type="text/javascript" src="assets/lib/videos/videogular-buffering/vg-buffering.js"></script>
-		<script type="text/javascript" src="assets/lib/videos/videogular-overlay-play/vg-overlay-play.js"></script>
-		<script type="text/javascript" src="assets/lib/videos/videogular-poster/vg-poster.js"></script>
-
-		<!-- dosbox -->
-		<script type="text/javascript" src="assets/lib/js-dos/js-dos.js"></script>
-
-		<!-- nes emulator -->
-		<script src="assets/lib/games/nes/lib/dynamicaudio-min.js" type="text/javascript" charset="utf-8"></script>
-	    <script src="assets/lib/games/nes/nes.js" type="text/javascript" charset="utf-8"></script>
-	    <script src="assets/lib/games/nes/utils.js" type="text/javascript" charset="utf-8"></script>
-	    <script src="assets/lib/games/nes/cpu.js" type="text/javascript" charset="utf-8"></script>
-	    <script src="assets/lib/games/nes/keyboard.js" type="text/javascript" charset="utf-8"></script>
-	    <script src="assets/lib/games/nes/mappers.js" type="text/javascript" charset="utf-8"></script>
-	    <script src="assets/lib/games/nes/papu.js" type="text/javascript" charset="utf-8"></script>
-	    <script src="assets/lib/games/nes/ppu.js" type="text/javascript" charset="utf-8"></script>
-	    <script src="assets/lib/games/nes/rom.js" type="text/javascript" charset="utf-8"></script>
-	    <script src="assets/lib/games/nes/ui.js" type="text/javascript" charset="utf-8"></script>
-
-		<!-- app core -->
-		<script type="text/javascript" src="app/application.js"></script>		
-		<script type="text/javascript" src="app/core/controllers/main.ctrl.js"></script>
-		<script type="text/javascript" src="app/core/directives/site-config.directive.js"></script>		
-		<script type="text/javascript" src="app/core/directives/site-header.directive.js"></script>		
-		<script type="text/javascript" src="app/core/directives/item-view.directive.js"></script>
-		<script type="text/javascript" src="app/core/directives/comments.directive.js"></script>
-		<script type="text/javascript" src="app/core/directives/votes.directive.js"></script>
-		<script type="text/javascript" src="app/core/directives/views.directive.js"></script>
-		<script type="text/javascript" src="app/core/filters/file-size.filter.js"></script>
-
-		<!-- app games -->
-		<script type="text/javascript" src="app/games/directives/game-view.directive.js"></script>
-		<script type="text/javascript" src="app/games/directives/dosbox.directive.js"></script>
-		<script type="text/javascript" src="app/games/directives/nes-emulator.directive.js"></script>
-
-		<!-- app videos -->
-		<script type="text/javascript" src="app/videos/directives/video-view.directive.js"></script>
-		<script type="text/javascript" src="app/core/directives/channel-register.directive.js"></script>
-
-	<!-- CPCBOX -->
-			
-			<script type="text/javascript" src="assets/lib/cpcbox/jquerytools.rangeinput.js"></script>
-			<script type="text/javascript" src="assets/lib/cpcbox/inflate.js"></script>
-			<script type="text/javascript" src="assets/lib/cpcbox/cpcbox.sysroms.js"></script>
-			<script type="text/javascript" src="assets/lib/cpcbox/cpcbox.decrypted.js"></script>
+		
 
 	<!-- /JS -->  
 
+	<script type="text/javascript">
+		$(function() {
+		   ///12MVkvYGcRW6u2NYbpfwVad1oQeyG4s9Er/merged-IFS/1FHtDQ8i5NFFeuo7Fux6TeLpwmmeUGvdc8/uploads/games/fruity_frank.sna
+		 var channelId = window.location.href.split('&')[0].split('c=')[1].split('g')[0];		 
+		 var gameName =  window.location.href.split('&')[0].split('f=')[1];		 
+		 var snaFile  = "/12MVkvYGcRW6u2NYbpfwVad1oQeyG4s9Er/merged-IFS/"+channelId+"/uploads/games/"+gameName;			
+				// load nes				        
+				$('<option>'+snaFile+'</option>').attr("value", snaFile).appendTo($("#snapshot"));                                					 				
+		    	$("#snapshot").val(snaFile);
+		    	$( "#snapshot" ).trigger( "change" );	
+
+		});
+	</script>
 	</body>
 </html>
