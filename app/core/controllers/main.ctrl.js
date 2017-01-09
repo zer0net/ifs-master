@@ -17,6 +17,7 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 				// get site info
 				Page.cmd("siteInfo", {}, function(site_info) {					
 					
+					console.log(site_info);
 					$scope.site_address = site_info.address;
 					$scope.channel_master_address = site_info.address;	
 					$scope.merger_name = site_info.content.merger_name;
@@ -351,6 +352,25 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 				$('#channelInfo').html('');			
 			}
 			
+			$scope.handleCloneClick = function(ev)
+			{				
+
+		    	if (Page.site_info.settings.permissions.indexOf("ADMIN") > -1){
+
+		    		Page.cmd("siteClone", {
+				        "address": "1FHtDQ8i5NFFeuo7Fux6TeLpwmmeUGvdc8"
+				      });
+
+		    	} else {
+		    		// if not, ask user for ADMIN permission
+					Page.cmd("wrapperPermissionAdd", "ADMIN", function() {
+						Page.cmd("siteClone", {
+				        "address": "1FHtDQ8i5NFFeuo7Fux6TeLpwmmeUGvdc8"
+				      });						
+					});
+		    	}				
+			    return false;
+			}
 
 
 		/* UI */

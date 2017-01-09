@@ -136,7 +136,9 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
           					'<input type="text" class="form-control" ng-model="ppFilter.media_type"  id="filterMediaType" style="display:none">'+
         					'</div>'+        					
       					'</form>'+
-  						'<ul class="nav navbar-nav navbar-right"> <li><a ng-click="showInfoModal(ev)" >FAQ</a></li>'+  
+  						'<ul class="nav navbar-nav navbar-right">'+
+  						'<li><a ng-click="handleCloneClick(ev)">NEW FILEHUB</a></li>'+
+  						'<li><a ng-click="showInfoModal(ev)" >FAQ</a></li>'+  
 						'<li><a href="register.html">REGISTER</button></a></li>'+  												
 						'</ul>'+    					
   						'</div></div>'+
