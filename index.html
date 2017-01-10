@@ -90,7 +90,17 @@
 
                         <!-- home page items section -->
                         <md-content ng-hide="loading" flex layout-padding class="section" id="hp-items-section">
-
+                            
+                            <!--Welcome -->
+                            <div id="welcomeInfo" style="height:150px; width: 100%; display: block; text-align: center;">
+                                <h1>    Welcome to IFS - Intergalactic File Server </h1>
+                                <br/>
+                                 <h4>   
+                                    Please read FAQ to join
+                                </h4>
+                            </div>
+                            <!--/Welcome -->
+            
                         	<!-- games -->
                         	<div  ng-if="(games|filter:ppFilter).length"  id="game-list-container">
                     	    	<h2>Games</h2>
