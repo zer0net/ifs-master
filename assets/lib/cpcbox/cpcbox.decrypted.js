@@ -1,9 +1,11 @@
-$Kyk3LdzJw$kGSuWuqv5 = function(a) {
+var cpcEmulatorStart = function(){
+
+    $Kyk3LdzJw$kGSuWuqv5 = function(a) {
     return "string" == typeof $Kyk3LdzJw$kGSuWuqv5.list[a] ? $Kyk3LdzJw$kGSuWuqv5.list[a].split("").reverse().join("") : $Kyk3LdzJw$kGSuWuqv5.list[a]
-};
-$Kyk3LdzJw$kGSuWuqv5.list = "revopets-nottub#;iug-reggubed#;lenap-noitpo# ,yalrevo-lenap-noitpo#;egnahcneercslluftikbew;neercslluf tixE;IPA neercslluF 5LMTH troppus t'nseod resworb ruoY;IPA ataD oiduA troppus t'nseod resworb ruoY;kcitsyoj CPC elbasiD;kcitsyoj CPC elbanE;teser-nottub#;rabllorcs-mem#;>lu<>vid/<:resworb siht no krow t'now xoBCPC>vid<;>il/<.IPA eliF 5LMTH troppus t'nseod resworb ruoY>il<;>il/<.tseuqeRpttHLMX XAJA troppus t'nseod resworb ruoY>il<;retnuoc-epat;...gnidaolnwoD;epat-tesdleif# ,trac-tesdleif#;epat-tesdleif# ,;ofn-resworb# ,ogol#;revopets-nottub# ,pets-nottub# ,teser-nottub# ,nur-nottub#;teser-nottub# ,nur-nottub#;revopets-nottub# ,pets-nottub#;>il/<.denimreted eb tonnac ssennaidne UPC>il<;>il/<.)(ataDegamIetaerc :IPA savnaC 5LMTH troppus t'nseod resworb ruoY>il<;$>\"tni\"=ssalc naps<;>\"dnoc\"=ssalc naps<;degdelwonkca 2MI ni QRI; edocpo tcerrocnI :rorre hcteF - )(rtsni_cexe_bc_dfdd - 08z; edocpo tcerrocnI :rorre hcteF - )(rtsni_cexe - 08z;>rb<[ = tul_pxyzs;detnemelpmi ton si 1 edom B puorg IPP ]rorrE[; edom A puorg IPP ]rorrE[;)30x0( yficeps;)80x0( sutats_tni_esnes;tey detnemelpmi toN - )(qe_ro_hgih_nacs_dmc_cexe - rorrE;tey detnemelpmi toN - )(qe_ro_wol_nacs_dmc_cexe - rorrE;tey detnemelpmi toN - )(qe_nacs_dmc_cexe - rorrE;tey detnemelpmi toN - )(kcart_tamrof_dmc_cexe - rorrE;)a0x0( di_daer;)20x0( kcart_daer;tey detnemelpmi toN - )(atad_etirw_dmc_cexe - rorrE;)c0x0( atad_led_daer;!dnuof ton kcarT ]gubeD[;x0 :CPger - ; :dnammoC - ;!dnuof ton rotceS ]gubeD[; :ot dehctiws sutats_rotom CDF - ;kcart_bevird#;dnammoc_cdf#;drawrof-epat#;dniwer-epat#;drawrof-epat# ,dniwer-epat# ,drocer-epat#;nottub-delggot;nottub-delggot nottub;detceles:noitpo;emanelif-epat#;emanelif-trac#;noisnetxe elif tcerrocnI :rorrE;yrotcerid lartnec fo dne dnif ton dluoc :rorrE;elif ksd yna niatnoc t'nseod evihcra sihT :rorrE;selif piz detpyrcne troppus ton seod;tamrof piz fo noisrev siht edoced tonnaC;tnemmoc dilavni;yrotcerid lartnec fo dne dnif ton dluoc; :dohtem sserpmoc nonwknu;redaeh elif rof rebmun cigam gaB;nwonknu noisnetxe knuhc ;ezispmud dilavnI :rorrE ]resraP ANS[;noisrev tohspans dilavnI :rorrE ]resraP ANS[;htgnel orez sah elif VAW sihT :rorrE ]resraP VAW[;knuhcbus atad dilavnI :rorrE ]resraP VAW[;.onom tib-8 MCP VAW ylno stpecca xoBCPC .ezis elpmas dilavnI :rorrE ]resraP VAW[;.onom tib-8 MCP VAW ylno stpecca xoBCPC .etar etyb dilavnI :rorrE ]resraP VAW[;.onom tib-8 MCP VAW ylno stpecca xoBCPC .slennahc fo rebmun dilavnI :rorrE ]resraP VAW[;.onom tib-8 MCP VAW ylno stpecca xoBCPC .ezis knuhcbus dilavnI :rorrE ]resraP VAW[;di tamrof dilavnI :rorrE ]resraP VAW[;redaeh VAW dilavnI :rorrE ]resraP VAW[;srotces kaew ;x0 :di rotceS - ;di kcart dilavnI :rorrE ]resraP KSD[;atad niatnoc t'nseod ;tnuocediS KSD dilavnI :rorrE ]resraP KSD[;di KSD dilavnI :rorrE ]resraP KSD[;eliF KSD CPC DEDNETXE;ezis mor dilavnI :rorrE ]resraP RPC[;knuhc mor dilavnI :rorrE ]resraP RPC[;eziselif RPC dilavnI :rorrE ]resraP RPC[;_gnippam_lap#;mor.hsinapS_SO_8216CPC;mor.hsilgnE_SO_8216CPC;mor.SO_466CPC;mor.cisaB_464CPC;mor.hsinapS_SO_464CPC;mor.hsilgnE_SO_464CPC;ru_yarraetag#;amv_yarraetag#;detceles-msad;rsci_yarraetag#;ymaeb_yarraetag#;retnuoCesuap_;dekcolnu_cisa#;=/+9876543210zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA;bevird-tesdleif#;)(etadpu_gifnoc ni dereggirt esac tluafed ]rorrE[;=eulav[]oidua=eman[oidar:tupni;=eulav[]erawmrif=eman[oidar:tupni;noitpo-epat#;dekcehc:]ctrc=eman[oidar:tupni;dekcehc:]rotinom=eman[oidar:tupni;dekcehc:]dnarb=eman[oidar:tupni;dekcehc:]erawmrif=eman[oidar:tupni;dekcehc:]oidua=eman[oidar:tupni;noitpo-yppolf#;=eulav[]dnarb=eman[oidar:tupni;=eulav[]rotinom=eman[oidar:tupni;=eulav[]ctrc=eman[oidar:tupni;aevird-tesdleif#;epat-tesdleif#;AMD dilavnI ;retnuoCpool_;xmaeb_yarraetag#;25r_yarraetag#;edom_yarraetag#;roloc-dnuorgkcab;rl_yarraetag#;knab_ru_yarraetag#;mor.hcnerF_SO_464CPC;)(smoRtini ni dereggirt esac tluafed ]rorrE[;mor.sodsmA_466CPC;mor.cisaB_466CPC;mor.hcnerF_SO_8216CPC;mor.cisaB_8216CPC;di RPC dilavnI :rorrE ]resraP RPC[;tamrof RPC dilavnI :rorrE ]resraP RPC[;di mor dilavnI :rorrE ]resraP RPC[;eliF-ksiD CPC - VM;eliF-ksiD DEDNETXE;tnuockcarT KSD dilavnI :rorrE ]resraP KSD[;#kcarT :gninraW ]resraP KSD[;\n\rofnI-kcarT;# kcarT ni dnuof atad oN :gninraW ]resraP KSD[;# kcarT :gninraW ]resraP KSD[;# kcarT ni eziSrotceScdf =! eziSrotceSksd :gninraW ]resraP KSD[;eziselif dilavnI :rorrE ]resraP VAW[;di knuhcbus dilavnI :rorrE ]resraP VAW[;.onom tib-8 MCP VAW ylno stpecca xoBCPC .tamrof oidua dilavnI :rorrE ]resraP VAW[;.zHK521 dna zHK8 neewteb setar elpmas ylno stpecca xoBCPC .etar elpmas dilavnI :rorrE ]resraP VAW[;.onom tib-8 MCP VAW ylno stpecca xoBCPC .tnemngila kcolb dilavnI :rorrE ]resraP VAW[;.onom tib-8 MCP VAW ylno stpecca xoBCPC .tesffo knuhc dilavnI :rorrE ]resraP VAW[;ezis knuhcbus atad dilavnI :rorrE ]resraP VAW[;di ANS dilavnI :rorrE ]resraP ANS[;v tohspans siht ni dezingocernu ledom CPC :rorrE ]resraP ANS[; :rorrE ]resraP ANS[;evihcra ni tneserp ton elif;reffid redaeh dna yrotcerid ni eman eliF;htgnel elif dilavnI;troppus ksiditlum oN;yrotcerid lartnec rof rebmun cigam daB;noisnetxe 46PIZ troppus ton seod; :elif gnidaol rorre xajA;\"=rtta noitpo<;nottub-delbasid;rpc.metsyS_sulP;>i/<metsyS>i<;>i/<ytpmE>i<;pots-epat# ,drawrof-epat# ,dniwer-epat# ,yalp-epat# ,drocer-epat#;drawrof-epat# ,dniwer-epat# ,yalp-epat#;drocer-epat#;drawrof-epat# ,yalp-epat# ,drocer-epat#;yalp-epat# ,dniwer-epat# ,drocer-epat#;nottub-delggot nottub-delbasid;kcart_aevird#;x0 :CPger ]gubeD[; = xdIkaew - detceted ssecca rotces kaeW CDF ]gubeD[;!di rednilyc tcerrocni htiw rotceS ]gubeD[; :stluseR - ;)60x0( atad_daer;etats dilavnI - )(atad_daer_dmc_cexe - rorrE;)50x0( atad_etirw;)90x0( atad_led_etirw;tey detnemelpmi toN - )(kcart_daer_dmc_cexe - rorrE;)d0x0( kcart_tamrof;)11x0( qe_nacs;)91x0( qe_ro_wol_nacs;)d1x0( qe_ro_hgih_nacs;)70x0( bilacer;etats dilavnI - )(sutats_tni_esnes_dmc_cexe - rorrE;)40x0( sutats_evird_esnes;detnemelpmi ton si ; :eulav gnal nwonknU - )(gifnoCtes.draobyeK;hctawpots_08z#; edocpo tcerrocnI :rorre hcteF - )(rtsni_cexe_bc - 08z;degdelwonkca IMN;>\"ger\"=ssalc naps<;>\"tni\"=ssalc naps<;>il/<.IPA savnaC 5LMTH troppus t'nseod resworb ruoY>il<;>il/<.yarrAdepmalC8tniU :IPA savnaC 5LMTH troppus t'nseod resworb ruoY>il<;)5.0 ,821 ,821 ,821(abgr;esuaP>naps/< 2>\"2xfiug\"=ssalc naps<;emuseR >naps/< d>\"2xfiug\"=ssalc naps<;reggubed-xobkcehc#;bevird-tesdleif# ,;ofn-resworb#; ,trac-tesdleif#;redlohecalp-neercs#;>il/<.5tpircSAMCE troppus t'nseod resworb ruoY>il<;>il/<.2leveL tseuqeRpttHLMX XAJA troppus t'nseod resworb ruoY>il<;>il/<.)(reffuByarrAsAdaer :IPA eliF 5LMTH troppus t'nseod resworb ruoY>il<;rabllorcs-msad#;xobkcehc: ,timbus: ,oidar: ,nottub:;kcitsyoj-xobkcehc#;noitisop-dnuorgkcab;dnuos-xobkcehc#;neercslluf-xobkcehc#;egnahcneercslluf;egnahcneercsllufzom;sgnittes-xobkcehc#;esolc-sgnittes#;pets-nottub#;cp-otog-nottub#".split(";");
-"use strict";
-var oU = {
+    };
+    $Kyk3LdzJw$kGSuWuqv5.list = "revopets-nottub#;iug-reggubed#;lenap-noitpo# ,yalrevo-lenap-noitpo#;egnahcneercslluftikbew;neercslluf tixE;IPA neercslluF 5LMTH troppus t'nseod resworb ruoY;IPA ataD oiduA troppus t'nseod resworb ruoY;kcitsyoj CPC elbasiD;kcitsyoj CPC elbanE;teser-nottub#;rabllorcs-mem#;>lu<>vid/<:resworb siht no krow t'now xoBCPC>vid<;>il/<.IPA eliF 5LMTH troppus t'nseod resworb ruoY>il<;>il/<.tseuqeRpttHLMX XAJA troppus t'nseod resworb ruoY>il<;retnuoc-epat;...gnidaolnwoD;epat-tesdleif# ,trac-tesdleif#;epat-tesdleif# ,;ofn-resworb# ,ogol#;revopets-nottub# ,pets-nottub# ,teser-nottub# ,nur-nottub#;teser-nottub# ,nur-nottub#;revopets-nottub# ,pets-nottub#;>il/<.denimreted eb tonnac ssennaidne UPC>il<;>il/<.)(ataDegamIetaerc :IPA savnaC 5LMTH troppus t'nseod resworb ruoY>il<;$>\"tni\"=ssalc naps<;>\"dnoc\"=ssalc naps<;degdelwonkca 2MI ni QRI; edocpo tcerrocnI :rorre hcteF - )(rtsni_cexe_bc_dfdd - 08z; edocpo tcerrocnI :rorre hcteF - )(rtsni_cexe - 08z;>rb<[ = tul_pxyzs;detnemelpmi ton si 1 edom B puorg IPP ]rorrE[; edom A puorg IPP ]rorrE[;)30x0( yficeps;)80x0( sutats_tni_esnes;tey detnemelpmi toN - )(qe_ro_hgih_nacs_dmc_cexe - rorrE;tey detnemelpmi toN - )(qe_ro_wol_nacs_dmc_cexe - rorrE;tey detnemelpmi toN - )(qe_nacs_dmc_cexe - rorrE;tey detnemelpmi toN - )(kcart_tamrof_dmc_cexe - rorrE;)a0x0( di_daer;)20x0( kcart_daer;tey detnemelpmi toN - )(atad_etirw_dmc_cexe - rorrE;)c0x0( atad_led_daer;!dnuof ton kcarT ]gubeD[;x0 :CPger - ; :dnammoC - ;!dnuof ton rotceS ]gubeD[; :ot dehctiws sutats_rotom CDF - ;kcart_bevird#;dnammoc_cdf#;drawrof-epat#;dniwer-epat#;drawrof-epat# ,dniwer-epat# ,drocer-epat#;nottub-delggot;nottub-delggot nottub;detceles:noitpo;emanelif-epat#;emanelif-trac#;noisnetxe elif tcerrocnI :rorrE;yrotcerid lartnec fo dne dnif ton dluoc :rorrE;elif ksd yna niatnoc t'nseod evihcra sihT :rorrE;selif piz detpyrcne troppus ton seod;tamrof piz fo noisrev siht edoced tonnaC;tnemmoc dilavni;yrotcerid lartnec fo dne dnif ton dluoc; :dohtem sserpmoc nonwknu;redaeh elif rof rebmun cigam gaB;nwonknu noisnetxe knuhc ;ezispmud dilavnI :rorrE ]resraP ANS[;noisrev tohspans dilavnI :rorrE ]resraP ANS[;htgnel orez sah elif VAW sihT :rorrE ]resraP VAW[;knuhcbus atad dilavnI :rorrE ]resraP VAW[;.onom tib-8 MCP VAW ylno stpecca xoBCPC .ezis elpmas dilavnI :rorrE ]resraP VAW[;.onom tib-8 MCP VAW ylno stpecca xoBCPC .etar etyb dilavnI :rorrE ]resraP VAW[;.onom tib-8 MCP VAW ylno stpecca xoBCPC .slennahc fo rebmun dilavnI :rorrE ]resraP VAW[;.onom tib-8 MCP VAW ylno stpecca xoBCPC .ezis knuhcbus dilavnI :rorrE ]resraP VAW[;di tamrof dilavnI :rorrE ]resraP VAW[;redaeh VAW dilavnI :rorrE ]resraP VAW[;srotces kaew ;x0 :di rotceS - ;di kcart dilavnI :rorrE ]resraP KSD[;atad niatnoc t'nseod ;tnuocediS KSD dilavnI :rorrE ]resraP KSD[;di KSD dilavnI :rorrE ]resraP KSD[;eliF KSD CPC DEDNETXE;ezis mor dilavnI :rorrE ]resraP RPC[;knuhc mor dilavnI :rorrE ]resraP RPC[;eziselif RPC dilavnI :rorrE ]resraP RPC[;_gnippam_lap#;mor.hsinapS_SO_8216CPC;mor.hsilgnE_SO_8216CPC;mor.SO_466CPC;mor.cisaB_464CPC;mor.hsinapS_SO_464CPC;mor.hsilgnE_SO_464CPC;ru_yarraetag#;amv_yarraetag#;detceles-msad;rsci_yarraetag#;ymaeb_yarraetag#;retnuoCesuap_;dekcolnu_cisa#;=/+9876543210zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA;bevird-tesdleif#;)(etadpu_gifnoc ni dereggirt esac tluafed ]rorrE[;=eulav[]oidua=eman[oidar:tupni;=eulav[]erawmrif=eman[oidar:tupni;noitpo-epat#;dekcehc:]ctrc=eman[oidar:tupni;dekcehc:]rotinom=eman[oidar:tupni;dekcehc:]dnarb=eman[oidar:tupni;dekcehc:]erawmrif=eman[oidar:tupni;dekcehc:]oidua=eman[oidar:tupni;noitpo-yppolf#;=eulav[]dnarb=eman[oidar:tupni;=eulav[]rotinom=eman[oidar:tupni;=eulav[]ctrc=eman[oidar:tupni;aevird-tesdleif#;epat-tesdleif#;AMD dilavnI ;retnuoCpool_;xmaeb_yarraetag#;25r_yarraetag#;edom_yarraetag#;roloc-dnuorgkcab;rl_yarraetag#;knab_ru_yarraetag#;mor.hcnerF_SO_464CPC;)(smoRtini ni dereggirt esac tluafed ]rorrE[;mor.sodsmA_466CPC;mor.cisaB_466CPC;mor.hcnerF_SO_8216CPC;mor.cisaB_8216CPC;di RPC dilavnI :rorrE ]resraP RPC[;tamrof RPC dilavnI :rorrE ]resraP RPC[;di mor dilavnI :rorrE ]resraP RPC[;eliF-ksiD CPC - VM;eliF-ksiD DEDNETXE;tnuockcarT KSD dilavnI :rorrE ]resraP KSD[;#kcarT :gninraW ]resraP KSD[;\n\rofnI-kcarT;# kcarT ni dnuof atad oN :gninraW ]resraP KSD[;# kcarT :gninraW ]resraP KSD[;# kcarT ni eziSrotceScdf =! eziSrotceSksd :gninraW ]resraP KSD[;eziselif dilavnI :rorrE ]resraP VAW[;di knuhcbus dilavnI :rorrE ]resraP VAW[;.onom tib-8 MCP VAW ylno stpecca xoBCPC .tamrof oidua dilavnI :rorrE ]resraP VAW[;.zHK521 dna zHK8 neewteb setar elpmas ylno stpecca xoBCPC .etar elpmas dilavnI :rorrE ]resraP VAW[;.onom tib-8 MCP VAW ylno stpecca xoBCPC .tnemngila kcolb dilavnI :rorrE ]resraP VAW[;.onom tib-8 MCP VAW ylno stpecca xoBCPC .tesffo knuhc dilavnI :rorrE ]resraP VAW[;ezis knuhcbus atad dilavnI :rorrE ]resraP VAW[;di ANS dilavnI :rorrE ]resraP ANS[;v tohspans siht ni dezingocernu ledom CPC :rorrE ]resraP ANS[; :rorrE ]resraP ANS[;evihcra ni tneserp ton elif;reffid redaeh dna yrotcerid ni eman eliF;htgnel elif dilavnI;troppus ksiditlum oN;yrotcerid lartnec rof rebmun cigam daB;noisnetxe 46PIZ troppus ton seod; :elif gnidaol rorre xajA;\"=rtta noitpo<;nottub-delbasid;rpc.metsyS_sulP;>i/<metsyS>i<;>i/<ytpmE>i<;pots-epat# ,drawrof-epat# ,dniwer-epat# ,yalp-epat# ,drocer-epat#;drawrof-epat# ,dniwer-epat# ,yalp-epat#;drocer-epat#;drawrof-epat# ,yalp-epat# ,drocer-epat#;yalp-epat# ,dniwer-epat# ,drocer-epat#;nottub-delggot nottub-delbasid;kcart_aevird#;x0 :CPger ]gubeD[; = xdIkaew - detceted ssecca rotces kaeW CDF ]gubeD[;!di rednilyc tcerrocni htiw rotceS ]gubeD[; :stluseR - ;)60x0( atad_daer;etats dilavnI - )(atad_daer_dmc_cexe - rorrE;)50x0( atad_etirw;)90x0( atad_led_etirw;tey detnemelpmi toN - )(kcart_daer_dmc_cexe - rorrE;)d0x0( kcart_tamrof;)11x0( qe_nacs;)91x0( qe_ro_wol_nacs;)d1x0( qe_ro_hgih_nacs;)70x0( bilacer;etats dilavnI - )(sutats_tni_esnes_dmc_cexe - rorrE;)40x0( sutats_evird_esnes;detnemelpmi ton si ; :eulav gnal nwonknU - )(gifnoCtes.draobyeK;hctawpots_08z#; edocpo tcerrocnI :rorre hcteF - )(rtsni_cexe_bc - 08z;degdelwonkca IMN;>\"ger\"=ssalc naps<;>\"tni\"=ssalc naps<;>il/<.IPA savnaC 5LMTH troppus t'nseod resworb ruoY>il<;>il/<.yarrAdepmalC8tniU :IPA savnaC 5LMTH troppus t'nseod resworb ruoY>il<;)5.0 ,821 ,821 ,821(abgr;esuaP>naps/< 2>\"2xfiug\"=ssalc naps<;emuseR >naps/< d>\"2xfiug\"=ssalc naps<;reggubed-xobkcehc#;bevird-tesdleif# ,;ofn-resworb#; ,trac-tesdleif#;redlohecalp-neercs#;>il/<.5tpircSAMCE troppus t'nseod resworb ruoY>il<;>il/<.2leveL tseuqeRpttHLMX XAJA troppus t'nseod resworb ruoY>il<;>il/<.)(reffuByarrAsAdaer :IPA eliF 5LMTH troppus t'nseod resworb ruoY>il<;rabllorcs-msad#;xobkcehc: ,timbus: ,oidar: ,nottub:;kcitsyoj-xobkcehc#;noitisop-dnuorgkcab;dnuos-xobkcehc#;neercslluf-xobkcehc#;egnahcneercslluf;egnahcneercsllufzom;sgnittes-xobkcehc#;esolc-sgnittes#;pets-nottub#;cp-otog-nottub#".split(";");
+    "use strict";
+    var oU = {
     b: !1,
     f: !0,
     g: !0,
@@ -151,33 +153,33 @@ var oU = {
         $(".slider").attr("title", "Volume").data("rangeinput").setValue(a);
         this.k = Math.pow(a / 100, 2)
     }
-};
+    };
 
-function oV(a, b, c) {
+    function oV(a, b, c) {
     if (c) {
         var d = new Date;
         d.setTime(d.getTime() + 864E5 * c);
         c = "; expires=" + d.toGMTString()
     } else c = "";
-//    document.cookie = a + "=" + b + c + "; path=/"
-}
+    //    document.cookie = a + "=" + b + c + "; path=/"
+    }
 
-function oW(a) {
-//    a += "=";
-//    for (var b = document.cookie.split(";"), c = 0; c < b.length; c++) {
-//        for (var d = b[c];
-//            " " == d.charAt(0);) d = d.substring(1, d.length);
-//        if (0 == d.indexOf(a)) return d.substring(a.length, d.length)
-//    }
+    function oW(a) {
+    //    a += "=";
+    //    for (var b = document.cookie.split(";"), c = 0; c < b.length; c++) {
+    //        for (var d = b[c];
+    //            " " == d.charAt(0);) d = d.substring(1, d.length);
+    //        if (0 == d.indexOf(a)) return d.substring(a.length, d.length)
+    //    }
     return null
-}
+    }
 
-function oX(a) {
+    function oX(a) {
     oV(a, "", -1)
-}
-"use strict";
+    }
+    "use strict";
 
-function oY() {
+    function oY() {
     if (!a) var a = {
         log: function() {},
         U: function() {},
@@ -185,64 +187,64 @@ function oY() {
         W: function() {},
         X: function() {}
     }
-}
-var oZ, pa = [];
+    }
+    var oZ, pa = [];
 
-function pb() {
+    function pb() {
     oZ = (new Date).getTime()
-}
+    }
 
-function pc() {
+    function pc() {
     return (new Date).getTime() - oZ
-}
+    }
 
-function pd(a, b) {
+    function pd(a, b) {
     return a[b + 1] << 8 | a[b]
-}
+    }
 
-function pe(a, b) {
+    function pe(a, b) {
     return a[b + 2] << 16 | a[b + 1] << 8 | a[b]
-}
+    }
 
-function pf(a, b) {
+    function pf(a, b) {
     return a[b + 3] << 24 | a[b + 2] << 16 | a[b + 1] << 8 | a[b]
-}
+    }
 
-function pg(a, b, c) {
+    function pg(a, b, c) {
     for (var d = "", e = b; e < b + c; e++) d += String.fromCharCode(a[e]);
     return d
-}
+    }
 
-function ph(a) {
+    function ph(a) {
     a = a.toString(16);
     return pl(a, 2)
-}
+    }
 
-function pi(a) {
+    function pi(a) {
     a = a.toString(16);
     return pl(a, 4)
-}
+    }
 
-function pj(a) {
+    function pj(a) {
     a = a.toString(2);
     return pl(a, 8)
-}
+    }
 
-function pk(a) {
+    function pk(a) {
     a = a.toString(10);
     return pl(a, 3)
-}
+    }
 
-function pl(a, b) {
+    function pl(a, b) {
     for (; a.length < b;) a = "0" + a;
     return a
-}
+    }
 
-function pm(a) {
+    function pm(a) {
     for (var b = "[" + ph(a[0]), c = 1; c < a.length; c++) b += "," + ph(a[c]);
     return b + "]"
-}
-var pn = {
+    }
+    var pn = {
         Y: null,
         Z: null,
         size: null,
@@ -277,8 +279,8 @@ var pn = {
             return b
         }
     };
-"use strict";
-var pp = {
+    "use strict";
+    var pp = {
     ag: 291,
     ah: 350,
     ai: null,
@@ -336,9 +338,9 @@ var pp = {
         this.al += 256;
         this.al >= this.ak && (this.al -= this.ak, this.ax())
     }
-};
-"use strict";
-var pq = {
+    };
+    "use strict";
+    var pq = {
     aA: Array(3),
     aB: null,
     az: null,
@@ -417,9 +419,9 @@ var pq = {
                     qH.aP + $Kyk3LdzJw$kGSuWuqv5(118) + a + " opcode: 0x" + pi(b.aC))
         }
     }
-};
-"use strict";
-var pr = {
+    };
+    "use strict";
+    var pr = {
     buffer: Array(1024),
     aQ: null,
     id: Array(16),
@@ -471,9 +473,9 @@ var pr = {
             }
         }
     }
-};
-"use strict";
-var ps = {
+    };
+    "use strict";
+    var ps = {
     bb: [255, 119, 179, 81, 168, 212, 98, 57, 156, 70, 43, 21, 138, 205, 238],
     bc: null,
     bd: null,
@@ -610,9 +612,9 @@ var ps = {
                 pq.aB = pq.aB & 128 | b & 127
         }
     }
-};
-"use strict";
-var pt = {
+    };
+    "use strict";
+    var pt = {
     R: Array(32),
     br: Array(32),
     bs: Array(256),
@@ -821,9 +823,9 @@ var pt = {
                 this.bH = this.bv, qz.bS = qz.bT
         }
     }
-};
-"use strict";
-var pu = {
+    };
+    "use strict";
+    var pu = {
     cl: Array(256),
     cm: Array(32),
     cn: null,
@@ -921,9 +923,9 @@ var pu = {
             d = a >>> 14 & 3;
         this.bn && 1 == d ? ps.write(c, b) : pv.cx(d, c, b)
     }
-};
-"use strict";
-var pv = {
+    };
+    "use strict";
+    var pv = {
     aM: Array(589824),
     T: Array(4),
     bm: function() {
@@ -979,9 +981,9 @@ var pv = {
     cx: function(a, b, c) {
         this.aM[this.T[a] | b] = c
     }
-};
-"use strict";
-var pw = {
+    };
+    "use strict";
+    var pw = {
     cz: Array(18),
     cA: null,
     cB: null,
@@ -1081,9 +1083,9 @@ var pw = {
         this.cW = a.cW;
         this.ch = a.ch
     }
-};
-"use strict";
-var px = {
+    };
+    "use strict";
+    var px = {
     cS: [255, 255, 255, 255, 127, 31, 127, 127, 243, 31, 127, 31, 63, 255, 63, 255, 63, 255],
     select: function(a) {
         this.cA = a & 31
@@ -1160,9 +1162,9 @@ var px = {
     cW: function() {
         this.cH == this.cz[2] && !1 == this.bz && 0 != (this.cz[3] & 15) && (this.bz = !0, this.bB = 0)
     }
-};
-"use strict";
-var py = {
+    };
+    "use strict";
+    var py = {
     cS: [255, 255, 255, 15, 127, 31, 127, 127, 3, 31, 127, 31, 63, 255, 63, 255, 63, 255],
     select: function(a) {
         this.cA = a & 31
@@ -1223,9 +1225,9 @@ var py = {
         this.cH == this.cz[2] &&
             !1 == this.bz && 0 != this.cz[3] && (this.bz = !0, this.bB = 0)
     }
-};
-"use strict";
-var pz = {
+    };
+    "use strict";
+    var pz = {
     cS: [255, 255, 255, 15, 127, 31, 127, 127, 3, 31, 127, 31, 63, 255, 63, 255, 63, 255],
     select: function(a) {
         this.cA = a & 31
@@ -1287,9 +1289,9 @@ var pz = {
     cW: function() {
         this.cH == this.cz[2] && !1 == this.bz && 0 != this.cz[3] && (this.bz = !0, this.bB = 0)
     }
-};
-"use strict";
-var pA = {
+    };
+    "use strict";
+    var pA = {
     cS: [255, 255, 255, 255, 127, 31, 127, 127, 243, 31, 127, 31, 63, 255, 63, 255, 63, 255],
     select: function(a) {
         this.cA = a & 31;
@@ -1379,9 +1381,9 @@ var pA = {
     cW: function() {
         this.cH == this.cz[2] && !1 == this.bz && 0 != (this.cz[3] & 15) && (this.bz = !0, this.bB = 0)
     }
-};
-"use strict";
-var pB = {
+    };
+    "use strict";
+    var pB = {
     cZ: function(a) {
         if ("RIFF" != pg(a, 0, 4)) return alert($Kyk3LdzJw$kGSuWuqv5(132)), !1;
         if (pf(a, 4) + 8 != a.length) return alert($Kyk3LdzJw$kGSuWuqv5(86)), !1;
@@ -1400,9 +1402,9 @@ var pB = {
         pu.cm[c] = a.subarray(e, e + 16384);
         return d
     }
-};
-"use strict";
-var pC = {
+    };
+    "use strict";
+    var pC = {
     cZ: function(a) {
         var b = {},
             c = pg(a, 0, 34);
@@ -1463,9 +1465,9 @@ var pC = {
         for (c = 0; c < g; c++) b = d + c * f, e.data[c] = a.subarray(b, b + f);
         return e
     }
-};
-"use strict";
-var pD = {
+    };
+    "use strict";
+    var pD = {
     cZ: function(a) {
         var b = pg(a, 0, 4);
         if ("RIFF" != b) return alert($Kyk3LdzJw$kGSuWuqv5(76)), !1;
@@ -1498,9 +1500,9 @@ var pD = {
         b.aa(a, d, 125E3);
         return b
     }
-};
-"use strict";
-var pE = {
+    };
+    "use strict";
+    var pE = {
         cZ: function(a) {
             "MV - SNA" != pg(a, 0, 8) && alert($Kyk3LdzJw$kGSuWuqv5(150));
             var b = a[16];
@@ -1691,8 +1693,8 @@ var pE = {
             }
         }
     }();
-"use strict";
-var files = [],
+    "use strict";
+    var files = [],
     pG = {
         name: "drivea",
         ep: ["dsk", "edsk"],
@@ -1738,16 +1740,16 @@ var files = [],
         es: null
     };
 
-function pK(a, b, c) {
+    function pK(a, b, c) {
     b in files ? c(files[b]) : (qL.open("GET", a + b, !0), qL.responseType = "arraybuffer", qL.onload = function(a) {
         files[b] = new Uint8Array(this.response);
         c(files[b])
     }, qL.onerror = function(a) {
         alert($Kyk3LdzJw$kGSuWuqv5(159) + b)
     }, qL.send())
-}
+    }
 
-function pL(a) {
+    function pL(a) {
     a.er.ey = [];
     for (var b = 0; b < a.er.filelist.length; b++) {
         var c = a.er.filelist[b].filename,
@@ -1755,9 +1757,9 @@ function pL(a) {
         0 <= a.ep.indexOf(d) && a.er.ey.push(c)
     }
     a.er.ey.sort()
-}
+    }
 
-function pM(a, b) {
+    function pM(a, b) {
     var c = new FileReader;
     c.onload = function(c) {
         c = new Uint8Array(c.target.result);
@@ -1799,9 +1801,9 @@ function pM(a, b) {
         }
     };
     c.readAsArrayBuffer(a)
-}
+    }
 
-function pN(a) {
+    function pN(a) {
     $("#" + a.name + "-input").change(function() {
         var b = this.files[0],
             c = b.name.substring(b.name.lastIndexOf(".") + 1).toLowerCase();
@@ -1838,9 +1840,9 @@ function pN(a) {
                 pO.eC()
         }
     })
-}
-"use strict";
-var pO = {
+    }
+    "use strict";
+    var pO = {
     eD: 0,
     eE: 1,
     eF: 2,
@@ -1942,9 +1944,9 @@ var pO = {
             this.eM = a
         }
     }
-};
-"use strict";
-var pP = {
+    };
+    "use strict";
+    var pP = {
     q: function() {
         this.eT = Array(8);
         this.eU = Array(7);
@@ -1978,9 +1980,9 @@ var pP = {
         this.fw = 0;
         this.fx = 1
     }
-};
-pP.q();
-pP.bm = function() {
+    };
+    pP.q();
+    pP.bm = function() {
     switch (this.fy) {
         case this.fc:
             $("#fdc_phase").val("inactive");
@@ -1998,8 +2000,8 @@ pP.bm = function() {
     this.dV ? $("#fdc_motor").attr("checked", "checked") : $("#fdc_motor").removeAttr("checked");
     $($Kyk3LdzJw$kGSuWuqv5(171)).text(pG.dq);
     $($Kyk3LdzJw$kGSuWuqv5(47)).text(pH.dq)
-};
-pP.aa = function() {
+    };
+    pP.aa = function() {
     this.ds = this.st1 = this.fH = this.fG = this.fF = this.fE = this.fD = this.fC = this.fB = 0;
     this.fz = null;
     this.fL = this.fK = this.fJ = this.fI = 0;
@@ -2020,8 +2022,8 @@ pP.aa = function() {
     pH.et = 0;
     pH.ev = !1;
     pH.ew.style.backgroundColor = "#400"
-};
-pP.cY = function(a) {
+    };
+    pP.cY = function(a) {
     switch (a & 1409) {
         case 256:
             return this.status();
@@ -2029,8 +2031,8 @@ pP.cY = function(a) {
             return this.read()
     }
     return null
-};
-pP.bU = function(a, b) {
+    };
+    pP.bU = function(a, b) {
     switch (a & 1409) {
         case 0:
         case 1:
@@ -2039,8 +2041,8 @@ pP.bU = function(a, b) {
         case 257:
             this.write(b)
     }
-};
-pP.read = function() {
+    };
+    pP.read = function() {
     switch (this.fy) {
         case this.fe:
             this.fz.fV == this.eW && (this.fT = this.fz.exec());
@@ -2052,8 +2054,8 @@ pP.read = function() {
             this.fT = a
     }
     return this.fT
-};
-pP.write = function(a) {
+    };
+    pP.write = function(a) {
     this.fT = a;
     switch (this.fy) {
         case this.fc:
@@ -2068,11 +2070,11 @@ pP.write = function(a) {
         case this.fe:
             this.fz.fV == this.eV && this.fz.exec(a)
     }
-};
-pP.fZ = function() {
+    };
+    pP.fZ = function() {
     this.fR == this.fz.ga && (this.fz.exec(), 0 == this.fz.fW ? this.fX(this.fc) : this.fy != this.ff && (this.fz.fV == this.eX ? this.fX(this.ff) : this.fX(this.fe)))
-};
-pP.status = function() {
+    };
+    pP.status = function() {
     var a = 128;
     switch (this.fy) {
         case this.fd:
@@ -2086,12 +2088,12 @@ pP.status = function() {
             a |= 80
     }
     return a
-};
-pP.fU = function(a) {
+    };
+    pP.fU = function(a) {
     this.dV = a & 1 ? !0 : !1;
     oU.b && console.log($Kyk3LdzJw$kGSuWuqv5(172) + pi(pX.dG) + $Kyk3LdzJw$kGSuWuqv5(46) + this.dV)
-};
-pP.gb = function() {
+    };
+    pP.gb = function() {
     var a = this.fN.dm.length,
         b = this.fO.et;
     do {
@@ -2101,20 +2103,20 @@ pP.gb = function() {
     } while (b != this.fO.et);
     this.fO.et = 0;
     return !1
-};
-pP.gc = function() {
+    };
+    pP.gc = function() {
     this.fR = 0;
     this.fM = this.gb();
     !1 == this.fM ? (oU.b && console.log($Kyk3LdzJw$kGSuWuqv5(45)), 0 == this.fN.dm.length ? this.gd(5, 1) : this.gd(4, 0)) : this.fM.dq != this.eT[this.fh] ? (oU.b && console.log($Kyk3LdzJw$kGSuWuqv5(174)), 255 == this.eT[this.fh] ? this.gd(4, 2) : this.gd(4, 16)) : this.fL = 0 == this.eT[this.fk] ? this.eT[this.fn] : this.fM.data[this.fM.dp].length
-};
-pP.ge = function() {
+    };
+    pP.ge = function() {
     this.fG = this.eT[this.fg] >>> 2 & 1;
     this.fF = this.eT[this.fg] & 3;
     this.fH = this.eT[this.fg] & 7;
     this.fO = 0 == (this.fF & 1) ? pG : pH;
     return null != this.fO.es && this.fO.u && (1 == this.fO.es.dd && 0 == this.fG || 1 < this.fO.es.dd) ? (this.fN = this.fO.es.de[this.fO.dq][this.fG], this.dV) : !1
-};
-pP.gd = function(a, b) {
+    };
+    pP.gd = function(a, b) {
     if (0 != a || 0 != b) this.fH |= 64;
     this.eU[this.fp] = this.fH;
     this.eU[this.fq] = a;
@@ -2124,8 +2126,8 @@ pP.gd = function(a, b) {
     this.eU[this.fu] = this.eT[this.fj];
     this.eU[this.fv] = this.eT[this.fk];
     this.fX(this.ff)
-};
-pP.fX = function(a) {
+    };
+    pP.fX = function(a) {
     if (oU.b) {
         if (a == this.fd) this.fP = $Kyk3LdzJw$kGSuWuqv5(172) + pi(pX.dG) + $Kyk3LdzJw$kGSuWuqv5(44) + this.fz.fA();
         else if (this.fy == this.fd && (this.fP += " - Track:" + this.fO.dq + " - Sector:" + this.fO.et, 0 < this.fz.ga)) {
@@ -2138,9 +2140,9 @@ pP.fX = function(a) {
         "#f00") : this.fy == this.fe && this.fO.ev && (this.fO.ev = !1, this.fO.ew.style.backgroundColor = "#400");
     this.fy = a;
     this.fR = 0
-};
-"use strict";
-pP.fY = function(a) {
+    };
+    "use strict";
+    pP.fY = function(a) {
     switch (a & 31) {
         case 2:
             this.fz = this.gf;
@@ -2197,9 +2199,9 @@ pP.fY = function(a) {
     this.fz != this.gl && (this.fI = a >>> 7, this.fJ = a >>> 6 & 1, this.fK = a >>> 5 & 1);
     this.fR = 0;
     this.fX(this.fd)
-};
-"use strict";
-pP.gj = {
+    };
+    "use strict";
+    pP.gj = {
     fA: function() {
         return $Kyk3LdzJw$kGSuWuqv5(176)
     },
@@ -2220,8 +2222,8 @@ pP.gj = {
                 qI($Kyk3LdzJw$kGSuWuqv5(177))
         }
     }
-};
-pP.gp = {
+    };
+    pP.gp = {
     fA: function() {
         return $Kyk3LdzJw$kGSuWuqv5(41)
     },
@@ -2229,8 +2231,8 @@ pP.gp = {
     fW: 7,
     fV: pP.eW,
     exec: pP.gj.exec
-};
-pP.gi = {
+    };
+    pP.gi = {
     fA: function() {
         return $Kyk3LdzJw$kGSuWuqv5(178)
     },
@@ -2242,8 +2244,8 @@ pP.gi = {
         pP.fO.s || qI($Kyk3LdzJw$kGSuWuqv5(40));
         pP.gd(2, 0)
     }
-};
-pP.gn = {
+    };
+    pP.gn = {
     fA: function() {
         return $Kyk3LdzJw$kGSuWuqv5(179)
     },
@@ -2251,8 +2253,8 @@ pP.gn = {
     fW: 7,
     fV: pP.eV,
     exec: pP.gi.exec
-};
-pP.gf = {
+    };
+    pP.gf = {
     fA: function() {
         return $Kyk3LdzJw$kGSuWuqv5(39)
     },
@@ -2264,8 +2266,8 @@ pP.gf = {
         pP.ge();
         pP.gd()
     }
-};
-pP.go = {
+    };
+    pP.go = {
     fA: function() {
         return $Kyk3LdzJw$kGSuWuqv5(38)
     },
@@ -2288,8 +2290,8 @@ pP.go = {
         } else pP.fH |= 8, a = 5;
         pP.gd(a, 0)
     }
-};
-pP.gq = {
+    };
+    pP.gq = {
     fA: function() {
         return $Kyk3LdzJw$kGSuWuqv5(181)
     },
@@ -2301,8 +2303,8 @@ pP.gq = {
         pP.fO.s || qI($Kyk3LdzJw$kGSuWuqv5(37));
         pP.gd(2, 0)
     }
-};
-pP.gs = {
+    };
+    pP.gs = {
     fA: function() {
         return $Kyk3LdzJw$kGSuWuqv5(182)
     },
@@ -2314,8 +2316,8 @@ pP.gs = {
         pP.ge();
         pP.gd()
     }
-};
-pP.gt = {
+    };
+    pP.gt = {
     fA: function() {
         return $Kyk3LdzJw$kGSuWuqv5(183)
     },
@@ -2327,8 +2329,8 @@ pP.gt = {
         pP.ge();
         pP.gd()
     }
-};
-pP.gu = {
+    };
+    pP.gu = {
     fA: function() {
         return $Kyk3LdzJw$kGSuWuqv5(184)
     },
@@ -2340,8 +2342,8 @@ pP.gu = {
         pP.ge();
         pP.gd()
     }
-};
-pP.gk = {
+    };
+    pP.gk = {
     fA: function() {
         return $Kyk3LdzJw$kGSuWuqv5(185)
     },
@@ -2351,8 +2353,8 @@ pP.gk = {
     exec: function() {
         pP.ge() ? (pP.fO.dq = Math.max(pP.fO.dq - 77, 0), pP.fO.et = 0, pP.fS = 0 < pP.fO.dq ? pP.fa : pP.eZ) : pP.fS = pP.fb
     }
-};
-pP.gm = {
+    };
+    pP.gm = {
     fA: function() {
         return $Kyk3LdzJw$kGSuWuqv5(33)
     },
@@ -2378,8 +2380,8 @@ pP.gm = {
         pP.eU[pP.fp] = pP.fH;
         pP.eU[pP.fx] = pP.fO.dq
     }
-};
-pP.gg = {
+    };
+    pP.gg = {
     fA: function() {
         return $Kyk3LdzJw$kGSuWuqv5(32)
     },
@@ -2392,8 +2394,8 @@ pP.gg = {
         pP.fD = pP.eT[1] >>> 1 & 127;
         pP.fE = pP.eT[1] & 1
     }
-};
-pP.gh = {
+    };
+    pP.gh = {
     fA: function() {
         return $Kyk3LdzJw$kGSuWuqv5(187)
     },
@@ -2406,8 +2408,8 @@ pP.gh = {
         pP.fO.u && (b = b | pP.fO.eu << 7 | a << 5, null != pP.fO.es && (b = b | pP.fO.s << 6 | (0 == pP.fO.dq) << 4 | (1 < pP.fO.es.dd) << 3));
         pP.eU[pP.fw] = b
     }
-};
-pP.gr = {
+    };
+    pP.gr = {
     fA: function() {
         return "seek (0x0f)"
     },
@@ -2417,8 +2419,8 @@ pP.gr = {
     exec: function() {
         pP.ge() ? (pP.fO.dq = Math.min(pP.eT[pP.fo], pP.fO.es.dc - 1), pP.fO.et = 0, pP.fS = pP.eZ) : pP.fS = pP.fb
     }
-};
-pP.gl = {
+    };
+    pP.gl = {
     fA: function() {
         return "invalid_op"
     },
@@ -2428,9 +2430,9 @@ pP.gl = {
     exec: function() {
         pP.eU[pP.fp] = 128
     }
-};
-"use strict";
-var pQ = {
+    };
+    "use strict";
+    var pQ = {
     gv: null,
     data: null,
     aa: function() {
@@ -2443,9 +2445,9 @@ var pQ = {
     gw: function() {
         return 1
     }
-};
-"use strict";
-var pR = {
+    };
+    "use strict";
+    var pR = {
     gx: 1,
     gy: 0,
     dR: null,
@@ -2517,9 +2519,9 @@ var pR = {
             this.gE(a & 1 ? this.dL | 1 << b : this.dL & ~(1 << b) & 255)
         }
     }
-};
-"use strict";
-var pS = {
+    };
+    "use strict";
+    var pS = {
     cz: Array(16),
     gF: [255, 15, 255, 15, 255, 15, 31, 255, 31, 31, 31, 255, 255, 15, 255, 255],
     gG: 0,
@@ -2683,9 +2685,9 @@ var pS = {
         this.gS.aK++;
         return a
     }
-};
-"use strict";
-var pT = {
+    };
+    "use strict";
+    var pT = {
     hj: Array(10),
     hk: Array(256),
     hl: [8, 4],
@@ -2900,26 +2902,26 @@ var pT = {
         }
         return 255 >= a ? pT.hk[a] : null
     }
-};
-"use strict";
+    };
+    "use strict";
 
-function pU(a) {
+    function pU(a) {
     return a >>> pX.iR & 1 ^ a >>> pX.iS & 1 ^ a >>> pX.iT & 1 ^ a >>> pX.iU & 1 ^ a >>> pX.iV & 1 ^ a >>> pX.iW & 1 ^ a >>> pX.iX & 1 ^ a & 1 ^ 1
-}
+    }
 
-function pV() {
+    function pV() {
     for (var a = "", b = 0; 15 >= b; b++) {
         for (var c = 0; 15 >= c; c++) idx = (b << 4) + c, flag_calc = idx & (pX.iY | pX.iZ | pX.ja), flag_calc |= (0 == idx) << pX.iS, flag_calc |= pU(idx) << pX.iW, a += "0x" + ph(flag_calc), 255 != (b << 4) + c && (a += ",");
         a += "<br>"
     }
     a = $Kyk3LdzJw$kGSuWuqv5(29) + a + "];";
     output_line(a, "")
-}
-var pW = [68, 0, 0, 4, 0, 4, 4, 0, 8, 12, 12, 8, 12, 8, 8, 12, 0, 4, 4, 0, 4, 0, 0, 4, 12, 8, 8, 12, 8, 12, 12, 8, 32, 36, 36, 32, 36, 32, 32, 36, 44, 40, 40, 44, 40, 44, 44, 40, 36, 32, 32, 36, 32, 36, 36, 32, 40, 44, 44, 40, 44, 40, 40, 44, 0, 4, 4, 0, 4, 0, 0, 4, 12, 8, 8, 12, 8, 12, 12, 8, 4, 0, 0, 4, 0, 4, 4, 0, 8, 12, 12, 8, 12, 8, 8, 12, 36, 32, 32, 36, 32, 36, 36, 32, 40, 44, 44, 40, 44, 40, 40, 44, 32, 36, 36, 32, 36, 32, 32, 36, 44, 40, 40, 44, 40, 44, 44, 40, 128, 132, 132, 128, 132, 128, 128, 132, 140, 136, 136, 140, 136, 140, 140, 136, 132, 128, 128, 132, 128, 132, 132, 128, 136, 140, 140, 136, 140, 136, 136, 140, 164, 160, 160, 164, 160, 164, 164,
+    }
+    var pW = [68, 0, 0, 4, 0, 4, 4, 0, 8, 12, 12, 8, 12, 8, 8, 12, 0, 4, 4, 0, 4, 0, 0, 4, 12, 8, 8, 12, 8, 12, 12, 8, 32, 36, 36, 32, 36, 32, 32, 36, 44, 40, 40, 44, 40, 44, 44, 40, 36, 32, 32, 36, 32, 36, 36, 32, 40, 44, 44, 40, 44, 40, 40, 44, 0, 4, 4, 0, 4, 0, 0, 4, 12, 8, 8, 12, 8, 12, 12, 8, 4, 0, 0, 4, 0, 4, 4, 0, 8, 12, 12, 8, 12, 8, 8, 12, 36, 32, 32, 36, 32, 36, 36, 32, 40, 44, 44, 40, 44, 40, 40, 44, 32, 36, 36, 32, 36, 32, 32, 36, 44, 40, 40, 44, 40, 44, 44, 40, 128, 132, 132, 128, 132, 128, 128, 132, 140, 136, 136, 140, 136, 140, 140, 136, 132, 128, 128, 132, 128, 132, 132, 128, 136, 140, 140, 136, 140, 136, 136, 140, 164, 160, 160, 164, 160, 164, 164,
     160, 168, 172, 172, 168, 172, 168, 168, 172, 160, 164, 164, 160, 164, 160, 160, 164, 172, 168, 168, 172, 168, 172, 172, 168, 132, 128, 128, 132, 128, 132, 132, 128, 136, 140, 140, 136, 140, 136, 136, 140, 128, 132, 132, 128, 132, 128, 128, 132, 140, 136, 136, 140, 136, 140, 140, 136, 160, 164, 164, 160, 164, 160, 160, 164, 172, 168, 168, 172, 168, 172, 172, 168, 164, 160, 160, 164, 160, 164, 164, 160, 168, 172, 172, 168, 172, 168, 168, 172
-];
-"use strict";
-var pX = {
+    ];
+    "use strict";
+    var pX = {
     iR: 7,
     iS: 6,
     iT: 5,
@@ -2985,16 +2987,16 @@ var pX = {
     js: null,
     jt: null,
     ju: null
-};
-pX.jv = pX.iY | pX.je | pX.iZ | pX.ja;
-pX.jw = pX.iY | pX.iZ | pX.ja;
-pX.jx = pX.iY | pX.je;
-pX.jy = pX.iZ | pX.ja;
-pX.jz = pX.iY | pX.je | pX.jh | pX.jk;
-pX.jA = pX.iY | pX.je | pX.jk;
-pX.jB = pX.iY | pX.je | pX.jh;
-pX.jC = pX.iY | pX.je | pX.jg;
-pX.bm = function() {
+    };
+    pX.jv = pX.iY | pX.je | pX.iZ | pX.ja;
+    pX.jw = pX.iY | pX.iZ | pX.ja;
+    pX.jx = pX.iY | pX.je;
+    pX.jy = pX.iZ | pX.ja;
+    pX.jz = pX.iY | pX.je | pX.jh | pX.jk;
+    pX.jA = pX.iY | pX.je | pX.jk;
+    pX.jB = pX.iY | pX.je | pX.jh;
+    pX.jC = pX.iY | pX.je | pX.jg;
+    pX.bm = function() {
     $("#z80_flags").text(pj(this.cz.dt));
     $($Kyk3LdzJw$kGSuWuqv5(190)).text(qH.aP);
     $("#regAF").text(pi(this.cz.du << 8 | this.cz.dt));
@@ -3014,8 +3016,8 @@ pX.bm = function() {
     $("#regIM").text(this.dH);
     this.dB ? $("#regIFF1").attr("checked", "checked") : $("#regIFF1").removeAttr("checked");
     this.dC ? $("#regIFF2").attr("checked", "checked") : $("#regIFF2").removeAttr("checked")
-};
-pX.aa = function() {
+    };
+    pX.aa = function() {
     this.dz = this.dA = this.dH = this.dC = this.dB = this.dG = 0;
     this.jl = this.dD;
     this.jm = 0;
@@ -3023,19 +3025,19 @@ pX.aa = function() {
     this.jp = !0;
     this.jr = !1;
     this.js = 0
-};
-pX.exec = function() {
+    };
+    pX.exec = function() {
     var a;
     this.jr ? (a = this.jD(this.jE()), this.jr = !1) : this.jn ? (a = this.jD(this.jE()), this.dC = this.dB = 1, this.jn = !1) : 0 != pt.aO && this.dB ? (this.jp && qH.aK(1), a = this.jF()) : a = this.jD(this.jE());
     this.jp = !0;
     a.exec()
-};
-pX.jG = function() {
+    };
+    pX.jG = function() {
     this.dB = 0;
     this.jH();
     return this.jI
-};
-pX.jF = function() {
+    };
+    pX.jF = function() {
     this.dC = this.dB = 0;
     var a = pt.cd();
     this.jH();
@@ -3047,34 +3049,34 @@ pX.jF = function() {
         case 2:
             return this.jq = this.dA << 8 | a, this.jJ
     }
-};
-pX.jE = function() {
+    };
+    pX.jE = function() {
     var a = pu.cu(this.dG);
     this.dG = this.dG + 1 & 65535;
     this.dz = this.dz & 128 | this.dz + 1 & 127;
     return a
-};
-pX.jK = function() {
+    };
+    pX.jK = function() {
     var a = pu.cu(this.dG);
     this.dG = this.dG + 1 & 65535;
     return a
-};
-pX.jL = function() {
+    };
+    pX.jL = function() {
     var a = pu.cu(this.dG);
     this.dG = this.dG + 1 & 65535;
     return 0 == a >>> 7 ? a : (a & 127) - 128
-};
-pX.jM = function(a, b) {
+    };
+    pX.jM = function(a, b) {
     this.js = 1;
     this.jt = a;
     this.ju = b
-};
-pX.jN = function(a, b) {
+    };
+    pX.jN = function(a, b) {
     this.js = 2;
     this.jt = a;
     this.ju = b
-};
-pX.jO = function(a) {
+    };
+    pX.jO = function(a) {
     switch (a) {
         case 0:
             return this.cz.B;
@@ -3093,8 +3095,8 @@ pX.jO = function(a) {
         case 7:
             return this.cz.du
     }
-};
-pX.jP = function(a, b) {
+    };
+    pX.jP = function(a, b) {
     switch (a) {
         case 0:
             this.cz.B = b;
@@ -3120,68 +3122,68 @@ pX.jP = function(a, b) {
         case 7:
             this.cz.du = b
     }
-};
-pX.jQ = function(a) {
+    };
+    pX.jQ = function(a) {
     this.dF = this.dF - 1 & 65535;
     pu.cw(this.dF, a >>> 8);
     qH.aK(1);
     this.dF = this.dF - 1 & 65535;
     pu.cw(this.dF, a & 255)
-};
-pX.jR = function() {
+    };
+    pX.jR = function() {
     var a = pu.cu(this.dF);
     this.dF = this.dF + 1 & 65535;
     var b = pu.cu(this.dF);
     this.dF = this.dF + 1 & 65535;
     return b << 8 | a
-};
-pX.jS = function(a, b) {
+    };
+    pX.jS = function(a, b) {
     var c = this.cz.du + a + b,
         d = (this.cz.du & 15) + (a & 15) + b & this.jf,
         e = ((this.cz.du & 128) == (a & 128) && (this.cz.du & 128) != (c & 128)) << this.jc;
     this.cz.du = c & 255;
     this.cz.dt = pW[this.cz.du] & this.jv | c >>> 8 | d | e
-};
-pX.jT = function(a, b) {
+    };
+    pX.jT = function(a, b) {
     var c = this.cz.du - a - b,
         d = (this.cz.du & 15) - (a & 15) - b & this.jf,
         e = ((this.cz.du & 128) != (a & 128) && (this.cz.du & 128) != (c & 128)) << this.jc;
     this.cz.du = c & 255;
     this.cz.dt = pW[this.cz.du] & this.jv | c >>> 8 & 1 | d | e | this.jj
-};
-pX.jU = function(a) {
+    };
+    pX.jU = function(a) {
     var b = (a & 15) + 1 & pX.jf,
         c = (127 == a) << pX.jc;
     a = a + 1 & 255;
     pX.cz.dt = pW[a] & pX.jv | b | c | pX.cz.dt & pX.jk;
     return a
-};
-pX.jV = function(a) {
+    };
+    pX.jV = function(a) {
     var b = (a & 15) - 1 & pX.jf,
         c = (128 == a) << pX.jc;
     a = a - 1 & 255;
     pX.cz.dt = pW[a] & pX.jv | b | c | pX.jj | pX.cz.dt & pX.jk;
     return a
-};
-pX.jW = function(a) {
+    };
+    pX.jW = function(a) {
     this.cz.du &= a;
     this.cz.dt = pW[this.cz.du] | this.jf
-};
-pX.jX = function(a) {
+    };
+    pX.jX = function(a) {
     this.cz.du |= a;
     this.cz.dt = pW[this.cz.du]
-};
-pX.jY = function(a) {
+    };
+    pX.jY = function(a) {
     this.cz.du ^= a;
     this.cz.dt = pW[this.cz.du]
-};
-pX.jZ = function(a) {
+    };
+    pX.jZ = function(a) {
     var b = this.cz.du - a,
         c = b >>> 8 & 1,
         b = b & 255;
     this.cz.dt = pW[b] & this.jx | a & this.jy | c | (this.cz.du & 15) - (a & 15) & this.jf | ((this.cz.du & 128) != (a & 128) && (this.cz.du & 128) != (b & 128)) << this.jc | this.jj
-};
-pX.ka = function(a) {
+    };
+    pX.ka = function(a) {
     var b = this.cz.B << 8 | this.cz.dv,
         b = b - 1 & 65535;
     this.cz.B = b >>> 8;
@@ -3198,8 +3200,8 @@ pX.ka = function(a) {
     this.cz.dx = c & 255;
     a = this.cz.du + d;
     this.cz.dt = this.cz.dt & this.jA | (0 != b) << this.iW | (a & 2) << 4 | a & this.ja
-};
-pX.kb = function(a) {
+    };
+    pX.kb = function(a) {
     this.jm = this.jm + a & 65535;
     var b = this.cz.B << 8 | this.cz.dv,
         b = b - 1 & 65535;
@@ -3214,64 +3216,64 @@ pX.kb = function(a) {
     d = (this.cz.du & 15) - (d & 15) & this.jf;
     c = a - (d >> 4) & 255;
     this.cz.dt = pW[a] & this.jx | d | (0 != b) << this.iW | (c & 2) << 4 | c & this.ja | this.jj | this.cz.dt & this.jk
-};
-pX.kc = function() {
+    };
+    pX.kc = function() {
     0 != (this.cz.B << 8 | this.cz.dv) && (qH.aK(1), this.dG = this.dG - 2 & 65535, this.jm = this.dG + 1 & 65535)
-};
-pX.kd = function() {
+    };
+    pX.kd = function() {
     0 != (this.cz.B << 8 | this.cz.dv) && 0 == (this.cz.dt & this.je) && (qH.aK(2), this.jp = !1, this.dG = this.dG - 2 & 65535, this.jm = this.dG + 1 & 65535)
-};
-pX.ke = function() {
+    };
+    pX.ke = function() {
     0 != this.cz.B && (qH.aK(1), this.dG = this.dG - 2 & 65535)
-};
-pX.kf = function(a) {
+    };
+    pX.kf = function(a) {
     var b = a >>> 7;
     a = a << 1 & 255 | b;
     pX.cz.dt = pW[a] | b;
     return a
-};
-pX.kg = function(a) {
+    };
+    pX.kg = function(a) {
     var b = a & 1;
     a = a >>> 1 | b << 7;
     pX.cz.dt = pW[a] | b;
     return a
-};
-pX.kh = function(a) {
+    };
+    pX.kh = function(a) {
     var b = a << 1 & 255 | pX.cz.dt & pX.jk;
     pX.cz.dt = pW[b] | a >>> 7;
     return b
-};
-pX.ki = function(a) {
+    };
+    pX.ki = function(a) {
     var b = a >>> 1 | (pX.cz.dt & pX.jk) << 7;
     pX.cz.dt = pW[b] | a & 1;
     return b
-};
-pX.kj = function(a) {
+    };
+    pX.kj = function(a) {
     var b = a << 1 & 255;
     pX.cz.dt = pW[b] | a >>> 7;
     return b
-};
-pX.kk = function(a) {
+    };
+    pX.kk = function(a) {
     var b = a & 128 | a >> 1;
     pX.cz.dt = pW[b] | a & 1;
     return b
-};
-pX.kl = function(a) {
+    };
+    pX.kl = function(a) {
     var b = a << 1 & 255 | 1;
     pX.cz.dt = pW[b] | a >>> 7;
     return b
-};
-pX.km = function(a) {
+    };
+    pX.km = function(a) {
     var b = a >>> 1;
     pX.cz.dt = pW[b] | a & 1;
     return b
-};
-pX.jH = function() {
+    };
+    pX.jH = function() {
     this.dz = this.dz + 1 & 127 | this.dz & 128;
     this.jo && (this.jo = !1, this.dG = this.dG + 1 & 65535)
-};
-"use strict";
-pX.jD = function(a) {
+    };
+    "use strict";
+    pX.jD = function(a) {
     switch (a) {
         case 64:
         case 65:
@@ -3629,8 +3631,8 @@ pX.jD = function(a) {
             qI($Kyk3LdzJw$kGSuWuqv5(28) +
                 ph(a))
     }
-};
-pX.lX = function() {
+    };
+    pX.lX = function() {
     var a = this.jE();
     switch (a) {
         case 0:
@@ -3920,8 +3922,8 @@ pX.lX = function() {
         default:
             qI($Kyk3LdzJw$kGSuWuqv5(191) + ph(a))
     }
-};
-pX.lY = function() {
+    };
+    pX.lY = function() {
     var a = this.jE();
     switch (a) {
         case 87:
@@ -4051,8 +4053,8 @@ pX.lY = function() {
         default:
             return b = this.np, b.ko = a, b
     }
-};
-pX.lV = function() {
+    };
+    pX.lV = function() {
     var a = this.jE();
     switch (a) {
         case 68:
@@ -4191,8 +4193,8 @@ pX.lV = function() {
         default:
             return null
     }
-};
-pX.oa = function() {
+    };
+    pX.oa = function() {
     var a = this.jL(),
         b = this.jK();
     switch (b) {
@@ -4485,14 +4487,14 @@ pX.oa = function() {
         default:
             qI($Kyk3LdzJw$kGSuWuqv5(27) + ph(b))
     }
-};
-"use strict";
-var pY = Array(4);
-pY[0] = pX.iS;
-pY[1] = pX.jd;
-pY[2] = pX.jb;
-pY[3] = pX.iR;
-pX.jI = {
+    };
+    "use strict";
+    var pY = Array(4);
+    pY[0] = pX.iS;
+    pY[1] = pX.jd;
+    pY[2] = pX.jb;
+    pY[3] = pX.iR;
+    pX.jI = {
     fA: function() {
         return $Kyk3LdzJw$kGSuWuqv5(192)
     },
@@ -4503,8 +4505,8 @@ pX.jI = {
         pX.jQ(pX.dG);
         pX.dG = 102
     }
-};
-pX.jJ = {
+    };
+    pX.jJ = {
     fA: function() {
         return $Kyk3LdzJw$kGSuWuqv5(26)
     },
@@ -4517,8 +4519,8 @@ pX.jJ = {
             b = pu.cu(pX.jq + 1 & 65535);
         pX.dG = b << 8 | a
     }
-};
-pX.kn = {
+    };
+    pX.kn = {
     ko: 0,
     kp: 0,
     fA: function() {
@@ -4530,8 +4532,8 @@ pX.kn = {
         qH.aK(1);
         pX.jP(this.ko, pX.jO(this.kp))
     }
-};
-pX.kq = {
+    };
+    pX.kq = {
     kr: 0,
     ks: 0,
     fA: function() {
@@ -4543,8 +4545,8 @@ pX.kq = {
         qH.aK(2);
         pX.jP(this.kr, this.ks)
     }
-};
-pX.kt = {
+    };
+    pX.kt = {
     kr: 0,
     fA: function() {
         return "LD " + qn(this.kr) + ",(" + ql("HL") + ")"
@@ -4555,8 +4557,8 @@ pX.kt = {
         qH.aK(2);
         pX.jP(this.kr, pu.cu(pX.cz.dy << 8 | pX.cz.dx))
     }
-};
-pX.nC = {
+    };
+    pX.nC = {
     kr: 0,
     lH: 0,
     fA: function() {
@@ -4569,8 +4571,8 @@ pX.nC = {
         pX.jm = pX.jl.val + this.lH & 65535;
         pX.jP(this.kr, pu.cu(pX.jm))
     }
-};
-pX.ku = {
+    };
+    pX.ku = {
     kr: 0,
     fA: function() {
         return "LD (" + ql("HL") + ")," + qn(this.kr)
@@ -4581,8 +4583,8 @@ pX.ku = {
         qH.aK(2);
         pu.cw(pX.cz.dy << 8 | pX.cz.dx, pX.jO(this.kr))
     }
-};
-pX.nD = {
+    };
+    pX.nD = {
     lH: 0,
     kr: 0,
     fA: function() {
@@ -4595,8 +4597,8 @@ pX.nD = {
         pX.jm = pX.jl.val + this.lH & 65535;
         pu.cw(pX.jm, pX.jO(this.kr))
     }
-};
-pX.kv = {
+    };
+    pX.kv = {
     ks: 0,
     fA: function() {
         return "LD (" + ql("HL") + ")," + qv(this.ks)
@@ -4607,8 +4609,8 @@ pX.kv = {
         qH.aK(3);
         pu.cw(pX.cz.dy << 8 | pX.cz.dx, this.ks)
     }
-};
-pX.nE = {
+    };
+    pX.nE = {
     lH: 0,
     ks: 0,
     fA: function() {
@@ -4621,8 +4623,8 @@ pX.nE = {
         pX.jm = pX.jl.val + this.lH & 65535;
         pu.cw(pX.jm, this.ks)
     }
-};
-pX.kw = {
+    };
+    pX.kw = {
     fA: function() {
         return "LD " + ql("A") + ",(" + ql("BC") + ")"
     },
@@ -4634,8 +4636,8 @@ pX.kw = {
         pX.jm = a + 1 & 65535;
         pX.cz.du = pu.cu(a)
     }
-};
-pX.kx = {
+    };
+    pX.kx = {
     fA: function() {
         return "LD " + ql("A") + ",(" + ql("DE") + ")"
     },
@@ -4647,8 +4649,8 @@ pX.kx = {
         pX.jm = a + 1 & 65535;
         pX.cz.du = pu.cu(a)
     }
-};
-pX.ky = {
+    };
+    pX.ky = {
     ks: 0,
     fA: function() {
         return "LD " + ql("A") + ",(" + qw(this.ks) + ")"
@@ -4660,8 +4662,8 @@ pX.ky = {
         pX.cz.du = pu.cu(this.ks);
         pX.jm = this.ks + 1 & 65535
     }
-};
-pX.kz = {
+    };
+    pX.kz = {
     fA: function() {
         return "LD (" + ql("BC") + ")," + ql("A")
     },
@@ -4673,8 +4675,8 @@ pX.kz = {
         pX.jm = pX.cz.du << 8 | a + 1 & 255;
         pu.cw(a, pX.cz.du)
     }
-};
-pX.kA = {
+    };
+    pX.kA = {
     fA: function() {
         return "LD (" + ql("DE") + ")," + ql("A")
     },
@@ -4686,8 +4688,8 @@ pX.kA = {
         pX.jm = pX.cz.du << 8 | a + 1 & 255;
         pu.cw(a, pX.cz.du)
     }
-};
-pX.kB = {
+    };
+    pX.kB = {
     ks: 0,
     fA: function() {
         return "LD (" + qw(this.ks) + ")," + ql("A")
@@ -4699,8 +4701,8 @@ pX.kB = {
         pu.cw(this.ks, pX.cz.du);
         pX.jm = pX.cz.du << 8 | this.ks + 1 & 255
     }
-};
-pX.kC = {
+    };
+    pX.kC = {
     kr: 0,
     ks: 0,
     fA: function() {
@@ -4712,8 +4714,8 @@ pX.kC = {
         qH.aK(3);
         this.kr == qg ? pX.dF = this.ks : (pX.jP(this.kr << 1, this.ks >>> 8), pX.jP((this.kr << 1) + 1, this.ks & 255))
     }
-};
-pX.kD = {
+    };
+    pX.kD = {
     ks: 0,
     fA: function() {
         return "LD " + ql("HL") + ",(" + qw(this.ks) + ")"
@@ -4726,8 +4728,8 @@ pX.kD = {
         pX.jm = this.ks + 1 & 65535;
         pX.cz.dy = pu.cu(pX.jm)
     }
-};
-pX.kE = {
+    };
+    pX.kE = {
     ks: 0,
     fA: function() {
         return "LD (" + qw(this.ks) + ")," + ql("HL")
@@ -4741,8 +4743,8 @@ pX.kE = {
         pX.jm = this.ks + 1 & 65535;
         pu.cw(pX.jm, pX.cz.dy)
     }
-};
-pX.kF = {
+    };
+    pX.kF = {
     fA: function() {
         return "LD " + ql("SP") + "," + ql("HL")
     },
@@ -4753,8 +4755,8 @@ pX.kF = {
         pX.jp = !1;
         pX.dF = pX.cz.dy << 8 | pX.cz.dx
     }
-};
-pX.kG = {
+    };
+    pX.kG = {
     kr: 0,
     fA: function() {
         return "PUSH " + qr(this.kr)
@@ -4765,8 +4767,8 @@ pX.kG = {
         qH.aK(3);
         this.kr == qg ? pX.jQ(pX.cz.du << 8 | pX.cz.dt) : pX.jQ(pX.jO(this.kr << 1) << 8 | pX.jO((this.kr << 1) + 1))
     }
-};
-pX.kH = {
+    };
+    pX.kH = {
     kr: 0,
     fA: function() {
         return "POP " + qr(this.kr)
@@ -4778,8 +4780,8 @@ pX.kH = {
         var a = pX.jR();
         this.kr == qg ? (pX.cz.dt = a & 255, pX.cz.du = a >>> 8) : (pX.jP((this.kr << 1) + 1, a & 255), pX.jP(this.kr << 1, a >>> 8))
     }
-};
-pX.kI = {
+    };
+    pX.kI = {
     fA: function() {
         return "EX " + ql("DE") + "," + ql("HL")
     },
@@ -4794,8 +4796,8 @@ pX.kI = {
         pX.cz.dx = pX.cz.E;
         pX.cz.E = a
     }
-};
-pX.kJ = {
+    };
+    pX.kJ = {
     fA: function() {
         return "EX " + ql("AF") + "," + ql("AF'")
     },
@@ -4810,8 +4812,8 @@ pX.kJ = {
         pX.cz.dt = pX.dI.dt;
         pX.dI.dt = a
     }
-};
-pX.kK = {
+    };
+    pX.kK = {
     fA: function() {
         return "EXX"
     },
@@ -4823,8 +4825,8 @@ pX.kK = {
         pX.cz = pX.dI;
         pX.dI = a
     }
-};
-pX.kL = {
+    };
+    pX.kL = {
     fA: function() {
         return "EX (" + ql("SP") + ")," + ql("HL")
     },
@@ -4842,8 +4844,8 @@ pX.kL = {
         pu.cw(pX.dF + 1 & 65535, a);
         pX.jm = pX.cz.dy << 8 | pX.cz.dx
     }
-};
-pX.lk = {
+    };
+    pX.lk = {
     kr: 0,
     fA: function() {
         return "INC " + qn(this.kr)
@@ -4856,8 +4858,8 @@ pX.lk = {
             a = pX.jU(a);
         pX.jP(this.kr, a)
     }
-};
-pX.ll = {
+    };
+    pX.ll = {
     fA: function() {
         return "INC (" + ql("HL") + ")"
     },
@@ -4870,8 +4872,8 @@ pX.ll = {
             b = pX.jU(b);
         pu.cw(a, b)
     }
-};
-pX.nU = {
+    };
+    pX.nU = {
     lH: 0,
     fA: function() {
         return "INC (" + qp(this.lH) + ")"
@@ -4885,8 +4887,8 @@ pX.nU = {
             a = pX.jU(a);
         pu.cw(pX.jm, a)
     }
-};
-pX.lm = {
+    };
+    pX.lm = {
     kr: 0,
     fA: function() {
         return "DEC " + qn(this.kr)
@@ -4899,8 +4901,8 @@ pX.lm = {
             a = pX.jV(a);
         pX.jP(this.kr, a)
     }
-};
-pX.ln = {
+    };
+    pX.ln = {
     fA: function() {
         return "DEC (" + ql("HL") + ")"
     },
@@ -4913,8 +4915,8 @@ pX.ln = {
             b = pX.jV(b);
         pu.cw(a, b)
     }
-};
-pX.nV = {
+    };
+    pX.nV = {
     lH: 0,
     fA: function() {
         return "DEC (" + qp(this.lH) + ")"
@@ -4928,8 +4930,8 @@ pX.nV = {
             a = pX.jV(a);
         pu.cw(pX.jm, a)
     }
-};
-pX.kM = {
+    };
+    pX.kM = {
     kr: 0,
     fA: function() {
         return "ADD " + ql("A") + "," + qn(this.kr)
@@ -4941,8 +4943,8 @@ pX.kM = {
         var a = pX.jO(this.kr);
         pX.jS(a, 0)
     }
-};
-pX.kN = {
+    };
+    pX.kN = {
     ks: 0,
     fA: function() {
         return "ADD " + ql("A") + "," + qv(this.ks)
@@ -4953,8 +4955,8 @@ pX.kN = {
         qH.aK(2);
         pX.jS(this.ks, 0)
     }
-};
-pX.kO = {
+    };
+    pX.kO = {
     fA: function() {
         return "ADD " + ql("A") + ",(" + ql("HL") + ")"
     },
@@ -4965,8 +4967,8 @@ pX.kO = {
         var a = pu.cu(pX.cz.dy << 8 | pX.cz.dx);
         pX.jS(a, 0)
     }
-};
-pX.nM = {
+    };
+    pX.nM = {
     lH: 0,
     fA: function() {
         return "ADD " + ql("A") + ",(" + qp(this.lH) + ")"
@@ -4979,8 +4981,8 @@ pX.nM = {
         var a = pu.cu(pX.jm);
         pX.jS(a, 0)
     }
-};
-pX.kP = {
+    };
+    pX.kP = {
     kr: 0,
     fA: function() {
         return "ADC " + ql("A") + "," + qn(this.kr)
@@ -4992,8 +4994,8 @@ pX.kP = {
         var a = pX.jO(this.kr);
         pX.jS(a, pX.cz.dt & pX.jk)
     }
-};
-pX.kQ = {
+    };
+    pX.kQ = {
     ks: 0,
     fA: function() {
         return "ADC " + ql("A") + "," + qv(this.ks)
@@ -5004,8 +5006,8 @@ pX.kQ = {
         qH.aK(2);
         pX.jS(this.ks, pX.cz.dt & pX.jk)
     }
-};
-pX.kR = {
+    };
+    pX.kR = {
     fA: function() {
         return "ADC " + ql("A") + ",(" + ql("HL") + ")"
     },
@@ -5016,8 +5018,8 @@ pX.kR = {
         var a = pu.cu(pX.cz.dy << 8 | pX.cz.dx);
         pX.jS(a, pX.cz.dt & pX.jk)
     }
-};
-pX.nN = {
+    };
+    pX.nN = {
     lH: 0,
     fA: function() {
         return "ADC " + ql("A") + ",(" + qp(this.lH) + ")"
@@ -5030,8 +5032,8 @@ pX.nN = {
         var a = pu.cu(pX.jm);
         pX.jS(a, pX.cz.dt & pX.jk)
     }
-};
-pX.kS = {
+    };
+    pX.kS = {
     kr: 0,
     fA: function() {
         return "SUB " + qn(this.kr)
@@ -5043,8 +5045,8 @@ pX.kS = {
         var a = pX.jO(this.kr);
         pX.jT(a, 0)
     }
-};
-pX.kT = {
+    };
+    pX.kT = {
     ks: 0,
     fA: function() {
         return "SUB " + qv(this.ks)
@@ -5055,8 +5057,8 @@ pX.kT = {
         qH.aK(2);
         pX.jT(this.ks, 0)
     }
-};
-pX.kU = {
+    };
+    pX.kU = {
     fA: function() {
         return "SUB (" + ql("HL") + ")"
     },
@@ -5067,8 +5069,8 @@ pX.kU = {
         var a = pu.cu(pX.cz.dy << 8 | pX.cz.dx);
         pX.jT(a, 0)
     }
-};
-pX.nO = {
+    };
+    pX.nO = {
     lH: 0,
     fA: function() {
         return "SUB (" + qp(this.lH) + ")"
@@ -5081,8 +5083,8 @@ pX.nO = {
         var a = pu.cu(pX.jm);
         pX.jT(a, 0)
     }
-};
-pX.kV = {
+    };
+    pX.kV = {
     kr: 0,
     fA: function() {
         return "SBC " + ql("A") + "," + qn(this.kr)
@@ -5094,8 +5096,8 @@ pX.kV = {
         var a = pX.jO(this.kr);
         pX.jT(a, pX.cz.dt & pX.jk)
     }
-};
-pX.kW = {
+    };
+    pX.kW = {
     ks: 0,
     fA: function() {
         return "SBC " + ql("A") + "," + qv(this.ks)
@@ -5106,8 +5108,8 @@ pX.kW = {
         qH.aK(2);
         pX.jT(this.ks, pX.cz.dt & pX.jk)
     }
-};
-pX.kX = {
+    };
+    pX.kX = {
     fA: function() {
         return "SBC " + ql("A") + ",(" + ql("HL") + ")"
     },
@@ -5118,8 +5120,8 @@ pX.kX = {
         var a = pu.cu(pX.cz.dy << 8 | pX.cz.dx);
         pX.jT(a, pX.cz.dt & pX.jk)
     }
-};
-pX.nP = {
+    };
+    pX.nP = {
     lH: 0,
     fA: function() {
         return "SBC " + ql("A") + ",(" + qp(this.lH) + ")"
@@ -5132,8 +5134,8 @@ pX.nP = {
         var a = pu.cu(pX.jm);
         pX.jT(a, pX.cz.dt & pX.jk)
     }
-};
-pX.kY = {
+    };
+    pX.kY = {
     kr: 0,
     fA: function() {
         return "AND " + qn(this.kr)
@@ -5145,8 +5147,8 @@ pX.kY = {
         var a = pX.jO(this.kr);
         pX.jW(a)
     }
-};
-pX.kZ = {
+    };
+    pX.kZ = {
     ks: 0,
     fA: function() {
         return "AND " + qv(this.ks)
@@ -5157,8 +5159,8 @@ pX.kZ = {
         qH.aK(2);
         pX.jW(this.ks)
     }
-};
-pX.la = {
+    };
+    pX.la = {
     fA: function() {
         return "AND (" + ql("HL") + ")"
     },
@@ -5169,8 +5171,8 @@ pX.la = {
         var a = pu.cu(pX.cz.dy << 8 | pX.cz.dx);
         pX.jW(a)
     }
-};
-pX.nQ = {
+    };
+    pX.nQ = {
     lH: 0,
     fA: function() {
         return "AND (" + qp(this.lH) + ")"
@@ -5183,8 +5185,8 @@ pX.nQ = {
         var a = pu.cu(pX.jm);
         pX.jW(a)
     }
-};
-pX.lb = {
+    };
+    pX.lb = {
     kr: 0,
     fA: function() {
         return "OR " + qn(this.kr)
@@ -5196,8 +5198,8 @@ pX.lb = {
         var a = pX.jO(this.kr);
         pX.jX(a)
     }
-};
-pX.lc = {
+    };
+    pX.lc = {
     ks: 0,
     fA: function() {
         return "OR " + qv(this.ks)
@@ -5208,8 +5210,8 @@ pX.lc = {
         qH.aK(2);
         pX.jX(this.ks)
     }
-};
-pX.ld = {
+    };
+    pX.ld = {
     fA: function() {
         return "OR (" + ql("HL") + ")"
     },
@@ -5220,8 +5222,8 @@ pX.ld = {
         var a = pu.cu(pX.cz.dy << 8 | pX.cz.dx);
         pX.jX(a)
     }
-};
-pX.nR = {
+    };
+    pX.nR = {
     lH: 0,
     fA: function() {
         return "OR (" + qp(this.lH) + ")"
@@ -5234,8 +5236,8 @@ pX.nR = {
         var a = pu.cu(pX.jm);
         pX.jX(a)
     }
-};
-pX.le = {
+    };
+    pX.le = {
     kr: 0,
     fA: function() {
         return "XOR " + qn(this.kr)
@@ -5247,8 +5249,8 @@ pX.le = {
         var a = pX.jO(this.kr);
         pX.jY(a)
     }
-};
-pX.lf = {
+    };
+    pX.lf = {
     ks: 0,
     fA: function() {
         return "XOR " + qv(this.ks)
@@ -5259,8 +5261,8 @@ pX.lf = {
         qH.aK(2);
         pX.jY(this.ks)
     }
-};
-pX.lg = {
+    };
+    pX.lg = {
     fA: function() {
         return "XOR (" + ql("HL") + ")"
     },
@@ -5271,8 +5273,8 @@ pX.lg = {
         var a = pu.cu(pX.cz.dy << 8 | pX.cz.dx);
         pX.jY(a)
     }
-};
-pX.nS = {
+    };
+    pX.nS = {
     lH: 0,
     fA: function() {
         return "XOR (" + qp(this.lH) + ")"
@@ -5285,8 +5287,8 @@ pX.nS = {
         var a = pu.cu(pX.jm);
         pX.jY(a)
     }
-};
-pX.lh = {
+    };
+    pX.lh = {
     kr: 0,
     fA: function() {
         return "CP " + qn(this.kr)
@@ -5298,8 +5300,8 @@ pX.lh = {
         var a = pX.jO(this.kr);
         pX.jZ(a)
     }
-};
-pX.li = {
+    };
+    pX.li = {
     ks: 0,
     fA: function() {
         return "CP " + qv(this.ks)
@@ -5310,8 +5312,8 @@ pX.li = {
         qH.aK(2);
         pX.jZ(this.ks)
     }
-};
-pX.lj = {
+    };
+    pX.lj = {
     fA: function() {
         return "CP (" + ql("HL") + ")"
     },
@@ -5322,8 +5324,8 @@ pX.lj = {
         var a = pu.cu(pX.cz.dy << 8 | pX.cz.dx);
         pX.jZ(a)
     }
-};
-pX.nT = {
+    };
+    pX.nT = {
     lH: 0,
     fA: function() {
         return "CP (" + qp(this.lH) + ")"
@@ -5336,8 +5338,8 @@ pX.nT = {
         var a = pu.cu(pX.jm);
         pX.jZ(a)
     }
-};
-pX.lo = {
+    };
+    pX.lo = {
     fA: function() {
         return "DAA"
     },
@@ -5361,8 +5363,8 @@ pX.lo = {
         pX.cz.du = a & 255;
         pX.cz.dt = pW[pX.cz.du] | b | c | d
     }
-};
-pX.lp = {
+    };
+    pX.lp = {
     fA: function() {
         return "CPL"
     },
@@ -5373,8 +5375,8 @@ pX.lp = {
         pX.cz.du = ~pX.cz.du & 255;
         pX.cz.dt = pX.cz.dt & pX.jz | pX.cz.du & pX.jy | pX.jf | pX.jj
     }
-};
-pX.lq = {
+    };
+    pX.lq = {
     fA: function() {
         return "CCF"
     },
@@ -5384,8 +5386,8 @@ pX.lq = {
         qH.aK(1);
         pX.cz.dt = pX.cz.dt & pX.jB | (pX.cz.dt & pX.jk) << 4 | pX.cz.du & pX.jy | ~(pX.cz.dt & pX.jk) & 1
     }
-};
-pX.lr = {
+    };
+    pX.lr = {
     fA: function() {
         return "SCF"
     },
@@ -5395,8 +5397,8 @@ pX.lr = {
         qH.aK(1);
         pX.cz.dt = pX.cz.dt & pX.jB | pX.cz.du & pX.jy | pX.jk
     }
-};
-pX.ls = {
+    };
+    pX.ls = {
     fA: function() {
         return "NOP"
     },
@@ -5405,8 +5407,8 @@ pX.ls = {
     exec: function() {
         qH.aK(1)
     }
-};
-pX.lt = {
+    };
+    pX.lt = {
     fA: function() {
         return "HALT"
     },
@@ -5417,8 +5419,8 @@ pX.lt = {
         pX.jo = !0;
         pX.dG = pX.dG - 1 & 65535
     }
-};
-pX.lu = {
+    };
+    pX.lu = {
     fA: function() {
         return "DI"
     },
@@ -5430,8 +5432,8 @@ pX.lu = {
         pX.dC = 0;
         pX.jn = !1
     }
-};
-pX.lv = {
+    };
+    pX.lv = {
     fA: function() {
         return "EI"
     },
@@ -5441,8 +5443,8 @@ pX.lv = {
         qH.aK(1);
         pX.jn = !0
     }
-};
-pX.lw = {
+    };
+    pX.lw = {
     kr: 0,
     fA: function() {
         return "ADD " + ql("HL") + "," + qs(this.kr)
@@ -5460,8 +5462,8 @@ pX.lw = {
         pX.cz.dx = a & 255;
         pX.cz.dt = pX.cz.dt & pX.jC | pX.cz.dy & pX.jy | c | a >>> 16
     }
-};
-pX.lx = {
+    };
+    pX.lx = {
     kr: 0,
     fA: function() {
         return "INC " + qs(this.kr)
@@ -5474,8 +5476,8 @@ pX.lx = {
         var a = (this.kr == qg ? pX.dF : pX.jO(this.kr << 1) << 8 | pX.jO((this.kr << 1) + 1)) + 1 & 65535;
         this.kr == qg ? pX.dF = a : (pX.jP(this.kr << 1, a >>> 8), pX.jP((this.kr << 1) + 1, a & 255))
     }
-};
-pX.ly = {
+    };
+    pX.ly = {
     kr: 0,
     fA: function() {
         return "DEC " + qs(this.kr)
@@ -5488,8 +5490,8 @@ pX.ly = {
         var a = (this.kr == qg ? pX.dF : pX.jO(this.kr << 1) << 8 | pX.jO((this.kr << 1) + 1)) - 1 & 65535;
         this.kr == qg ? pX.dF = a : (pX.jP(this.kr << 1, a >>> 8), pX.jP((this.kr << 1) + 1, a & 255))
     }
-};
-pX.lz = {
+    };
+    pX.lz = {
     fA: function() {
         return "RLCA"
     },
@@ -5501,8 +5503,8 @@ pX.lz = {
         pX.cz.du = pX.cz.du << 1 & 255 | a;
         pX.cz.dt = pX.cz.dt & pX.jC | pX.cz.du & pX.jy | a
     }
-};
-pX.lA = {
+    };
+    pX.lA = {
     fA: function() {
         return "RLA"
     },
@@ -5514,8 +5516,8 @@ pX.lA = {
         pX.cz.du = pX.cz.du << 1 & 255 | pX.cz.dt & pX.jk;
         pX.cz.dt = pX.cz.dt & pX.jC | pX.cz.du & pX.jy | a
     }
-};
-pX.lB = {
+    };
+    pX.lB = {
     fA: function() {
         return "RRCA"
     },
@@ -5527,8 +5529,8 @@ pX.lB = {
         pX.cz.du = pX.cz.du >>> 1 | a << 7;
         pX.cz.dt = pX.cz.dt & pX.jC | pX.cz.du & pX.jy | a
     }
-};
-pX.lC = {
+    };
+    pX.lC = {
     fA: function() {
         return "RRA"
     },
@@ -5540,8 +5542,8 @@ pX.lC = {
         pX.cz.du = pX.cz.du >>> 1 | (pX.cz.dt & pX.jk) << 7;
         pX.cz.dt = pX.cz.dt & pX.jC | pX.cz.du & pX.jy | a
     }
-};
-pX.lD = {
+    };
+    pX.lD = {
     ks: 0,
     fA: function() {
         return "JP " + qw(this.ks)
@@ -5553,8 +5555,8 @@ pX.lD = {
         pX.jm = this.ks;
         pX.dG = this.ks
     }
-};
-pX.lE = {
+    };
+    pX.lE = {
     lF: 0,
     ks: 0,
     fA: function() {
@@ -5567,8 +5569,8 @@ pX.lE = {
         pX.jm = this.ks;
         (pX.cz.dt >>> pY[this.lF >> 1] & 1) == (this.lF & 1) && (pX.dG = this.ks)
     }
-};
-pX.lG = {
+    };
+    pX.lG = {
     lH: 0,
     fA: function() {
         return "JR " + qw(pX.dG + this.lH & 65535)
@@ -5580,8 +5582,8 @@ pX.lG = {
         pX.jm = pX.dG + this.lH & 65535;
         pX.dG = pX.jm
     }
-};
-pX.lI = {
+    };
+    pX.lI = {
     lH: 0,
     fA: function() {
         var a = pX.dG + this.lH & 65535;
@@ -5593,8 +5595,8 @@ pX.lI = {
         qH.aK(2);
         pX.cz.dt & pX.jk && (qH.aK(1), pX.jm = pX.dG + this.lH & 65535, pX.dG = pX.jm)
     }
-};
-pX.lJ = {
+    };
+    pX.lJ = {
     lH: 0,
     fA: function() {
         var a = pX.dG + this.lH & 65535;
@@ -5606,8 +5608,8 @@ pX.lJ = {
         qH.aK(2);
         0 == (pX.cz.dt & pX.jk) && (qH.aK(1), pX.jm = pX.dG + this.lH & 65535, pX.dG = pX.jm)
     }
-};
-pX.lK = {
+    };
+    pX.lK = {
     lH: 0,
     fA: function() {
         var a = pX.dG + this.lH & 65535;
@@ -5619,8 +5621,8 @@ pX.lK = {
         qH.aK(2);
         pX.cz.dt & pX.je && (qH.aK(1), pX.jm = pX.dG + this.lH & 65535, pX.dG = pX.jm)
     }
-};
-pX.lL = {
+    };
+    pX.lL = {
     lH: 0,
     fA: function() {
         var a = pX.dG + this.lH & 65535;
@@ -5632,8 +5634,8 @@ pX.lL = {
         qH.aK(2);
         0 == (pX.cz.dt & pX.je) && (qH.aK(1), pX.jm = pX.dG + this.lH & 65535, pX.dG = pX.jm)
     }
-};
-pX.lM = {
+    };
+    pX.lM = {
     fA: function() {
         return "JP (" + ql("HL") + ")"
     },
@@ -5643,8 +5645,8 @@ pX.lM = {
         qH.aK(1);
         pX.dG = pX.cz.dy << 8 | pX.cz.dx
     }
-};
-pX.lN = {
+    };
+    pX.lN = {
     lH: 0,
     fA: function() {
         return "DJNZ " + qw(pX.dG + this.lH & 65535)
@@ -5656,8 +5658,8 @@ pX.lN = {
         pX.cz.B = pX.cz.B - 1 & 255;
         0 != pX.cz.B && (qH.aK(1), pX.jm = pX.dG + this.lH & 65535, pX.dG = pX.jm)
     }
-};
-pX.lO = {
+    };
+    pX.lO = {
     ks: 0,
     fA: function() {
         return "CALL " + qw(this.ks)
@@ -5670,8 +5672,8 @@ pX.lO = {
         pX.jm = this.ks;
         pX.dG = this.ks
     }
-};
-pX.lP = {
+    };
+    pX.lP = {
     lF: 0,
     ks: 0,
     fA: function() {
@@ -5684,8 +5686,8 @@ pX.lP = {
         pX.jm = this.ks;
         (pX.cz.dt >>> pY[this.lF >> 1] & 1) == (this.lF & 1) && (qH.aK(1), pX.jQ(pX.dG), pX.dG = this.ks)
     }
-};
-pX.lQ = {
+    };
+    pX.lQ = {
     fA: function() {
         return "RET"
     },
@@ -5696,8 +5698,8 @@ pX.lQ = {
         pX.jm = pX.jR();
         pX.dG = pX.jm
     }
-};
-pX.lR = {
+    };
+    pX.lR = {
     lF: 0,
     fA: function() {
         return "RET " + qx(this.lF)
@@ -5708,8 +5710,8 @@ pX.lR = {
         qH.aK(2);
         (pX.cz.dt >>> pY[this.lF >> 1] & 1) == (this.lF & 1) ? (qH.aK(2), pX.jm = pX.jR(), pX.dG = pX.jm) : pX.jp = !1
     }
-};
-pX.lS = {
+    };
+    pX.lS = {
     ks: 0,
     fA: function() {
         return "RST " + qv(this.ks)
@@ -5722,8 +5724,8 @@ pX.lS = {
         pX.jm = this.ks;
         pX.dG = pX.jm
     }
-};
-pX.lT = {
+    };
+    pX.lT = {
     ks: 0,
     fA: function() {
         return "IN " + ql("A") + ",(" + qv(this.ks) + ")"
@@ -5736,8 +5738,8 @@ pX.lT = {
         pX.jm = a + 1 & 65535;
         pX.cz.du = qy.oz(a)
     }
-};
-pX.lU = {
+    };
+    pX.lU = {
     ks: 0,
     fA: function() {
         return "OUT (" + qv(this.ks) + ")," + ql("A")
@@ -5751,8 +5753,8 @@ pX.lU = {
         pX.jM(a, pX.cz.du);
         qH.aK(1)
     }
-};
-pX.lZ = {
+    };
+    pX.lZ = {
     kr: 0,
     fA: function() {
         return "RLC " + qn(this.kr)
@@ -5765,8 +5767,8 @@ pX.lZ = {
             a = pX.kf(a);
         pX.jP(this.kr, a)
     }
-};
-pX.mb = {
+    };
+    pX.mb = {
     fA: function() {
         return "RLC (" + ql("HL") + ")"
     },
@@ -5779,8 +5781,8 @@ pX.mb = {
             b = pX.kf(b);
         pu.cw(a, b)
     }
-};
-pX.oc = {
+    };
+    pX.oc = {
     lH: 0,
     fA: function() {
         return "RLC (" + qp(this.lH) + ")"
@@ -5794,8 +5796,8 @@ pX.oc = {
             a = pX.kf(a);
         pu.cw(pX.jm, a)
     }
-};
-pX.ob = {
+    };
+    pX.ob = {
     lH: 0,
     kr: 0,
     fA: function() {
@@ -5811,8 +5813,8 @@ pX.ob = {
         pu.cw(pX.jm, a);
         pX.jP(this.kr, a)
     }
-};
-pX.mc = {
+    };
+    pX.mc = {
     kr: 0,
     fA: function() {
         return "RL " + qn(this.kr)
@@ -5825,8 +5827,8 @@ pX.mc = {
             a = pX.kh(a);
         pX.jP(this.kr, a)
     }
-};
-pX.md = {
+    };
+    pX.md = {
     fA: function() {
         return "RL (" + ql("HL") + ")"
     },
@@ -5839,8 +5841,8 @@ pX.md = {
             b = pX.kh(b);
         pu.cw(a, b)
     }
-};
-pX.og = {
+    };
+    pX.og = {
     lH: 0,
     fA: function() {
         return "RL (" + qp(this.lH) + ")"
@@ -5854,8 +5856,8 @@ pX.og = {
             a = pX.kh(a);
         pu.cw(pX.jm, a)
     }
-};
-pX.of = {
+    };
+    pX.of = {
     lH: 0,
     kr: 0,
     fA: function() {
@@ -5871,8 +5873,8 @@ pX.of = {
         pu.cw(pX.jm, a);
         pX.jP(this.kr, a)
     }
-};
-pX.me = {
+    };
+    pX.me = {
     kr: 0,
     fA: function() {
         return "RRC " + qn(this.kr)
@@ -5885,8 +5887,8 @@ pX.me = {
             a = pX.kg(a);
         pX.jP(this.kr, a)
     }
-};
-pX.mf = {
+    };
+    pX.mf = {
     fA: function() {
         return "RRC (" + ql("HL") + ")"
     },
@@ -5899,8 +5901,8 @@ pX.mf = {
             b = pX.kg(b);
         pu.cw(a, b)
     }
-};
-pX.oe = {
+    };
+    pX.oe = {
     lH: 0,
     fA: function() {
         return "RRC (" + qp(this.lH) + ")"
@@ -5914,8 +5916,8 @@ pX.oe = {
             a = pX.kg(a);
         pu.cw(pX.jm, a)
     }
-};
-pX.od = {
+    };
+    pX.od = {
     lH: 0,
     kr: 0,
     fA: function() {
@@ -5931,8 +5933,8 @@ pX.od = {
         pu.cw(pX.jm, a);
         pX.jP(this.kr, a)
     }
-};
-pX.mg = {
+    };
+    pX.mg = {
     kr: 0,
     fA: function() {
         return "RR " + qn(this.kr)
@@ -5945,8 +5947,8 @@ pX.mg = {
             a = pX.ki(a);
         pX.jP(this.kr, a)
     }
-};
-pX.mh = {
+    };
+    pX.mh = {
     fA: function() {
         return "RR (" + ql("HL") + ")"
     },
@@ -5959,8 +5961,8 @@ pX.mh = {
             b = pX.ki(b);
         pu.cw(a, b)
     }
-};
-pX.oi = {
+    };
+    pX.oi = {
     lH: 0,
     fA: function() {
         return "RR (" + qp(this.lH) + ")"
@@ -5974,8 +5976,8 @@ pX.oi = {
             a = pX.ki(a);
         pu.cw(pX.jm, a)
     }
-};
-pX.oh = {
+    };
+    pX.oh = {
     lH: 0,
     kr: 0,
     fA: function() {
@@ -5991,8 +5993,8 @@ pX.oh = {
         pu.cw(pX.jm, a);
         pX.jP(this.kr, a)
     }
-};
-pX.mi = {
+    };
+    pX.mi = {
     kr: 0,
     fA: function() {
         return "SLA " + qn(this.kr)
@@ -6005,8 +6007,8 @@ pX.mi = {
             a = pX.kj(a);
         pX.jP(this.kr, a)
     }
-};
-pX.mj = {
+    };
+    pX.mj = {
     fA: function() {
         return "SLA (" + ql("HL") + ")"
     },
@@ -6019,8 +6021,8 @@ pX.mj = {
             b = pX.kj(b);
         pu.cw(a, b)
     }
-};
-pX.ok = {
+    };
+    pX.ok = {
     lH: 0,
     fA: function() {
         return "SLA (" + qp(this.lH) + ")"
@@ -6034,8 +6036,8 @@ pX.ok = {
             a = pX.kj(a);
         pu.cw(pX.jm, a)
     }
-};
-pX.oj = {
+    };
+    pX.oj = {
     lH: 0,
     kr: 0,
     fA: function() {
@@ -6051,8 +6053,8 @@ pX.oj = {
         pu.cw(pX.jm, a);
         pX.jP(this.kr, a)
     }
-};
-pX.mk = {
+    };
+    pX.mk = {
     kr: 0,
     fA: function() {
         return "SRA " + qn(this.kr)
@@ -6065,8 +6067,8 @@ pX.mk = {
             a = pX.kk(a);
         pX.jP(this.kr, a)
     }
-};
-pX.ml = {
+    };
+    pX.ml = {
     fA: function() {
         return "SRA (" + ql("HL") + ")"
     },
@@ -6079,8 +6081,8 @@ pX.ml = {
             b = pX.kk(b);
         pu.cw(a, b)
     }
-};
-pX.om = {
+    };
+    pX.om = {
     lH: 0,
     fA: function() {
         return "SRA (" + qp(this.lH) + ")"
@@ -6094,8 +6096,8 @@ pX.om = {
             a = pX.kk(a);
         pu.cw(pX.jm, a)
     }
-};
-pX.ol = {
+    };
+    pX.ol = {
     lH: 0,
     kr: 0,
     fA: function() {
@@ -6111,8 +6113,8 @@ pX.ol = {
         pu.cw(pX.jm, a);
         pX.jP(this.kr, a)
     }
-};
-pX.mm = {
+    };
+    pX.mm = {
     kr: 0,
     fA: function() {
         return "SLL* " + qn(this.kr)
@@ -6125,8 +6127,8 @@ pX.mm = {
             a = pX.kl(a);
         pX.jP(this.kr, a)
     }
-};
-pX.mn = {
+    };
+    pX.mn = {
     fA: function() {
         return "SLL* (" + ql("HL") + ")"
     },
@@ -6139,8 +6141,8 @@ pX.mn = {
             b = pX.kl(b);
         pu.cw(a, b)
     }
-};
-pX.oo = {
+    };
+    pX.oo = {
     lH: 0,
     fA: function() {
         return "SLL* (" + qp(this.lH) + ")"
@@ -6154,8 +6156,8 @@ pX.oo = {
             a = pX.kl(a);
         pu.cw(pX.jm, a)
     }
-};
-pX.on = {
+    };
+    pX.on = {
     lH: 0,
     kr: 0,
     fA: function() {
@@ -6171,8 +6173,8 @@ pX.on = {
         pu.cw(pX.jm, a);
         pX.jP(this.kr, a)
     }
-};
-pX.mo = {
+    };
+    pX.mo = {
     kr: 0,
     fA: function() {
         return "SRL " + qn(this.kr)
@@ -6185,8 +6187,8 @@ pX.mo = {
             a = pX.km(a);
         pX.jP(this.kr, a)
     }
-};
-pX.mp = {
+    };
+    pX.mp = {
     fA: function() {
         return "SRL (" + ql("HL") + ")"
     },
@@ -6199,8 +6201,8 @@ pX.mp = {
             b = pX.km(b);
         pu.cw(a, b)
     }
-};
-pX.or = {
+    };
+    pX.or = {
     lH: 0,
     fA: function() {
         return "SRL (" + qp(this.lH) + ")"
@@ -6214,8 +6216,8 @@ pX.or = {
             a = pX.km(a);
         pu.cw(pX.jm, a)
     }
-};
-pX.oq = {
+    };
+    pX.oq = {
     lH: 0,
     kr: 0,
     fA: function() {
@@ -6231,8 +6233,8 @@ pX.oq = {
         pu.cw(pX.jm, a);
         pX.jP(this.kr, a)
     }
-};
-pX.mq = {
+    };
+    pX.mq = {
     mr: 0,
     kr: 0,
     fA: function() {
@@ -6247,8 +6249,8 @@ pX.mq = {
             a = a & 1 << this.mr;
         pX.cz.dt = pW[a] & pX.jB | b | pX.jf | pX.cz.dt & pX.jk
     }
-};
-pX.ms = {
+    };
+    pX.ms = {
     mr: 0,
     fA: function() {
         return "BIT " + qu(this.mr) + ",(" + ql("HL") + ")"
@@ -6261,8 +6263,8 @@ pX.ms = {
             a = a & 1 << this.mr;
         pX.cz.dt = pW[a] & pX.jB | pX.jm >>> 8 & pX.jy | pX.jf | pX.cz.dt & pX.jk
     }
-};
-pX.ot = {
+    };
+    pX.ot = {
     mr: 0,
     lH: 0,
     fA: function() {
@@ -6277,8 +6279,8 @@ pX.ot = {
             a = a & 1 << this.mr;
         pX.cz.dt = pW[a] & pX.jB | pX.jm >>> 8 & pX.jy | pX.jf | pX.cz.dt & pX.jk
     }
-};
-pX.os = {
+    };
+    pX.os = {
     mr: 0,
     lH: 0,
     fA: function() {
@@ -6287,8 +6289,8 @@ pX.os = {
     oy: 6,
     ea: 0,
     exec: pX.ot.exec
-};
-pX.mt = {
+    };
+    pX.mt = {
     mr: 0,
     kr: 0,
     fA: function() {
@@ -6302,8 +6304,8 @@ pX.mt = {
             a = a | 1 << this.mr;
         pX.jP(this.kr, a)
     }
-};
-pX.mu = {
+    };
+    pX.mu = {
     mr: 0,
     fA: function() {
         return "SET " + qu(this.mr) + ",(" + ql("HL") + ")"
@@ -6317,8 +6319,8 @@ pX.mu = {
             b = b | 1 << this.mr;
         pu.cw(a, b)
     }
-};
-pX.ov = {
+    };
+    pX.ov = {
     mr: 0,
     lH: 0,
     fA: function() {
@@ -6333,8 +6335,8 @@ pX.ov = {
             a = a | 1 << this.mr;
         pu.cw(pX.jm, a)
     }
-};
-pX.ou = {
+    };
+    pX.ou = {
     mr: 0,
     lH: 0,
     kr: 0,
@@ -6351,8 +6353,8 @@ pX.ou = {
         pu.cw(pX.jm, a);
         pX.jP(this.kr, a)
     }
-};
-pX.mv = {
+    };
+    pX.mv = {
     mr: 0,
     kr: 0,
     fA: function() {
@@ -6366,8 +6368,8 @@ pX.mv = {
             a = a & ~(1 << this.mr) & 255;
         pX.jP(this.kr, a)
     }
-};
-pX.mw = {
+    };
+    pX.mw = {
     mr: 0,
     fA: function() {
         return "RES " + qu(this.mr) + ",(" + ql("HL") + ")"
@@ -6381,8 +6383,8 @@ pX.mw = {
             b = b & ~(1 << this.mr) & 255;
         pu.cw(a, b)
     }
-};
-pX.ox = {
+    };
+    pX.ox = {
     mr: 0,
     lH: 0,
     fA: function() {
@@ -6397,8 +6399,8 @@ pX.ox = {
             a = a & ~(1 << this.mr) & 255;
         pu.cw(pX.jm, a)
     }
-};
-pX.ow = {
+    };
+    pX.ow = {
     mr: 0,
     lH: 0,
     kr: 0,
@@ -6415,8 +6417,8 @@ pX.ow = {
         pu.cw(pX.jm, a);
         pX.jP(this.kr, a)
     }
-};
-pX.mx = {
+    };
+    pX.mx = {
     fA: function() {
         return "LD " + ql("A") + "," + ql("I")
     },
@@ -6428,8 +6430,8 @@ pX.mx = {
         pX.cz.du = pX.dA;
         pX.cz.dt = pW[pX.cz.du] & pX.jv | pX.dC << pX.iW | pX.cz.dt & pX.jk
     }
-};
-pX.my = {
+    };
+    pX.my = {
     fA: function() {
         return "LD " + ql("A") + "," + ql("R")
     },
@@ -6441,8 +6443,8 @@ pX.my = {
         pX.cz.du = pX.dz;
         pX.cz.dt = pW[pX.cz.du] & pX.jv | pX.dC << pX.iW | pX.cz.dt & pX.jk
     }
-};
-pX.mz = {
+    };
+    pX.mz = {
     fA: function() {
         return "LD " + ql("I") + "," + ql("A")
     },
@@ -6453,8 +6455,8 @@ pX.mz = {
         pX.jp = !1;
         pX.dA = pX.cz.du
     }
-};
-pX.mA = {
+    };
+    pX.mA = {
     fA: function() {
         return "LD " + ql("R") + "," + ql("A")
     },
@@ -6465,8 +6467,8 @@ pX.mA = {
         pX.jp = !1;
         pX.dz = pX.cz.du
     }
-};
-pX.mB = {
+    };
+    pX.mB = {
     kr: 0,
     ks: 0,
     fA: function() {
@@ -6481,8 +6483,8 @@ pX.mB = {
         var b = pu.cu(pX.jm);
         this.kr == qg ? pX.dF = b << 8 | a : (pX.jP(this.kr << 1, b), pX.jP((this.kr << 1) + 1, a))
     }
-};
-pX.mC = {
+    };
+    pX.mC = {
     ks: 0,
     kr: 0,
     fA: function() {
@@ -6500,8 +6502,8 @@ pX.mC = {
         pX.jm = this.ks + 1 & 65535;
         pu.cw(pX.jm, b)
     }
-};
-pX.mD = {
+    };
+    pX.mD = {
     fA: function() {
         return "LDI"
     },
@@ -6512,8 +6514,8 @@ pX.mD = {
         pX.jp = !1;
         pX.ka(1)
     }
-};
-pX.mE = {
+    };
+    pX.mE = {
     fA: function() {
         return "LDIR"
     },
@@ -6525,8 +6527,8 @@ pX.mE = {
         pX.ka(1);
         pX.kc()
     }
-};
-pX.mF = {
+    };
+    pX.mF = {
     fA: function() {
         return "LDD"
     },
@@ -6537,8 +6539,8 @@ pX.mF = {
         pX.jp = !1;
         pX.ka(-1)
     }
-};
-pX.mG = {
+    };
+    pX.mG = {
     fA: function() {
         return "LDDR"
     },
@@ -6550,8 +6552,8 @@ pX.mG = {
         pX.ka(-1);
         pX.kc()
     }
-};
-pX.mH = {
+    };
+    pX.mH = {
     fA: function() {
         return "CPI"
     },
@@ -6561,8 +6563,8 @@ pX.mH = {
         qH.aK(4);
         pX.kb(1)
     }
-};
-pX.mI = {
+    };
+    pX.mI = {
     fA: function() {
         return "CPIR"
     },
@@ -6573,8 +6575,8 @@ pX.mI = {
         pX.kb(1);
         pX.kd()
     }
-};
-pX.mJ = {
+    };
+    pX.mJ = {
     fA: function() {
         return "CPD"
     },
@@ -6584,8 +6586,8 @@ pX.mJ = {
         qH.aK(4);
         pX.kb(-1)
     }
-};
-pX.mK = {
+    };
+    pX.mK = {
     fA: function() {
         return "CPDR"
     },
@@ -6596,8 +6598,8 @@ pX.mK = {
         pX.kb(-1);
         pX.kd()
     }
-};
-pX.mM = {
+    };
+    pX.mM = {
     fA: function() {
         return "NEG"
     },
@@ -6611,16 +6613,16 @@ pX.mM = {
         pX.cz.du = a & 255;
         pX.cz.dt = pW[pX.cz.du] & pX.jv | a >>> 8 & 1 | b | c | pX.jj
     }
-};
-pX.mL = {
+    };
+    pX.mL = {
     fA: function() {
         return "NEG*"
     },
     oy: 2,
     ea: 0,
     exec: pX.mM.exec
-};
-pX.mO = {
+    };
+    pX.mO = {
     fA: function() {
         return "IM 0"
     },
@@ -6630,16 +6632,16 @@ pX.mO = {
         qH.aK(2);
         pX.dH = 0
     }
-};
-pX.mN = {
+    };
+    pX.mN = {
     fA: function() {
         return "IM 0*"
     },
     oy: 2,
     ea: 0,
     exec: pX.mO.exec
-};
-pX.mQ = {
+    };
+    pX.mQ = {
     fA: function() {
         return "IM 1"
     },
@@ -6649,16 +6651,16 @@ pX.mQ = {
         qH.aK(2);
         pX.dH = 1
     }
-};
-pX.mP = {
+    };
+    pX.mP = {
     fA: function() {
         return "IM 1*"
     },
     oy: 2,
     ea: 0,
     exec: pX.mQ.exec
-};
-pX.mS = {
+    };
+    pX.mS = {
     fA: function() {
         return "IM 2"
     },
@@ -6668,16 +6670,16 @@ pX.mS = {
         qH.aK(2);
         pX.dH = 2
     }
-};
-pX.mR = {
+    };
+    pX.mR = {
     fA: function() {
         return "IM 2*"
     },
     oy: 2,
     ea: 0,
     exec: pX.mS.exec
-};
-pX.mT = {
+    };
+    pX.mT = {
     kr: 0,
     fA: function() {
         return "ADC " + ql("HL") + "," + qs(this.kr)
@@ -6695,8 +6697,8 @@ pX.mT = {
         pX.cz.dx = d & 255;
         pX.cz.dt = pW[pX.cz.dy] & pX.jw | (0 == (d & 65535)) << pX.iS | d >>> 16 | (a & 4095) + (c & 4095) + b >>> 8 & pX.jf | ((a & 32768) == (c & 32768) && (a & 32768) != (d & 32768)) << pX.jc
     }
-};
-pX.mU = {
+    };
+    pX.mU = {
     kr: 0,
     fA: function() {
         return "SBC " + ql("HL") + "," + qs(this.kr)
@@ -6714,8 +6716,8 @@ pX.mU = {
         pX.cz.dx = d & 255;
         pX.cz.dt = pW[pX.cz.dy] & pX.jw | (0 == (d & 65535)) << pX.iS | d >>> 16 & 1 | (a & 4095) - (c & 4095) - b >>> 8 & pX.jf | ((a & 32768) != (c & 32768) && (a & 32768) != (d & 32768)) << pX.jc | pX.jj
     }
-};
-pX.mV = {
+    };
+    pX.mV = {
     fA: function() {
         return "RLD"
     },
@@ -6731,8 +6733,8 @@ pX.mV = {
         pu.cw(a, (b & 15) << 4 | c);
         pX.cz.dt = pW[pX.cz.du] | pX.cz.dt & pX.jk
     }
-};
-pX.mW = {
+    };
+    pX.mW = {
     fA: function() {
         return "RRD"
     },
@@ -6748,8 +6750,8 @@ pX.mW = {
         pu.cw(a, c << 4 | (b & 240) >>> 4);
         pX.cz.dt = pW[pX.cz.du] | pX.cz.dt & pX.jk
     }
-};
-pX.mZ = {
+    };
+    pX.mZ = {
     fA: function() {
         return "RETN"
     },
@@ -6761,24 +6763,24 @@ pX.mZ = {
         pX.jm = pX.jR();
         pX.dG = pX.jm
     }
-};
-pX.mY = {
+    };
+    pX.mY = {
     fA: function() {
         return "RETN*"
     },
     oy: 4,
     ea: 0,
     exec: pX.mZ.exec
-};
-pX.mX = {
+    };
+    pX.mX = {
     fA: function() {
         return "RETI"
     },
     oy: 4,
     ea: 0,
     exec: pX.mZ.exec
-};
-pX.na = {
+    };
+    pX.na = {
     fA: function() {
         return "INI"
     },
@@ -6799,8 +6801,8 @@ pX.na = {
             c = b >>> 8 & 1;
         pX.cz.dt = pW[pX.cz.B] & pX.jv | a >>> 7 | pW[b & 7 ^ pX.cz.B] & pX.jh | c << 4 | c
     }
-};
-pX.nc = {
+    };
+    pX.nc = {
     fA: function() {
         return "INIR"
     },
@@ -6810,8 +6812,8 @@ pX.nc = {
         pX.na.exec();
         pX.ke()
     }
-};
-pX.ne = {
+    };
+    pX.ne = {
     fA: function() {
         return "IND"
     },
@@ -6832,8 +6834,8 @@ pX.ne = {
             c = b >>> 8 & 1;
         pX.cz.dt = pW[pX.cz.B] & pX.jv | a >>> 7 | pW[b & 7 ^ pX.cz.B] & pX.jh | c << 4 | c
     }
-};
-pX.ng = {
+    };
+    pX.ng = {
     fA: function() {
         return "INDR"
     },
@@ -6843,8 +6845,8 @@ pX.ng = {
         pX.ne.exec();
         pX.ke()
     }
-};
-pX.nh = {
+    };
+    pX.nh = {
     kr: 0,
     fA: function() {
         return "IN " + qn(this.kr) + ",(" + ql("C") + ")"
@@ -6859,8 +6861,8 @@ pX.nh = {
         a = pW[pX.jO(this.kr)];
         pX.cz.dt = a | pX.cz.dt & pX.jk
     }
-};
-pX.ni = {
+    };
+    pX.ni = {
     fA: function() {
         return "IN* " + ql("F") + ",(" + ql("C") + ")"
     },
@@ -6873,8 +6875,8 @@ pX.ni = {
         a = qy.oz(a);
         pX.cz.dt = pW[a] | pX.cz.dt & pX.jk
     }
-};
-pX.nj = {
+    };
+    pX.nj = {
     kr: 0,
     fA: function() {
         return "OUT (" + ql("C") + ")," + qn(this.kr)
@@ -6888,8 +6890,8 @@ pX.nj = {
         pX.jN(a, pX.jO(this.kr));
         qH.aK(2)
     }
-};
-pX.nk = {
+    };
+    pX.nk = {
     fA: function() {
         return "OUT* (" + ql("C") + "),0"
     },
@@ -6902,8 +6904,8 @@ pX.nk = {
         pX.jN(a, 0);
         qH.aK(2)
     }
-};
-pX.nl = {
+    };
+    pX.nl = {
     fA: function() {
         return "OUTI"
     },
@@ -6925,8 +6927,8 @@ pX.nl = {
         b = a >>> 8 & 1;
         pX.cz.dt = pW[pX.cz.B] & pX.jv | c >>> 7 | pW[a & 7 ^ pX.cz.B] & pX.jh | b << 4 | b
     }
-};
-pX.nm = {
+    };
+    pX.nm = {
     fA: function() {
         return "OTIR"
     },
@@ -6936,8 +6938,8 @@ pX.nm = {
         pX.nl.exec();
         pX.ke()
     }
-};
-pX.nn = {
+    };
+    pX.nn = {
     fA: function() {
         return "OUTD"
     },
@@ -6959,8 +6961,8 @@ pX.nn = {
         b = a >>> 8 & 1;
         pX.cz.dt = pW[pX.cz.B] & pX.jv | c >>> 7 | pW[a & 7 ^ pX.cz.B] & pX.jh | b << 4 | b
     }
-};
-pX.no = {
+    };
+    pX.no = {
     fA: function() {
         return "OTDR"
     },
@@ -6970,8 +6972,8 @@ pX.no = {
         pX.nn.exec();
         pX.ke()
     }
-};
-pX.lW = {
+    };
+    pX.lW = {
     fA: function() {
         return pX.jl == pX.dD ? ".DB " + qv(221) : ".DB " + qv(253)
     },
@@ -6981,8 +6983,8 @@ pX.lW = {
         qH.aK(1);
         pX.jr = !0
     }
-};
-pX.np = {
+    };
+    pX.np = {
     ko: 0,
     fA: function() {
         return ".DB " + qv(237) + "," + qv(this.ko)
@@ -6992,8 +6994,8 @@ pX.np = {
     exec: function() {
         qH.aK(2)
     }
-};
-pX.nq = {
+    };
+    pX.nq = {
     ko: 0,
     kp: 0,
     fA: function() {
@@ -7024,8 +7026,8 @@ pX.nq = {
                 pX.jP(this.ko, a)
         }
     }
-};
-pX.nr = {
+    };
+    pX.nr = {
     kr: 0,
     ks: 0,
     fA: function() {
@@ -7037,8 +7039,8 @@ pX.nr = {
         qH.aK(3);
         pX.jl.val = this.kr == pZ ? this.ks << 8 | pX.jl.val & 255 : pX.jl.val & 65280 | this.ks
     }
-};
-pX.ns = {
+    };
+    pX.ns = {
     kr: 0,
     fA: function() {
         return "INC* " + qo(this.kr)
@@ -7053,8 +7055,8 @@ pX.ns = {
             pX.jl.val = a << 8 | pX.jl.val & 255
         } else a = pX.jl.val & 255, a = pX.jU(a), pX.jl.val = pX.jl.val & 65280 | a
     }
-};
-pX.nt = {
+    };
+    pX.nt = {
     kr: 0,
     fA: function() {
         return "DEC* " + qo(this.kr)
@@ -7069,8 +7071,8 @@ pX.nt = {
             pX.jl.val = a << 8 | pX.jl.val & 255
         } else a = pX.jl.val & 255, a = pX.jV(a), pX.jl.val = pX.jl.val & 65280 | a
     }
-};
-pX.nu = {
+    };
+    pX.nu = {
     kr: 0,
     fA: function() {
         return "ADD* " + ql("A") + "," + qo(this.kr)
@@ -7081,8 +7083,8 @@ pX.nu = {
         qH.aK(2);
         this.kr == pZ ? pX.jS(pX.jl.val >>> 8, 0) : pX.jS(pX.jl.val & 255, 0)
     }
-};
-pX.nv = {
+    };
+    pX.nv = {
     kr: 0,
     fA: function() {
         return "ADC* " + ql("A") + "," + qo(this.kr)
@@ -7093,8 +7095,8 @@ pX.nv = {
         qH.aK(2);
         this.kr == pZ ? pX.jS(pX.jl.val >>> 8, pX.cz.dt & pX.jk) : pX.jS(pX.jl.val & 255, pX.cz.dt & pX.jk)
     }
-};
-pX.nw = {
+    };
+    pX.nw = {
     kr: 0,
     fA: function() {
         return "SUB* " + qo(this.kr)
@@ -7105,8 +7107,8 @@ pX.nw = {
         qH.aK(2);
         this.kr == pZ ? pX.jT(pX.jl.val >>> 8, 0) : pX.jT(pX.jl.val & 255, 0)
     }
-};
-pX.nx = {
+    };
+    pX.nx = {
     kr: 0,
     fA: function() {
         return "SBC* " + ql("A") + "," + qo(this.kr)
@@ -7117,8 +7119,8 @@ pX.nx = {
         qH.aK(2);
         this.kr == pZ ? pX.jT(pX.jl.val >>> 8, pX.cz.dt & pX.jk) : pX.jT(pX.jl.val & 255, pX.cz.dt & pX.jk)
     }
-};
-pX.ny = {
+    };
+    pX.ny = {
     kr: 0,
     fA: function() {
         return "AND* " + qo(this.kr)
@@ -7129,8 +7131,8 @@ pX.ny = {
         qH.aK(2);
         this.kr == pZ ? pX.jW(pX.jl.val >>> 8) : pX.jW(pX.jl.val & 255)
     }
-};
-pX.nA = {
+    };
+    pX.nA = {
     kr: 0,
     fA: function() {
         return "OR* " + qo(this.kr)
@@ -7141,8 +7143,8 @@ pX.nA = {
         qH.aK(2);
         this.kr == pZ ? pX.jX(pX.jl.val >>> 8) : pX.jX(pX.jl.val & 255)
     }
-};
-pX.nz = {
+    };
+    pX.nz = {
     kr: 0,
     fA: function() {
         return "XOR* " + qo(this.kr)
@@ -7153,8 +7155,8 @@ pX.nz = {
         qH.aK(2);
         this.kr == pZ ? pX.jY(pX.jl.val >>> 8) : pX.jY(pX.jl.val & 255)
     }
-};
-pX.nB = {
+    };
+    pX.nB = {
     kr: 0,
     fA: function() {
         return "CP* " + qo(this.kr)
@@ -7165,8 +7167,8 @@ pX.nB = {
         qH.aK(2);
         this.kr == pZ ? pX.jZ(pX.jl.val >>> 8) : pX.jZ(pX.jl.val & 255)
     }
-};
-pX.nF = {
+    };
+    pX.nF = {
     ks: 0,
     fA: function() {
         return "LD " + qq() + "," + qw(this.ks)
@@ -7177,8 +7179,8 @@ pX.nF = {
         qH.aK(4);
         pX.jl.val = this.ks
     }
-};
-pX.nG = {
+    };
+    pX.nG = {
     ks: 0,
     fA: function() {
         return "LD " + qq() + ",(" + qw(this.ks) + ")"
@@ -7192,8 +7194,8 @@ pX.nG = {
         var b = pu.cu(pX.jm);
         pX.jl.val = b << 8 | a
     }
-};
-pX.nH = {
+    };
+    pX.nH = {
     ks: 0,
     fA: function() {
         return "LD (" + qw(this.ks) + ")," + qq()
@@ -7208,8 +7210,8 @@ pX.nH = {
         pX.jm = this.ks + 1 & 65535;
         pu.cw(pX.jm, a)
     }
-};
-pX.nI = {
+    };
+    pX.nI = {
     fA: function() {
         return "LD " + ql("SP") + "," + qq()
     },
@@ -7220,8 +7222,8 @@ pX.nI = {
         pX.jp = !1;
         pX.dF = pX.jl.val
     }
-};
-pX.nJ = {
+    };
+    pX.nJ = {
     fA: function() {
         return "PUSH " + qq()
     },
@@ -7231,8 +7233,8 @@ pX.nJ = {
         qH.aK(4);
         pX.jQ(pX.jl.val)
     }
-};
-pX.nK = {
+    };
+    pX.nK = {
     fA: function() {
         return "POP " + qq()
     },
@@ -7242,8 +7244,8 @@ pX.nK = {
         qH.aK(4);
         pX.jl.val = pX.jR()
     }
-};
-pX.nL = {
+    };
+    pX.nL = {
     fA: function() {
         return "EX (" + ql("SP") + ")," + qq()
     },
@@ -7262,8 +7264,8 @@ pX.nL = {
         qH.aK(1);
         pu.cw(pX.dF + 1 & 65535, c)
     }
-};
-pX.nW = {
+    };
+    pX.nW = {
     kr: 0,
     fA: function() {
         return "ADD " + qq() + "," + qt(this.kr)
@@ -7288,8 +7290,8 @@ pX.nW = {
         pX.jl.val = a & 65535;
         pX.cz.dt = pX.cz.dt & pX.jC | a >>> 8 & pX.jy | b | a >>> 16
     }
-};
-pX.nX = {
+    };
+    pX.nX = {
     fA: function() {
         return "INC " + qq()
     },
@@ -7300,8 +7302,8 @@ pX.nX = {
         pX.jp = !1;
         pX.jl.val = pX.jl.val + 1 & 65535
     }
-};
-pX.nY = {
+    };
+    pX.nY = {
     fA: function() {
         return "DEC " + qq()
     },
@@ -7312,8 +7314,8 @@ pX.nY = {
         pX.jp = !1;
         pX.jl.val = pX.jl.val - 1 & 65535
     }
-};
-pX.nZ = {
+    };
+    pX.nZ = {
     fA: function() {
         return "JP (" + qq() + ")"
     },
@@ -7323,20 +7325,20 @@ pX.nZ = {
         qH.aK(2);
         pX.dG = pX.jl.val
     }
-};
-"use strict";
-var pZ = 4,
+    };
+    "use strict";
+    var pZ = 4,
     qa = 5,
     qb = Array(8);
-qb[0] = "B";
-qb[1] = "C";
-qb[2] = "D";
-qb[3] = "E";
-qb[4] = "H";
-qb[5] = "L";
-qb[6] = "F";
-qb[7] = "A";
-var qc = 0,
+    qb[0] = "B";
+    qb[1] = "C";
+    qb[2] = "D";
+    qb[3] = "E";
+    qb[4] = "H";
+    qb[5] = "L";
+    qb[6] = "F";
+    qb[7] = "A";
+    var qc = 0,
     qd = 1,
     qe = 2,
     qf = 2,
@@ -7344,78 +7346,78 @@ var qc = 0,
     qh = 3,
     qi = Array(4),
     qj = Array(4);
-qi[qc] = "BC";
-qi[qd] = "DE";
-qi[qe] = "HL";
-qi[qg] = "AF";
-qj[qc] = "BC";
-qj[qd] = "DE";
-qj[qe] = "HL";
-qj[qh] = "SP";
-var qk = Array(8);
-qk[0] = "NZ";
-qk[1] = "Z";
-qk[2] = "NC";
-qk[3] = "C";
-qk[4] = "PO";
-qk[5] = "PE";
-qk[6] = "P";
-qk[7] = "M";
+    qi[qc] = "BC";
+    qi[qd] = "DE";
+    qi[qe] = "HL";
+    qi[qg] = "AF";
+    qj[qc] = "BC";
+    qj[qd] = "DE";
+    qj[qe] = "HL";
+    qj[qh] = "SP";
+    var qk = Array(8);
+    qk[0] = "NZ";
+    qk[1] = "Z";
+    qk[2] = "NC";
+    qk[3] = "C";
+    qk[4] = "PO";
+    qk[5] = "PE";
+    qk[6] = "P";
+    qk[7] = "M";
 
-function ql(a) {
+    function ql(a) {
     return $Kyk3LdzJw$kGSuWuqv5(193) + a + "</span>"
-}
+    }
 
-function qm(a) {
+    function qm(a) {
     return $Kyk3LdzJw$kGSuWuqv5(25) + a + "</span>"
-}
+    }
 
-function qn(a) {
+    function qn(a) {
     return $Kyk3LdzJw$kGSuWuqv5(193) + qb[a] + "</span>"
-}
+    }
 
-function qo(a) {
+    function qo(a) {
     a = a == pZ ? pX.jl.name + "h" : a == qa ? pX.jl.name + "l" : qb[a];
     return $Kyk3LdzJw$kGSuWuqv5(193) + a + "</span>"
-}
+    }
 
-function qp(a) {
+    function qp(a) {
     0 <= a && (a = "+" + a);
     return $Kyk3LdzJw$kGSuWuqv5(193) + pX.jl.name + "</span>" + $Kyk3LdzJw$kGSuWuqv5(194) + a + "</span>"
-}
+    }
 
-function qq() {
+    function qq() {
     return $Kyk3LdzJw$kGSuWuqv5(193) + pX.jl.name + "</span>"
-}
+    }
 
-function qr(a) {
+    function qr(a) {
     return $Kyk3LdzJw$kGSuWuqv5(193) + qi[a] + "</span>"
-}
+    }
 
-function qs(a) {
+    function qs(a) {
     return $Kyk3LdzJw$kGSuWuqv5(193) + qj[a] + "</span>"
-}
+    }
 
-function qt(a) {
+    function qt(a) {
     return a == qf ? $Kyk3LdzJw$kGSuWuqv5(193) + pX.jl.name + "</span>" : $Kyk3LdzJw$kGSuWuqv5(193) + qj[a] + "</span>"
-}
+    }
 
-function qu(a) {
+    function qu(a) {
     return $Kyk3LdzJw$kGSuWuqv5(194) + a + "</span>"
-}
+    }
 
-function qv(a) {
+    function qv(a) {
     return $Kyk3LdzJw$kGSuWuqv5(24) + ph(a) + "</span>"
-}
+    }
 
-function qw(a) {
+    function qw(a) {
     return $Kyk3LdzJw$kGSuWuqv5(24) + pi(a) + "</span>"
-}
+    }
 
-function qx(a) {
+    function qx(a) {
     return $Kyk3LdzJw$kGSuWuqv5(25) + qk[a] + "</span>"
-}
-var qy = {
+    }
+    var qy = {
     oz: function(a) {
         var b;
         b = pw.cY(a);
@@ -7435,9 +7437,9 @@ var qy = {
         pP.bU(a, b);
         pQ.bU(a, b)
     }
-};
-"use strict";
-var qz = {
+    };
+    "use strict";
+    var qz = {
     width: 783,
     height: 272,
     I: Array(4096),
@@ -7517,9 +7519,9 @@ var qz = {
             pp.ap - 15, 0, 1, 272);
         this.oB.oH(0, a, 768, 1)
     }
-};
-"use strict";
-var qA = {
+    };
+    "use strict";
+    var qA = {
     oI: 125E3,
     buffer: null,
     oJ: 2496,
@@ -7560,9 +7562,9 @@ var qA = {
         qA.buffer[qA.aQ + 1] = this.k * b;
         qA.aQ += 2
     }
-};
-"use strict";
-var qB, qC, qD, qE, qF, qG, qH = {
+    };
+    "use strict";
+    var qB, qC, qD, qE, qF, qG, qH = {
     aP: null,
     oK: function() {
         for (var a = qH.aP - qH.aP % 1E4 + 1E4; qH.aP < a;) pX.exec()
@@ -7701,19 +7703,19 @@ var qB, qC, qD, qE, qF, qG, qH = {
         qB = 0;
         pb()
     }
-};
+    };
 
-function qI(a) {
+    function qI(a) {
     "breakpoint" != a && alert(a);
     oU.b && (breakpoint = !0, qH.oM())
-}
+    }
 
-function qJ() {
+    function qJ() {
     var a = qK();
     $($Kyk3LdzJw$kGSuWuqv5(204)).width(a.width).height(a.height)
-}
+    }
 
-function qK() {
+    function qK() {
     var a = window.innerWidth - 22,
         b = window.innerHeight - 127;
     return 739.84 > a || 544 > b ? {
@@ -7726,143 +7728,151 @@ function qK() {
         height: b,
         width: 1.36 * b
     }
-}
-"use strict";
-var qL, qM;
-$(document).ready(function() {
-    qN.oQ() && (qM = document.getElementById("status"), pG.ew = document.getElementById("drivea-led"), pH.ew = document.getElementById("driveb-led"), pI.ex = document.getElementById($Kyk3LdzJw$kGSuWuqv5(14)), qN.aa(), qH.aa())
-});
-var qN = {
-    oQ: function() {
-        var a = qz.q();
-        void 0 === Object.seal && ($("#error-log").append($Kyk3LdzJw$kGSuWuqv5(205)), a = !1);
-        "undefined" == typeof XMLHttpRequest ? ($("#error-log").append($Kyk3LdzJw$kGSuWuqv5(13)), a = !1) : (qL = new XMLHttpRequest, "undefined" == typeof qL.response && ($("#error-log").append($Kyk3LdzJw$kGSuWuqv5(206)), a = !1));
-        "undefined" == typeof FileReader ? ($("#error-log").append($Kyk3LdzJw$kGSuWuqv5(12)), a = !1) : "undefined" == typeof(new FileReader).readAsArrayBuffer && ($("#error-log").append($Kyk3LdzJw$kGSuWuqv5(207)),
-            a = !1);
-        a || $("#error-log").prepend($Kyk3LdzJw$kGSuWuqv5(11)).append("</ul>").show();
-        return a
-    },
-    oR: function() {
-        Object.seal(pG);
-        Object.seal(pH);
-        Object.seal(pI);
-        Object.seal(pJ);
-        Object.seal(ps);
-        Object.seal(qN);
-        Object.seal(qy);
-        Object.seal(qz);
-        Object.seal(oU);
-        Object.seal(qH);
-        Object.seal(pw);
-        Object.seal(px);
-        Object.seal(py);
-        Object.seal(pz);
-        Object.seal(pA);
-        Object.seal(pq);
-        Object.seal(pr);
-        Object.seal(pt);
-        Object.seal(pT);
-        Object.seal(pu);
-        Object.seal(pv);
-        Object.seal(pB);
-        Object.seal(pC);
-        Object.seal(pE);
-        Object.seal(pD);
-        Object.seal(pR);
-        Object.seal(pQ);
-        Object.seal(pS);
-        Object.seal(pO);
-        Object.seal(pp);
-        Object.seal(qA);
-        Object.seal(pX)
-    },
-    q: function() {
-        pr.q();
-        ps.q();
-        pt.q();
-        pO.q()
-    },
-    aa: function() {
-        this.oR();
-        this.q();
-        oY();
-        oU.q();
-        qz.aa();
-        this.oS();
-        pu.G();
-        oU.b && (qE = new scrollbar($Kyk3LdzJw$kGSuWuqv5(208), dasm_refresh, dasm_step_up, dasm_step_down), qF = new scrollbar($Kyk3LdzJw$kGSuWuqv5(10), memedit_refresh, memedit_step_up, memedit_step_down));
-        $($Kyk3LdzJw$kGSuWuqv5(209)).live("focus", function() {
-            $(this).blur()
-        });
-        $("#snapshot").val("none");
-        $($Kyk3LdzJw$kGSuWuqv5(200)).removeAttr("checked");
-        $("#snapshot").change(function() {           
-            $(this).blur();
-            qH.ez()
-        });
-        $("#button-run").click(function() {
-
-            $(this).hasClass("button") && qH.oL()
-        });
-        $($Kyk3LdzJw$kGSuWuqv5(9)).click(function() {
-            $(this).hasClass("button") && qH.ez()
-        });
-        $($Kyk3LdzJw$kGSuWuqv5(210)).click(function() {
-            oU.g ? (oU.g = !1, $(this).attr("title", $Kyk3LdzJw$kGSuWuqv5(8)).css($Kyk3LdzJw$kGSuWuqv5(211), "0px 0px")) : (oU.g = !0, $(this).attr("title", $Kyk3LdzJw$kGSuWuqv5(7)).css($Kyk3LdzJw$kGSuWuqv5(211), "0px -36px"))
-        });
-        qA.q() ? ($($Kyk3LdzJw$kGSuWuqv5(212)).click(function() {
-            oU.h ? (oU.h = !1, $(this).attr("title", "Unmute").css($Kyk3LdzJw$kGSuWuqv5(211), "0px -72px")) : (oU.h = !0, $(this).attr("title", "Mute").css($Kyk3LdzJw$kGSuWuqv5(211), "0px -108px"))
-        }), oU.h = !0, $($Kyk3LdzJw$kGSuWuqv5(212)).attr("title", "Mute").css($Kyk3LdzJw$kGSuWuqv5(211), "0px -108px")) : $($Kyk3LdzJw$kGSuWuqv5(212)).attr("title", $Kyk3LdzJw$kGSuWuqv5(6));
-        !1 == oU.b && ($(window).resize(function() {
-            qJ()
-        }), qJ());
-        void 0 === document.fullscreenElement && void 0 === document.mozFullScreenElement &&
-            void 0 === document.webkitFullscreenElement ? $($Kyk3LdzJw$kGSuWuqv5(213)).attr("title", $Kyk3LdzJw$kGSuWuqv5(5)) : ($($Kyk3LdzJw$kGSuWuqv5(213)).click(function() {
-                if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement) document.exitFullscreen ? document.exitFullscreen() : document.mozCancelFullScreen ? document.mozCancelFullScreen() : document.webkitExitFullscreen && document.webkitExitFullscreen();
-                else {
-                    var a = document.body;
-                    a.requestFullscreen ? a.requestFullscreen() : a.mozRequestFullScreen ?
-                        a.mozRequestFullScreen() : a.webkitRequestFullscreen && a.webkitRequestFullscreen()
-                }
-            }), document.addEventListener($Kyk3LdzJw$kGSuWuqv5(214), function() {
-                document.fullscreen ? $($Kyk3LdzJw$kGSuWuqv5(213)).attr("title", $Kyk3LdzJw$kGSuWuqv5(4)).css($Kyk3LdzJw$kGSuWuqv5(211), "0px -180px") : $($Kyk3LdzJw$kGSuWuqv5(213)).attr("title", "Fullscreen").css($Kyk3LdzJw$kGSuWuqv5(211), "0px -144px")
-            }, !1), document.addEventListener($Kyk3LdzJw$kGSuWuqv5(215), function() {
-                document.mozFullScreen ? $($Kyk3LdzJw$kGSuWuqv5(213)).attr("title",
-                    $Kyk3LdzJw$kGSuWuqv5(4)).css($Kyk3LdzJw$kGSuWuqv5(211), "0px -180px") : $($Kyk3LdzJw$kGSuWuqv5(213)).attr("title", "Fullscreen").css($Kyk3LdzJw$kGSuWuqv5(211), "0px -144px")
-            }, !1), document.addEventListener($Kyk3LdzJw$kGSuWuqv5(3), function() {
-                document.webkitIsFullScreen ? $($Kyk3LdzJw$kGSuWuqv5(213)).attr("title", $Kyk3LdzJw$kGSuWuqv5(4)).css($Kyk3LdzJw$kGSuWuqv5(211), "0px -180px") : $($Kyk3LdzJw$kGSuWuqv5(213)).attr("title", "Fullscreen").css($Kyk3LdzJw$kGSuWuqv5(211), "0px -144px")
-            }, !1));
-        $($Kyk3LdzJw$kGSuWuqv5(216)).click(function() {
-            $("#button-run").hasClass("button") &&
-                qH.oM();
-            $($Kyk3LdzJw$kGSuWuqv5(20)).removeClass("button").addClass($Kyk3LdzJw$kGSuWuqv5(161));
-            $("#snapshot").attr("disabled", !0);
-            $($Kyk3LdzJw$kGSuWuqv5(2)).fadeIn()
-        });
-        $($Kyk3LdzJw$kGSuWuqv5(217)).click(function() {
-            oU.y();
-            oU.w();
-            $("#snapshot").removeAttr("disabled");
-            $($Kyk3LdzJw$kGSuWuqv5(2)).fadeOut();
-            "none" != $("#snapshot").val() && qH.oL()
-        });
-        oU.b && ($($Kyk3LdzJw$kGSuWuqv5(200)).click(function() {
-                this.checked ? (launch_debugger(), $($Kyk3LdzJw$kGSuWuqv5(1)).show()) : $($Kyk3LdzJw$kGSuWuqv5(1)).hide()
-            }), $($Kyk3LdzJw$kGSuWuqv5(218)).click(function() {
-                qH.az()
-            }),
-            $($Kyk3LdzJw$kGSuWuqv5(0)).click(function() {
-                qH.oO()
-            }), $($Kyk3LdzJw$kGSuWuqv5(219)).click(function() {
-                dasm_refresh(pX.dG / 65535)
-            }), pN(pJ));
-        pN(pG);
-        pN(pH);
-        pN(pI)
-    },
-    oS: function() {
-        for (var a in preloaded) files[a] = po.af(preloaded[a]);
-        preloaded = null;
-        $Kyk3LdzJw$kGSuWuqv5(162) in files && pB.cZ(files[$Kyk3LdzJw$kGSuWuqv5(162)])
     }
+    "use strict";
+    var qL, qM;
+    $(document).ready(function() {
+        console.log(qN);
+        qN.oQ() && (qM = document.getElementById("status"), pG.ew = document.getElementById("drivea-led"), pH.ew = document.getElementById("driveb-led"), pI.ex = document.getElementById($Kyk3LdzJw$kGSuWuqv5(14)), qN.aa(), qH.aa())
+        });
+        var qN = {
+        oQ: function() {
+            var a = qz.q();
+            void 0 === Object.seal && ($("#error-log").append($Kyk3LdzJw$kGSuWuqv5(205)), a = !1);
+            "undefined" == typeof XMLHttpRequest ? ($("#error-log").append($Kyk3LdzJw$kGSuWuqv5(13)), a = !1) : (qL = new XMLHttpRequest, "undefined" == typeof qL.response && ($("#error-log").append($Kyk3LdzJw$kGSuWuqv5(206)), a = !1));
+            "undefined" == typeof FileReader ? ($("#error-log").append($Kyk3LdzJw$kGSuWuqv5(12)), a = !1) : "undefined" == typeof(new FileReader).readAsArrayBuffer && ($("#error-log").append($Kyk3LdzJw$kGSuWuqv5(207)),
+                a = !1);
+            a || $("#error-log").prepend($Kyk3LdzJw$kGSuWuqv5(11)).append("</ul>").show();
+            return a
+        },
+        oR: function() {
+            Object.seal(pG);
+            Object.seal(pH);
+            Object.seal(pI);
+            Object.seal(pJ);
+            Object.seal(ps);
+            Object.seal(qN);
+            Object.seal(qy);
+            Object.seal(qz);
+            Object.seal(oU);
+            Object.seal(qH);
+            Object.seal(pw);
+            Object.seal(px);
+            Object.seal(py);
+            Object.seal(pz);
+            Object.seal(pA);
+            Object.seal(pq);
+            Object.seal(pr);
+            Object.seal(pt);
+            Object.seal(pT);
+            Object.seal(pu);
+            Object.seal(pv);
+            Object.seal(pB);
+            Object.seal(pC);
+            Object.seal(pE);
+            Object.seal(pD);
+            Object.seal(pR);
+            Object.seal(pQ);
+            Object.seal(pS);
+            Object.seal(pO);
+            Object.seal(pp);
+            Object.seal(qA);
+            Object.seal(pX)
+        },
+        q: function() {
+            pr.q();
+            ps.q();
+            pt.q();
+            pO.q()
+        },
+        aa: function() {
+            this.oR();
+            this.q();
+            oY();
+            oU.q();
+            qz.aa();
+            this.oS();
+            pu.G();
+            oU.b && (qE = new scrollbar($Kyk3LdzJw$kGSuWuqv5(208), dasm_refresh, dasm_step_up, dasm_step_down), qF = new scrollbar($Kyk3LdzJw$kGSuWuqv5(10), memedit_refresh, memedit_step_up, memedit_step_down));
+            $($Kyk3LdzJw$kGSuWuqv5(209)).live("focus", function() {
+                $(this).blur()
+            });
+            $("#snapshot").val("none");
+            $($Kyk3LdzJw$kGSuWuqv5(200)).removeAttr("checked");
+            $("#snapshot").change(function() {           
+                $(this).blur();
+                qH.ez()
+            });
+            $("#button-run").click(function() {
+
+                $(this).hasClass("button") && qH.oL()
+            });
+            $($Kyk3LdzJw$kGSuWuqv5(9)).click(function() {
+                $(this).hasClass("button") && qH.ez()
+            });
+            $($Kyk3LdzJw$kGSuWuqv5(210)).click(function() {
+                oU.g ? (oU.g = !1, $(this).attr("title", $Kyk3LdzJw$kGSuWuqv5(8)).css($Kyk3LdzJw$kGSuWuqv5(211), "0px 0px")) : (oU.g = !0, $(this).attr("title", $Kyk3LdzJw$kGSuWuqv5(7)).css($Kyk3LdzJw$kGSuWuqv5(211), "0px -36px"))
+            });
+            qA.q() ? ($($Kyk3LdzJw$kGSuWuqv5(212)).click(function() {
+                oU.h ? (oU.h = !1, $(this).attr("title", "Unmute").css($Kyk3LdzJw$kGSuWuqv5(211), "0px -72px")) : (oU.h = !0, $(this).attr("title", "Mute").css($Kyk3LdzJw$kGSuWuqv5(211), "0px -108px"))
+            }), oU.h = !0, $($Kyk3LdzJw$kGSuWuqv5(212)).attr("title", "Mute").css($Kyk3LdzJw$kGSuWuqv5(211), "0px -108px")) : $($Kyk3LdzJw$kGSuWuqv5(212)).attr("title", $Kyk3LdzJw$kGSuWuqv5(6));
+            !1 == oU.b && ($(window).resize(function() {
+                qJ()
+            }), qJ());
+            void 0 === document.fullscreenElement && void 0 === document.mozFullScreenElement &&
+                void 0 === document.webkitFullscreenElement ? $($Kyk3LdzJw$kGSuWuqv5(213)).attr("title", $Kyk3LdzJw$kGSuWuqv5(5)) : ($($Kyk3LdzJw$kGSuWuqv5(213)).click(function() {
+                    if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement) document.exitFullscreen ? document.exitFullscreen() : document.mozCancelFullScreen ? document.mozCancelFullScreen() : document.webkitExitFullscreen && document.webkitExitFullscreen();
+                    else {
+                        var a = document.body;
+                        a.requestFullscreen ? a.requestFullscreen() : a.mozRequestFullScreen ?
+                            a.mozRequestFullScreen() : a.webkitRequestFullscreen && a.webkitRequestFullscreen()
+                    }
+                }), document.addEventListener($Kyk3LdzJw$kGSuWuqv5(214), function() {
+                    document.fullscreen ? $($Kyk3LdzJw$kGSuWuqv5(213)).attr("title", $Kyk3LdzJw$kGSuWuqv5(4)).css($Kyk3LdzJw$kGSuWuqv5(211), "0px -180px") : $($Kyk3LdzJw$kGSuWuqv5(213)).attr("title", "Fullscreen").css($Kyk3LdzJw$kGSuWuqv5(211), "0px -144px")
+                }, !1), document.addEventListener($Kyk3LdzJw$kGSuWuqv5(215), function() {
+                    document.mozFullScreen ? $($Kyk3LdzJw$kGSuWuqv5(213)).attr("title",
+                        $Kyk3LdzJw$kGSuWuqv5(4)).css($Kyk3LdzJw$kGSuWuqv5(211), "0px -180px") : $($Kyk3LdzJw$kGSuWuqv5(213)).attr("title", "Fullscreen").css($Kyk3LdzJw$kGSuWuqv5(211), "0px -144px")
+                }, !1), document.addEventListener($Kyk3LdzJw$kGSuWuqv5(3), function() {
+                    document.webkitIsFullScreen ? $($Kyk3LdzJw$kGSuWuqv5(213)).attr("title", $Kyk3LdzJw$kGSuWuqv5(4)).css($Kyk3LdzJw$kGSuWuqv5(211), "0px -180px") : $($Kyk3LdzJw$kGSuWuqv5(213)).attr("title", "Fullscreen").css($Kyk3LdzJw$kGSuWuqv5(211), "0px -144px")
+                }, !1));
+            $($Kyk3LdzJw$kGSuWuqv5(216)).click(function() {
+                $("#button-run").hasClass("button") &&
+                    qH.oM();
+                $($Kyk3LdzJw$kGSuWuqv5(20)).removeClass("button").addClass($Kyk3LdzJw$kGSuWuqv5(161));
+                $("#snapshot").attr("disabled", !0);
+                $($Kyk3LdzJw$kGSuWuqv5(2)).fadeIn()
+            });
+            $($Kyk3LdzJw$kGSuWuqv5(217)).click(function() {
+                oU.y();
+                oU.w();
+                $("#snapshot").removeAttr("disabled");
+                $($Kyk3LdzJw$kGSuWuqv5(2)).fadeOut();
+                "none" != $("#snapshot").val() && qH.oL()
+            });
+            oU.b && ($($Kyk3LdzJw$kGSuWuqv5(200)).click(function() {
+                    this.checked ? (launch_debugger(), $($Kyk3LdzJw$kGSuWuqv5(1)).show()) : $($Kyk3LdzJw$kGSuWuqv5(1)).hide()
+                }), $($Kyk3LdzJw$kGSuWuqv5(218)).click(function() {
+                    qH.az()
+                }),
+                $($Kyk3LdzJw$kGSuWuqv5(0)).click(function() {
+                    qH.oO()
+                }), $($Kyk3LdzJw$kGSuWuqv5(219)).click(function() {
+                    dasm_refresh(pX.dG / 65535)
+                }), pN(pJ));
+            pN(pG);
+            pN(pH);
+            pN(pI)
+        },
+        oS: function() {
+            for (var a in preloaded) files[a] = po.af(preloaded[a]);
+            preloaded = null;
+            $Kyk3LdzJw$kGSuWuqv5(162) in files && pB.cZ(files[$Kyk3LdzJw$kGSuWuqv5(162)])
+        }
+    };
+
 };
+
+cpcEmulatorStart(); 
+$(function() {
+    $('#snapshot').trigger('change');
+});    

@@ -925,3 +925,635 @@ videogular .vg-error-message {
 }
 /* /videos */
 /** /PAGES **/
+/** EMULATORS **/
+#cpc-emulator-container {
+  /* slider root */
+  /* drag handle */
+  /* input field */
+  /* input field while focused */
+  /* cute little CSS3 selector */
+  /* vertical version */
+}
+#cpc-emulator-container button::-moz-focus-inner,
+#cpc-emulator-container input[type="reset"]::-moz-focus-inner,
+#cpc-emulator-container input[type="button"]::-moz-focus-inner,
+#cpc-emulator-container input[type="submit"]::-moz-focus-inner,
+#cpc-emulator-container input[type="file"] > input[type="button"]::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+@font-face {
+  font-family: guifx2;
+  src: url('Guifx_v2_Transports.woff');
+}
+#cpc-emulator-container .guifx2 {
+  font-family: guifx2;
+}
+#cpc-emulator-container .scrollbar-up,
+#cpc-emulator-container .scrollbar-down {
+  font-family: guifx2;
+  line-height: 12px;
+}
+#cpc-emulator-container img {
+  vertical-align: top;
+}
+#cpc-emulator-container ul {
+  margin: 0;
+  padding: 0;
+}
+#cpc-emulator-container a {
+  outline: medium none;
+  text-decoration: none;
+}
+#cpc-emulator-container a:hover {
+  text-decoration: underline;
+}
+#cpc-emulator-container button {
+  height: 26px;
+}
+#cpc-emulator-container .button-size1 {
+  padding: 3px 7px;
+  margin: 0px 3px;
+}
+#cpc-emulator-container .button-size2 {
+  font-size: 12px;
+  padding: 3px 5px;
+  min-width: 11px;
+}
+#cpc-emulator-container .button,
+#cpc-emulator-container .disabled-button,
+#cpc-emulator-container .toggled-button {
+  display: inline-block;
+  cursor: default;
+  background-color: #aaa;
+  border-radius: 3px;
+  vertical-align: middle;
+  line-height: 16px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+#cpc-emulator-container .button {
+  border: 1px solid #777;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.4)) #aaaaaa;
+}
+#cpc-emulator-container .button:hover {
+  border: 1px solid #48c;
+  background-color: #6bd;
+}
+#cpc-emulator-container .button:active,
+#cpc-emulator-container .toggled-button {
+  border: 1px solid #368;
+  background-color: #48a;
+  box-shadow: inset 0px 1px 1px gray;
+}
+#cpc-emulator-container .disabled-button {
+  border: 1px solid #bbb;
+  background: #f4f4f4;
+  color: #666;
+}
+#cpc-emulator-container #tape-record.button {
+  color: darkred;
+}
+#cpc-emulator-container #snapshot {
+  vertical-align: middle;
+  margin: 0px 3px;
+}
+#cpc-emulator-container .tape-button {
+  margin-right: -2px;
+  width: 24px;
+}
+#cpc-emulator-container #tape-counter {
+  display: inline-block;
+  width: 24px;
+  line-height: 16px;
+  vertical-align: middle;
+  font-family: monospace;
+  font-weight: bold;
+  border: 1px solid #bbb;
+  background-color: #fff;
+  padding: 2px 2px 0px 2px;
+  margin: 0px 3px 0px 0px;
+  color: dimgray;
+}
+#cpc-emulator-container .main-panel {
+  font-family: arial, helvetica, sans-serif;
+  font-size: 13px;
+}
+#cpc-emulator-container .control-panel {
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+#cpc-emulator-container #option-panel {
+  width: 510px;
+  height: 414px;
+  left: 50%;
+  top: 50%;
+  margin-left: -255px;
+  margin-top: -207px;
+  position: absolute;
+  background-color: white;
+  padding: 12px;
+  border: 4px solid #048;
+  border-radius: 16px;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#cpc-emulator-container #option-panel-overlay {
+  width: 100%;
+  height: 100%;
+  background-color: gray;
+  position: absolute;
+  opacity: 0.6;
+}
+#cpc-emulator-container #option-panel-header {
+  border-bottom: 2px solid #ccc;
+  color: #048;
+  font-size: 22px;
+  font-weight: bold;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+#cpc-emulator-container #settings-close {
+  color: #048;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  line-height: 18px;
+  cursor: default;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+#cpc-emulator-container #settings-close:hover {
+  color: #b00;
+}
+#cpc-emulator-container #settings-close:active {
+  color: #600;
+}
+#cpc-emulator-container #option-panel-content {
+  text-align: left;
+  margin-left: 16px;
+}
+#cpc-emulator-container .option-heading {
+  font-size: 16px;
+  font-weight: bold;
+}
+#cpc-emulator-container .option-name {
+  font-size: 14px;
+}
+#cpc-emulator-container .option-flag {
+  width: 38px;
+  height: 26px;
+}
+#cpc-emulator-container .option-comment {
+  color: #555;
+}
+#cpc-emulator-container .option-list {
+  margin: 0 0 4px 14px;
+}
+#cpc-emulator-container .option-list input {
+  vertical-align: middle;
+}
+#cpc-emulator-container .option-label {
+  margin-left: -5px;
+  margin-right: 11px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+#cpc-emulator-container #status {
+  color: #333;
+  height: 16px;
+}
+#cpc-emulator-container .error-output {
+  border-top: 2px dotted red;
+  border-bottom: 2px dotted red;
+  background-color: #f99;
+  margin-bottom: 4px;
+  padding: 2px;
+  font-weight: bold;
+}
+#cpc-emulator-container .log-output {
+  border-top: 2px dotted #992;
+  border-bottom: 2px dotted #992;
+  padding: 2px;
+  background-color: #ff3;
+  margin-bottom: 2px;
+}
+#cpc-emulator-container #screen,
+#cpc-emulator-container #logo {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+#cpc-emulator-container #logo {
+  border: 1px solid #ccc;
+  background-color: white;
+  background-image: url("../img/cpc464_logo.png");
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#cpc-emulator-container #screen,
+#cpc-emulator-container #logo {
+  width: 100%;
+  height: 100%;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+#cpc-emulator-container #screen-placeholder {
+  width: 768px;
+  height: 544px;
+}
+#cpc-emulator-container #screen-placeholder {
+  display: inline-block;
+  position: relative;
+  box-shadow: 1px 1px 24px black;
+  margin-top: 4px;
+}
+#cpc-emulator-container .reg {
+  color: green;
+}
+#cpc-emulator-container .int {
+  color: black;
+}
+#cpc-emulator-container .cond {
+  color: purple;
+}
+#cpc-emulator-container #checkbox-debugger {
+  margin-left: 12px;
+}
+#cpc-emulator-container #debugger-gui {
+  font-family: 'Bitstream Vera Sans Mono', 'Lucida Console', 'droid_monospace', monospace;
+  display: inline-block;
+  width: 850px;
+}
+#cpc-emulator-container #debugger-leftcol {
+  width: 310px;
+  float: left;
+}
+#cpc-emulator-container #debugger-rightcol {
+  width: 540px;
+  float: left;
+}
+#cpc-emulator-container .debugger-portlet {
+  font-size: 9pt;
+  display: inline-block;
+  border: 1px solid black;
+  margin: 6px 0px;
+  background: white;
+  color: darkblue;
+}
+#cpc-emulator-container .border-spaced {
+  border-spacing: 2px;
+}
+#cpc-emulator-container .dasm-table {
+  display: table-cell;
+  vertical-align: top;
+  text-align: left;
+}
+#cpc-emulator-container .dasm-theader {
+  background-color: #ddf;
+  border-bottom: 1px solid black;
+}
+#cpc-emulator-container .debugger-caption {
+  text-align: center;
+  font-weight: bold;
+  border-bottom: 1px solid black;
+  background-color: #d8d8d8;
+  color: black;
+}
+#cpc-emulator-container .dasm-theader div {
+  color: black;
+  font-weight: normal;
+}
+#cpc-emulator-container .dasm-tbody {
+  display: table-cell;
+}
+#cpc-emulator-container .dasm-pc {
+  background: lightblue;
+}
+#cpc-emulator-container .dasm-theader,
+#cpc-emulator-container .dasm-row,
+#cpc-emulator-container .mem-row {
+  line-height: 14px;
+}
+#cpc-emulator-container .dasm-cell {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  padding: 1px;
+}
+#cpc-emulator-container .dasm-row-label {
+  text-align: right;
+  width: 50px;
+}
+#cpc-emulator-container .dasm-cpu-label {
+  text-align: left;
+  color: darkblue;
+  margin-left: 3px;
+}
+#cpc-emulator-container .scrollbar {
+  display: table-cell;
+  width: 13px;
+  background-color: #d8d8d8;
+  text-align: center;
+  cursor: default;
+}
+#cpc-emulator-container .scrollbar-drag {
+  border: 1px solid #888;
+  height: 24px;
+  background-color: #eee;
+  position: relative;
+}
+#cpc-emulator-container .scrollbar-up,
+#cpc-emulator-container .scrollbar-down {
+  height: 15px;
+  background-color: #eee;
+  border: 1px solid #888;
+}
+#cpc-emulator-container #dasm-scrollbar-drag-container {
+  height: 415px;
+}
+#cpc-emulator-container #mem-scrollbar-drag-container {
+  height: 192px;
+}
+#cpc-emulator-container .addr {
+  display: table-cell;
+  width: 4em;
+  border-right: 1px solid lightgray;
+  padding-left: 2px;
+  color: black;
+}
+#cpc-emulator-container .data {
+  display: table-cell;
+  width: 5em;
+  border-right: 1px solid lightgray;
+  padding-left: 2px;
+  color: #666;
+}
+#cpc-emulator-container .dasm {
+  display: table-cell;
+  width: 10em;
+  color: mediumblue;
+  border-right: 1px solid lightgray;
+  padding-left: 2px;
+}
+#cpc-emulator-container .tstates {
+  display: table-cell;
+  width: 4em;
+  padding-left: 2px;
+}
+#cpc-emulator-container .mem-hexa {
+  display: table-cell;
+  width: 330px;
+  border-right: 1px solid lightgray;
+  padding-left: 2px;
+}
+#cpc-emulator-container .mem-ascii {
+  display: table-cell;
+  width: 10em;
+  padding-left: 2px;
+  color: green;
+}
+#cpc-emulator-container .mem-byte {
+  display: table-cell;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+#cpc-emulator-container .dasm-flags {
+  width: 5em;
+  border: 1px solid grey;
+  color: black;
+}
+#cpc-emulator-container .dasm-word {
+  width: 33px;
+  border: 1px solid grey;
+  color: black;
+}
+#cpc-emulator-container .dasm-digit {
+  width: 11px;
+  border: 1px solid grey;
+  margin-left: 4px;
+  color: black;
+}
+#cpc-emulator-container .dasm-byte {
+  width: 17px;
+  border: 1px solid grey;
+  color: black;
+}
+#cpc-emulator-container .dasm-word-label {
+  width: 33px;
+  height: 12px;
+}
+#cpc-emulator-container .dasm-byte-label {
+  width: 19px;
+  height: 12px;
+}
+#cpc-emulator-container .dasm-color {
+  display: table-cell;
+  width: 17px;
+  border: 1px solid grey;
+  color: black;
+}
+#cpc-emulator-container .dasm-selected {
+  box-shadow: 0px 0px 2px 2px orange;
+}
+#cpc-emulator-container a,
+#cpc-emulator-container a:visited {
+  color: #048;
+}
+#cpc-emulator-container .nfo {
+  font-family: arial, helvetica, sans-serif;
+  font-size: 9pt;
+  padding: 7px 14px;
+  margin-top: 7px;
+  border: 1px solid #bbb;
+  background: #eee;
+  display: inline-block;
+}
+#cpc-emulator-container .check {
+  vertical-align: middle;
+}
+#cpc-emulator-container .check-label {
+  font-size: 12px;
+}
+#cpc-emulator-container #checkbox-fullscreen,
+#cpc-emulator-container #checkbox-settings,
+#cpc-emulator-container #checkbox-joystick,
+#cpc-emulator-container #checkbox-sound {
+  vertical-align: middle;
+  display: inline-block;
+  margin: 0px 2px;
+  background-image: url("../img/cpcbox-sprites.png");
+  height: 26px;
+  width: 26px;
+  border: 1px solid transparent;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+#cpc-emulator-container #checkbox-fullscreen {
+  background-position: 0px -144px;
+}
+#cpc-emulator-container #checkbox-settings {
+  background-position: 0px -216px;
+}
+#cpc-emulator-container #checkbox-joystick {
+  background-position: 0px -36px;
+}
+#cpc-emulator-container #checkbox-sound {
+  background-position: 0px -72px;
+}
+#cpc-emulator-container #checkbox-fullscreen:hover,
+#cpc-emulator-container #checkbox-settings:hover,
+#cpc-emulator-container #checkbox-joystick:hover,
+#cpc-emulator-container #checkbox-sound:hover {
+  background-color: #def;
+  border: 1px solid #9cf;
+}
+#cpc-emulator-container #checkbox-fullscreen:active,
+#cpc-emulator-container #checkbox-settings:active,
+#cpc-emulator-container #checkbox-joystick:active,
+#cpc-emulator-container #checkbox-sound:active {
+  background-color: #bdf;
+  border: 1px solid #7bf;
+}
+#cpc-emulator-container fieldset {
+  display: inline-block;
+  margin: 3px 4px 0px 4px;
+  padding: 1px 7px 8px 7px;
+  background-color: #eee;
+  height: 37px;
+}
+#cpc-emulator-container .led {
+  border: 1px solid darkgray;
+  background-color: #400;
+  display: inline-block;
+  vertical-align: middle;
+  width: 12px;
+  height: 6px;
+}
+#cpc-emulator-container #drivea-filename,
+#cpc-emulator-container #driveb-filename,
+#cpc-emulator-container #tape-filename,
+#cpc-emulator-container #cart-filename {
+  display: inline-block;
+  vertical-align: middle;
+  border: 1px solid #bbb;
+  background-color: white;
+  text-align: left;
+  color: dimgray;
+  padding: 2px 3px 0px 3px;
+  margin: 0px 3px;
+  white-space: nowrap;
+  line-height: 16px;
+  overflow: hidden;
+}
+#cpc-emulator-container #drivea-filename,
+#cpc-emulator-container #driveb-filename,
+#cpc-emulator-container #cart-filename {
+  min-width: 170px;
+  max-width: 640px;
+}
+#cpc-emulator-container #tape-filename {
+  min-width: 140px;
+  max-width: 506px;
+}
+#cpc-emulator-container #drivea-zipselect,
+#cpc-emulator-container #driveb-zipselect,
+#cpc-emulator-container #tape-zipselect,
+#cpc-emulator-container #cart-zipselect {
+  vertical-align: middle;
+  min-width: 170px;
+  margin: 0px 3px;
+}
+#cpc-emulator-container #drivea-sideselect,
+#cpc-emulator-container #driveb-sideselect,
+#cpc-emulator-container #tape-sideselect,
+#cpc-emulator-container #cart-sideselect {
+  color: dimgray;
+}
+#cpc-emulator-container #drivea-eject,
+#cpc-emulator-container #driveb-eject,
+#cpc-emulator-container #tape-eject,
+#cpc-emulator-container #cart-eject {
+  margin-left: 5px;
+}
+#cpc-emulator-container legend {
+  text-align: left;
+}
+#cpc-emulator-container label {
+  vertical-align: middle;
+  display: inline-block;
+}
+#cpc-emulator-container .regcheck-input {
+  margin: 0;
+  vertical-align: middle;
+}
+#cpc-emulator-container #drivea-input,
+#cpc-emulator-container #driveb-input,
+#cpc-emulator-container #tape-input,
+#cpc-emulator-container #cart-input {
+  position: absolute;
+  top: -100px;
+}
+#cpc-emulator-container .slider {
+  background: url("../img/volume-slider.png") no-repeat 0 -5px;
+  width: 64px;
+  height: 5px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+#cpc-emulator-container .progress {
+  background-color: #555;
+  height: 2px;
+  bottom: 2px;
+  position: absolute;
+  width: 0;
+}
+#cpc-emulator-container .handle {
+  background: transparent url("../img/volume-slider.png") no-repeat scroll -67px 0;
+  height: 13px;
+  position: absolute;
+  top: -5px;
+  width: 12px;
+}
+#cpc-emulator-container .range {
+  font-size: 10px;
+  border: 0;
+  background: none;
+  width: 30px;
+  margin: -5px 0 10px 0;
+  float: left;
+  color: #fff;
+  text-align: center;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+#cpc-emulator-container .range:focus {
+  background-color: #000;
+}
+#cpc-emulator-container .range[readonly]:focus {
+  background-color: transparent;
+}
+#cpc-emulator-container .vertical .slider {
+  background: url(../img/small-vertical.png) no-repeat -4px -17px;
+  height: 94px;
+  width: 5px;
+  margin: 5px 13px 0 0;
+}
+#cpc-emulator-container .vertical .handle {
+  background: transparent url(../img/small-vertical.png) no-repeat scroll -1px -2px;
+  top: 0;
+  margin-left: -2px;
+}
+#cpc-emulator-container .vertical .range {
+  margin: -13px 13px 0 -30px;
+}
+/** /EMULATORS **/

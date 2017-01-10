@@ -11,13 +11,8 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 			$scope.init = function(){
 				// loading
 				$scope.showLoadingMessage('Loading');
-				// update site
-				//Page.cmd('siteUpdate',{"address":$scope.site_address})
-
 				// get site info
 				Page.cmd("siteInfo", {}, function(site_info) {					
-					
-					console.log(site_info);
 					$scope.site_address = site_info.address;
 					$scope.channel_master_address = site_info.address;	
 					$scope.merger_name = site_info.content.merger_name;
@@ -25,17 +20,16 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 					Page.site_info = site_info;
 					// owner					
 					$scope.owner = site_info.settings.own;
-
+					// page
+					$scope.page = Page;
 					// update site
-					Page.cmd('siteUpdate',{"address":$scope.site_address})
-
+					Page.cmd('siteUpdate',{"address":$scope.site_address});
 					// apply auth address to scope
 					if (Page.site_info.cert_user_id) { $scope.user = Page.site_info.cert_user_id; } 
 					else { $scope.user = Page.site_info.auth_address; }
 					// merger site permission
 					$scope.getConfig();
 		    	});
-				
 			};
 
 			// get config json
@@ -238,69 +232,61 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 
 			// get channels items
 			$scope.addChannelItems = function(data,channel,cIndex){
-				Page.cmd("optionalFileList", {
-				        address: channel.address,
-				        limit:2000
-				      },function(site_files){
-				      	      						      						      	
-				      		for (var media_type in data){
-				      			if (Object.prototype.toString.call(data[media_type]) === '[object Array]'){
-				      				if ($scope.config.media_types.indexOf(media_type) > -1){
-				      					// loop through items in data
-				      					data[media_type].forEach(function(item,itemIndex){
+				Page.cmd("optionalFileList", { address: channel.address, limit:2000 }, function(site_files){
+		      		for (var media_type in data){
+		      			if (Object.prototype.toString.call(data[media_type]) === '[object Array]'){
+		      				if ($scope.config.media_types.indexOf(media_type) > -1){
+		      					// loop through items in data
+		      					data[media_type].forEach(function(item,itemIndex){
 
-				      						// create item if in cache
-				      						item.x_is_load = false;
-				      						item.x_peer = 0;
-				      						var path = item.path;
-				      						for (var i = 0, len = site_files.length; i < len; i++) {
-				      						  var inner_path = site_files[i].inner_path;
-				      						  if(path==inner_path)
-				      							{
-				      								item.x_is_load=true;
-				      								item.x_peer=site_files[i].peer;
-				      								break;
-				      							}
-				      						}		
+		      						// create item if in cache
+		      						item.x_is_load = false;
+		      						item.x_peer = 0;
+		      						var path = item.path;
+		      						for (var i = 0, len = site_files.length; i < len; i++) {
+		      						  var inner_path = site_files[i].inner_path;
+		      						  if(path==inner_path)
+		      							{
+		      								item.x_is_load=true;
+		      								item.x_peer=site_files[i].peer;
+		      								break;
+		      							}
+		      						}		
 
-				      						// assign channel obj
-				      						item.channel = channel;
-				      						// genereate unique item id
-				      						item.uid = item.channel.address + item.date_added;															
-				      						// render item's img url
-				      						if(item.imgPath)
-				      						{
-				      							item.img = '/'+$scope.site_address+'/merged-'+$scope.merger_name+'/'+item.channel.address+'/'+item.imgPath;
-				      						}else
-				      						{
-				      							if(item.file_type=='sna')
-				      							{
-				      								item.img = '/'+$scope.site_address+'/assets/img/logo_sna.jpg';	
-				      							}else
-				      							{
-				      								item.img = '/'+$scope.site_address+'/assets/img/logo.png';
-				      							}
-				      							
-				      						}
+		      						// assign channel obj
+		      						item.channel = channel;
+		      						// genereate unique item id
+		      						item.uid = item.channel.address + item.date_added;															
+		      						// render item's img url
+		      						if(item.imgPath)
+		      						{
+		      							item.img = '/'+$scope.site_address+'/merged-'+$scope.merger_name+'/'+item.channel.address+'/'+item.imgPath;
+		      						}else
+		      						{
+		      							if(item.file_type=='sna')
+		      							{
+		      								item.img = '/'+$scope.site_address+'/assets/img/logo_sna.jpg';	
+		      							}else
+		      							{
+		      								item.img = '/'+$scope.site_address+'/assets/img/logo.png';
+		      							}
+		      							
+		      						}
 
-				      						// apply to scope items array						
-				      						if (!$scope[media_type]) $scope[media_type] = [];
-				      						$scope[media_type].push(item);
-				      						// if last item in channels items array
-				      						if ((itemIndex + 1) === data[media_type].length){
-				      							// finish loading
-				      							$scope.finishLoadingChannels(cIndex);
-				      						}
-				      						
-				      					});
-				      				}
-				      			}
-				      		}
-
-							
-				      });	
-
-				
+		      						// apply to scope items array						
+		      						if (!$scope[media_type]) $scope[media_type] = [];
+		      						$scope[media_type].push(item);
+		      						// if last item in channels items array
+		      						if ((itemIndex + 1) === data[media_type].length){
+		      							// finish loading
+		      							$scope.finishLoadingChannels(cIndex);
+		      						}
+		      						
+		      					});
+		      				}
+		      			}
+		      		}
+			    });
 			};
 
 			// finish loading channels
@@ -328,7 +314,6 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 				$('#filterMediaType').trigger('input');	
 			}
 			
-
 			$scope.filerChannel = function(channel)
 			{
 
@@ -391,6 +376,22 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 		    $scope.selectUser = function(){
 		    	Page.cmd("certSelect", [["zeroid.bit"]]);
 		    };
+
+		    // load script dynamically
+			$scope.loadScript = function(url, type, charset) {
+			    if (type===undefined) type = 'text/javascript';
+			    if (url) {
+		            var body = angular.element(document.getElementsByTagName("body"));
+	                if (body) {
+	                    script = document.createElement('script');
+	                    script.setAttribute('src', url);
+	                    script.setAttribute('type', type);
+	                    if (charset) script.setAttribute('charset', charset);
+	                    body.append(script);
+	                }
+			        return script;
+			    }
+			};    
 
 	    /* /UI */
 	}
