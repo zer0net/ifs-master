@@ -927,6 +927,7 @@ videogular .vg-error-message {
 /** /PAGES **/
 /** EMULATORS **/
 #cpc-emulator-container {
+  text-align: center;
   /* slider root */
   /* drag handle */
   /* input field */
@@ -1166,14 +1167,12 @@ videogular .vg-error-message {
   box-sizing: border-box;
 }
 #cpc-emulator-container #screen-placeholder {
-  width: 768px;
+  width: 100%;
   height: 544px;
 }
 #cpc-emulator-container #screen-placeholder {
   display: inline-block;
   position: relative;
-  box-shadow: 1px 1px 24px black;
-  margin-top: 4px;
 }
 #cpc-emulator-container .reg {
   color: green;

@@ -7875,4 +7875,5 @@ var cpcEmulatorStart = function(){
 cpcEmulatorStart(); 
 $(function() {
     $('#snapshot').trigger('change');
+    $('#screen-placeholder').width('100%');
 });    
