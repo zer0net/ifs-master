@@ -90,6 +90,7 @@ app.directive('comments', ['$rootScope','$sce','$location',
 							$scope.$apply(function() {
 								Page.cmd("wrapperNotification", ["done", "Comment posted!", 10000]);
 								$scope.user = Page.site_info.cert_user_id;
+								if (!$scope.comments) $scope.comments = [];
 								$scope.comments.push(comment);
 								$scope.comment = "";
 							});

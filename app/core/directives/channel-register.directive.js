@@ -1,15 +1,12 @@
 app.directive('channelRegister', [
 	function() {
 
-
-
 		var controller = function($scope,$element) {
 				
 			var query = ["SELECT * FROM channel ORDER BY date_added"];
 			Page.cmd("dbQuery", query, function(channels) {										
 				if (channels.length > 0){
 					$scope.channelsAll = channels;
-					
 				} 
 			});
 
