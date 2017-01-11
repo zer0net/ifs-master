@@ -7,8 +7,10 @@ app.directive('comments', ['$rootScope','$sce','$location',
 			$scope.getComments = function(item){
 				
 				$scope.comments = [];
-				var query = ["SELECT * FROM comment WHERE item_id="+item[item.item_id_name]+" AND channel='"+item.channel.address+"' ORDER BY date_added"];
+				var query = ["SELECT * FROM comment WHERE item_id="+item[$scope.item_id_name]+" AND channel='"+item.channel.address+"' ORDER BY date_added"];
+				console.log(query);
 				Page.cmd("dbQuery", query, function(comments) {
+					console.log(comments);
 					$scope.comments = comments;
 					$scope.$apply();
 				});
@@ -90,6 +92,7 @@ app.directive('comments', ['$rootScope','$sce','$location',
 							$scope.$apply(function() {
 								Page.cmd("wrapperNotification", ["done", "Comment posted!", 10000]);
 								$scope.user = Page.site_info.cert_user_id;
+								if (!$scope.comments) $scope.comments = [];
 								$scope.comments.push(comment);
 								$scope.comment = "";
 							});

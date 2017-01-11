@@ -30,6 +30,7 @@ app.directive('dosbox', ['$location',
 
 		var template = 				
 		'<div id="dosbox-section" class="{{dosboxSize}} md-whiteframe-1dp" ng-init="initDosBox()">' +
+			'<script type="text/javascript" src="assets/lib/js-dos/js-dos.js"></script>' +
 			'<style type="text/css">' +
 				'.dosbox-overlay {background-image: url("{{game.img}}");}' +
 			'</style>' +
