@@ -55,10 +55,9 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
 					    	'</div>' +
 					    '</md-toolbar>' +
 					    '<md-dialog-content >' +
-							'<ol style="padding: 8px 24px;"><li>Go to Filehub site: <a href="/1FHtDQ8i5NFFeuo7Fux6TeLpwmmeUGvdc8">1FHtDQ8i5NFFeuo7Fux6TeLpwmmeUGvdc8</a></li>' +
-							'<li>Clone that site</li>' +
-							'<li>Add stuff</li>' +
-							'<li>Register site</li></ol>'+
+							'<ol style="padding: 8px 24px;"><li>click "new Filehub" and confirm to clone <img src="assets/img/step1.png"/></li>' +						
+							'<li>upload stuff on new filehub</li>' +
+							'<li>get back to register site. done!</li></ol>'+
 					    '</md-dialog-content>' +
 					'</md-dialog>';
 				// show dialog
