@@ -11,22 +11,21 @@ app.directive('nesEmulator', ['$location','$rootScope',
 		                "Working": [ ]
 		            })
 		        });
-
+		        // remove select options
+				nes.ui.romSelect.children().remove();
 				// nes file
-				var nesFile  = "/"+$scope.site_address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/uploads/games/"+$scope.game.file_name;
-				
-
-				// load nes
-				nes.ui.romSelect.children().remove();           
-				$('<option>'+nesFile+'</option>').attr("value", nesFile).appendTo(nes.ui.romSelect);                                						 
+				var nesFile  = "/"+$scope.page.site_info.address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/uploads/games/"+$scope.game.file_name;
+				// create select option
+				$('<option value="'+nesFile+'">'+$scope.game.title+'</option>').appendTo(nes.ui.romSelect);                                						 
+				// select rom
 				nes.ui.romSelect.val(nesFile);						
+				// load nes
 				nes.ui.loadROM();
 			};
 
-
 		};
 
-		var template = 	'<center ng-init="initNesEmulator()">' +
+		var template = 	'<center id="nes-emulator-container" ng-init="initNesEmulator()">' +
 						    '<div id="emulator"></div>' +
 						    '<div id="emcontrols" style="display: none">' +
 							    '<h2>Controls</h2>' +
@@ -78,6 +77,16 @@ app.directive('nesEmulator', ['$location','$rootScope',
 							        '</tr>' +
 							    '</table>' +
 						    '</div>' +
+							'<script src="assets/lib/games/nes/lib/dynamicaudio-min.js" type="text/javascript" charset="utf-8"></script>' +
+							'<script src="assets/lib/games/nes/nes.js" type="text/javascript" charset="utf-8"></script>' +
+							'<script src="assets/lib/games/nes/utils.js" type="text/javascript" charset="utf-8"></script>' +
+							'<script src="assets/lib/games/nes/cpu.js" type="text/javascript" charset="utf-8"></script>' +
+							'<script src="assets/lib/games/nes/keyboard.js" type="text/javascript" charset="utf-8"></script>' +
+							'<script src="assets/lib/games/nes/mappers.js" type="text/javascript" charset="utf-8"></script>' +
+							'<script src="assets/lib/games/nes/papu.js" type="text/javascript" charset="utf-8"></script>' +
+							'<script src="assets/lib/games/nes/ppu.js" type="text/javascript" charset="utf-8"></script>' +
+							'<script src="assets/lib/games/nes/rom.js" type="text/javascript" charset="utf-8"></script>' +
+							'<script src="assets/lib/games/nes/ui.js" type="text/javascript" charset="utf-8"></script>' +
 						'</center>';
 
 		return {

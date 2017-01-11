@@ -1555,4 +1555,18 @@ videogular .vg-error-message {
 #cpc-emulator-container .vertical .range {
   margin: -13px 13px 0 -30px;
 }
+#nes-emulator-container {
+  width: 512px;
+  margin: 0 auto;
+}
+#nes-emulator-container #emulator #nes-roms {
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+#nes-emulator-container #emulator #nes-roms select {
+  background: white;
+}
+#nes-emulator-container #emulator #nes-controls {
+  margin-bottom: 5px;
+}
 /** /EMULATORS **/
