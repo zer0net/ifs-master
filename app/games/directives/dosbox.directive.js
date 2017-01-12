@@ -1,5 +1,5 @@
-app.directive('dosbox', ['$location',
-	function($location) {
+app.directive('dosbox', ['$location','$timeout',
+	function($location,$timeout) {
 
 		var controller = function($scope,$element) {
 
@@ -17,6 +17,10 @@ app.directive('dosbox', ['$location',
 						console.log($scope.game.title + ' running...');
 						dosbox.run("/"+$scope.site_address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/uploads/games/"+$scope.game.zip_name, "./"+$scope.game.file_name);
 					}
+				});
+				$timeout(function () {
+					// run dosbox
+					$('#dosbox-start').trigger('click');
 				});
 			};
 
