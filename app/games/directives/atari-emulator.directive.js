@@ -13,8 +13,8 @@ app.directive('atariEmulator', ['$location','$timeout',
 			};
 		};
 
-		var template =  '<section id="javatari">' +
-							'<div style="margin: 30px auto 0; min-height: 594px;" ng-init="initAtariEmulator()">' +
+		var template =  '<section id="javatari" style="background:transparent;">' +
+							'<div style="margin:auto 0; min-height: 594px;" ng-init="initAtariEmulator()">' +
 							    '<div id="javatari-screen" style="margin: 0 auto; box-shadow: 2px 2px 10px rgb(60, 60, 60);"></div>' +
 							    '<div id="javatari-console-panel" style="margin: 0 auto; box-shadow: 2px 2px 10px rgb(60, 60, 60);"></div>' +
 							'</div>'+

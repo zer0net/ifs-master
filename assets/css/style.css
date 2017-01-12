@@ -182,6 +182,13 @@ section.container hr.divider {
 #hp-items-section .list-item .inner-wrap .item-img .game-genre.Arcade {
   background-color: green;
 }
+#hp-items-section .list-item .inner-wrap.itemLoaded {
+  border: 3px solid #32cf32;
+}
+#hp-items-section .list-item .inner-wrap.itemLoaded md-grid-tile-footer {
+  border: 3px solid #32cf32;
+  border-top: 0;
+}
 #hp-items-section .list-item md-grid-tile-footer {
   height: 120px;
   display: block;
