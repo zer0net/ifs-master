@@ -333,14 +333,29 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 		/* Explore filter*/
 			$scope.filterMediaType = function(type)
 			{
-				$('#filterMediaType').val(type);
-				$('#filterMediaType').trigger('input');				
+				$scope.filerRemove();
+				$('#filterMediaType').val(type);				
+				$('#filterMediaType').trigger('input');		
+				
 			}
-			$scope.filerMediaTypeRemove = function()
+
+			$scope.filterFileType = function(type)
+			{
+				$scope.filerRemove();
+				$('#filterFileType').val(type);			
+				$('#filterFileType').trigger('input');	
+			}
+
+			$scope.filerRemove = function()
 			{
 				$('#filterMediaType').val('');
+				$('#filterFileType').val('');
+
 				$('#filterMediaType').trigger('input');	
+				$('#filterFileType').trigger('input');
 			}
+			
+
 			
 			$scope.filerChannel = function(channel)
 			{
