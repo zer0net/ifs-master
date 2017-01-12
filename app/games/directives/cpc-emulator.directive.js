@@ -132,7 +132,7 @@ app.directive('cpcEmulator', ['$location','$rootScope','$timeout',
 							'<div id="status">Paused</div>' +
 							'<div class="control-panel">' +
 								'<select id="snapshot" rows="1" autocomplete="off" value="{{file}}">' +
-									'<option value="{{file}}">frank</option>' +
+									'<option value="{{file}}">{{game.title}}</option>' +
 								'</select>' +
 								'<div id="button-run" class="button-size1 disabled-button"><span class="guifx2">d </span> Resume</div>' +
 								'<div id="button-reset" title="Reset CPC" class="button-size1 disabled-button guifx2">q</div>' +
