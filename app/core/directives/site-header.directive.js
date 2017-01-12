@@ -71,9 +71,9 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
 					    	'</div>' +
 					    '</md-toolbar>' +
 					    '<md-dialog-content >' +
-							'<ol style="padding: 8px 24px;"><li>click<md-button  ng-click="handleCloneClick(ev)"> here </md-button> and confirm to clone </li>' +						
-							'<li>upload stuff on new filehub</li>' +
-							'<li>get back to register and add site. done!</li></ol>'+
+							'<ol style="padding: 8px 24px;"><li>click on button "new Filehub" below and confirm to create your filehub <br/><button  ng-click="handleCloneClick(ev)"> new Filehub </button> </li>' +						
+							'<li>upload stuff on your newly created filehub</li>' +
+							'<li>click "Register" button on header to add your hub.</li><li>done!</li></ol>'+
 					    '</md-dialog-content>' +
 					'</md-dialog>';
 				// show dialog
@@ -148,10 +148,17 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
           					'<input type="text" class="form-control" placeholder="Search" ng-model="ppFilter.title">'+
           					'<input type="text" class="form-control" ng-model="ppFilter.channel.address"  id="filterChannel" style="display:none">'+
           					'<input type="text" class="form-control" ng-model="ppFilter.media_type"  id="filterMediaType" style="display:none">'+
-          					 	
-	  						'<a ng-click="filterMediaType(\'game\')" style="color:#777; padding:10px 20px;" >GAME</a>'+  
+          					'<input type="text" class="form-control" ng-model="ppFilter.file_type"  id="filterFileType" style="display:none">'+
+          					'<div class="dropdown">'+
+          					  '<a ng-click="filterMediaType(\'game\')" style="color:#777; padding:10px 20px;" >GAME</a>'+
+          					  '<div class="dropdown-content">'+
+          					    '<ul><li><a ng-click="filterFileType(\'nes\')"> NES </a></li>'+
+          					    '<li><a ng-click="filterFileType(\'sna\')">CPC </a> </li>'+
+          					  '</div>'+
+          					'</div>'+
+						
 							'<a ng-click="filterMediaType(\'video\')" style="color: #777;padding:10px 20px;">VIDEO</a>'+   
-							'<a ng-click="filerMediaTypeRemove()" style="color: #777;padding:10px 20px;"><span class="glyphicon glyphicon-filter" style="text-decoration: line-through"></span></a>'+  												
+							'<a ng-click="filerRemove()" style="color: #777;padding:10px 20px;"><span class="glyphicon glyphicon-filter" style="text-decoration: line-through"></span></a>'+  												
 							
         					'</div>'+        					
       					'</form>'+
