@@ -283,10 +283,23 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 		      							item.img = '/'+$scope.site_address+'/merged-'+$scope.merger_name+'/'+item.channel.address+'/'+item.imgPath;
 		      						}else
 		      						{
-		      							if(item.file_type=='sna')
+		      							if(item.file_type=='nes')
+		      							{
+		      								item.img = '/'+$scope.site_address+'/assets/img/logo_nes.png';	
+		      							}
+		      							else if(item.file_type=='sna')
 		      							{
 		      								item.img = '/'+$scope.site_address+'/assets/img/logo_sna.jpg';	
-		      							}else
+		      							}
+		      							else if(item.file_type=='bin')
+		      							{
+		      								item.img = '/'+$scope.site_address+'/assets/img/logo_jatari.jpeg';	
+		      							}
+		      							else if(item.file_type=='zip')
+		      							{
+		      								item.img = '/'+$scope.site_address+'/assets/img/logo_dos.gif';	
+		      							}
+		      							else
 		      							{
 		      								item.img = '/'+$scope.site_address+'/assets/img/logo.png';
 		      							}
