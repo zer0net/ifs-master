@@ -20,7 +20,8 @@ app.directive('dosbox', ['$location','$timeout',
 				});
 				$timeout(function () {
 					// run dosbox
-					$('#dosbox-start').trigger('click');
+					console.log(dosbox);
+					dosbox.ui.start[0].click();
 				});
 			};
 
