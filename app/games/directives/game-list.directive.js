@@ -19,7 +19,7 @@ app.directive('gameList', ['$location',
 			}
 		};
 
-		var template =  	'<div class="container-fluid">'+
+		var template =  '<div class="container-fluid">'+
 							'<md-grid-list md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="5" ' +
 						    'sm-row-height="3:4" md-row-height="3:3" ' +
 						    'md-gutter="12px" md-gutter-gt-sm="8px">' +
@@ -27,7 +27,7 @@ app.directive('gameList', ['$location',
 							'<md-grid-tile class="list-item" dir-paginate="game in games|filter:ppFilter| orderBy:\'-date_added\' |itemsPerPage:15 track by $index"  ng-class="chooseStyle(game.x_is_load)">' +
 								'<div class="inner-wrap md-whiteframe-1dp" ng-init="renderGame(game)">' +
 									'<!-- img -->' +
-									'<div class="item-img md-whiteframe-1dp" style="background-position: center;background-repeat: no-repeat;background-size: contain;background-image:url(\'{{game.img}}\');">' +
+									'<div class="item-img md-whiteframe-1dp" style="background-position: center;background-repeat: no-repeat;background-size: {{game.imgSize}};background-image:url(\'{{game.img}}\');">' +
 										'<a href="/{{site_address}}/view.html?type=game-c={{game.channel.address}}g={{game.game_id}}z={{game.zip_name}}f={{game.file_name}}"><span ng-if="game.genre" ng-bind="game.genre" class="game-genre {{game.genre}}"></span></a>' +
 									'</div>' +
 									'<!-- img -->' +
