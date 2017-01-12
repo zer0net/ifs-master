@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html ng-app="PPLOAD_MASTER" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="keywords" content="cpcbox, amstrad cpc, amstrad, cpc, schneider cpc, cpc 464, cpc 664, cpc 6128, emulation, emulator, emu, javascript" />
+		<meta name="description" content="CPCBox is an Amstrad CPC computer emulator. Written in Javascript, it runs directly on your browser. Play your favorite 80's games online, let's go 8-bit!" />
+		<link rel="icon" href="img/favicon32.ico" type="image/x-icon" />
+		<title>CPCBox - Amstrad CPC emulator in Javascript</title>
+		<!-- lib -->
+		<!-- app -->
+		<!-- jquery -->
+		<link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+	</head>
+<body class="ng-cloack" ng-controller="MainCtrl" ng-init="init()">
+
+	<main ng-hide="loading" item-view ng-init="initItemView()">
+		<!-- emulator -->
+		<cpc-emulator ng-if="item_type === 'game'"></cpc-emulator>
+	</main>
+	<!-- /JS -->  
+
+		<!-- zeronet -->
+		<script type="text/javascript" src="assets/lib/zeronet/Class.js"></script>
+		<script type="text/javascript" src="assets/lib/zeronet/ZeroFrame.js"></script>
+		<script type="text/javascript" src="assets/lib/zeronet/ZeroChat.js"></script>
+
+		<!-- jquery -->
+		<script type="text/javascript" src="assets/lib/jquery/jquery.min.js"></script>
+
+		<!-- angular -->		
+		<script type="text/javascript" src="assets/lib/angular/angular.min.js"></script>
+	    <script type="text/javascript" src="assets/lib/angular/angular-route.min.js"></script>
+	    <script type="text/javascript" src="assets/lib/angular/angular-animate.min.js"></script>
+	    <script type="text/javascript" src="assets/lib/angular/angular-aria.min.js"></script>
+		<script type="text/javascript" src="assets/lib/angular-sanitize/angular-sanitize.min.js"></script>
+		<script type="text/javascript" src="assets/lib/angular-material/angular-material.min.js"></script>
+		<script type="text/javascript" src="assets/lib/moment/moment.js"></script>
+		<script type="text/javascript" src="assets/lib/angular-moment/angular-moment.min.js"></script>
+	    <script type="text/javascript" src="assets/lib/identicon/pnglib.js"></script>
+	    <script type="text/javascript" src="assets/lib/identicon/identicon.js"></script>
+	    <script type="text/javascript" src="assets/lib/angular-identicon/angular-identicon.min.js"></script>
+	    <script type="text/javascript" src="assets/lib/angular-fullscreen/angular-fullscreen.js"></script>
+
+		<!-- videogular -->
+		<script type="text/javascript" src="assets/lib/videos/videogular/videogular.js"></script>
+		<script type="text/javascript" src="assets/lib/videos/videogular-controls/vg-controls.js"></script>
+		<script type="text/javascript" src="assets/lib/videos/videogular-buffering/vg-buffering.js"></script>
+		<script type="text/javascript" src="assets/lib/videos/videogular-overlay-play/vg-overlay-play.js"></script>
+		<script type="text/javascript" src="assets/lib/videos/videogular-poster/vg-poster.js"></script>
+
+		<!-- dosbox -->
+		<script type="text/javascript" src="assets/lib/js-dos/js-dos.js"></script>
+
+		<!-- nes emulator -->
+		<script src="assets/lib/games/nes/lib/dynamicaudio-min.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="assets/lib/games/nes/nes.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="assets/lib/games/nes/utils.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="assets/lib/games/nes/cpu.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="assets/lib/games/nes/keyboard.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="assets/lib/games/nes/mappers.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="assets/lib/games/nes/papu.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="assets/lib/games/nes/ppu.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="assets/lib/games/nes/rom.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="assets/lib/games/nes/ui.js" type="text/javascript" charset="utf-8"></script>
+
+		<!-- app core -->
+		<script type="text/javascript" src="app/application.js"></script>
+		<script type="text/javascript" src="app/core/controllers/main.ctrl.js"></script>
+		<script type="text/javascript" src="app/core/directives/site-config.directive.js"></script>		
+		<script type="text/javascript" src="app/core/directives/site-header.directive.js"></script>		
+		<script type="text/javascript" src="app/core/directives/item-view.directive.js"></script>
+		<script type="text/javascript" src="app/core/directives/comments.directive.js"></script>
+		<script type="text/javascript" src="app/core/directives/votes.directive.js"></script>
+		<script type="text/javascript" src="app/core/directives/views.directive.js"></script>
+		<script type="text/javascript" src="app/core/filters/file-size.filter.js"></script>
+		<script type="text/javascript" src="app/core/util/dirPagination.js"></script>
+
+		<!-- app games -->
+		<script type="text/javascript" src="app/games/directives/game-view.directive.js"></script>
+		<script type="text/javascript" src="app/games/directives/dosbox.directive.js"></script>
+		<script type="text/javascript" src="app/games/directives/nes-emulator.directive.js"></script>
+		<script type="text/javascript" src="app/games/directives/cpc-emulator.directive.js"></script>
+
+		<!-- app videos -->
+		<script type="text/javascript" src="app/videos/directives/video-view.directive.js"></script>
+		<script type="text/javascript" src="app/core/directives/channel-register.directive.js"></script>	
+
+	</body>
+</html>
