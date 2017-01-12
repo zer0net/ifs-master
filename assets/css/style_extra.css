@@ -76,14 +76,3 @@ md-dialog.fullscreen-dialog {
     border-radius: 0;
 }
 
-.navbar-brand
-{
-    color:#fff !important;
-}
-.navbar-nav >li > a {
-    color:#fff !important;
-}
-
-.navbar-nav >li > a:hover{
-    color:#a9a9a9 !important;
-}

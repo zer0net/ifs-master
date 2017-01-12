@@ -32,29 +32,18 @@
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
-            <li class="sidebar-brand" style="font-size: 20px; font-weight: bold; color: #fff; ">
-                
-                    EXPLORE  <span class="glyphicon glyphicon-refresh"  ng-click="filerMediaTypeRemove()" ></span>
-                
-            </li>
-            <li ng-if="games" ng-click="filterMediaType('game')">
-                <span style="color: #fff">Games&nbsp;[{{games.length}}]</span>
-            </li>
-            <li ng-if="videos" ng-click="filterMediaType('video')">
-                <span style="color: #fff">Videos&nbsp;[{{videos.length}}]</span>
-            </li>    
           
-           <div channel-register ng-if="channels.length > 0"  style="border-top: 1px solid #fff">     
+           <div channel-register ng-if="channels.length > 0">     
             
-           <li class="sidebar-brand" style="font-size: 20px; font-weight: bold; color: #fff; ">               
+           <li class="sidebar-brand" style="font-size: 22px; font-weight: bold; color: #5e5e5e; padding-bottom: 20px; padding-top: 20px ">               
                    Channels  <span class="glyphicon glyphicon-refresh"  ng-click="filerChannelRemove()" ></span>                              
            </li>      
                 <li ng-repeat="channel in channels | orderBy:'-date_added'" ng-init="getChannelInfo(channel)"  ng-click="filerChannel(channel)" >                                                                     
-                    
-                <img ng-if="channel.logo" ng-src="/{{channel_master_address}}/merged-{{merger_name}}/{{channel.channel_address}}/uploads/images/{{channel.logo}}" class="imgFilehubLogo" />   
-                <img ng-hide="channel.logo" src="assets/img/x-avatar.png" class="imgFilehubLogo"/>          
-                
-                <a href="#">{{channel.channel_name}}&nbsp;[{{channel.filesLen}}]</a>                            
+                <div ng-if="channel.filesLen">
+                    <img ng-if="channel.logo" ng-src="/{{channel_master_address}}/merged-{{merger_name}}/{{channel.channel_address}}/uploads/images/{{channel.logo}}" class="imgFilehubLogo" />   
+                    <img ng-hide="channel.logo" src="assets/img/x-avatar.png" class="imgFilehubLogo"/>                              
+                    <a href="#">{{channel.channel_name}}&nbsp;[{{channel.filesLen}}]</span></a>                 
+                </div>           
                 </li>            
             </div> 
         </ul>                              

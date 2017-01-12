@@ -15,6 +15,26 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
 			$scope.answer = function(answer) {
 				$mdDialog.hide(answer);
 			};
+
+			$scope.handleCloneClick = function(ev)
+			{				
+
+		    	if (Page.site_info.settings.permissions.indexOf("ADMIN") > -1){
+
+		    		Page.cmd("siteClone", {
+				        "address": "1FHtDQ8i5NFFeuo7Fux6TeLpwmmeUGvdc8"
+				      });
+
+		    	} else {
+		    		// if not, ask user for ADMIN permission
+					Page.cmd("wrapperPermissionAdd", "ADMIN", function() {
+						Page.cmd("siteClone", {
+				        "address": "1FHtDQ8i5NFFeuo7Fux6TeLpwmmeUGvdc8"
+				      });						
+					});
+		    	}				
+			    return false;
+			}
 		};
 
 		// header directive controller
@@ -32,7 +52,6 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
 			    };			    
 			}
 
-			
 		    // show info modal
 			$scope.showInfoModal = function(ev) {
 				// dialog vars
@@ -41,23 +60,20 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
 			    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
 			    // dialog template
 			    var dialogTemplate = 
-			    	'<md-dialog class="fullscreen-dialog" aria-label="Mango (Fruit)">' +
+			    	'<md-dialog class="fullscreen-dialog" >' +
 					    '<md-toolbar>' +
 					    	'<div class="md-toolbar-tools">' +
 					    	  '<md-button class="md-icon-button" ng-click="hide()">'+
 					            '<span class="glyphicon glyphicon-remove"></span>'+
 					          '</md-button>'+
 						        '<h2>How to upload?</h2>' +
-						        '<span flex></span>' +
-						        '<md-button class="md-icon-button" ng-click="hide()">' +
-						            '<md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>' +
-						        '</md-button>' +
+						        '<span flex></span>' +						        
 					    	'</div>' +
 					    '</md-toolbar>' +
 					    '<md-dialog-content >' +
-							'<ol style="padding: 8px 24px;"><li>click "new Filehub" and confirm to clone <img src="assets/img/step1.png"/></li>' +						
+							'<ol style="padding: 8px 24px;"><li>click<md-button  ng-click="handleCloneClick(ev)"> here </md-button> and confirm to clone </li>' +						
 							'<li>upload stuff on new filehub</li>' +
-							'<li>get back to register site. done!</li></ol>'+
+							'<li>get back to register and add site. done!</li></ol>'+
 					    '</md-dialog-content>' +
 					'</md-dialog>';
 				// show dialog
@@ -69,15 +85,14 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
 					clickOutsideToClose:true,
 					fullscreen: true,
 					locals:{
-						items:{}
+						items:null
 					}		
 
 			    });
 			};
 			
 			// open site config dialog
-			$scope.openSiteConfigDialog = function(ev){
-				console.log($scope.config);
+			$scope.openSiteConfigDialog = function(ev){				
 				// dialog vars
 				$scope.status = '';
 				$scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
@@ -133,10 +148,14 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
           					'<input type="text" class="form-control" placeholder="Search" ng-model="ppFilter.title">'+
           					'<input type="text" class="form-control" ng-model="ppFilter.channel.address"  id="filterChannel" style="display:none">'+
           					'<input type="text" class="form-control" ng-model="ppFilter.media_type"  id="filterMediaType" style="display:none">'+
+          					 	
+	  						'<a ng-click="filterMediaType(\'game\')" style="color:#777; padding:10px 20px;" >GAME</a>'+  
+							'<a ng-click="filterMediaType(\'video\')" style="color: #777;padding:10px 20px;">VIDEO</a>'+   
+							'<a ng-click="filerMediaTypeRemove()" style="color: #777;padding:10px 20px;"><span class="glyphicon glyphicon-filter" style="text-decoration: line-through"></span></a>'+  												
+							
         					'</div>'+        					
       					'</form>'+
-  						'<ul class="nav navbar-nav navbar-right">'+
-  						'<li><a ng-click="handleCloneClick(ev)">NEW FILEHUB</a></li>'+
+  						'<ul class="nav navbar-nav navbar-right">'+  	
   						'<li><a ng-click="showInfoModal(ev)" >FAQ</a></li>'+  
 						'<li><a href="register.html">REGISTER</button></a></li>'+  												
 						'</ul>'+    					

@@ -13,11 +13,11 @@ app.directive('channelRegister', [
 			// get channel info
 			$scope.getChannelInfo = function(channel){
 				// get channel's content.json
-				var inner_path = 'merged-'+$scope.merger_name+'/'+channel.channel_address+'/content.json';
+
+				var inner_path = 'merged-'+$scope.merger_name+'/'+channel.channel_address+'/content.json';				
 				Page.cmd("fileGet",{"inner_path":inner_path},function(data){
 					// check if site has content.json
-				
-					if (!data){
+				   if (!data){
 						console.log('No content.json found for '+$scope.channel_address+'!');
 					} else {
 						data = JSON.parse(data);
