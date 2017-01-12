@@ -226,11 +226,11 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 			$scope.getChannel = function(channel,cIndex){
 				// get channel.json
 				var inner_path = 'merged-'+$scope.merger_name+'/'+channel.address+'/data/channel.json';
-				console.log(inner_path);					
+								
 				Page.cmd("fileGet",{"inner_path":inner_path},function(data){
 					// assign games
 					data = JSON.parse(data);	
-					console.log(data);					
+				
 					// if channel has data
 					if (data){
 						// get channel items
@@ -247,11 +247,9 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 	// get channels items
 			$scope.addChannelItems = function(data,channel,cIndex){
 				
-				//console.log("----------------begin");
-				//console.log(channel.address);
 				Page.cmd("optionalFileList", { address: channel.address, limit:2000 }, function(site_files){
 				
-				console.log(site_files);
+				
 		      		for (var media_type in data){
 
 		      			if (Object.prototype.toString.call(data[media_type]) === '[object Array]'){
@@ -280,28 +278,7 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 		      						// render item's img url
 		      						if(item.imgPath) {
 		      							item.img = '/'+$scope.site_address+'/merged-'+$scope.merger_name+'/'+item.channel.address+'/'+item.imgPath;
-<<<<<<< HEAD
-		      						}else
-		      						{
-		      							if(item.file_type=='nes')
-		      							{
-		      								item.img = '/'+$scope.site_address+'/assets/img/logo_nes.png';	
-		      							}
-		      							else if(item.file_type=='sna')
-		      							{
-		      								item.img = '/'+$scope.site_address+'/assets/img/logo_sna.jpg';	
-		      							}
-		      							else if(item.file_type=='bin')
-		      							{
-		      								item.img = '/'+$scope.site_address+'/assets/img/logo_jatari.jpeg';	
-		      							}
-		      							else if(item.file_type=='zip')
-		      							{
-		      								item.img = '/'+$scope.site_address+'/assets/img/logo_dos.gif';	
-		      							}
-		      							else
-		      							{
-=======
+
 		      						} else {
 		      							if (item.file_type === 'sna') {
 		      								item.img = '/'+$scope.site_address+'/assets/img/logo_sna.jpg';
@@ -313,8 +290,7 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 		      								item.img = '/'+$scope.site_address+'/assets/img/logo_atari.gif';
 		      								item.imgSize = 'contain';
 		      							} else if (item.file_type === 'nes'){
->>>>>>> 665473e881ab9942f80313a225c4a37ece6c7da3
-		      								item.img = '/'+$scope.site_address+'/assets/img/logo.png';
+		      								item.img = '/'+$scope.site_address+'/assets/img/logo_nes.png';
 		      								item.imgSize = 'contain';
 		      							}
 		      						}
