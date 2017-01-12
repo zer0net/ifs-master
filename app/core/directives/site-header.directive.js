@@ -152,8 +152,10 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
           					'<div class="dropdown">'+
           					  '<a ng-click="filterMediaType(\'game\')" style="color:#777; padding:10px 20px;" >GAME</a>'+
           					  '<div class="dropdown-content">'+
-          					    '<ul><li><a ng-click="filterFileType(\'nes\')"> NES </a></li>'+
-          					    '<li><a ng-click="filterFileType(\'sna\')">CPC </a> </li>'+
+          					    '<ul><li><a ng-click="filterFileType(\'nes\')"> NINTENDO </a></li>'+
+          					    '<li><a ng-click="filterFileType(\'sna\')">AMSTRAD </a> </li>'+
+          					    '<li><a ng-click="filterFileType(\'zip\')">DOS </a> </li>'+
+          					    '<li><a ng-click="filterFileType(\'bin\')">ATARI</a> </li>'+
           					  '</div>'+
           					'</div>'+
 						
