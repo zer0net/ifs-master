@@ -278,9 +278,9 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 		      						// genereate unique item id
 		      						item.uid = item.channel.address + item.date_added;															
 		      						// render item's img url
-		      						if(item.imgPath)
-		      						{
+		      						if(item.imgPath) {
 		      							item.img = '/'+$scope.site_address+'/merged-'+$scope.merger_name+'/'+item.channel.address+'/'+item.imgPath;
+<<<<<<< HEAD
 		      						}else
 		      						{
 		      							if(item.file_type=='nes')
@@ -301,9 +301,22 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 		      							}
 		      							else
 		      							{
+=======
+		      						} else {
+		      							if (item.file_type === 'sna') {
+		      								item.img = '/'+$scope.site_address+'/assets/img/logo_sna.jpg';
+		      								item.imgSize = 'cover';
+		      							} else if (item.file_type === 'zip'){
+		      								item.img = '/'+$scope.site_address+'/assets/img/logo_dos.gif';
+		      								item.imgSize = 'contain';
+		      							} else if (item.file_type === 'bin'){
+		      								item.img = '/'+$scope.site_address+'/assets/img/logo_atari.gif';
+		      								item.imgSize = 'contain';
+		      							} else if (item.file_type === 'nes'){
+>>>>>>> 665473e881ab9942f80313a225c4a37ece6c7da3
 		      								item.img = '/'+$scope.site_address+'/assets/img/logo.png';
+		      								item.imgSize = 'contain';
 		      							}
-		      							
 		      						}
 
 		      						// apply to scope items array						
