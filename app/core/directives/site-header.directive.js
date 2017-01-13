@@ -3,7 +3,7 @@ app.directive('siteHeader', ['$rootScope','$mdDialog', '$mdMedia',
 
 	
 		// dialog controller
-		var DialogController= function($rootScope,$scope, $mdDialog, items) {
+		var DialogController= function($scope, $mdDialog, items) {
 			// items
 			$scope.items = items;			
 			$scope.hide = function() {
@@ -16,15 +16,12 @@ app.directive('siteHeader', ['$rootScope','$mdDialog', '$mdMedia',
 				$mdDialog.hide(answer);
 			};
 
-			$scope.handleCloneClick = function(ev)
-			{				
-				console.log($rootScope);
-		    	 $rootScope.cloneFilehub(ev);
-			}
 		};
 
 		// header directive controller
-		var controller = function($scope,$element) {
+		var controller = function($rootScope,$scope,$element) {
+
+			$rootScope.$broadcast("handleCloneClick");
 
 			$scope.toggleMenu = function(ev)
 			{
@@ -37,6 +34,8 @@ app.directive('siteHeader', ['$rootScope','$mdDialog', '$mdMedia',
 			    	$("#navbar-fixed-top").css({left:0});
 			    };			    
 			}
+
+			
 
 		    // show info modal
 			$scope.showInfoModal = function(ev) {

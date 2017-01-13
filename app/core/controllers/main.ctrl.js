@@ -1,5 +1,5 @@
-app.controller('MainCtrl', ['$rootscope','$scope','$location','$mdDialog', '$mdMedia',
-	function($rootscope,$scope,$location,$mdDialog,$mdMedia) {
+app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdMedia',
+	function($rootScope,$scope,$location,$mdDialog,$mdMedia) {
 
 		/* CONFIG */
 			// move config merger_name to content.json			
@@ -133,9 +133,7 @@ app.controller('MainCtrl', ['$rootscope','$scope','$location','$mdDialog', '$mdM
 
 	    	$scope.cloneFilehub = function(ev)
 	    	{				
-
 	        	if (Page.site_info.settings.permissions.indexOf("ADMIN") > -1){
-
 	        		Page.cmd("siteClone", {
 	    		        "address": "1FHtDQ8i5NFFeuo7Fux6TeLpwmmeUGvdc8"
 	    		      });
@@ -150,6 +148,8 @@ app.controller('MainCtrl', ['$rootscope','$scope','$location','$mdDialog', '$mdM
 	        	}				
 	    	    return false;
 	    	}
+
+	    	$rootScope.$on('handleCloneClick',function(ev){ $scope.cloneFilehub(ev) });
 
 			// get channels
 			$scope.getChannels = function(){				
