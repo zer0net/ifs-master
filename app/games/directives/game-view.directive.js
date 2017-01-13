@@ -56,7 +56,6 @@ app.directive('gameView', ['$location','$rootScope',
 					} else {
 						console.log("file not found!");
 					}
-					$scope.$apply();					
 				};
 				xhttp.open("GET", inner_path, true);
 				xhttp.send();
@@ -65,9 +64,10 @@ app.directive('gameView', ['$location','$rootScope',
 		};
 
 
-		var template = '<md-content flex="65" class="item-view" ng-if="games" ng-init="initGameView()">' +
-							'<div ng-if="error_msg" ng-hide="game" ng-bind="error_msg" style="font-weight: bold;text-align: center;"></div>' +
-							'<div ng-if="game">' +
+		var template = '<div class="item-view" layout="row"  layout-padding ng-if="games" ng-init="initGameView()">' +
+							'<div ng-if="error_msg" flex="100" ng-hide="game" ng-bind="error_msg" style="font-weight: bold;text-align: center;"></div>' +
+							'<!-- game -->' +
+							'<md-content style="background-color:transparent;" flex="65" ng-if="game">' +
 								'<!-- dosbox -->' +
 								'<dosbox ng-if="game.file_type === \'zip\'"></dosbox>' +
 								'<!-- /dosbox -->' +
@@ -82,7 +82,7 @@ app.directive('gameView', ['$location','$rootScope',
 								'<!-- atari -->' +
 								'<hr class="divider"/>' +
 								'<!-- info -->' +
-								'<section ng-if="game" class="section md-whiteframe-1dp item-info">' +
+								'<section class="section md-whiteframe-1dp item-info">' +
 									'<div class="section-header item-info-header">' +
 										'<h3 ng-bind="game.title"></h3>' +
 										'<a href="/{{game.channel.address}}">{{game.channel.content.title}}</a>' +
@@ -115,7 +115,7 @@ app.directive('gameView', ['$location','$rootScope',
 								'<!-- /info -->' +
 								'<hr class="divider"/>' +
 								'<!-- comments -->' +
-								'<comments ng-if="game" ng-init="getComments(game)">' +
+								'<comments ng-init="getComments(game)">' +
 									'<div class="item-comments">' +
 										'<!-- comment form -->' +
 										'<section class="comment-form section md-whiteframe-1dp"  style="margin-top:16px;">' +
@@ -162,8 +162,28 @@ app.directive('gameView', ['$location','$rootScope',
 									'</div>' +
 								'</comments>' +
 								'<!-- /comments -->' +
-							'</div>' +
-						'</md-content>';
+							'</md-content>' +
+							'<!-- /game -->' +
+							'<!-- game list -->' +
+							'<md-content class="game-list" flex="35" ng-if="game">' +
+								'<div class="md-whiteframe-1dp" layout="column">' +
+									'<ul>' +
+								    	'<li ng-repeat="game in games|limitTo:15 | orderBy:\'-date_added\' track by $index" layout="row" layout-padding>'+
+											'<figure flex="35" class="game-img" style="background-position: center;background-repeat: no-repeat;background-size: contain;background-image:url(\'{{game.img}}\');">' +
+												'<a href="/{{site_address}}/view.html?type=game-c={{game.channel.address}}g={{game.game_id}}z={{game.zip_name}}f={{game.file_name}}"></a>' +
+											'</figure>' +
+											'<div flex="65" class="game-info">' +
+									    		'<h3><a href="/{{site_address}}/view.html?type=game-c={{game.channel.address}}g={{game.game_id}}z={{game.zip_name}}f={{game.file_name}}">{{game.title}}</a></h3>' +
+									    		'<span><b>size:</b> {{game.file_size|filesize}}</span><br/>' +
+									    		'<span><b>date added:</b> <span am-time-ago="game.date_added"></span></span>' +
+									    	'</div>' +
+									    	'<hr/>' +
+								    	'</li>' +
+									'</ul>' +
+								'</div>' +
+							'</md-content>' +
+							'<!-- /game list -->' +
+						'</div>';
 
 
 		return {
