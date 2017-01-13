@@ -1,9 +1,9 @@
-app.directive('siteHeader', ['$mdDialog', '$mdMedia',
-	function($mdDialog,$mdMedia) {		
+app.directive('siteHeader', ['$rootScope','$mdDialog', '$mdMedia',
+	function($rootScope,$mdDialog,$mdMedia) {		
 
 	
 		// dialog controller
-		var DialogController= function($scope, $mdDialog,items) {
+		var DialogController= function($rootScope,$scope, $mdDialog, items) {
 			// items
 			$scope.items = items;			
 			$scope.hide = function() {
@@ -18,22 +18,8 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia',
 
 			$scope.handleCloneClick = function(ev)
 			{				
-
-		    	if (Page.site_info.settings.permissions.indexOf("ADMIN") > -1){
-
-		    		Page.cmd("siteClone", {
-				        "address": "1FHtDQ8i5NFFeuo7Fux6TeLpwmmeUGvdc8"
-				      });
-
-		    	} else {
-		    		// if not, ask user for ADMIN permission
-					Page.cmd("wrapperPermissionAdd", "ADMIN", function() {
-						Page.cmd("siteClone", {
-				        "address": "1FHtDQ8i5NFFeuo7Fux6TeLpwmmeUGvdc8"
-				      });						
-					});
-		    	}				
-			    return false;
+				console.log($rootScope);
+		    	 $rootScope.cloneFilehub(ev);
 			}
 		};
 

@@ -1,5 +1,5 @@
-app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
-	function($scope,$location,$mdDialog,$mdMedia) {
+app.controller('MainCtrl', ['$rootscope','$scope','$location','$mdDialog', '$mdMedia',
+	function($rootscope,$scope,$location,$mdDialog,$mdMedia) {
 
 		/* CONFIG */
 			// move config merger_name to content.json			
@@ -130,6 +130,26 @@ app.controller('MainCtrl', ['$scope','$location','$mdDialog', '$mdMedia',
 					});
 				});
 		    };		    
+
+	    	$scope.cloneFilehub = function(ev)
+	    	{				
+
+	        	if (Page.site_info.settings.permissions.indexOf("ADMIN") > -1){
+
+	        		Page.cmd("siteClone", {
+	    		        "address": "1FHtDQ8i5NFFeuo7Fux6TeLpwmmeUGvdc8"
+	    		      });
+
+	        	} else {
+	        		// if not, ask user for ADMIN permission
+	    			Page.cmd("wrapperPermissionAdd", "ADMIN", function() {
+	    				Page.cmd("siteClone", {
+	    		        "address": "1FHtDQ8i5NFFeuo7Fux6TeLpwmmeUGvdc8"
+	    		      });						
+	    			});
+	        	}				
+	    	    return false;
+	    	}
 
 			// get channels
 			$scope.getChannels = function(){				
