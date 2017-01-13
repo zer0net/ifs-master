@@ -149,7 +149,9 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 	    	    return false;
 	    	}
 
-	    	$rootScope.$on('handleCloneClick',function(ev){ $scope.cloneFilehub(ev) });
+	    	$rootScope.$on('handleCloneClick',function(ev,mass){ 
+	    		$scope.cloneFilehub(ev) 
+	    	});
 
 			// get channels
 			$scope.getChannels = function(){				

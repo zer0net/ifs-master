@@ -16,13 +16,17 @@ app.directive('siteHeader', ['$rootScope','$mdDialog', '$mdMedia',
 				$mdDialog.hide(answer);
 			};
 
+			$scope.handleCloneClick = function() {
+		    	$rootScope.$broadcast('handleCloneClick');
+			};
+
+
 		};
 
 		// header directive controller
 		var controller = function($rootScope,$scope,$element) {
 
-			$rootScope.$broadcast("handleCloneClick");
-
+		
 			$scope.toggleMenu = function(ev)
 			{
 				ev.preventDefault();
