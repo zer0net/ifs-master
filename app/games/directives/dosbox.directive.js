@@ -8,7 +8,7 @@ app.directive('dosbox', ['$location','$timeout',
 				// dosbox size
 				$scope.dosboxSize = 'normal';
 				// emulator status 
-				$scope.emulator_status = 'Downloading ...';	
+				$scope.emulator_status = 'Loading ...';	
 				// dosbox config
 				var dosbox = new Dosbox({
 					id: "dosbox",
