@@ -14,6 +14,15 @@ app.directive('gameView', ['$location',
 					if (game.game_id === gameId && game.channel.address === channelId){
 						// apply game to scope
 						$scope.game = game;
+						// get file info
+						Page.cmd("optionalFileList", { address: $scope.game.channel.address, limit:2000 }, function(site_files){
+							site_files.forEach(function(site_file){
+								if (site_file.inner_path === $scope.game.path){
+									$scope.game.site_file = site_file;
+								}
+							});
+						});
+
 					}
 				});
 			};
@@ -40,9 +49,8 @@ app.directive('gameView', ['$location',
 								'<div class="section-header item-info-header">' +
 									'<h3 ng-bind="game.title"></h3>' +
 									'<a href="/{{game.channel.address}}">{{game.channel.content.title}}</a>' +
-									'<div class="item-views" views ng-init="getViews(game)">' +
-										'<!--<span>{{game.views.length}} Views</span>-->' +
-										'<span>{{game.channel.peers}} Peers </span>' +
+									'<div class="item-views">' +
+										'<span>{{game.site_file.peers}} Peers </span>' +
 									'</div>' +
 								'</div>' +
 								'<hr/>' +
