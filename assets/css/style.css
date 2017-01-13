@@ -152,6 +152,9 @@ section.container hr.divider {
   -o-transition: all 0.2s ease-out;
   transition: all 0.2s ease-out;
 }
+main {
+  max-width: 100% !important;
+}
 /** /TEMPLATE **/
 /** PAGES **/
 /* home */
