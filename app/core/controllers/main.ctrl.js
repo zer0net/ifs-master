@@ -125,27 +125,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 						$scope.getChannels();
 					});
 				});
-		    };		    
-
-	    	$scope.cloneFilehub = function(ev)
-	    	{				
-	        	if (Page.site_info.settings.permissions.indexOf("ADMIN") > -1){
-	        		Page.cmd("siteClone", {
-	    		        "address": "1FHtDQ8i5NFFeuo7Fux6TeLpwmmeUGvdc8"
-	    		      });
-
-	        	} else {
-	        		// if not, ask user for ADMIN permission
-	    			Page.cmd("wrapperPermissionAdd", "ADMIN", function() {
-	    				Page.cmd("siteClone", {
-	    		        "address": "1FHtDQ8i5NFFeuo7Fux6TeLpwmmeUGvdc8"
-	    		      });						
-	    			});
-	        	}				
-	    	    return false;
-	    	}
-
-	    	$rootScope.$on('handleCloneClick',function(ev){ $scope.cloneFilehub(ev) });
+		    };
 
 			// get channels
 			$scope.getChannels = function(){				
@@ -332,58 +312,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			};
 
 		/* /INIT SITE */
-		
-		/* Explore filter*/
-			$scope.filterMediaType = function(type)
-			{
-				$scope.filerRemove();
-				$('#filterMediaType').val(type);				
-				$('#filterMediaType').trigger('input');		
-				
-			}
-
-			$scope.filterFileType = function(type)
-			{
-				$scope.filerRemove();
-				$('#filterFileType').val(type);			
-				$('#filterFileType').trigger('input');	
-			}
-
-			$scope.filerRemove = function()
-			{
-				$('#filterMediaType').val('');
-				$('#filterFileType').val('');
-
-				$('#filterMediaType').trigger('input');	
-				$('#filterFileType').trigger('input');
-			}
-			
-
-			
-			$scope.filerChannel = function(channel)
-			{
-
-				$('#filterChannel').val(channel.channel_address);
-				$('#filterChannel').trigger('input');
-				var imgSrc = '/'+$scope.channel_master_address+'/merged-'+$scope.merger_name+'/'+channel.channel_address+'/uploads/images/'+channel.logo;
-				if(channel.logo)
- 				{                
-					$('#channelInfo').html('<div class="description"><span><img src='+imgSrc+' class="imgFilehubLogo imgFilehubLogoBig"></img></span><span class="">'+channel.games.length+' games '+ channel.videos.length+' videos </span></div>');
-				}else
-				{
-					$('#channelInfo').html('<div class="description"><img src="assets/img/x-avatar.png" class="imgFilehubLogo imgFilehubLogoBig"/><span class="">'+channel.games.length+' games '+ channel.videos.length+' videos </span></div>');
-					          
-				}
-				
-			}
-			$scope.filerChannelRemove = function()
-			{
-				$('#filterChannel').val('');
-				$('#filterChannel').trigger('input');				
-				$('#channelInfo').html('');			
-			}
-			
-			
 
 		/* UI */
 
@@ -420,6 +348,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			    }
 			};
 
+			// clone file hub
 			$scope.cloneFileHub = function(){
 				if (Page.site_info.settings.permissions.indexOf("ADMIN") > -1){
 		    		Page.cmd("siteClone", {
@@ -434,6 +363,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			    return false;
 			};
 
+			// on clone file hub
 			$rootScope.$on('onCloneFileHub',function(event,mass){
 				$scope.cloneFilehub();
 			});
