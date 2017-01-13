@@ -363,7 +363,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// on clone file hub
 			$rootScope.$on('onCloneFileHub',function(event,mass){
-				$scope.cloneFilehub();
+				$scope.cloneFileHub();
 			});
 
 			// toggle menu
