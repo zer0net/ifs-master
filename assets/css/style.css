@@ -362,7 +362,7 @@ section.container hr.divider {
   float: left;
   margin: 0 10px;
 }
-#game-list-section {
+.game-list-section {
   background-color: transparent;
 }
 /* /home */
