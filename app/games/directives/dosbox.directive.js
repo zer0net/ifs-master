@@ -3,31 +3,12 @@ app.directive('dosbox', ['$location','$timeout',
 
 		var controller = function($scope,$element) {
 
-			// init dosbox
+			// run dosbox
 			$scope.initDosBox = function(){
-				console.log('hi');
-				// inner path
-				var inner_path = "merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/uploads/games/"+$scope.game.zip_name;
 				// dosbox size
 				$scope.dosboxSize = 'normal';
 				// emulator status 
-				$scope.emulator_status = 'Downloading ...';				
-				// xhttp get dos file
-				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function() {
-					if (this.readyState === 4){
-						console.log(this);
-						$scope.runDosBox();						
-					} else {
-
-					}
-				};
-				xhttp.open("GET", inner_path, true);
-				xhttp.send();
-			};
-
-			// run dosbox
-			$scope.initDosBox = function(){
+				$scope.emulator_status = 'Downloading ...';	
 				// dosbox config
 				var dosbox = new Dosbox({
 					id: "dosbox",
