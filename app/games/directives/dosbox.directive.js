@@ -27,21 +27,14 @@ app.directive('dosbox', ['$location','$timeout',
 			};
 
 			// run dosbox
-			$scope.runDosBox = function(){
+			$scope.initDosBox = function(){
 				// dosbox config
 				var dosbox = new Dosbox({
 					id: "dosbox",
 					onrun: function (dosbox, app) {
 						console.log("App '" + app + "' is runned");
-						if ($scope.game.site_file){
-							if ($scope.game.site_file.is_downloaded === 1){
-								$scope.emulator_status = 'Running';
-							} else {
-								$scope.emulator_status = 'File not downloaded';
-							}
-						} else {
-							$scope.emulator_status = 'File not found';
-						}
+						console.log($scope.game.site_file);
+						$scope.emulator_status = 'Running';
 						$scope.$apply();
 					},
 					onload: function (dosbox) {

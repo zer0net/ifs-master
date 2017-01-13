@@ -12,20 +12,50 @@ app.directive('gameView', ['$location',
 				$scope.games.forEach(function(game,index){
 					// if game id & channel exist in array
 					if (game.game_id === gameId && game.channel.address === channelId){
-						// apply game to scope
-						$scope.game = game;
-						// get file info
-						Page.cmd("optionalFileList", { address: $scope.game.channel.address, limit:2000 }, function(site_files){
-							site_files.forEach(function(site_file){
-								if (site_file.inner_path === $scope.game.path){
-									$scope.game.site_file = site_file;
-									console.log(site_file);
-								}
-							});
-						});
-
+						// get site file info
+						$scope.getSiteFileInfo(game);
 					}
 				});
+			};
+
+			// get site file info
+			$scope.getSiteFileInfo = function(game){
+				// get optional files info
+				Page.cmd("optionalFileList", { address: game.channel.address, limit:2000 }, function(site_files){
+					// for each site file
+					site_files.forEach(function(site_file){
+						if (site_file.inner_path === game.path){
+							console.log('file found');
+							// apply site file info to game obj
+							game.site_file = site_file;
+							// apply game to scope
+							$scope.game = game;
+							// apply scope
+							$scope.$apply();
+						}
+					});
+					// if file is not in site_files
+					if (!game.site_file){
+						console.log('file not found');
+						$scope.forceFileDownload(game);
+					}
+				});
+			};
+
+			// force file download
+			$scope.forceFileDownload = function(game){
+				// xhttp get dos file
+				var inner_path = "merged-"+$scope.merger_name+"/"+game.channel.address+"/uploads/games/"+game.zip_name;
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					$scope.$apply();
+					if (this.readyState === 4){
+						console.log('file ready');
+						$scope.getSiteFileInfo(game);
+					}
+				};
+				xhttp.open("GET", inner_path, true);
+				xhttp.send();
 			};
 
 		};
@@ -46,7 +76,7 @@ app.directive('gameView', ['$location',
 							'<!-- atari -->' +
 							'<hr class="divider"/>' +
 							'<!-- info -->' +
-							'<section class="section md-whiteframe-1dp item-info">' +
+							'<section ng-if="game" class="section md-whiteframe-1dp item-info">' +
 								'<div class="section-header item-info-header">' +
 									'<h3 ng-bind="game.title"></h3>' +
 									'<a href="/{{game.channel.address}}">{{game.channel.content.title}}</a>' +
@@ -79,7 +109,7 @@ app.directive('gameView', ['$location',
 							'<!-- /info -->' +
 							'<hr class="divider"/>' +
 							'<!-- comments -->' +
-							'<comments ng-init="getComments(game)">' +
+							'<comments ng-if="game" ng-init="getComments(game)">' +
 								'<div class="item-comments">' +
 									'<!-- comment form -->' +
 									'<section class="comment-form section md-whiteframe-1dp"  style="margin-top:16px;">' +
