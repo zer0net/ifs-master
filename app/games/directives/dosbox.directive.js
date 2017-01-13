@@ -16,8 +16,15 @@ app.directive('dosbox', ['$location','$timeout',
 					onrun: function (dosbox, app) {
 						console.log("App '" + app + "' is runned");
 						$scope.emulator_status = 'Running';
-						$scope.emuReady = true;
-						$scope.$apply();
+						if ($scope.game.site_file.is_downloaded === 1){
+							$scope.emuReady = true;
+							$scope.emulator_status = 'Running';
+						} else {
+							$screen.emulator_status = 'File not found';
+						}
+						$timeout(function () {
+							$scope.$apply();
+						},100);
 					},
 					onload: function (dosbox) {
 						console.log($scope.game.title + ' running ...');
