@@ -46,8 +46,17 @@ app.directive('gameView', ['$location','$rootScope',
 
 			// force file download
 			$scope.forceFileDownload = function(game){
+				if (!game.path){
+					var fileName;
+					if (game.zip_name){
+						fileName = game.zip_name
+					} else {
+						fileName = game.file_name;
+					}
+					game.path = 'uploads/games/' + fileName;
+				}
 				// xhttp get dos file
-				var inner_path = "merged-"+$scope.merger_name+"/"+game.channel.address+"/uploads/games/"+game.zip_name;
+				var inner_path = "merged-"+$scope.merger_name+"/"+game.channel.address+"/"+game.path;
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function() {
 					if (this.readyState === 4){
