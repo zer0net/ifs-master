@@ -82,7 +82,7 @@ app.directive('gameView', ['$location','$rootScope',
 								'<!-- atari -->' +
 								'<hr class="divider"/>' +
 								'<!-- info -->' +
-								'<section class="section md-whiteframe-1dp item-info">' +
+								'<section ng-if="game" class="section md-whiteframe-1dp item-info">' +
 									'<div class="section-header item-info-header">' +
 										'<h3 ng-bind="game.title"></h3>' +
 										'<a href="/{{game.channel.address}}">{{game.channel.content.title}}</a>' +
@@ -115,7 +115,7 @@ app.directive('gameView', ['$location','$rootScope',
 								'<!-- /info -->' +
 								'<hr class="divider"/>' +
 								'<!-- comments -->' +
-								'<comments ng-init="getComments(game)">' +
+								'<comments ng-if="game" ng-init="getComments(game)">' +
 									'<div class="item-comments">' +
 										'<!-- comment form -->' +
 										'<section class="comment-form section md-whiteframe-1dp"  style="margin-top:16px;">' +
