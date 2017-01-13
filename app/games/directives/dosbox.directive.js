@@ -12,13 +12,14 @@ app.directive('dosbox', ['$location','$timeout',
 				$scope.dosboxSize = 'normal';
 				// emulator status 
 				$scope.emulator_status = 'Downloading ...';				
-				$scope.emuReady = false;
 				// xhttp get dos file
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function() {
 					if (this.readyState === 4){
 						console.log(this);
 						$scope.runDosBox();						
+					} else {
+
 					}
 				};
 				xhttp.open("GET", inner_path, true);
@@ -32,16 +33,16 @@ app.directive('dosbox', ['$location','$timeout',
 					id: "dosbox",
 					onrun: function (dosbox, app) {
 						console.log("App '" + app + "' is runned");
-						$scope.emulator_status = 'Running';
-						if ($scope.game.site_file.is_downloaded === 1){
-							$scope.emuReady = true;
-							$scope.emulator_status = 'Running';
+						if ($scope.game.site_file){
+							if ($scope.game.site_file.is_downloaded === 1){
+								$scope.emulator_status = 'Running';
+							} else {
+								$scope.emulator_status = 'File not downloaded';
+							}
 						} else {
 							$scope.emulator_status = 'File not found';
 						}
-						$timeout(function () {
-							$scope.$apply();
-						},100);
+						$scope.$apply();
 					},
 					onload: function (dosbox) {
 						console.log($scope.game.title + ' running ...');
@@ -66,8 +67,7 @@ app.directive('dosbox', ['$location','$timeout',
 		};
 
 		var template = 	'<section id="dosbox-section-container">' +	
-							'<div id="loading-mask" ng-hide="emuReady"></div>' +	
-							'<div id="dosbox-section" ng-show="emuReady" class="{{dosboxSize}} md-whiteframe-1dp" ng-init="initDosBox()">' +
+							'<div id="dosbox-section" class="{{dosboxSize}} md-whiteframe-1dp" ng-init="initDosBox()">' +
 								'<script type="text/javascript" src="assets/lib/js-dos/js-dos.js"></script>' +
 								'<style type="text/css">' +
 									'.dosbox-overlay {background-image: url("{{game.img}}");}' +
