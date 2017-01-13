@@ -19,6 +19,7 @@ app.directive('gameView', ['$location',
 							site_files.forEach(function(site_file){
 								if (site_file.inner_path === $scope.game.path){
 									$scope.game.site_file = site_file;
+									console.log(site_file);
 								}
 							});
 						});
@@ -50,7 +51,7 @@ app.directive('gameView', ['$location',
 									'<h3 ng-bind="game.title"></h3>' +
 									'<a href="/{{game.channel.address}}">{{game.channel.content.title}}</a>' +
 									'<div class="item-views">' +
-										'<span>{{game.site_file.peers}} Peers </span>' +
+										'<span>{{game.site_file.peer}} Peers </span>' +
 									'</div>' +
 								'</div>' +
 								'<hr/>' +
