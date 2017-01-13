@@ -147,6 +147,10 @@ section.container hr.divider {
 }
 #sidebar-wrapper li div a {
   padding: 5px 0;
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
 }
 /** /TEMPLATE **/
 /** PAGES **/
@@ -1594,6 +1598,11 @@ videogular .vg-error-message {
 }
 #dosbox-section-container #dosbox-section {
   margin-bottom: 5px;
+}
+#dosbox-section-container #loading-mask {
+  width: 100%;
+  height: 400px;
+  background-color: black;
 }
 #dosbox-section-container #emulator-status {
   text-align: center;

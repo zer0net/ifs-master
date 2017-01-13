@@ -295,8 +295,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 
 		      		}
-
-		      		//console.log("----------------end");
 			    });
 			};
 	

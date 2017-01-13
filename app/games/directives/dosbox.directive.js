@@ -5,6 +5,7 @@ app.directive('dosbox', ['$location','$timeout',
 
 			// init dosbox
 			$scope.initDosBox = function(){
+				$scope.emuReady = false;
 				// dosbox size
 				$scope.dosboxSize = 'normal';
 				// emulator status 
@@ -14,21 +15,19 @@ app.directive('dosbox', ['$location','$timeout',
 					id: "dosbox",
 					onrun: function (dosbox, app) {
 						console.log("App '" + app + "' is runned");
-						console.log(Page);
 						$scope.emulator_status = 'Running';
+						$scope.emuReady = true;
 						$scope.$apply();
 					},
 					onload: function (dosbox) {
 						console.log($scope.game.title + ' running ...');
 						dosbox.run("/"+$scope.site_address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/uploads/games/"+$scope.game.zip_name, "./"+$scope.game.file_name);
 						$scope.emulator_status = 'Launching ...'
-						console.log(Page);
 						$scope.$apply();
 					}
 				});
 				$timeout(function () {
 					// run dosbox
-					console.log(dosbox);
 					dosbox.ui.start[0].click();
 				});
 			};
@@ -41,8 +40,9 @@ app.directive('dosbox', ['$location','$timeout',
 
 		};
 
-		var template = 	'<section id="dosbox-section-container">' +		
-							'<div id="dosbox-section" class="{{dosboxSize}} md-whiteframe-1dp" ng-init="initDosBox()">' +
+		var template = 	'<section id="dosbox-section-container">' +	
+							'<div id="loading-mask" ng-hide="emuReady"></div>' +	
+							'<div id="dosbox-section" ng-show="emuReady" class="{{dosboxSize}} md-whiteframe-1dp" ng-init="initDosBox()">' +
 								'<script type="text/javascript" src="assets/lib/js-dos/js-dos.js"></script>' +
 								'<style type="text/css">' +
 									'.dosbox-overlay {background-image: url("{{game.img}}");}' +
