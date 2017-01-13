@@ -5,11 +5,28 @@ app.directive('dosbox', ['$location','$timeout',
 
 			// init dosbox
 			$scope.initDosBox = function(){
-				$scope.emuReady = false;
+				console.log('hi');
+				// inner path
+				var inner_path = "merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/uploads/games/"+$scope.game.zip_name;
 				// dosbox size
 				$scope.dosboxSize = 'normal';
 				// emulator status 
-				$scope.emulator_status = 'Downloading ...';
+				$scope.emulator_status = 'Downloading ...';				
+				$scope.emuReady = false;
+				// xhttp get dos file
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState === 4){
+						console.log(this);
+						$scope.runDosBox();						
+					}
+				};
+				xhttp.open("GET", inner_path, true);
+				xhttp.send();
+			};
+
+			// run dosbox
+			$scope.runDosBox = function(){
 				// dosbox config
 				var dosbox = new Dosbox({
 					id: "dosbox",
@@ -20,7 +37,7 @@ app.directive('dosbox', ['$location','$timeout',
 							$scope.emuReady = true;
 							$scope.emulator_status = 'Running';
 						} else {
-							$screen.emulator_status = 'File not found';
+							$scope.emulator_status = 'File not found';
 						}
 						$timeout(function () {
 							$scope.$apply();
@@ -33,8 +50,9 @@ app.directive('dosbox', ['$location','$timeout',
 						$scope.$apply();
 					}
 				});
+
+				// run dosbox					
 				$timeout(function () {
-					// run dosbox
 					dosbox.ui.start[0].click();
 				});
 			};
