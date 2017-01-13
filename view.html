@@ -17,36 +17,11 @@
 	<!--<base href="/">-->
 </head>
 <body class="ng-cloak" ng-controller="MainCtrl" ng-init="init()">
-	<div id="wrapper" class="toggled">
 
+	<!-- wrapper -->
+	<div id="wrapper" class="toggled">
 	    <!-- sidebar -->
-	    <div id="sidebar-wrapper">
-	      <ul class="sidebar-nav">
-	            <li class="sidebar-brand" style="font-size: 20px; font-weight: bold; color: #fff; ">
-	                EXPLORE  <span class="glyphicon glyphicon-refresh"  ng-click="filerMediaTypeRemove()" ></span>
-	            </li>
-	            <li ng-if="games" ng-click="filterMediaType('game')">
-	                <span style="color: #fff">Games&nbsp;[{{games.length}}]</span>
-	            </li>
-	            <li ng-if="videos" ng-click="filterMediaType('video')">
-	                <span style="color: #fff">Videos&nbsp;[{{videos.length}}]</span>
-	            </li>    
-	          
-	           <div channel-register ng-if="channels.length > 0"  style="border-top: 1px solid #fff">     
-	            
-	           <li class="sidebar-brand" style="font-size: 20px; font-weight: bold; color: #fff; ">               
-	                   Channels  <span class="glyphicon glyphicon-refresh"  ng-click="filerChannelRemove()" ></span>                              
-	           </li>      
-	                <li ng-repeat="channel in channels | orderBy:'-date_added'" ng-init="getChannelInfo(channel)"  ng-click="filerChannel(channel)" >                                                                     
-	                    
-	                <img ng-if="channel.logo" ng-src="/{{channel_master_address}}/merged-{{merger_name}}/{{channel.channel_address}}/uploads/images/{{channel.logo}}" class="imgFilehubLogo" />   
-	                <img ng-hide="channel.logo" src="assets/img/x-avatar.png" class="imgFilehubLogo"/>          
-	                
-	                <a href="#">{{channel.channel_name}}&nbsp;[{{channel.filesLen}}]</a>                            
-	                </li>            
-	            </div> 
-	        </ul>                             
-	    </div>
+	    <sidebar></sidebar>
 	    <!-- /sidebar-->
 	    <!-- page content -->
 	    <div id="page-content-wrapper">
@@ -260,8 +235,8 @@
 	        </div>
 	    </div>
 	    <!-- /page content -->
-
 	</div>
+	<!-- /wrapper -->
 
 	<!-- JS -->
 
@@ -298,7 +273,8 @@
 		<script type="text/javascript" src="app/application.js"></script>
 		<script type="text/javascript" src="app/core/controllers/main.ctrl.js"></script>
 		<script type="text/javascript" src="app/core/directives/site-config.directive.js"></script>		
-		<script type="text/javascript" src="app/core/directives/site-header.directive.js"></script>		
+		<script type="text/javascript" src="app/core/directives/site-header.directive.js"></script>
+        <script type="text/javascript" src="app/core/directives/sidebar.directive.js"></script>		
 		<script type="text/javascript" src="app/core/directives/item-view.directive.js"></script>
 		<script type="text/javascript" src="app/core/directives/comments.directive.js"></script>
 		<script type="text/javascript" src="app/core/directives/votes.directive.js"></script>

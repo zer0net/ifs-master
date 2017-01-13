@@ -7,15 +7,23 @@ app.directive('dosbox', ['$location','$timeout',
 			$scope.initDosBox = function(){
 				// dosbox size
 				$scope.dosboxSize = 'normal';
+				// emulator status 
+				$scope.emulator_status = 'Downloading ...';
 				// dosbox config
 				var dosbox = new Dosbox({
 					id: "dosbox",
 					onrun: function (dosbox, app) {
 						console.log("App '" + app + "' is runned");
+						console.log(Page);
+						$scope.emulator_status = 'Running';
+						$scope.$apply();
 					},
 					onload: function (dosbox) {
-						console.log($scope.game.title + ' running...');
+						console.log($scope.game.title + ' running ...');
 						dosbox.run("/"+$scope.site_address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/uploads/games/"+$scope.game.zip_name, "./"+$scope.game.file_name);
+						$scope.emulator_status = 'Launching ...'
+						console.log(Page);
+						$scope.$apply();
 					}
 				});
 				$timeout(function () {
@@ -33,18 +41,20 @@ app.directive('dosbox', ['$location','$timeout',
 
 		};
 
-		var template = 				
-		'<div id="dosbox-section" class="{{dosboxSize}} md-whiteframe-1dp" ng-init="initDosBox()">' +
-			'<script type="text/javascript" src="assets/lib/js-dos/js-dos.js"></script>' +
-			'<style type="text/css">' +
-				'.dosbox-overlay {background-image: url("{{game.img}}");}' +
-			'</style>' +
-			'<div id="dosbox"></div>' +
-			'<div ng-if="dosboxSize === \'full\'" class="dosbox-exit-fullscreen">' +
-				'<a ng-click="toggleFullScreen()">Exit Full Screen</a>' +
-			'</div>' +
-			'<a ng-click="toggleFullScreen()" class="fullscreen-btn"><span class="glyphicon glyphicon-fullscreen"></span></a>' +
-		'</div>';
+		var template = 	'<section id="dosbox-section-container">' +		
+							'<div id="dosbox-section" class="{{dosboxSize}} md-whiteframe-1dp" ng-init="initDosBox()">' +
+								'<script type="text/javascript" src="assets/lib/js-dos/js-dos.js"></script>' +
+								'<style type="text/css">' +
+									'.dosbox-overlay {background-image: url("{{game.img}}");}' +
+								'</style>' +
+								'<div id="dosbox"></div>' +
+								'<div ng-if="dosboxSize === \'full\'" class="dosbox-exit-fullscreen">' +
+									'<a ng-click="toggleFullScreen()">Exit Full Screen</a>' +
+								'</div>' +
+								'<a ng-click="toggleFullScreen()" class="fullscreen-btn"><span class="glyphicon glyphicon-fullscreen"></span></a>' +
+							'</div>' +
+							'<p id="emulator-status" ng-bind="emulator_status"></p>' +
+						'</section>';
 
 		return {
 			restrict: 'AE',

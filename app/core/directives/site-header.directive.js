@@ -1,45 +1,32 @@
-app.directive('siteHeader', ['$rootScope','$mdDialog', '$mdMedia',
-	function($rootScope,$mdDialog,$mdMedia) {		
+app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope',
+	function($mdDialog,$mdMedia,$rootScope) {
 
 	
 		// dialog controller
-		var DialogController= function($scope, $mdDialog, items) {
+		var DialogController= function($scope, $mdDialog,items) {
+			
 			// items
-			$scope.items = items;			
+			$scope.items = items;	
+			
+			// hide dialog		
 			$scope.hide = function() {
 				$mdDialog.hide();
 			};
+			
+			// cancel dialog
 			$scope.cancel = function() {
 				$mdDialog.cancel();
 			};
-			$scope.answer = function(answer) {
-				$mdDialog.hide(answer);
-			};
 
+			// handle clone click
 			$scope.handleCloneClick = function() {
-		    	$rootScope.$broadcast('handleCloneClick');
+		    	$rootScope.$broadcast('onCloneFileHub');
 			};
-
 
 		};
 
 		// header directive controller
-		var controller = function($rootScope,$scope,$element) {
-
-		
-			$scope.toggleMenu = function(ev)
-			{
-				ev.preventDefault();
-			    $("#wrapper").toggleClass("toggled");			   
-			    if($("#navbar-fixed-top").position().left==0){
-			    		$("#navbar-fixed-top").css({left:250});
-			    	}
-			    else{
-			    	$("#navbar-fixed-top").css({left:0});
-			    };			    
-			}
-
-			
+		var controller = function($scope,$element) {
 
 		    // show info modal
 			$scope.showInfoModal = function(ev) {
@@ -60,7 +47,7 @@ app.directive('siteHeader', ['$rootScope','$mdDialog', '$mdMedia',
 					    	'</div>' +
 					    '</md-toolbar>' +
 					    '<md-dialog-content >' +
-							'<ol style="padding: 8px 24px;"><li>click on button "new Filehub" below and confirm to create your filehub <br/><button  ng-click="handleCloneClick(ev)"> new Filehub </button> </li>' +						
+							'<ol style="padding: 8px 24px;"><li>click on button "new Filehub" below and confirm to create your filehub <br/><button  ng-click="handleCloneClick()"> new Filehub </button> </li>' +						
 							'<li>upload stuff on your newly created filehub</li>' +
 							'<li>click "Register" button on header to add your hub.</li><li>done!</li></ol>'+
 					    '</md-dialog-content>' +
@@ -146,13 +133,11 @@ app.directive('siteHeader', ['$rootScope','$mdDialog', '$mdMedia',
           					    '<li><a ng-click="filterFileType(\'zip\')">DOS </a> </li>'+
           					    '<li><a ng-click="filterFileType(\'bin\')">ATARI</a> </li>'+
           					  '</div>'+
-          					'</div>'+
-						
-							'<a ng-click="filterMediaType(\'video\')" style="color: #777;padding:10px 20px;">VIDEO</a>'+   
-							'<a ng-click="filerRemove()" style="color: #777;padding:10px 20px;"><span class="glyphicon glyphicon-filter" style="text-decoration: line-through"></span></a>'+  												
-							
-        					'</div>'+        					
-      					'</form>'+
+          					'</div>' +
+							'<a ng-click="filterMediaType(\'video\')" style="color: #777;padding:10px 20px;">VIDEO</a>' + 
+							'<a ng-click="filerRemove()" style="color: #777;padding:10px 20px;"><span class="glyphicon glyphicon-filter" style="text-decoration: line-through"></span></a>' + 
+        					'</div>' +        					
+      					'</form>' +
   						'<ul class="nav navbar-nav navbar-right">'+  	
   						'<li><a ng-click="showInfoModal(ev)" >FAQ</a></li>'+  
 						'<li><a href="register.html">REGISTER</button></a></li>'+  												

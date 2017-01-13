@@ -1,10 +1,6 @@
 app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdMedia',
 	function($rootScope,$scope,$location,$mdDialog,$mdMedia) {
 
-		/* CONFIG */
-			// move config merger_name to content.json			
-		/* /CONFIG */
-
 		/* INIT SITE */
 
 			// init
@@ -149,9 +145,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 	    	    return false;
 	    	}
 
-	    	$rootScope.$on('handleCloneClick',function(ev,mass){ 
-	    		$scope.cloneFilehub(ev) 
-	    	});
+	    	$rootScope.$on('handleCloneClick',function(ev){ $scope.cloneFilehub(ev) });
 
 			// get channels
 			$scope.getChannels = function(){				
@@ -181,35 +175,27 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				// items array, named ny media type var
 				$scope[$scope.media_type] = [];
 				// for each channel
-				
 				$scope.channels.forEach(function(channel,cIndex){
-
-		 				// check if site exists
-						var siteExists = false;
-						// loop through sites array
-						$scope.sites.forEach(function(site,sIndex){
-							// if channel's id exists in merged sites array
-							if (site.address === channel.channel_address){
-								siteExists = true;
-								channel = site;
-							}
-						});
-						// if site exists get channel, if not add merged site
-						if (siteExists === true){
-							// get channel
-							
-							$scope.getChannel(channel,cIndex);
-
-						} else {						
-							console.log('site ' + channel.channel_address + ' doesnt exists! adding site...');
-							// add merger site
-							$scope.addSite(channel,cIndex);
+	 				// check if site exists
+					var siteExists = false;
+					// loop through sites array
+					$scope.sites.forEach(function(site,sIndex){
+						// if channel's id exists in merged sites array
+						if (site.address === channel.channel_address){
+							siteExists = true;
+							channel = site;
 						}
-
-
+					});
+					// if site exists get channel, if not add merged site
+					if (siteExists === true){
+						// get channel
+						$scope.getChannel(channel,cIndex);
+					} else {						
+						console.log('site ' + channel.channel_address + ' doesnt exists! adding site...');
+						// add merger site
+						$scope.addSite(channel,cIndex);
+					}
 				});
-
-
 			};
 
 			
@@ -263,12 +249,9 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					}
 				});
 			};
-
-
 	
-	// get channels items
+			// add channels items
 			$scope.addChannelItems = function(data,channel,cIndex){
-				
 				Page.cmd("optionalFileList", { address: channel.address, limit:2000 }, function(site_files){
 				
 				
@@ -335,8 +318,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 		      		//console.log("----------------end");
 			    });
-
-
 			};
 	
 			// finish loading channels
@@ -348,8 +329,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 						$scope.finishedLoading();
 					});
 				}
-
-			
 			};
 
 		/* /INIT SITE */
@@ -439,8 +418,37 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 	                }
 			        return script;
 			    }
-			};    
+			};
 
+			$scope.cloneFileHub = function(){
+				if (Page.site_info.settings.permissions.indexOf("ADMIN") > -1){
+		    		Page.cmd("siteClone", {
+				        "address": "1FHtDQ8i5NFFeuo7Fux6TeLpwmmeUGvdc8"
+				    });
+		    	} else {
+		    		// if not, ask user for ADMIN permission
+					Page.cmd("wrapperPermissionAdd", "ADMIN", function() {
+						Page.cmd("siteClone", {"address": "1FHtDQ8i5NFFeuo7Fux6TeLpwmmeUGvdc8" });
+					});
+		    	}				
+			    return false;
+			};
+
+			$rootScope.$on('onCloneFileHub',function(event,mass){
+				$scope.cloneFilehub();
+			});
+
+			// toggle menu
+			$scope.toggleMenu = function(ev) {
+				ev.preventDefault();
+			    $("#wrapper").toggleClass("toggled");			   
+			    if ($("#navbar-fixed-top").position().left==0){
+			    	$("#navbar-fixed-top").css({left:250});
+			    } else {
+			    	$("#navbar-fixed-top").css({left:0});
+			    };			    
+			}
+			
 	    /* /UI */
 	}
 ]);

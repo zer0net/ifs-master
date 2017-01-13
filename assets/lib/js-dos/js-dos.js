@@ -175,6 +175,8 @@ function(a,b){jQuery.fn[b]=function(d){return d?this.bind(b,d):this.trigger(b)}}
 
     Module.prototype.setStatus = function(text) {
       return typeof console !== "undefined" && console !== null ? typeof console.log === "function" ? console.log(text) : void 0 : void 0;
+      Page.emu_status = text;
+      console.log(Page);
     };
 
     Module.prototype.monitorRunDependencies = function(left) {
