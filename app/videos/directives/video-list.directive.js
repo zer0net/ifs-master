@@ -15,7 +15,7 @@ app.directive('videoList', ['$location',
 
 		};
 
-		var template =  '<div class="container-fluid">'+
+		var template =  '<div>'+
 						'<md-grid-list class="videos-section"' +
 						    'md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="5" ' +
 						    'sm-row-height="3:4" md-row-height="3:3"' +
