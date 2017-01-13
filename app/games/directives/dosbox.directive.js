@@ -5,30 +5,38 @@ app.directive('dosbox', ['$location','$timeout',
 
 			// init dosbox
 			$scope.initDosBox = function(){
-				$scope.emuReady = false;
-				// dosbox size
-				$scope.dosboxSize = 'normal';
-				// emulator status 
-				$scope.emulator_status = 'Downloading ...';
-				// dosbox config
-				var dosbox = new Dosbox({
-					id: "dosbox",
-					onrun: function (dosbox, app) {
-						console.log("App '" + app + "' is runned");
-						$scope.emulator_status = 'Running';
-						$scope.emuReady = true;
-						$scope.$apply();
-					},
-					onload: function (dosbox) {
-						console.log($scope.game.title + ' running ...');
-						dosbox.run("/"+$scope.site_address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/uploads/games/"+$scope.game.zip_name, "./"+$scope.game.file_name);
-						$scope.emulator_status = 'Launching ...'
-						$scope.$apply();
-					}
-				});
-				$timeout(function () {
-					// run dosbox
-					dosbox.ui.start[0].click();
+				Page.cmd("optionalFileList", { address: $scope.game.channel.address, limit:2000 }, function(site_files){
+					site_files.forEach(function(site_file){
+						if (site_file.inner_path === $scope.game.path){
+							$scope.site_file = site_file;
+						}
+					});
+					$scope.emuReady = false;
+					// dosbox size
+					$scope.dosboxSize = 'normal';
+					// emulator status 
+					$scope.emulator_status = 'Downloading ...';
+					// dosbox config
+					var dosbox = new Dosbox({
+						id: "dosbox",
+						onrun: function (dosbox, app) {
+							console.log("App '" + app + "' is runned");
+							$scope.emulator_status = 'Running';
+							$scope.emuReady = true;
+							$scope.$apply();
+						},
+						onload: function (dosbox) {
+							console.log($scope.game.title + ' running ...');
+							dosbox.run("/"+$scope.site_address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/uploads/games/"+$scope.game.zip_name, "./"+$scope.game.file_name);
+							$scope.emulator_status = 'Extracting ...';
+							$scope.$apply();
+						}
+					});
+					$timeout(function () {
+						// run dosbox
+						dosbox.ui.start[0].click();
+					});				
+
 				});
 			};
 
