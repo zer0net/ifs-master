@@ -233,10 +233,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// add channels items
 			$scope.addChannelItems = function(data,channel,cIndex){
 				Page.cmd("optionalFileList", { address: channel.address, limit:2000 }, function(site_files){
-				
-				
 		      		for (var media_type in data){
-
 		      			if (Object.prototype.toString.call(data[media_type]) === '[object Array]'){
 		      				if ($scope.config.media_types.indexOf(media_type) > -1){
 		      					// loop through items in data
@@ -292,8 +289,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		      					});
 		      				}
 		      			}
-
-
 		      		}
 			    });
 			};
