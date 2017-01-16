@@ -9,9 +9,9 @@
 		<link href="assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 		
 		<!-- app -->
-		<link href="assets/css/simple-sidebar.css" rel="stylesheet" type="text/css"/>
-		<link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
-		<link href="assets/css/style_extra.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/master/css/simple-sidebar.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/master/css/style.css" rel="stylesheet" type="text/css"/>
+		<link href="assets/master/css/style_extra.css" rel="stylesheet" type="text/css"/>
 
 	<!-- /CSS -->
 
@@ -123,7 +123,6 @@
 									<h2>Channels</h2>
 									<span class="label" ng-hide="loading">total: <span ng-bind="channels.length"></span></span>
 									<hr/>
-
 								</div>
 								<div class="section-body">
 									<div class="channels-list" ng-if="channelsAll.length > 0">
@@ -141,9 +140,6 @@
 
 											<span class="pull-right" ng-if="channel.games">{{channel.games.length}} games</span>
 											<span class="pull-right" ng-if="channel.videos" style="padding-right: 20px">{{channel.videos.length}} videos</span>
-
-											
-
 											<!--
 											<span class="pull-right">{{channel.items.length}} {{media_type}}</span>
 											<a class="label" ng-if="channel.user_id === user" ng-click="deleteChannel(channel,$index)">
@@ -194,7 +190,6 @@
 	    <script type="text/javascript" src="assets/lib/identicon/identicon.js"></script>
 	    <script type="text/javascript" src="assets/lib/angular-identicon/angular-identicon.min.js"></script>
 	    <script type="text/javascript" src="assets/lib/angular-fullscreen/angular-fullscreen.js"></script>
-		<script type="text/javascript" src="app/core/util/dirPagination.js"></script>
 
 		<!-- videogular -->
 		<script type="text/javascript" src="assets/lib/videos/videogular/videogular.js"></script>
@@ -205,13 +200,14 @@
 
 		<!-- app core -->
 		<script type="text/javascript" src="app/application.js"></script>		
-		<script type="text/javascript" src="app/core/controllers/main.ctrl.js"></script>
-		<script type="text/javascript" src="app/core/directives/site-config.directive.js"></script>		
-		<script type="text/javascript" src="app/core/directives/site-header.directive.js"></script>
-        <script type="text/javascript" src="app/core/directives/sidebar.directive.js"></script>
-		<script type="text/javascript" src="app/core/directives/channel-input.directive.js"></script>
-		<script type="text/javascript" src="app/core/directives/channel-register.directive.js"></script>
-        <script type="text/javascript" src="app/core/services/item.service.js"></script>
+		<script type="text/javascript" src="app/master/core/controllers/main.ctrl.js"></script>
+		<script type="text/javascript" src="app/master/core/directives/site-config.directive.js"></script>		
+		<script type="text/javascript" src="app/master/core/directives/site-header.directive.js"></script>
+        <script type="text/javascript" src="app/master/core/directives/sidebar.directive.js"></script>
+		<script type="text/javascript" src="app/master/core/directives/channel-input.directive.js"></script>
+		<script type="text/javascript" src="app/master/core/directives/channel-register.directive.js"></script>
+        <script type="text/javascript" src="app/master/core/services/item.service.js"></script>
+		<script type="text/javascript" src="app/master/core/util/dirPagination.js"></script>
 		
 
 	<!-- /JS -->  
