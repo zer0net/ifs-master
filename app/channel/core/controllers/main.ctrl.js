@@ -1,12 +1,12 @@
-app.controller('MainCtrl', ['$scope','$rootScope','$sce','$location','$window',
+app.controller('ChannelMainCtrl', ['$scope','$rootScope','$sce','$location','$window',
 	function($scope,$rootScope,$sce,$location,$window) {
 
 		/** CONFIG **/
 		
 			//$scope.site_address = $location.$$absUrl.split('0/')[1].split('/')[0];			
 			//$scope.site_address = '1Nrpa9niDCoY9wpJ5s4AEeoMjj1Bi6RhG6';
-			$scope.master_address = '12MVkvYGcRW6u2NYbpfwVad1oQeyG4s9Er';			
-			$scope.master_name = 'IFS';
+			// $scope.master_address = '12MVkvYGcRW6u2NYbpfwVad1oQeyG4s9Er';			
+			// $scope.master_name = 'IFS';
 			$scope.inner_path =  'data/channel.json';
 			$scope.media_type = 'games';
 
@@ -16,34 +16,51 @@ app.controller('MainCtrl', ['$scope','$rootScope','$sce','$location','$window',
 
 			// init
 			$scope.init = function(){
-
-				// get site info
-				Page.cmd("siteInfo", {}, function(site_info) {
-					// site info
-					Page.site_info = site_info;
-					// site address
-					$scope.site_address = site_info.address;
-					// peers
-					$scope.peers = Page.site_info.settings.peers;
-					// user is owner
-					$scope.owner = Page.site_info.settings.own;
-					// settings
-					$scope.settings = Page.site_info.settings;	
-					// optional help
-					$scope.optionalHelp = false;
-					if(site_info.settings.autodownloadoptional) $scope.optionalHelp = site_info.settings.autodownloadoptional;
-					// apply to scope
+				// create an array of all user's registered sites (channels)
+				$scope.u_sites = [];
+				$scope.channels.forEach(function(channel,index){
+					if (channel.user === $scope.page.site_info.auth_address){
+						$scope.sites.forEach(function(site,index){
+							if (site.address === channel.channel_address){
+								$scope.u_sites.push(site);
+							}
+						});
+					}
+				});
+				// get channel data (default - first site in array)
+				$scope.site = $scope.u_sites[0];
+				$scope.getSiteFileList($scope.site);
+				// peers
+				/*$scope.peers = Page.site_info.settings.peers;
+				// user is owner
+				$scope.owner = Page.site_info.settings.own;
+				// settings
+				$scope.settings = Page.site_info.settings;	
+				// optional help
+				$scope.optionalHelp = false;
+				if(site_info.settings.autodownloadoptional) $scope.optionalHelp = site_info.settings.autodownloadoptional;
+				// apply to scope
+				// optional file list
+				Page.cmd("optionalFileList", { address: $scope.site_address, limit:2000 }, function(site_files){				      						      		
+					$scope.optionalFileList = site_files;
 					$scope.$apply(function(){
 						// get jsons
 						$scope.getSitesJsons();
 					});
-				});
+				});*/				
+			};
 
+			// get channel data
+			$scope.getSiteFileList = function(site){
 				// optional file list
-				Page.cmd("optionalFileList", { address: $scope.site_address, limit:2000 }, function(site_files){				      						      		
-					$scope.optionalFileList = site_files;					      		
-				});	
-				
+				Page.cmd("optionalFileList", { address: site.address, limit:2000 }, function(site_files){				      						      		
+					$scope.optionalFileList = site_files;
+					console.log($scope.optionalFileList);
+					$scope.$apply(function(){
+						// get jsons
+						$scope.getSitesJsons(site);
+					});
+				});
 			};
 
 			// on optional help
@@ -72,13 +89,14 @@ app.controller('MainCtrl', ['$scope','$rootScope','$sce','$location','$window',
 			}
 			
 			// get sites jsons
-			$scope.getSitesJsons = function(){
+			$scope.getSitesJsons = function(site){
 				// get content.json
-				Page.cmd("fileGet", { "inner_path": 'content.json', "required": false },function(data) {
+				Page.cmd("fileGet", { "inner_path": 'merged-'+$scope.merger_name+'/'+site.address+'/content.json', "required": false },function(data) {
 		    		// store content.json to scope
 		    		$scope.contentJson = JSON.parse(data);
+		    		console.log($scope.contentJson);
 		    		// get channel.json
-					Page.cmd("fileGet", { "inner_path": $scope.inner_path, "required": false },function(data) {
+					Page.cmd("fileGet", { "inner_path": 'merged-'+$scope.merger_name+'/'+site.address+'/data/channel.json', "required": false },function(data) {
 						// store channel.json to scope
 						$scope.chJson = JSON.parse(data);	
 

@@ -21,30 +21,43 @@
 </head>
 
 <body class="ng-cloak" ng-controller="MainCtrl" ng-init="init()">
-
-	<!-- HEADER -->
-	<site-header></site-header>
-	<!-- /HEADER -->
-
-	<section ng-controller="ItemsCtrl" layout="row" class="container">
-
-    	<!-- loading -->
-		<div layout="column" ng-show="loading" flex="100">
-			<div layout="column" flex="100" style="text-align:center;">
-				<span ng-hide="pendingItems"><b ng-bind="msg"></b></span>
-			</div>
-			<div layout="row" flex="100" layout-align="space-around">
-				<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-			</div>
+	
+	<div layout="column" ng-show="loading" flex>
+		<div layout="column" flex="100" style="text-align:center;">
+			<span><b ng-bind="msg"></b></span>
 		</div>
-		<!-- /loading -->
+		<div layout="row" flex="100" layout-align="space-around">
+			<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+		</div>
+	</div>
 
-	    <!-- MAIN -->
-	    <md-content ng-if="chJson" ng-hide="loading" flex layout-padding class="main-content">
-			<file-list></file-list>
-	    </md-content>
-	    <!-- /MAIN -->
+	<section ng-if="channels" ng-hide="loading" class="wrapper" ng-controller="ChannelMainCtrl" ng-init="init()">
 
+		<!-- HEADER -->
+		<site-header></site-header>
+		<!-- /HEADER -->
+
+		<section ng-controller="ItemsCtrl" layout="row" class="container">
+
+	    	<!-- loading -->
+			<div layout="column" ng-show="loading" flex="100">
+				<div layout="column" flex="100" style="text-align:center;">
+					<span ng-hide="pendingItems"><b ng-bind="msg"></b></span>
+				</div>
+				<div layout="row" flex="100" layout-align="space-around">
+					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+				</div>
+			</div>
+			<!-- /loading -->
+
+		    <!-- MAIN -->
+		    <md-content ng-if="chJson" ng-hide="loading" flex layout-padding class="main-content">
+				<file-list></file-list>
+		    </md-content>
+		    <!-- /MAIN -->
+
+		</section>
+	
 	</section>
 
 	<!-- JS -->
@@ -68,6 +81,7 @@
 		<script type="text/javascript" src="../assets/lib/angular-moment/angular-moment.min.js"></script>
 	    <script type="text/javascript" src="../assets/lib/identicon/pnglib.js"></script>
 	    <script type="text/javascript" src="../assets/lib/identicon/identicon.js"></script>
+	    <script type="text/javascript" src="../assets/lib/dropzone/dropzone.js"></script>
 	    <script type="text/javascript" src="../assets/lib/angular-identicon/angular-identicon.min.js"></script>
 	    <script type="text/javascript" src="../assets/lib/angular-fullscreen/angular-fullscreen.js"></script>
         <script type="text/javascript" src="../assets/lib/util/dirPagination.js"></script>
@@ -89,6 +103,8 @@
 
 		<!-- app -->
 		<script type="text/javascript" src="../app/application.js"></script>		
+		<script type="text/javascript" src="../app/master/core/controllers/main.ctrl.js"></script>
+		<script type="text/javascript" src="../app/master/core/services/item.service.js"></script>
 		<script type="text/javascript" src="../app/channel/core/controllers/main.ctrl.js"></script>
 		<script type="text/javascript" src="../app/channel/core/controllers/items.ctrl.js"></script>
 		<script type="text/javascript" src="../app/channel/core/directives/site-header.directive.js"></script>		

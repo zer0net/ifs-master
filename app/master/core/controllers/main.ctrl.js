@@ -111,8 +111,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				// merged sites array		    	
 		    	$scope.sites = [];
 				Page.cmd("mergerSiteList", {query_site_info: true}, function(sites) {		
-					
-				//console.log(sites);			
 					// for every site in sites obj
 					for (var site in sites) {
 					    if (!sites.hasOwnProperty(site)) continue;
@@ -261,6 +259,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				if ((cIndex + 1) === $scope.channels.length){
 					// finished loading & apply to scope
 					$scope.$apply(function(){
+						console.log('finished loading master main ctrl');
 						$scope.finishedLoading();
 					});
 				}
