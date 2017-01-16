@@ -42,7 +42,7 @@ app.directive('fileList', ['$mdDialog','$mdMedia',
 
 		var template=  '<div class="container-fluid" id="file-list">' +
 							'<select ng-model="site" value="site.address" ng-change="onSelectSite(site)">' +
-								'<option ng-repeat="site in u_sites" value="{{site}}">{{site.address}}</option>' +
+								'<option ng-repeat="site in u_sites track by $index" value="{{site}}">{{site.address}}</option>' +
 							'</select>' +
 							'<form class="form-inline">' +
 								'<div class="form-group" id="file-search-form">' +
