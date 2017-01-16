@@ -27,7 +27,7 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$sce','$location','$wi
 					$scope.channels.forEach(function(channel,index){
 						if (channel.user === $scope.page.site_info.auth_address){
 							$scope.sites.forEach(function(site,index){
-								if (site.address === channel.channel_address){
+								if (site.address === channel.channel_address && site.settings.own === true){
 									$scope.u_sites.push(site);
 								}
 							});
