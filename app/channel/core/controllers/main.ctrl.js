@@ -28,12 +28,19 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$sce','$location','$wi
 					}
 				});
 				// get channel data (default - first site in array)
-				$scope.site = $scope.u_sites[0];
-				$scope.getSiteFileList($scope.site);			
+				$scope.getSiteFileList($scope.u_sites[0]);			
 			};
 
 			// get channel data
 			$scope.getSiteFileList = function(site){
+				delete $scope.chJson;
+				delete $scope.site;
+				delete $scope.channel;
+				delete $scope.contentJson;
+				delete $scope.filesTotal;
+				console.log($scope);
+				console.log(site);
+				$scope.site = site;
 				// optional file list
 				Page.cmd("optionalFileList", { address: site.address, limit:2000 }, function(site_files){				      						      		
 					$scope.optionalFileList = site_files;

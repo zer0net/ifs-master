@@ -30,21 +30,14 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// get config json
 			$scope.getConfig = function(){
-				/*var inner_path = "data/config.json";			
-				Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(data) {
-					if (!data && $scope.owner){
-						$scope.generateConfig();
-					} else {*/
-						$scope.config = {
-							media_types:[
-								'all',
-								'games',
-								'videos'
-							]
-						}
-						$scope.getMergerPermission();
-					/*}
-				});*/
+				$scope.config = {
+					media_types:[
+						'all',
+						'games',
+						'videos'
+					]
+				}
+				$scope.getMergerPermission();
 			};
 
 			// generate config
@@ -126,10 +119,9 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    };
 
 			// get channels
-			$scope.getChannels = function(){				
+			$scope.getChannels = function(){
 				// loading
-				$scope.showLoadingMessage('Loading Channels');	
-				
+				$scope.showLoadingMessage('Loading Channels');					
 				// get channels				
 				var query = ["SELECT * FROM channel where hide = 0 ORDER BY date_added"];	
 				
@@ -179,7 +171,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			
 			// add merger site
 			$scope.addSite = function(channel,cIndex){
-				
 				Page.cmd("mergerSiteAdd",{"addresses":channel.channel_address},function(data){
 					// list merger sites					
 					Page.cmd("mergerSiteList", {query_site_info: true}, function(sites) {						
@@ -189,7 +180,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 						    var siteFound = false;
 							// if channel's id exists in merged sites array
 						    if (site.address === channel.channel_address){
-				
 						    	siteFound = true;
 						    	// info prompt
 								Page.cmd("wrapperNotification", ["info", "Refresh this page to view new content", 10000]);
@@ -211,8 +201,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// get channel
 			$scope.getChannel = function(channel,cIndex){
 				// get channel.json
-				var inner_path = 'merged-'+$scope.merger_name+'/'+channel.address+'/data/channel.json';
-								
+				var inner_path = 'merged-'+$scope.merger_name+'/'+channel.address+'/data/channel.json';					
 				Page.cmd("fileGet",{"inner_path":inner_path},function(data){
 					// assign games
 					data = JSON.parse(data);	
@@ -233,20 +222,25 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				Page.cmd("optionalFileList", { address: channel.address, limit:2000 }, function(site_files){
 		      		for (var media_type in data){
 		      			if (Object.prototype.toString.call(data[media_type]) === '[object Array]'){
-		      				if ($scope.config.media_types.indexOf(media_type) > -1){
-		      					// loop through items in data
-		      					data[media_type].forEach(function(item,itemIndex){
-		      						// render channel item via Item service
-		      						item = Item.renderChannelItem($scope,item,site_files,channel);
-		      						// apply to scope items array						
-		      						if (!$scope[media_type]) $scope[media_type] = [];
-		      						$scope[media_type].push(item);
-		      						// if last item in channels items array
-		      						if ((itemIndex + 1) === data[media_type].length){
-		      							// finish loading
-		      							$scope.finishLoadingChannels(cIndex);
-		      						}
-		      					});
+		      				if (data[media_type].length > 0){
+			      				if ($scope.config.media_types.indexOf(media_type) > -1){
+			      					if (data[media_type].length)
+			      					// loop through items in data
+			      					data[media_type].forEach(function(item,itemIndex){
+			      						// render channel item via Item service
+			      						item = Item.renderChannelItem($scope,item,site_files,channel);
+			      						// apply to scope items array						
+			      						if (!$scope[media_type]) $scope[media_type] = [];
+			      						$scope[media_type].push(item);
+			      						// if last item in channels items array
+			      						if ((itemIndex + 1) === data[media_type].length){
+			      							// finish loading
+			      							$scope.finishLoadingChannels(cIndex);
+			      						}
+			      					});
+			      				}
+		      				} else {
+								$scope.finishLoadingChannels(cIndex);
 		      				}
 		      			}
 		      		}
@@ -259,7 +253,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				if ((cIndex + 1) === $scope.channels.length){
 					// finished loading & apply to scope
 					$scope.$apply(function(){
-						console.log('finished loading master main ctrl');
 						$scope.finishedLoading();
 					});
 				}
