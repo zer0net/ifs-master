@@ -16,19 +16,26 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$sce','$location','$wi
 
 			// init
 			$scope.init = function(){
-				// create an array of all user's registered sites (channels)
-				$scope.u_sites = [];
-				$scope.channels.forEach(function(channel,index){
-					if (channel.user === $scope.page.site_info.auth_address){
-						$scope.sites.forEach(function(site,index){
-							if (site.address === channel.channel_address){
-								$scope.u_sites.push(site);
-							}
-						});
-					}
-				});
-				// get channel data (default - first site in array)
-				$scope.getSiteFileList($scope.u_sites[0]);			
+
+				Page.cmd("siteInfo", {}, function(site_info) {
+					// site info
+					Page.site_info = site_info;
+					// apply to scope
+					$scope.page = Page;
+					// create an array of all user's registered sites (channels)
+					$scope.u_sites = [];
+					$scope.channels.forEach(function(channel,index){
+						if (channel.user === $scope.page.site_info.auth_address){
+							$scope.sites.forEach(function(site,index){
+								if (site.address === channel.channel_address){
+									$scope.u_sites.push(site);
+								}
+							});
+						}
+					});
+					// get channel data (default - first site in array)
+					$scope.getSiteFileList($scope.u_sites[0]);
+				});	
 			};
 
 			// get channel data
