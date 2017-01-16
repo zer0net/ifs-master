@@ -40,13 +40,13 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$sce','$location','$wi
 
 			// get channel data
 			$scope.getSiteFileList = function(site){
+				// remove channel & site info from scope
 				delete $scope.chJson;
 				delete $scope.site;
 				delete $scope.channel;
 				delete $scope.contentJson;
 				delete $scope.filesTotal;
-				console.log($scope);
-				console.log(site);
+				// apply site to scope
 				$scope.site = site;
 				// optional file list
 				Page.cmd("optionalFileList", { address: site.address, limit:2000 }, function(site_files){				      						      		
