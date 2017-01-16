@@ -3,8 +3,8 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$sce','$location','$wi
 
 		/** CONFIG **/
 		
-			//$scope.site_address = $location.$$absUrl.split('0/')[1].split('/')[0];			
-			//$scope.site_address = '1Nrpa9niDCoY9wpJ5s4AEeoMjj1Bi6RhG6';
+			// $scope.site_address = $location.$$absUrl.split('0/')[1].split('/')[0];			
+			// $scope.site_address = '1Nrpa9niDCoY9wpJ5s4AEeoMjj1Bi6RhG6';
 			// $scope.master_address = '12MVkvYGcRW6u2NYbpfwVad1oQeyG4s9Er';			
 			// $scope.master_name = 'IFS';
 			$scope.inner_path =  'data/channel.json';
