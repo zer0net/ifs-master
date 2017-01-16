@@ -7,8 +7,9 @@ app.directive('zipContent', [
 			// show zip content
 			$scope.showZipContent = function(){
 				$scope.zipFiles = [];
+				console.log($scope.item);
 				// get remote zip file
-				JSZipUtils.getBinaryContent($scope.item.path, function(err, data) {
+				JSZipUtils.getBinaryContent('/'+$scope.page.site_info.address + '/merged-'+$scope.merger_name + '/' + $scope.item.channel + '/' + $scope.item.path, function(err, data) {
 				    if(err) {
 				        throw err; // or handle err
 				    }

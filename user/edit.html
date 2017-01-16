@@ -5,8 +5,8 @@
 
 	<!-- CSS -->
 		<!-- lib -->
-		<link href="../assets/lib/core/angular-material/angular-material.css" rel="stylesheet" type="text/css"/>
-		<link href="../assets/lib/core/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+		<link href="../assets/lib/angular-material/angular-material.css" rel="stylesheet" type="text/css"/>
+		<link href="../assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 		<!-- app -->
 		<link href="../assets/channel/css/style.css" rel="stylesheet" type="text/css"/>
 		<link href="../assets/channel/css/style_extra.css" rel="stylesheet" type="text/css"/>
@@ -21,47 +21,60 @@
 </head>
 
 <body class="ng-cloak" ng-controller="MainCtrl" ng-init="init()">
-
-	<!-- HEADER -->
-	<site-header></site-header>
-	<!-- /HEADER -->
-
-	<!-- MAIN -->
-	<section class="container edit-item-view" layout="column" 
-		ng-controller="ItemsCtrl" ng-if="chJson" ng-init="getItem()">
-
-		<!-- loading -->
-		<div layout="column" ng-show="loading" flex>
-			<div layout="column" flex="100" style="text-align:center;"><b ng-bind="msg"></b></div>
-			<div layout="row" flex="100" layout-align="space-around">
-				<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-			</div>
+	
+	<div layout="column" ng-show="loading" flex>
+		<div layout="column" flex="100" style="text-align:center;">
+			<span><b ng-bind="msg"></b></span>
 		</div>
-		<!-- /loading -->
+		<div layout="row" flex="100" layout-align="space-around">
+			<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+		</div>
+	</div>
 
-		<!-- edit item section -->
-		<md-content class="edit-item-section" edit-item  ng-init="init()" ng-hide="loading" ng-if="item" layout="row" flex>
-			<!-- item sidebar -->
-			<side-bar></side-bar>
-			<!-- /item sidebar -->
-			<!-- item main -->
-			<section flex="70" layout="column" class="item-main" style="position: relative;" id="item-upload-form" layout-padding>
-        		<!-- game interface -->
-        		<game-interface ng-if="item.media_type === 'game'"></game-interface>
-        		<!-- /game interface -->
-        		<!-- video interface -->
-        		<video-interface ng-if="item.media_type === 'video'"></video-interface>
-        		<!-- /video interface -->
-	            <md-button flex="100" style="margin: 16px 0;" class="md-primary md-raised edgePadding pull-right" ng-click="onUpdateItem()">
-	            	<label>Update {{item.media_type}}</label>
-	            </md-button>
-			</section>
-			<!-- /item main -->
-		</md-content>
-		<!-- /edit item section -->
+	<section ng-if="channels" ng-hide="loading" class="wrapper" ng-controller="ChannelMainCtrl" ng-init="init()">
+
+		<!-- HEADER -->
+		<site-header></site-header>
+		<!-- /HEADER -->
+
+		<!-- MAIN -->
+		<section class="container edit-item-view" layout="column" 
+			ng-controller="ItemsCtrl" ng-if="chJson" ng-init="getItem()">
+
+			<!-- loading -->
+			<div layout="column" ng-show="loading" flex>
+				<div layout="column" flex="100" style="text-align:center;"><b ng-bind="msg"></b></div>
+				<div layout="row" flex="100" layout-align="space-around">
+					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+				</div>
+			</div>
+			<!-- /loading -->
+
+			<!-- edit item section -->
+			<md-content class="edit-item-section" edit-item  ng-init="init()" ng-hide="loading" ng-if="item" layout="row" flex>
+				<!-- item sidebar -->
+				<side-bar></side-bar>
+				<!-- /item sidebar -->
+				<!-- item main -->
+				<section flex="70" layout="column" class="item-main" style="position: relative;" id="item-upload-form" layout-padding>
+	        		<!-- game interface -->
+	        		<game-interface ng-if="item.media_type === 'game'"></game-interface>
+	        		<!-- /game interface -->
+	        		<!-- video interface -->
+	        		<video-interface ng-if="item.media_type === 'video'"></video-interface>
+	        		<!-- /video interface -->
+		            <md-button flex="100" style="margin: 16px 0;" class="md-primary md-raised edgePadding pull-right" ng-click="onUpdateItem()">
+		            	<label>Update {{item.media_type}}</label>
+		            </md-button>
+				</section>
+				<!-- /item main -->
+			</md-content>
+			<!-- /edit item section -->
+
+		</section>
+		<!-- /MAIN -->
 
 	</section>
-	<!-- /MAIN -->
 
 	<!-- JS -->
 
@@ -71,26 +84,27 @@
 		<script type="text/javascript" src="../assets/lib/zeronet/zerochat.js"></script>
 
 		<!-- jquery -->
-		<script type="text/javascript" src="../assets/lib/core/jquery/jquery.min.js"></script>
+		<script type="text/javascript" src="../assets/lib/jquery/jquery.min.js"></script>
 
 		<!-- angular -->
-		<script type="text/javascript" src="../assets/lib/core/angular/angular.min.js"></script>
-	    <script type="text/javascript" src="../assets/lib/core/angular/angular-route.min.js"></script>
-	    <script type="text/javascript" src="../assets/lib/core/angular/angular-animate.min.js"></script>
-	    <script type="text/javascript" src="../assets/lib/core/angular/angular-aria.min.js"></script>
-		<script type="text/javascript" src="../assets/lib/core/angular-sanitize/angular-sanitize.min.js"></script>
-		<script type="text/javascript" src="../assets/lib/core/angular-material/angular-material.min.js"></script>
-		<script type="text/javascript" src="../assets/lib/core/dropzone/dropzone.js"></script>
-		<script type="text/javascript" src="../assets/lib/core/moment/moment.js"></script>
-		<script type="text/javascript" src="../assets/lib/core/angular-moment/angular-moment.min.js"></script>
+		<script type="text/javascript" src="../assets/lib/angular/angular.min.js"></script>
+	    <script type="text/javascript" src="../assets/lib/angular/angular-route.min.js"></script>
+	    <script type="text/javascript" src="../assets/lib/angular/angular-animate.min.js"></script>
+	    <script type="text/javascript" src="../assets/lib/angular/angular-aria.min.js"></script>
+		<script type="text/javascript" src="../assets/lib/angular-sanitize/angular-sanitize.min.js"></script>
+		<script type="text/javascript" src="../assets/lib/angular-material/angular-material.min.js"></script>
+		<script type="text/javascript" src="../assets/lib/moment/moment.js"></script>
+		<script type="text/javascript" src="../assets/lib/angular-moment/angular-moment.min.js"></script>
+	    <script type="text/javascript" src="../assets/lib/identicon/pnglib.js"></script>
+	    <script type="text/javascript" src="../assets/lib/identicon/identicon.js"></script>
+	    <script type="text/javascript" src="../assets/lib/dropzone/dropzone.js"></script>
+	    <script type="text/javascript" src="../assets/lib/angular-identicon/angular-identicon.min.js"></script>
 	    <script type="text/javascript" src="../assets/lib/angular-fullscreen/angular-fullscreen.js"></script>
-
-		<!--uitls -->
-		<script type="text/javascript" src="../assets/lib/core/util/dirPagination.js"></script>
+        <script type="text/javascript" src="../assets/lib/util/dirPagination.js"></script>
 
 		<!-- jszip -->
-		<script type="text/javascript" src="../assets/lib/games/jszip/dist/jszip.min.js"></script>
-		<script type="text/javascript" src="../assets/lib/games/jszip/dist/jszip.utils.js"></script>
+		<script type="text/javascript" src="../assets/lib/jszip/dist/jszip.min.js"></script>
+		<script type="text/javascript" src="../assets/lib/jszip/dist/jszip.utils.js"></script>
 
 		<!-- videogular -->
 		<script type="text/javascript" src="../assets/lib/videos/videogular/videogular.js"></script>
@@ -99,10 +113,12 @@
 		<script type="text/javascript" src="../assets/lib/videos/videogular-overlay-play/vg-overlay-play.js"></script>
 		<script type="text/javascript" src="../assets/lib/videos/videogular-poster/vg-poster.js"></script>
 
-		<!-- app - core -->
+		<!-- app -->
 		<script type="text/javascript" src="../app/application.js"></script>		
+		<script type="text/javascript" src="../app/master/core/controllers/main.ctrl.js"></script>
+		<script type="text/javascript" src="../app/master/core/services/item.service.js"></script>
 		<script type="text/javascript" src="../app/channel/core/controllers/main.ctrl.js"></script>
-		<script type="text/javascript" src="../app/channel/core/controllers/items.ctrl.js"></script>
+		<script type="text/javascript" src="../app/channel/core/controllers/items.ctrl.js"></script>		
 		<script type="text/javascript" src="../app/channel/core/directives/site-header.directive.js"></script>
 		<script type="text/javascript" src="../app/channel/core/directives/my-channel.directive.js"></script>
 		<script type="text/javascript" src="../app/channel/core/directives/side-bar.directive.js"></script>
@@ -115,7 +131,7 @@
 
 		<!-- app - games -->
 		<script type="text/javascript" src="../app/channel/games/directives/game-interface.directive.js"></script>		
-		<script type="text/javascript" src="../app/channel/games/directives/dosbox.directive.js"></script>
+		<script type="text/javascript" src="../app/master/games/directives/dosbox.directive.js"></script>
 		<script type="text/javascript" src="../app/channel/games/directives/executable-file-input.directive.js"></script>
 		<script type="text/javascript" src="../app/channel/games/directives/nes-emulator.directive.js"></script>
 		<script type="text/javascript" src="../app/channel/games/directives/atari-emulator.directive.js"></script>

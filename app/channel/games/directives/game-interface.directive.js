@@ -86,7 +86,7 @@ app.directive('gameInterface', [
 							'<item-form ng-if="formTabs"></item-form>' +
 							'<!-- /form -->' +
 							'<!-- player -->' +
-							'<div id="dosbox-container" ng-if="item.file_type === \'zip\'">' +
+							'<div id="js-dos-container" ng-if="item.file_type === \'zip\'">' +
 								'<dosbox ng-init="initDosBox(item)"></dosbox>' +
 							'</div>' +
 							'<div id="nes-container" ng-if="item.file_type === \'nes\'">' +

@@ -69,7 +69,7 @@ app.directive('gameView', ['$location','$rootScope',
 							'<!-- game -->' +
 							'<md-content style="background-color:transparent;" flex="65" ng-if="game">' +
 								'<!-- dosbox -->' +
-								'<dosbox ng-if="game.file_type === \'zip\'"></dosbox>' +
+								'<dosbox ng-if="game.file_type === \'zip\'" ng-init="initDosBox()"></dosbox>' +
 								'<!-- /dosbox -->' +
 								'<!-- nes -->' +
 								'<nes-emulator ng-if="game.file_type === \'nes\'"></nes-emulator>' +

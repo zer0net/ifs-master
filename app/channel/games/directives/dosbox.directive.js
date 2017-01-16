@@ -61,7 +61,7 @@ app.directive('dosbox', ['$location','$rootScope','$timeout',
 
 		var template = 				
 		'<div id="dosbox-section" class="{{dosboxSize}} md-whiteframe-1dp">' +
-			'<script type="text/javascript" src="assets/lib/games/js-dos/js-dos.js"></script>' +
+			'<script type="text/javascript" src="{{page.site_info.address}}/assets/lib/games/js-dos/js-dos.js"></script>' +
 			'<style type="text/css">' +
 				'.dosbox-overlay {background-image: url("{{item.imgPath}}");}' +
 			'</style>' +

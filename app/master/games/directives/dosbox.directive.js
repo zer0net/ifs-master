@@ -4,30 +4,39 @@ app.directive('dosbox', ['$location','$timeout',
 		var controller = function($scope,$element) {
 
 			// run dosbox
-			$scope.initDosBox = function(){
+			$scope.initDosBox = function(game){
+				// render zip url
+				var zipUrl;
+				if (game) { 
+					$scope.game = game;
+					zipUrl = "/"+$scope.site_address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel+"/uploads/games/"+$scope.game.zip_name;
+				} else {
+					zipUrl = "/"+$scope.site_address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/uploads/games/"+$scope.game.zip_name;
+				}
+				// script url
+				$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/games/js-dos/js-dos.js', 'text/javascript', 'utf-8');
 				// dosbox size
 				$scope.dosboxSize = 'normal';
 				// emulator status 
 				$scope.emulator_status = 'Loading ...';	
-				// dosbox config
-				var dosbox = new Dosbox({
-					id: "dosbox",
-					onrun: function (dosbox, app) {
-						console.log("App '" + app + "' is runned");
-						console.log($scope.game.site_file);
-						$scope.emulator_status = 'Running';
-						$scope.$apply();
-					},
-					onload: function (dosbox) {
-						console.log($scope.game.title + ' running ...');
-						dosbox.run("/"+$scope.site_address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/uploads/games/"+$scope.game.zip_name, "./"+$scope.game.file_name);
-						$scope.emulator_status = 'Extracting ...';
-						$scope.$apply();
-					}
-				});
-
 				// run dosbox					
 				$timeout(function () {
+					// dosbox config
+					var dosbox = new Dosbox({
+						id: "dosbox",
+						onrun: function (dosbox, app) {
+							console.log("App '" + app + "' is runned");
+							console.log($scope.game.site_file);
+							$scope.emulator_status = 'Running';
+							$scope.$apply();
+						},
+						onload: function (dosbox) {
+							console.log($scope.game.title + ' running ...');
+							dosbox.run(zipUrl, "./"+$scope.game.file_name);
+							$scope.emulator_status = 'Extracting ...';
+							$scope.$apply();
+						}
+					});
 					dosbox.ui.start[0].click();
 				});
 			};
@@ -41,8 +50,7 @@ app.directive('dosbox', ['$location','$timeout',
 		};
 
 		var template = 	'<section id="dosbox-section-container">' +	
-							'<div id="dosbox-section" class="{{dosboxSize}} md-whiteframe-1dp" ng-init="initDosBox()">' +
-								'<script type="text/javascript" src="assets/lib/js-dos/js-dos.js"></script>' +
+							'<div id="dosbox-section" class="{{dosboxSize}} md-whiteframe-1dp">' +
 								'<style type="text/css">' +
 									'.dosbox-overlay {background-image: url("{{game.img}}");}' +
 								'</style>' +
