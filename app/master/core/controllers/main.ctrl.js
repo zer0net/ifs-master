@@ -1,5 +1,5 @@
-app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdMedia',
-	function($rootScope,$scope,$location,$mdDialog,$mdMedia) {
+app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdMedia','Item',
+	function($rootScope,$scope,$location,$mdDialog,$mdMedia,Item) {
 
 		/* INIT SITE */
 
@@ -233,53 +233,13 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// add channels items
 			$scope.addChannelItems = function(data,channel,cIndex){
 				Page.cmd("optionalFileList", { address: channel.address, limit:2000 }, function(site_files){
-				
-				
 		      		for (var media_type in data){
-
 		      			if (Object.prototype.toString.call(data[media_type]) === '[object Array]'){
 		      				if ($scope.config.media_types.indexOf(media_type) > -1){
 		      					// loop through items in data
 		      					data[media_type].forEach(function(item,itemIndex){
-
-		      						// create item if in cache
-		      						item.x_is_load = false;
-		      						item.x_peer = 0;
-		      						var path = item.path;
-		      						for (var i = 0, len = site_files.length; i < len; i++) {
-		      						  var inner_path = site_files[i].inner_path;
-		      						  if(path==inner_path)
-		      							{
-		      								item.x_is_load=true;
-		      								item.x_peer=site_files[i].peer;
-		      								break;
-		      							}
-		      						}		
-
-		      						// assign channel obj
-		      						item.channel = channel;
-		      						// genereate unique item id
-		      						item.uid = item.channel.address + item.date_added;															
-		      						// render item's img url
-		      						if(item.imgPath) {
-		      							item.img = '/'+$scope.site_address+'/merged-'+$scope.merger_name+'/'+item.channel.address+'/'+item.imgPath;
-
-		      						} else {
-		      							if (item.file_type === 'sna') {
-		      								item.img = '/'+$scope.site_address+'/assets/img/logo_sna.jpg';
-		      								item.imgSize = 'cover';
-		      							} else if (item.file_type === 'zip'){
-		      								item.img = '/'+$scope.site_address+'/assets/img/logo_dos.gif';
-		      								item.imgSize = 'contain';
-		      							} else if (item.file_type === 'bin'){
-		      								item.img = '/'+$scope.site_address+'/assets/img/logo_atari.gif';
-		      								item.imgSize = 'contain';
-		      							} else if (item.file_type === 'nes'){
-		      								item.img = '/'+$scope.site_address+'/assets/img/logo_nes.png';
-		      								item.imgSize = 'contain';
-		      							}
-		      						}
-
+		      						// render channel item via Item service
+		      						item = Item.renderChannelItem($scope,item,site_files,channel);
 		      						// apply to scope items array						
 		      						if (!$scope[media_type]) $scope[media_type] = [];
 		      						$scope[media_type].push(item);
@@ -288,12 +248,9 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		      							// finish loading
 		      							$scope.finishLoadingChannels(cIndex);
 		      						}
-		      						
 		      					});
 		      				}
 		      			}
-
-
 		      		}
 			    });
 			};
