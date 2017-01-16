@@ -14,11 +14,12 @@ app.directive('nesEmulator', ['$location','$rootScope',
 		        // remove select options
 				nes.ui.romSelect.children().remove();
 				// nes file
-				var nesFile  = "/"+$scope.page.site_info.address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/uploads/games/"+$scope.game.file_name;
+				var nesFile  = "merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/"+$scope.game.path;
 				// create select option
 				$('<option value="'+nesFile+'">'+$scope.game.title+'</option>').appendTo(nes.ui.romSelect);                                						 
 				// select rom
-				nes.ui.romSelect.val(nesFile);						
+				nes.ui.romSelect.val(nesFile);
+				console.log(nesFile);			
 				// load nes
 				nes.ui.loadROM();
 			};

@@ -29,25 +29,7 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$sce','$location','$wi
 				});
 				// get channel data (default - first site in array)
 				$scope.site = $scope.u_sites[0];
-				$scope.getSiteFileList($scope.site);
-				// peers
-				/*$scope.peers = Page.site_info.settings.peers;
-				// user is owner
-				$scope.owner = Page.site_info.settings.own;
-				// settings
-				$scope.settings = Page.site_info.settings;	
-				// optional help
-				$scope.optionalHelp = false;
-				if(site_info.settings.autodownloadoptional) $scope.optionalHelp = site_info.settings.autodownloadoptional;
-				// apply to scope
-				// optional file list
-				Page.cmd("optionalFileList", { address: $scope.site_address, limit:2000 }, function(site_files){				      						      		
-					$scope.optionalFileList = site_files;
-					$scope.$apply(function(){
-						// get jsons
-						$scope.getSitesJsons();
-					});
-				});*/				
+				$scope.getSiteFileList($scope.site);			
 			};
 
 			// get channel data
@@ -55,38 +37,12 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$sce','$location','$wi
 				// optional file list
 				Page.cmd("optionalFileList", { address: site.address, limit:2000 }, function(site_files){				      						      		
 					$scope.optionalFileList = site_files;
-					console.log($scope.optionalFileList);
 					$scope.$apply(function(){
 						// get jsons
 						$scope.getSitesJsons(site);
 					});
 				});
 			};
-
-			// on optional help
-			$scope.onOptionalHelp = function() {				
-				$scope.optionalHelp = true;	
-				 return Page.cmd("OptionalHelpAll", [true, $scope.site_address], (function(_this) {
-		          return function() {
-		            Page.site_info.settings.autodownloadoptional =true;
-		            return true;
-		          };
-		        })(this));
-			};
-
-			// on remove optional help
-			$scope.onRemoveOptionalHelp = function() {
-				
-				Page.cmd("OptionalHelpAll", [false, $scope.site_address], (function(_this) {
-				          return function() {
-				            Page.site_info.settings.autodownloadoptional = false;				           				            
-				          };
-				        })(this));
-
-				//Page.cmd("OptionalHelpRemove", ["uploads"]);		
-				$scope.optionalHelp = false;
-
-			}
 			
 			// get sites jsons
 			$scope.getSitesJsons = function(site){
@@ -94,7 +50,6 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$sce','$location','$wi
 				Page.cmd("fileGet", { "inner_path": 'merged-'+$scope.merger_name+'/'+site.address+'/content.json', "required": false },function(data) {
 		    		// store content.json to scope
 		    		$scope.contentJson = JSON.parse(data);
-		    		console.log($scope.contentJson);
 		    		// get channel.json
 					Page.cmd("fileGet", { "inner_path": 'merged-'+$scope.merger_name+'/'+site.address+'/data/channel.json', "required": false },function(data) {
 						// store channel.json to scope
@@ -172,7 +127,7 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$sce','$location','$wi
 			// update content json in scope
 			$scope.updateContentJson = function(){
 		    	// get content.json & store to scope
-		    	$.getJSON('/'+$scope.site_address+'/content.json',function(data){
+		    	$.getJSON('merged-'+$scope.merger_name+'/'+site.address+'/content.json',function(data){
 		    		$scope.contentJson = data;
 		    	});
 			};
@@ -181,7 +136,7 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$sce','$location','$wi
 			$scope.updateChannelJson = function(){
 				var json_raw = unescape(encodeURIComponent(JSON.stringify($scope.chJson, void 0, '\t')));
 				// write to file - channel.json
-				Page.cmd("fileWrite", [$scope.inner_path, btoa(json_raw)], function(res) {
+				Page.cmd("fileWrite", ['merged-'+$scope.merger_name+'/'+$scope.site.address+'/data/channel.json', btoa(json_raw)], function(res) {
 					// overwrite content.json title & description
 					if ($scope.chJson){
 						$scope.contentJson.title = $scope.chJson.channel.name;
@@ -189,14 +144,14 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$sce','$location','$wi
 					}
 					var json_raw = unescape(encodeURIComponent(JSON.stringify($scope.contentJson, void 0, '\t')));
 					// write to file - content.json
-					Page.cmd("fileWrite", ['content.json',btoa(json_raw)],function(res){
+					Page.cmd("fileWrite", ['merged-'+$scope.merger_name+'/'+$scope.site.address+'/content.json',btoa(json_raw)],function(res){
 						// sign & publish
-						Page.cmd("sitePublish",["stored"], function(res){							
+						Page.cmd("sitePublish",["stored",'merged-'+$scope.merger_name+'/'+$scope.site.address+'/content.json'], function(res){							
 							if (res === 'ok'){
 								// apply to scope
 								$scope.$apply(function(){
 									Page.cmd("wrapperNotification", ["done", "Channel Updated!",10000]);
-									$window.location.href = '/'+ $scope.site_address +'/';
+									$window.location.href = '/'+ $scope.page.site_info.address +'/user/';
 								});
 							} else {
 								Page.cmd("wrapperNotification", ["info", "Please clone this site to create your own channel",10000]);							
@@ -231,6 +186,29 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$sce','$location','$wi
 			// finish loading
 			$scope.finishLoading = function(){
 				$scope.loading = false;
+			};
+
+
+			// on optional help
+			$scope.onOptionalHelp = function() {				
+				$scope.optionalHelp = true;	
+				 return Page.cmd("OptionalHelpAll", [true, $scope.site_address], (function(_this) {
+		          return function() {
+		            Page.site_info.settings.autodownloadoptional =true;
+		            return true;
+		          };
+		        })(this));
+			};
+
+			// on remove optional help
+			$scope.onRemoveOptionalHelp = function() {
+				Page.cmd("OptionalHelpAll", [false, $scope.site_address], (function(_this) {
+				          return function() {
+				            Page.site_info.settings.autodownloadoptional = false;				           				            
+				          };
+				        })(this));
+				//Page.cmd("OptionalHelpRemove", ["uploads"]);		
+				$scope.optionalHelp = false;
 			};
 
 		    // load script dynamically

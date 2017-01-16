@@ -61,7 +61,7 @@ app.directive('siteHeader', ['$rootScope','$location','$mdDialog','$mdMedia',
 									    	'</div>' +
 									    '</md-toolbar>' +
 									    '<md-dialog-content layout-padding>' +
-											'<multiple-files-upload ng-init="init(items.chJson)"></multiple-files-upload>'
+											'<multiple-files-upload ng-init="init(items.chJson,items.site,items.merger_name)"></multiple-files-upload>'
 									    '</md-dialog-content>' +
 									'</md-dialog>';
 
@@ -74,7 +74,9 @@ app.directive('siteHeader', ['$rootScope','$location','$mdDialog','$mdMedia',
 					fullscreen: useFullScreen,
 					locals: {
 						items: {
-							chJson:$scope.chJson
+							chJson:$scope.chJson,
+							site:$scope.site,
+							merger_name:$scope.merger_name
 						}
 					}
 			    });
@@ -166,10 +168,10 @@ app.directive('siteHeader', ['$rootScope','$location','$mdDialog','$mdMedia',
 
 		// site header template
 		var template = 	
-		'<md-toolbar ng-show="chJson" layout-padding class="md-hue-2 header" layout="row">' + 			
+		'<md-toolbar ng-if="site" layout-padding class="md-hue-2 header" layout="row">' + 			
 			'<div class="col-xs-5">' + 
 				/*'<img ng-src="uploads/images/{{chJson.channel.img ? chJson.channel.img : \'x-avatar.png\'}}" class="imgFilehubLogo"/>'+ */
-				'<img ng-src="{{chJson.channel.img ? \'uploads/images/\'+chJson.channel.img : \'assets/img/x-avatar.png\'}}" class="imgFilehubLogo"/>' +
+				'<img ng-src="{{chJson.channel.img ? \'uploads/images/\'+chJson.channel.img : \'../assets/channel/img/x-avatar.png\'}}" class="imgFilehubLogo"/>' +
 				'<h3><a href="/{{master_address}}">{{master_name}}</a></h3>' + 
 				'<div class="site-title">' + 
 					'<h3>' + 

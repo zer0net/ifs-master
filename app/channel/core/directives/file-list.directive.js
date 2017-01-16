@@ -318,8 +318,8 @@ app.directive('fileList', ['$mdDialog','$mdMedia',
 										'</tr>' +
 									'</thead>' +
 									'<tr dir-paginate="item in games|orderBy:sortKey:reverse|filter:query |itemsPerPage:itemsPerPage track by $index">' +
-										'<td ng-if="item.file_type === \'zip\'" ng-click="itemPreviewDialog($event,item)">{{item.zip_name}}</td>' +
-										'<td ng-if="item.file_type !== \'zip\'" ng-click="itemPreviewDialog($event,item)">{{item.file_name}}</td>' +
+										'<td ng-if="item.file_type !== \'zip\'"><a href="/{{page.site_info.address}}/view.html?type={{item.media_type}}-c={{site.address}}g={{item.game_id}}z=f={{item.file_name}}">{{item.file_name}}</a></td>' +
+										'<td ng-if="item.file_type === \'zip\'"><a href="/{{page.site_info.address}}/view.html?type={{item.media_type}}-c={{site.address}}g={{item.game_id}}z={{item.zip_name}}f={{item.file_name}}">{{item.zip_name}}</a></td>' +
 										'<td><span ng-if="item.x_is_load" style="color:green">\u2713</span></td>' +
 										'<td><span ng-if="item.x_peer" >{{item.x_peer}}</span> </td>' +
 								    	'<td>{{item.file_size|filesize}}</td>' +

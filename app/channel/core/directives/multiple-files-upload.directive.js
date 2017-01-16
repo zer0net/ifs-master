@@ -15,10 +15,12 @@ app.directive('multipleFilesUpload', ['$location',
 			};
 
 
-			$scope.init = function(chJson){
-				$scope.chJson = chJson;				
+			$scope.init = function(chJson,site,merger_name){
+				// bind site & chJson to scope
+				$scope.chJson = chJson;		
+				$scope.site = site;
+				$scope.merger_name = merger_name;
 				// items upload config
-
 				$scope.itemsUploadConfig = {
 				    'options': { // passed into the Dropzone constructor
 				      'url': 'content.json',
@@ -77,6 +79,7 @@ app.directive('multipleFilesUpload', ['$location',
 
 			// upload files
 			$scope.uploadFiles = function(){
+				console.log($scope);
 				$scope.file_index = 0;
 				$scope.uploadFile($scope.files[$scope.file_index]);
 			};
@@ -136,7 +139,7 @@ app.directive('multipleFilesUpload', ['$location',
 					item[item_id_name] = next_item_id;
 					
 					// write to file
-					Page.cmd("fileWrite",[item.path, file.data.split('base64,')[1]], function(res) {
+					Page.cmd("fileWrite",['merged-'+$scope.merger_name+'/'+$scope.site.address+'/'+item.path, file.data.split('base64,')[1]], function(res) {
 						$scope.$apply(function(){
 							// file state
 							file.state = 'done!';
@@ -146,7 +149,6 @@ app.directive('multipleFilesUpload', ['$location',
 							var media_type = item.media_type + 's';
 							if (!$scope.chJson[media_type]){$scope.chJson[media_type] = [];}
 							$scope.chJson[media_type].push(item);
-							
 							// upload next file
 							$scope.uploadNextFile();
 						});

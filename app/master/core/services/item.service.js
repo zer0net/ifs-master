@@ -37,16 +37,16 @@ app.factory('Item', [
 				item.img = '/'+$scope.site_address+'/merged-'+$scope.merger_name+'/'+item.channel.address+'/'+item.imgPath;
 			} else {
 				if (item.file_type === 'sna') {
-					item.img = '/'+$scope.site_address+'/assets/img/logo_sna.jpg';
+					item.img = '/'+$scope.site_address+'/assets/master/img/logo_sna.jpg';
 					item.imgSize = 'cover';
 				} else if (item.file_type === 'zip'){
-					item.img = '/'+$scope.site_address+'/assets/img/logo_dos.gif';
+					item.img = '/'+$scope.site_address+'/assets/master/img/logo_dos.gif';
 					item.imgSize = 'contain';
 				} else if (item.file_type === 'bin'){
-					item.img = '/'+$scope.site_address+'/assets/img/logo_atari.gif';
+					item.img = '/'+$scope.site_address+'/assets/master/img/logo_atari.gif';
 					item.imgSize = 'contain';
 				} else if (item.file_type === 'nes'){
-					item.img = '/'+$scope.site_address+'/assets/img/logo_nes.png';
+					item.img = '/'+$scope.site_address+'/assets/master/img/logo_nes.png';
 					item.imgSize = 'contain';
 				}
 			}
