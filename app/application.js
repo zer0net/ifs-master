@@ -3,7 +3,6 @@ var app = angular.module('PPLOAD_MASTER',[
 	'ngSanitize',
 	'angularMoment',
 	'ui.identicon',
-	'FBAngular',
 	'angularUtils.directives.dirPagination',
     'com.2fdevs.videogular',
     'com.2fdevs.videogular.plugins.controls',

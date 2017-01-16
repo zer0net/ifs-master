@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html ng-app="PPLOAD_MASTER" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+	<!-- CSS -->
+		<!-- lib -->
+		<link href="../assets/lib/angular-material/angular-material.css" rel="stylesheet" type="text/css"/>
+		<link href="../assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+		<!-- app -->
+		<link href="../assets/channel/css/style.css" rel="stylesheet" type="text/css"/>
+		<link href="../assets/channel/css/style_extra.css" rel="stylesheet" type="text/css"/>
+	<!-- /CSS -->
+
+	<!-- HTML5 Shim -->
+	<!--[if lt IE 9]>
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<!--<base href="/">-->
+
+</head>
+
+<body class="ng-cloak" ng-controller="MainCtrl" ng-init="init()">
+
+	<!-- HEADER -->
+	<site-header></site-header>
+	<!-- /HEADER -->
+
+	<section ng-controller="ItemsCtrl" layout="row" class="container">
+
+    	<!-- loading -->
+		<div layout="column" ng-show="loading" flex="100">
+			<div layout="column" flex="100" style="text-align:center;">
+				<span ng-hide="pendingItems"><b ng-bind="msg"></b></span>
+			</div>
+			<div layout="row" flex="100" layout-align="space-around">
+				<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+			</div>
+		</div>
+		<!-- /loading -->
+
+	    <!-- MAIN -->
+	    <md-content ng-if="chJson" ng-hide="loading" flex layout-padding class="main-content">
+			<file-list></file-list>
+	    </md-content>
+	    <!-- /MAIN -->
+
+	</section>
+
+	<!-- JS -->
+
+		<!-- zeronet -->
+		<script type="text/javascript" src="../assets/lib/zeronet/class.js"></script>
+		<script type="text/javascript" src="../assets/lib/zeronet/zeroframe.js"></script>
+		<script type="text/javascript" src="../assets/lib/zeronet/zerochat.js"></script>
+
+		<!-- jquery -->
+		<script type="text/javascript" src="../assets/lib/jquery/jquery.min.js"></script>
+
+		<!-- angular -->
+		<script type="text/javascript" src="../assets/lib/angular/angular.min.js"></script>
+	    <script type="text/javascript" src="../assets/lib/angular/angular-route.min.js"></script>
+	    <script type="text/javascript" src="../assets/lib/angular/angular-animate.min.js"></script>
+	    <script type="text/javascript" src="../assets/lib/angular/angular-aria.min.js"></script>
+		<script type="text/javascript" src="../assets/lib/angular-sanitize/angular-sanitize.min.js"></script>
+		<script type="text/javascript" src="../assets/lib/angular-material/angular-material.min.js"></script>
+		<script type="text/javascript" src="../assets/lib/moment/moment.js"></script>
+		<script type="text/javascript" src="../assets/lib/angular-moment/angular-moment.min.js"></script>
+	    <script type="text/javascript" src="../assets/lib/identicon/pnglib.js"></script>
+	    <script type="text/javascript" src="../assets/lib/identicon/identicon.js"></script>
+	    <script type="text/javascript" src="../assets/lib/angular-identicon/angular-identicon.min.js"></script>
+	    <script type="text/javascript" src="../assets/lib/angular-fullscreen/angular-fullscreen.js"></script>
+        <script type="text/javascript" src="../assets/lib/util/dirPagination.js"></script>
+
+
+		<!--uitls -->		
+		<script type="text/javascript" src="../assets/lib/util/dirPagination.js"></script>
+
+		<!-- jszip - reading zip files -->
+		<script type="text/javascript" src="../assets/lib/jszip/dist/jszip.min.js"></script>
+		<script type="text/javascript" src="../assets/lib/jszip/dist/jszip.utils.js"></script>
+		
+		<!-- videogular -->
+		<script type="text/javascript" src="../assets/lib/videos/videogular/videogular.js"></script>
+		<script type="text/javascript" src="../assets/lib/videos/videogular-controls/vg-controls.js"></script>
+		<script type="text/javascript" src="../assets/lib/videos/videogular-buffering/vg-buffering.js"></script>
+		<script type="text/javascript" src="../assets/lib/videos/videogular-overlay-play/vg-overlay-play.js"></script>
+		<script type="text/javascript" src="../assets/lib/videos/videogular-poster/vg-poster.js"></script>
+
+		<!-- app -->
+		<script type="text/javascript" src="../app/application.js"></script>		
+		<script type="text/javascript" src="../app/channel/core/controllers/main.ctrl.js"></script>
+		<script type="text/javascript" src="../app/channel/core/controllers/items.ctrl.js"></script>
+		<script type="text/javascript" src="../app/channel/core/directives/site-header.directive.js"></script>		
+		<script type="text/javascript" src="../app/channel/core/directives/my-channel.directive.js"></script>
+		<script type="text/javascript" src="../app/channel/core/directives/multiple-files-upload.directive.js"></script>
+		<script type="text/javascript" src="../app/channel/core/directives/dropzone.directive.js"></script>
+		<script type="text/javascript" src="../app/channel/core/directives/file-list.directive.js"></script>
+		<script type="text/javascript" src="../app/channel/core/filters/file-size.filter.js"></script>
+
+		<!-- app games -->
+		<script type="text/javascript" src="../app/channel/games/directives/dosbox.directive.js"></script>
+		<script type="text/javascript" src="../app/channel/games/directives/nes-emulator.directive.js"></script>
+		<script type="text/javascript" src="../app/channel/games/directives/atari-emulator.directive.js"></script>
+		<script type="text/javascript" src="../app/channel/games/directives/cpc-emulator.directive.js"></script>
+
+		<!-- app videos -->
+		<script type="text/javascript" src="../app/channel/videos/directives/video-player.directive.js"></script>
+
+	<!-- /JS -->  
+
+</body>
+
+</html>
