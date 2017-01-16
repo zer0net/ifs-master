@@ -105,6 +105,7 @@ app.directive('channelRegister', [
 			// add channel
 			$scope.addChannel = function() {
 				// get site info
+				$scope.showLoadingMessage('Trying to fetch Channel data...');
 				Page.cmd("siteInfo",{},function(site_info){
 					Page.site_info = site_info;
 					// if user has no cert user id
@@ -114,12 +115,12 @@ app.directive('channelRegister', [
 					} else {
 						// check if channel exists in sites array
 						var channelExists = false;
-						if ($scope.channels){
-						
+						if ($scope.channels){						
 							// loop though channel array
 							$scope.channels.forEach(function(channel,index){
 								// if channel exists in channel array
 								if (channel.channel_address == $scope.channel_id){
+									$scope.finishedLoading();
 									channelExists = true;
 									Page.cmd("wrapperNotification", ["info", "Channel "+$scope.channel.channel_name+" ("+$scope.channel_id+") already exists in database", 10000]);
 								}
@@ -140,6 +141,7 @@ app.directive('channelRegister', [
 			$scope.createChannel = function() {
 				// get file
 				var inner_path = "data/users/"+Page.site_info.auth_address+"/channel.json";
+				var inner_path_content = "data/users/"+Page.site_info.auth_address+"/content.json";
 				Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(data) {
 		        	// data
 					//if (data) { data = JSON.parse(data); }
@@ -170,11 +172,11 @@ app.directive('channelRegister', [
 					// update data
 					data.channel.push(channel);
 					data.next_channel_id += 1;
-					// write to file
+					// write to file channel.json
 					var json_raw = unescape(encodeURIComponent(JSON.stringify(data, void 0, '\t')));
 					Page.cmd("fileWrite", [inner_path, btoa(json_raw)], function(res) {
-						// sign & publish site
-						Page.cmd("sitePublish",{"inner_path":inner_path}, function(res) {
+						// sign & publish site content.json
+						Page.cmd("sitePublish",{"inner_path":inner_path_content}, function(res) {
 							// apply to scope
 							$scope.$apply(function() {
 								Page.cmd("wrapperNotification", ["done", "Channel Added!", 10000]);
@@ -182,12 +184,14 @@ app.directive('channelRegister', [
 								// apply channel to channels array
 								if($scope.channelsAll){
 									$scope.channelsAll.push(channel);								
-								}else
-								{
+								}else{								
 									$scope.channelsAll = new Array();
 									$scope.channelsAll.push(channel);
 								}
 							});
+							// finish loading...
+							$scope.finishedLoading();
+							$scope.channel_id='';
 						});
 					});
 			    });
@@ -211,11 +215,9 @@ app.directive('channelRegister', [
 					// remove channel from user's channels.json
 					//data.channel.splice(channelIndex,1);
 					// toggle channel
-					if(data.channel[channelIndex].hide==0)
-					{
+					if(data.channel[channelIndex].hide==0) {					
 						data.channel[channelIndex].hide=1;
-					}else
-					{
+					}else{					
 						data.channel[channelIndex].hide=0;
 					}
 					// write to file
