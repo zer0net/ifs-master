@@ -8,6 +8,9 @@
 		<link href="../assets/lib/angular-material/angular-material.css" rel="stylesheet" type="text/css"/>
 		<link href="../assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 		<!-- app -->
+		<link href="../assets/master/css/simple-sidebar.css" rel="stylesheet" type="text/css"/>
+		<link href="../assets/master/css/style.css" rel="stylesheet" type="text/css"/>
+		<link href="../assets/master/css/style_extra.css" rel="stylesheet" type="text/css"/>
 		<link href="../assets/channel/css/style.css" rel="stylesheet" type="text/css"/>
 		<link href="../assets/channel/css/style_extra.css" rel="stylesheet" type="text/css"/>
 	<!-- /CSS -->
@@ -21,60 +24,90 @@
 </head>
 
 <body class="ng-cloak" ng-controller="MainCtrl" ng-init="init()">
+
+    <!-- wrapper -->
+    <div id="wrapper" class="toggled">
+
+        <!-- sidebar -->
+        <sidebar></sidebar>
+        <!-- /sidebar -->
+
+        <!-- page content -->
+        <div id="page-content-wrapper" style="padding-right: 0;">
+            <div class="container-fluid" style="padding-left: 0px; padding-right: 0;">
+                <div class="row">
+                    <div class="col-lg-12">
 	
-	<div layout="column" ng-show="loading" flex>
-		<div layout="column" flex="100" style="text-align:center;">
-			<span><b ng-bind="msg"></b></span>
-		</div>
-		<div layout="row" flex="100" layout-align="space-around">
-			<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-		</div>
-	</div>
+					<!-- SITE HEADER -->
+					<site-header></site-header>
+					<!-- /SITE HEADER -->
 
-	<section ng-if="channels" ng-hide="loading" class="wrapper" ng-controller="ChannelMainCtrl" ng-init="init()">
+					<section class="wrapper" id="user-channel-wrapper" >
 
-		<!-- HEADER -->
-		<site-header></site-header>
-		<!-- /HEADER -->
+						<div layout="column" ng-show="loading" flex>
+							<div layout="column" flex="100" style="text-align:center;">
+								<span><b ng-bind="msg"></b></span>
+							</div>
+							<div layout="row" flex="100" layout-align="space-around">
+								<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+							</div>
+						</div>
 
-		<!-- MAIN -->
-		<section class="container edit-item-view" layout="column" 
-			ng-controller="ItemsCtrl" ng-if="chJson" ng-init="getItem()">
+						<section ng-if="channels" ng-hide="loading" ng-controller="ChannelMainCtrl" ng-init="init()">
 
-			<!-- loading -->
-			<div layout="column" ng-show="loading" flex>
-				<div layout="column" flex="100" style="text-align:center;"><b ng-bind="msg"></b></div>
-				<div layout="row" flex="100" layout-align="space-around">
-					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-				</div>
-			</div>
-			<!-- /loading -->
+							<!-- CHANNEL HEADER -->
+							<channel-site-header></channel-site-header>
+							<!-- /CHANNEL HEADER -->
 
-			<!-- edit item section -->
-			<md-content class="edit-item-section" edit-item  ng-init="init()" ng-hide="loading" ng-if="item" layout="row" flex>
-				<!-- item sidebar -->
-				<side-bar></side-bar>
-				<!-- /item sidebar -->
-				<!-- item main -->
-				<section flex="70" layout="column" class="item-main" style="position: relative;" id="item-upload-form" layout-padding>
-	        		<!-- game interface -->
-	        		<game-interface ng-if="item.media_type === 'game'"></game-interface>
-	        		<!-- /game interface -->
-	        		<!-- video interface -->
-	        		<video-interface ng-if="item.media_type === 'video'"></video-interface>
-	        		<!-- /video interface -->
-		            <md-button flex="100" style="margin: 16px 0;" class="md-primary md-raised edgePadding pull-right" ng-click="onUpdateItem()">
-		            	<label>Update {{item.media_type}}</label>
-		            </md-button>
-				</section>
-				<!-- /item main -->
-			</md-content>
-			<!-- /edit item section -->
+							<!-- MAIN -->
+							<section class="container edit-item-view" layout="column" 
+								ng-controller="ItemsCtrl" ng-if="chJson" ng-init="getItem()">
 
-		</section>
-		<!-- /MAIN -->
+								<!-- loading -->
+								<div layout="column" ng-show="loading" flex>
+									<div layout="column" flex="100" style="text-align:center;"><b ng-bind="msg"></b></div>
+									<div layout="row" flex="100" layout-align="space-around">
+										<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+									</div>
+								</div>
+								<!-- /loading -->
 
-	</section>
+								<!-- edit item section -->
+								<md-content class="edit-item-section" edit-item  ng-init="init()" ng-hide="loading" ng-if="item" layout="row" flex>
+									<!-- item sidebar -->
+									<side-bar></side-bar>
+									<!-- /item sidebar -->
+									<!-- item main -->
+									<section flex="70" layout="column" class="item-main" style="position: relative;" id="item-upload-form" layout-padding>
+						        		<!-- game interface -->
+						        		<game-interface ng-if="item.media_type === 'game'"></game-interface>
+						        		<!-- /game interface -->
+						        		<!-- video interface -->
+						        		<video-interface ng-if="item.media_type === 'video'"></video-interface>
+						        		<!-- /video interface -->
+							            <md-button flex="100" style="margin: 16px 0;" class="md-primary md-raised edgePadding pull-right" ng-click="onUpdateItem()">
+							            	<label>Update {{item.media_type}}</label>
+							            </md-button>
+									</section>
+									<!-- /item main -->
+								</md-content>
+								<!-- /edit item section -->
+
+							</section>
+							<!-- /MAIN -->
+
+						</section>
+
+					</section>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /page content -->
+
+    </div>
+    <!-- wrapper -->
 
 	<!-- JS -->
 
@@ -116,10 +149,11 @@
 		<!-- app -->
 		<script type="text/javascript" src="../app/application.js"></script>		
 		<script type="text/javascript" src="../app/master/core/controllers/main.ctrl.js"></script>
+		<script type="text/javascript" src="../app/master/core/directives/site-header.directive.js"></script>
 		<script type="text/javascript" src="../app/master/core/services/item.service.js"></script>
 		<script type="text/javascript" src="../app/channel/core/controllers/main.ctrl.js"></script>
 		<script type="text/javascript" src="../app/channel/core/controllers/items.ctrl.js"></script>		
-		<script type="text/javascript" src="../app/channel/core/directives/site-header.directive.js"></script>
+		<script type="text/javascript" src="../app/channel/core/directives/channel-site-header.directive.js"></script>
 		<script type="text/javascript" src="../app/channel/core/directives/my-channel.directive.js"></script>
 		<script type="text/javascript" src="../app/channel/core/directives/side-bar.directive.js"></script>
 		<script type="text/javascript" src="../app/channel/core/directives/edit-item.directive.js"></script>
@@ -139,7 +173,7 @@
 
 		<!-- app - videos -->
 		<script type="text/javascript" src="../app/channel/videos/directives/video-interface.directive.js"></script>
-		<script type="text/javascript" src="../app/channel/videos/directives/video-player.directive.js"></script>
+		<script type="text/javascript" src="../app/master/videos/directives/video-player.directive.js"></script>
 
 	<!-- /JS -->  
 

@@ -1,4 +1,4 @@
-app.directive('siteHeader', ['$rootScope','$location','$mdDialog','$mdMedia',
+app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMedia',
 	function($rootScope,$location,$mdDialog,$mdMedia) {
 
 		// site header controller

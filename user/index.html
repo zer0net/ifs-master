@@ -8,6 +8,9 @@
 		<link href="../assets/lib/angular-material/angular-material.css" rel="stylesheet" type="text/css"/>
 		<link href="../assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 		<!-- app -->
+		<link href="../assets/master/css/simple-sidebar.css" rel="stylesheet" type="text/css"/>
+		<link href="../assets/master/css/style.css" rel="stylesheet" type="text/css"/>
+		<link href="../assets/master/css/style_extra.css" rel="stylesheet" type="text/css"/>
 		<link href="../assets/channel/css/style.css" rel="stylesheet" type="text/css"/>
 		<link href="../assets/channel/css/style_extra.css" rel="stylesheet" type="text/css"/>
 	<!-- /CSS -->
@@ -21,44 +24,70 @@
 </head>
 
 <body class="ng-cloak" ng-controller="MainCtrl" ng-init="init()">
-	
-	<div layout="column" ng-show="loading" flex>
-		<div layout="column" flex="100" style="text-align:center;">
-			<span><b ng-bind="msg"></b></span>
-		</div>
-		<div layout="row" flex="100" layout-align="space-around">
-			<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-		</div>
-	</div>
 
-	<section ng-if="channels" ng-hide="loading" class="wrapper" ng-controller="ChannelMainCtrl" ng-init="init()">
+    <!-- wrapper -->
+    <div id="wrapper" class="toggled">
+        <!-- sidebar -->
+        <sidebar></sidebar>
+        <!-- /sidebar -->
+        <!-- page Content -->
+        <div id="page-content-wrapper" style="padding-right: 0;">
+            <div class="container-fluid" style="padding-left: 0px; padding-right: 0;">
+                <div class="row">
+                    <div class="col-lg-12">
 
-		<!-- HEADER -->
-		<site-header></site-header>
-		<!-- /HEADER -->
+						<!-- SITE HEADER -->
+						<site-header></site-header>
+						<!-- /SITE HEADER -->
+						
+						<section class="wrapper" id="user-channel-wrapper">
 
-		<section ng-controller="ItemsCtrl" layout="row" class="container">
+							<div layout="column" ng-show="loading" flex>
+								<div layout="column" flex="100" style="text-align:center;">
+									<span><b ng-bind="msg"></b></span>
+								</div>
+								<div layout="row" flex="100" layout-align="space-around">
+									<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+								</div>
+							</div>
 
-	    	<!-- loading -->
-			<div layout="column" ng-show="loading" flex="100">
-				<div layout="column" flex="100" style="text-align:center;">
-					<span ng-hide="pendingItems"><b ng-bind="msg"></b></span>
-				</div>
-				<div layout="row" flex="100" layout-align="space-around">
-					<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-				</div>
-			</div>
-			<!-- /loading -->
+							<section ng-if="channels" ng-hide="loading" class="wrapper" id="user-channel-wrapper" ng-controller="ChannelMainCtrl" ng-init="init()">
 
-		    <!-- MAIN -->
-		    <md-content ng-if="chJson" ng-hide="loading" flex layout-padding class="main-content">
-				<file-list></file-list>
-		    </md-content>
-		    <!-- /MAIN -->
+								<!-- CHANNEL HEADER -->
+								<channel-site-header></channel-site-header>
+								<!-- /CHANNEL HEADER -->
 
-		</section>
-	
-	</section>
+								<section ng-controller="ItemsCtrl" layout="row" class="container">
+
+							    	<!-- loading -->
+									<div layout="column" ng-show="loading" flex="100">
+										<div layout="column" flex="100" style="text-align:center;">
+											<span ng-hide="pendingItems"><b ng-bind="msg"></b></span>
+										</div>
+										<div layout="row" flex="100" layout-align="space-around">
+											<md-progress-circular md-mode="indeterminate"></md-progress-circular>
+										</div>
+									</div>
+									<!-- /loading -->
+
+								    <!-- MAIN -->
+								    <md-content ng-if="chJson" ng-hide="loading" flex layout-padding class="main-content">
+										<file-list></file-list>
+								    </md-content>
+								    <!-- /MAIN -->
+
+								</section>
+							
+							</section>
+
+						</section>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 	<!-- JS -->
 
@@ -106,17 +135,16 @@
 		<script type="text/javascript" src="../app/application.js"></script>		
 		<script type="text/javascript" src="../app/master/core/controllers/main.ctrl.js"></script>
 		<script type="text/javascript" src="../app/master/core/services/item.service.js"></script>
+		<script type="text/javascript" src="../app/master/core/directives/site-header.directive.js"></script>
+		<script type="text/javascript" src="../app/master/core/directives/sidebar.directive.js"></script>
 		<script type="text/javascript" src="../app/channel/core/controllers/main.ctrl.js"></script>
 		<script type="text/javascript" src="../app/channel/core/controllers/items.ctrl.js"></script>
-		<script type="text/javascript" src="../app/channel/core/directives/site-header.directive.js"></script>		
+		<script type="text/javascript" src="../app/channel/core/directives/channel-site-header.directive.js"></script>		
 		<script type="text/javascript" src="../app/channel/core/directives/my-channel.directive.js"></script>
 		<script type="text/javascript" src="../app/channel/core/directives/multiple-files-upload.directive.js"></script>
 		<script type="text/javascript" src="../app/channel/core/directives/dropzone.directive.js"></script>
 		<script type="text/javascript" src="../app/channel/core/directives/file-list.directive.js"></script>
 		<script type="text/javascript" src="../app/channel/core/filters/file-size.filter.js"></script>
-
-		<!-- app videos -->
-		<script type="text/javascript" src="../app/channel/videos/directives/video-player.directive.js"></script>
 
 	<!-- /JS -->  
 

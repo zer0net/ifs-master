@@ -28,12 +28,8 @@ app.directive('videoInterface', ['$sce',
 					}
 				];
 
-				// if mode is create
-				if ($scope.mode === 'create'){
-					$scope.video = $sce.trustAsResourceUrl($scope.item.file);
-				} else {
-					$scope.video = '/'+$scope.site_address+'/uploads/videos/'+$scope.item.file_name;
-				}
+				$scope.video = '/' + $scope.page.site_info.address + '/merged-' + $scope.merger_name + '/'+$scope.site.address+'/uploads/videos/'+$scope.item.file_name;
+
 				// read video file
 				$scope.readVideoFile();
 			};
@@ -51,7 +47,13 @@ app.directive('videoInterface', ['$sce',
 					],
 					theme: "/" + $scope.site_address + "/assets/lib/videos/videogular-themes-default/videogular.css"
 				};
+				console.log($scope.player);
 			};
+
+		    // on hide spinner
+		    $scope.onHideSpinner = function() {
+		    	$scope.player.done = true;
+		    };
 
 		};
 
@@ -60,7 +62,7 @@ app.directive('videoInterface', ['$sce',
 							'<item-form ng-if="formTabs"></item-form>' +
 							'<!-- /form -->' +
 							'<!-- player -->' +
-							'<video-player></video-player>' +
+							'<video-player ng-init="initVideoPlayer(player)"></video-player>' +
 							'<!-- /player -->' +
 						'</div>';
 

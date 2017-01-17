@@ -3,12 +3,10 @@ app.directive('videoPlayer', ['$sce','$timeout',
 
 		// video interface player
 		var controller = function($scope,$element) {
-			
-			// init video player
 			$scope.initVideoPlayer = function(player){
+				console.log(player);
 				$scope.player = player;
 			};
-
 			// on player ready
 			$scope.onPlayerReady = function($API){
 				$timeout(function () {
@@ -17,15 +15,9 @@ app.directive('videoPlayer', ['$sce','$timeout',
 				}, 2000);
 			};
 
-		    // on hide spinner
-		    $scope.onHideSpinner = function() {
-		    	$scope.player.done = true;
-		    };
-
 		};
 
-		var template =	'<div>'+
-						'<videogular ng-if="player"' +
+		var template =	'<videogular ng-if="player"' +
 							'vg-auto-play="player.autoPlay" ' +
 							'vg-player-ready="onPlayerReady($API)" ' +
 							'vg-error="onPlayerError($event)"' +
@@ -51,8 +43,7 @@ app.directive('videoPlayer', ['$sce','$timeout',
 							'<vg-poster vg-url="player.plugins.poster" ng-if="player.plugins"></vg-poster>' +
 							'<vg-overlay-play ng-hide="player.error"></vg-overlay-play>' +
 							'<vg-buffering></vg-buffering>' +
-						'</videogular>' +
-						'</div>';
+						'</videogular>';
 
 		return {
 			restrict: 'AE',

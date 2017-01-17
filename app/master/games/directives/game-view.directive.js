@@ -78,7 +78,7 @@ app.directive('gameView', ['$location','$rootScope',
 								'<cpc-emulator ng-if="game.file_type === \'sna\'"  ng-init="initCpcEmulator()"></cpc-emulator>' +
 								'<!-- /cpc -->' +
 								'<!-- atari -->' +
-								'<atari-emulator ng-if="game.file_type === \'bin\' ng-init="initAtariEmulator()""></atari-emulator>' +
+								'<atari-emulator ng-if="game.file_type === \'bin\'" ng-init="initAtariEmulator()"></atari-emulator>' +
 								'<!-- atari -->' +
 								'<hr class="divider"/>' +
 								'<!-- info -->' +

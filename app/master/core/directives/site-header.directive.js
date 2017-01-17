@@ -139,8 +139,9 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope',
         					'</div>' +        					
       					'</form>' +
   						'<ul class="nav navbar-nav navbar-right">'+  	
-  						'<li><a ng-click="showInfoModal(ev)" >FAQ</a></li>'+  
-						'<li><a href="register.html">REGISTER</button></a></li>'+  												
+	  						'<li><a href="/{{page.site_info.address}}/user/">USER</a></li>'+  
+	  						'<li><a ng-click="showInfoModal(ev)" >FAQ</a></li>'+  
+							'<li><a href="/{{page.site_info.address}}/register.html">REGISTER</button></a></li>'+  												
 						'</ul>'+    					
   						'</div></div>'+
 					'</nav>';

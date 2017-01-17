@@ -99,7 +99,7 @@ app.directive('multipleFilesUpload', ['$location',
 					// item obj
 					var item = {
 						"file_type":file.file_type,
-						"channel": $location.$$absUrl.split('0/')[1].split('/')[0],
+						"channel": $scope.site.address,
 						"title": file.name.split('.'+file.file_type)[0],
 						"date_added": +(new Date),
 						"published":false
@@ -137,6 +137,7 @@ app.directive('multipleFilesUpload', ['$location',
 						next_item_id = $scope.chJson.next_item_id;
 					}
 					item[item_id_name] = next_item_id;
+					console.log(item);
 					
 					// write to file
 					Page.cmd("fileWrite",['merged-'+$scope.merger_name+'/'+$scope.site.address+'/'+item.path, file.data.split('base64,')[1]], function(res) {

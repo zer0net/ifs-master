@@ -78,6 +78,9 @@ md-dialog-content {
 }
 /** /GENERAL **/
 /** TEMPLATE **/
+#user-channel-wrapper {
+  margin-top: 51px;
+}
 .main-content {
   background-color: #f7f7f7;
 }
@@ -454,6 +457,13 @@ md-dialog.upload-dialog #multiple-files-upload ul li span {
 }
 /* /MULTIPLE FILE UPLOAD */
 /* FILE LIST */
+#file-list .select-channel {
+  width: 100%;
+  margin-bottom: 20px;
+}
+#file-list .select-channel select {
+  width: 50%;
+}
 #file-list #file-search-form span.btn {
   margin-left: 5px;
 }

@@ -18,7 +18,22 @@ app.directive('fileList', ['$mdDialog','$mdMedia',
 					$scope.reverse=false;					
 					if ($scope.sortKey=='date_added' || $scope.sortKey=='x_peer'||$scope.sortKey=='x_is_load') $scope.reverse=true; // special case
 				}			
-		    }
+		    };
+
+		    // render file list item
+		    $scope.renderFileListItem = function(item){
+		    	if (item){
+			    	item.edit_url = '/' + $scope.page.site_info.address + '/user/edit.html?item=';
+			    	item.view_url = '/' + $scope.page.site_info.address + '/view.html?type=';
+			    	if (item.media_type === 'game'){
+			    		item.edit_url += item.game_id + 'type=' + item.media_type;
+			    		item.view_url += 'game-c=' + $scope.site.address + 'g=' + item.game_id + 'z=' + item.zip_name + 'f=' + item.file_name;
+			    	} else if (item.media_type === 'video'){
+			    		item.edit_url += item.video_id + 'type=' + item.media_type;
+			    		item.view_url += 'video-c=' + $scope.site.address + 'v=' + item.video_id;
+			    	}
+		    	}
+		    };
 			
 		    // delete File
 		    $scope.deleteFile = function(item){
@@ -33,17 +48,16 @@ app.directive('fileList', ['$mdDialog','$mdMedia',
 
 		    // on select site
 		    $scope.onSelectSite = function(site){
-		    	site = JSON.parse(site);
 		    	$scope.getSiteFileList(site);
-		    };	
+		    };
 
 		};
 
 
 		var template=  '<div class="container-fluid" id="file-list">' +
-							'<select ng-model="site" value="site.address" ng-change="onSelectSite(site)">' +
-								'<option ng-repeat="site in u_sites track by $index" value="{{site}}">{{site.address}}</option>' +
-							'</select>' +
+							'<div class="select-channel">' +
+								'<select class="form-control" ng-model="site" value="site.address" ng-options="site.address for site in u_sites" ng-change="onSelectSite(site)"></select>' +
+							'</div>' +
 							'<form class="form-inline">' +
 								'<div class="form-group" id="file-search-form">' +
 									'<input id="searchfield" type="text" ng-model="query" class="form-control" placeholder="Search"> ' +
@@ -68,9 +82,9 @@ app.directive('fileList', ['$mdDialog','$mdMedia',
 										'<th ng-if="owner">Action</th>' +
 									'</tr>' +
 								'</thead>' +
-								'<tr dir-paginate="item in games|orderBy:sortKey:reverse|filter:query |itemsPerPage:itemsPerPage track by $index">' +
-									'<td ng-if="item.file_type !== \'zip\'"><a href="/{{page.site_info.address}}/view.html?type={{item.media_type}}-c={{site.address}}g={{item.game_id}}z=f={{item.file_name}}">{{item.file_name}}</a></td>' +
-									'<td ng-if="item.file_type === \'zip\'"><a href="/{{page.site_info.address}}/view.html?type={{item.media_type}}-c={{site.address}}g={{item.game_id}}z={{item.zip_name}}f={{item.file_name}}">{{item.zip_name}}</a></td>' +
+								'<tr dir-paginate="item in games|orderBy:sortKey:reverse|filter:query |itemsPerPage:itemsPerPage track by $index" ng-init="renderFileListItem(item)">' +
+									'<td ng-if="item.file_type !== \'zip\'"><a href="{{item.view_url}}">{{item.file_name}}</a></td>' +
+									'<td ng-if="item.file_type === \'zip\'"><a href="{{item.view_url}}">{{item.zip_name}}</a></td>' +
 									'<td><span ng-if="item.x_is_load" style="color:green">\u2713</span></td>' +
 									'<td><span ng-if="item.x_peer" >{{item.x_peer}}</span> </td>' +
 							    	'<td>{{item.file_size|filesize}}</td>' +
@@ -79,7 +93,7 @@ app.directive('fileList', ['$mdDialog','$mdMedia',
 									'<td><i am-time-ago="item.date_added"></i></td>' +
 									'<td ng-if="owner">' +
 										'<span ng-click="deleteFile(item)" class="glyphicon glyphicon-trash"></span>' +
-										'<a href="edit.html?item={{item.game_id}}type={{item.media_type}}">' +
+										'<a href="{{item.edit_url}}">' +
 										'<span class="glyphicon glyphicon-pencil"></span></a>' +
 									'</td>' +
 								'</tr>' +
