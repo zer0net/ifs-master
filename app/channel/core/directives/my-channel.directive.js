@@ -7,8 +7,11 @@ app.directive('myChannel', ['$sce','$location',
 			var reader = new FileReader();
 
 			// init
-			$scope.initChannelEdit = function (chJson) {
+			$scope.initChannelEdit = function (chJson,page,merger_name,site) {
 				$scope.chJson = chJson;
+				$scope.page = page;
+				$scope.merger_name = merger_name;
+				$scope.site = site;
 				// dropzone config
 				$scope.dropzoneConfig = {	
 				    'options': { // passed into the Dropzone constructor
@@ -42,9 +45,10 @@ app.directive('myChannel', ['$sce','$location',
 
 			// upload preview image
 			$scope.uploadPreviewImage = function(){
-			    var path = 'uploads/images/' + $scope.chJson.channel.img;
+			    var path = 'merged-' + $scope.merger_name + '/' + $scope.site.address + '/uploads/images/' + $scope.chJson.channel.img;
 			    var previewImgUrl = $scope.imgSrc.split(',')[1];
 				Page.cmd("fileWrite",{"inner_path":path,"content_base64": previewImgUrl, "ignore_bad_files": true}, function(res) {
+					console.log(res);
 					if (res === 'ok') $scope.updateChannelJson();
 				});
 			};

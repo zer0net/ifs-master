@@ -98,7 +98,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 				    	'</div>' +
 				    '</md-toolbar>' +
 				    '<md-dialog-content layout-padding>' +
-						'<md-content my-channel ng-init="initChannelEdit(items.chJson)">' +
+						'<md-content my-channel ng-init="initChannelEdit(items.chJson,items.page,items.merger_name,items.site)">' +
 							'<div class="section-body" layout="row">' +
 								'<figure flex="20">' +
 									'<img style="width:100%;" ng-src="uploads/images/{{chJson.channel.img}}" ng-show="chJson.channel.img" id="image"/>' +
@@ -132,7 +132,10 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 					fullscreen: useFullScreen,
 					locals: {
 						items:{
-							chJson:$scope.chJson
+							chJson:$scope.chJson,
+							page:$scope.page,
+							merger_name:$scope.merger_name,
+							site:$scope.site
 						}
 					}
 			    });
@@ -171,7 +174,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 		'<md-toolbar ng-if="site" layout-padding class="md-hue-2 header" layout="row">' + 			
 			'<div class="col-xs-5">' + 
 				/*'<img ng-src="uploads/images/{{chJson.channel.img ? chJson.channel.img : \'x-avatar.png\'}}" class="imgFilehubLogo"/>'+ */
-				'<img ng-src="{{chJson.channel.img ? \'uploads/images/\'+chJson.channel.img : \'../assets/channel/img/x-avatar.png\'}}" class="imgFilehubLogo"/>' +
+				'<img ng-src="/{{page.site_info.address}}/merged-{{merger_name}}/{{site.address}}/{{chJson.channel.img ? \'uploads/images/\'+chJson.channel.img : \'../assets/channel/img/x-avatar.png\'}}" class="imgFilehubLogo"/>' +
 				'<h3><a href="/{{master_address}}">{{master_name}}</a></h3>' + 
 				'<div class="site-title">' + 
 					'<h3>' + 

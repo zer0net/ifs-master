@@ -23,7 +23,7 @@ app.directive('siteSearch', ['$mdDialog', '$mdMedia','$rootScope',
 
 	    	// remove filter channel
 	    	$scope.removeFilterChannel = function(){
-				$scope.ppFilter.channel.address = '';
+	    		delete $scope.ppFilter.channel;
 	    	};
 
 	    	// rootscope on remove filter channel
@@ -37,18 +37,13 @@ app.directive('siteSearch', ['$mdDialog', '$mdMedia','$rootScope',
 	    	};
 
 			$scope.filterFileType = function(file_type) {
-				$scope.filterRemove();
 				$scope.ppFilter.file_type = file_type
 			};
 
 			// filter remove
 			$scope.filterRemove = function() {
 				$scope.ppFilter = {
-					channel:{
-						address:''
-					},
-					media_type:'',
-					file_type:''
+					channel:{}
 				}
 			}
 		

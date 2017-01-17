@@ -34,12 +34,15 @@
             <div class="container-fluid" style="padding-left: 0px">
                 <div class="row">
                     <div class="col-lg-12">
+                        
                         <!-- HEADER -->
                         <site-header></site-header>
                         <!-- /HEADER -->
+                        
                         <!-- MAIN -->
                         <section flex layout="column" layout-padding class="container" style="padding-top: 50px;">  
-                           <!-- loading -->
+                            
+                            <!-- loading -->
                         	<div layout="column" ng-show="loading" flex>
                         		<div layout="column" flex="100" style="text-align:center;">
                         			<span><b ng-bind="msg"></b></span>
@@ -49,6 +52,7 @@
                         		</div>
                         	</div>
                         	<!-- /loading -->
+
                             <!-- channel info -->
                             <div id="channel-info" ng-if="channel">
                                 <h2>{{channel.channel_name}}</h2>
@@ -67,11 +71,12 @@
                                 </div>
                             </div>
                             <!-- /channel info -->
+
                             <!-- home page items section -->
                             <md-content ng-hide="loading" flex layout-padding class="section" id="hp-items-section">
                                 
                                 <!--Welcome -->
-                                <div id="welcomeInfo" style="height:150px; width: 100%; display: block; text-align: center;">
+                                <div id="welcomeInfo" ng-hide="channel" style="height:150px; width: 100%; display: block; text-align: center;">
                                     <h1>    Welcome to IFS - Intergalactic File Server </h1>
                                     <br/>
                                      <h4>   
@@ -79,6 +84,14 @@
                                     </h4>
                                 </div>
                                 <!--/Welcome -->
+
+                                <!-- filter info -->
+                                <div id="filter-info" ng-if="ppFilter">
+                                    <span class="search-tag" ng-if="ppFilter.title">title:{{ppFilter.title}}</span>
+                                    <span class="search-tag" ng-if="ppFilter.file_type">file type: {{ppFilter.file_type}}</span>
+                                    <span class="search-tag" ng-if="ppFilter.media_type">media type: {{ppFilter.media_type}}</span>
+                                </div>
+                                <!-- /filter info -->
                 
                             	<!-- games -->
                             	<div  ng-if="(games|filter:ppFilter).length"  id="game-list-container">
