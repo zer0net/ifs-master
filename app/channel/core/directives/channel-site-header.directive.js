@@ -188,7 +188,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 					'<div class="sub-title">' + 
 						'<small>{{contentJson.description}}</small>' + 
 						'<small>Site : &nbsp;{{peers}} peers' +
-						' &nbsp; • &nbsp; Files &nbsp;  {{optionalFileList.length}} / {{fileTotalLength}} &nbsp;• &nbsp; Size : &nbsp;{{settings.optional_downloaded|filesize}} / {{settings.size_optional|filesize}} Total' +
+						' &nbsp; • &nbsp; Files &nbsp;  {{optionalFileList.length}} / {{fileTotalLength}} &nbsp;• &nbsp; Size : &nbsp;{{site.settings.optional_downloaded|filesize}} / {{site.settings.size_optional|filesize}} Total' +
 						'</small>' + 
 					'</div>' + 
 				'</div>' + 
