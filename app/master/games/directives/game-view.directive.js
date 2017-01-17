@@ -72,10 +72,10 @@ app.directive('gameView', ['$location','$rootScope',
 								'<dosbox ng-if="game.file_type === \'zip\'" ng-init="initDosBox()"></dosbox>' +
 								'<!-- /dosbox -->' +
 								'<!-- nes -->' +
-								'<nes-emulator ng-if="game.file_type === \'nes\'"></nes-emulator>' +
+								'<nes-emulator ng-if="game.file_type === \'nes\'" ng-init="initNesEmulator()"></nes-emulator>' +
 								'<!-- /nes -->' +
 								'<!-- cpc -->' +
-								'<cpc-emulator ng-if="game.file_type === \'sna\'"></cpc-emulator>' +
+								'<cpc-emulator ng-if="game.file_type === \'sna\'"  ng-init="initCpcEmulator()"></cpc-emulator>' +
 								'<!-- /cpc -->' +
 								'<!-- atari -->' +
 								'<atari-emulator ng-if="game.file_type === \'bin\'"></atari-emulator>' +

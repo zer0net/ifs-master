@@ -3,15 +3,23 @@ app.directive('cpcEmulator', ['$location','$rootScope','$timeout',
 
 		// cpc emulator controller
 		var controller = function($scope,$element) {
-			console.log('controller function');
-			$scope.initCpcEmulator = function(){
-				$scope.file = '/'+Page.site_info.address+'/merged-IFS/'+$scope.game.channel.address + '/' + $scope.game.path;
+
+			// init cpc emulator
+			$scope.initCpcEmulator = function(game){
+				
+				if (game){
+					$scope.game = game;
+					$scope.file = '/'+Page.site_info.address+'/merged-IFS/'+$scope.game.channel + '/' + $scope.game.path;
+				} else {
+					$scope.file = '/'+Page.site_info.address+'/merged-IFS/'+$scope.game.channel.address + '/' + $scope.game.path;
+				}
+
 				$timeout(function () {
-					$scope.loadScript('assets/lib/cpcbox/jquery-1.8.3.min.js', 'text/javascript', 'utf-8');
-					$scope.loadScript('assets/lib/cpcbox/jquerytools.rangeinput.js', 'text/javascript', 'utf-8');
-					$scope.loadScript('assets/lib/cpcbox/inflate.js', 'text/javascript', 'utf-8');
-					$scope.loadScript('assets/lib/cpcbox/cpcbox.sysroms.js', 'text/javascript', 'utf-8');
-					$scope.loadScript('assets/lib/cpcbox/cpcbox.decrypted.js', 'text/javascript', 'utf-8');
+					$scope.loadScript('/'+$scope.page.site_info.address + 'assets/lib/cpcbox/jquery-1.8.3.min.js', 'text/javascript', 'utf-8');
+					$scope.loadScript('/'+$scope.page.site_info.address + 'assets/lib/cpcbox/jquerytools.rangeinput.js', 'text/javascript', 'utf-8');
+					$scope.loadScript('/'+$scope.page.site_info.address + 'assets/lib/cpcbox/inflate.js', 'text/javascript', 'utf-8');
+					$scope.loadScript('/'+$scope.page.site_info.address + 'assets/lib/cpcbox/cpcbox.sysroms.js', 'text/javascript', 'utf-8');
+					$scope.loadScript('/'+$scope.page.site_info.address + 'assets/lib/cpcbox/cpcbox.decrypted.js', 'text/javascript', 'utf-8');
 				});
 			};
 		};
@@ -21,7 +29,7 @@ app.directive('cpcEmulator', ['$location','$rootScope','$timeout',
 		};
 
 		// cpc emulator template
-		var template =  '<div class="main-panel" id="cpc-emulator-container" ng-init="initCpcEmulator()">' +						
+		var template =  '<div class="main-panel" id="cpc-emulator-container">' +						
 							'<div id="screen-placeholder">' +
 								'<div id="logo"></div>' +
 								'<canvas id="screen" width="768" height="272" style="display:none"></canvas>' +
