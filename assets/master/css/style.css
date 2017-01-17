@@ -155,6 +155,40 @@ section.container hr.divider {
 main {
   max-width: 100% !important;
 }
+#channel-info figure {
+  background-size: contain;
+  border: 1px solid #dbdbdb;
+  width: 100px;
+  height: 100px;
+  margin-right: 10px;
+  background-image: url('../img/x-avatar.png');
+  overflow: hidden;
+  float: left;
+  -webkit-border-top-right-radius: 100%;
+  -webkit-border-bottom-right-radius: 100%;
+  -webkit-border-bottom-left-radius: 100%;
+  -webkit-border-top-left-radius: 100%;
+  -moz-border-radius-topright: 100%;
+  -moz-border-radius-bottomright: 100%;
+  -moz-border-radius-bottomleft: 100%;
+  -moz-border-radius-topleft: 100%;
+  border-top-right-radius: 100%;
+  border-bottom-right-radius: 100%;
+  border-bottom-left-radius: 100%;
+  border-top-left-radius: 100%;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+#channel-info figure img {
+  width: 100%;
+  height: 100%;
+}
+#channel-info span.items-counter {
+  margin-top: 40px;
+  display: block;
+  float: left;
+}
 /** /TEMPLATE **/
 /** PAGES **/
 /* home */

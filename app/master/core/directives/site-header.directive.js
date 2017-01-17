@@ -122,7 +122,7 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope',
   						'<div class="container"><form class="navbar-form navbar-left" >'+
         					'<div class="form-group">'+
           					'<input type="text" class="form-control" placeholder="Search" ng-model="ppFilter.title">'+
-          					'<input type="text" class="form-control" ng-model="ppFilter.channel.address"  id="filterChannel" style="display:none">'+
+          					'<input type="text" class="form-control" ng-model="ppFilter.channel.address"  id="filterChannel" style="display:none" value="{{channel}}">'+
           					'<input type="text" class="form-control" ng-model="ppFilter.media_type"  id="filterMediaType" style="display:none">'+
           					'<input type="text" class="form-control" ng-model="ppFilter.file_type"  id="filterFileType" style="display:none">'+
           					'<div class="dropdown">'+

@@ -41,7 +41,6 @@
                         <!-- /HEADER -->
                         <!-- MAIN -->
                         <section flex layout="column" layout-padding class="container" style="padding-top: 50px;">  
-                            <div id="channelInfo">  </div>                
                            <!-- loading -->
                         	<div layout="column" ng-show="loading" flex>
                         		<div layout="column" flex="100" style="text-align:center;">
@@ -52,7 +51,23 @@
                         		</div>
                         	</div>
                         	<!-- /loading -->
-
+                            <!-- channel info -->
+                            <div id="channel-info" ng-if="channel">
+                                <div class="description">
+                                    <figure>
+                                        <img ng-if="channel.logo_src" ng-src="{{channel.logo_src}}"/>
+                                    </figure>
+                                    <span class="items-counter">
+                                        <span ng-if="channel.videos">
+                                            {{channel.videos.length}} videos
+                                        </span>
+                                        <span ng-if="channel.games">
+                                            {{channel.games.length}} games
+                                        </span>                                        
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- /channel info -->
                             <!-- home page items section -->
                             <md-content ng-hide="loading" flex layout-padding class="section" id="hp-items-section">
                                 

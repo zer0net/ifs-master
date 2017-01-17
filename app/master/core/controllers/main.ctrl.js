@@ -327,6 +327,14 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			}
 			
 	    /* /UI */
+
+	    /* FILTER */
+
+	    	$scope.filterChannel = function(channel){
+	    		$scope.channel = channel;
+	    	};
+
+	    /* /FILTER */
 	}
 ]);
 
