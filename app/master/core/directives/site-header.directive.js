@@ -118,32 +118,16 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope',
 
 		var template ='<nav class="navbar navbar-default navbar-fixed-top" id="navbar-fixed-top">'+
   						'<div class="container-fluid" style="background-color:#041b2c">'+
-  						'<div class="navbar-header"><span class="glyphicon glyphicon-menu-hamburger navbar-brand" id="menu-toggle" ng-click="toggleMenu($event)"></span> <a class="navbar-brand" href="/{{site_address}}">IFS - Intergalactic File Server</a></div>'+
-  						'<div class="container"><form class="navbar-form navbar-left" >'+
-        					'<div class="form-group">'+
-          					'<input type="text" class="form-control" placeholder="Search" ng-model="ppFilter.title">'+
-          					'<input type="text" class="form-control" ng-model="ppFilter.channel.address"  id="filterChannel" style="display:none" value="{{channel}}">'+
-          					'<input type="text" class="form-control" ng-model="ppFilter.media_type"  id="filterMediaType" style="display:none">'+
-          					'<input type="text" class="form-control" ng-model="ppFilter.file_type"  id="filterFileType" style="display:none">'+
-          					'<div class="dropdown">'+
-          					  '<a ng-click="filterMediaType(\'game\')" style="color:#777; padding:10px 20px;" >GAME</a>'+
-          					  '<div class="dropdown-content">'+
-          					    '<ul><li><a ng-click="filterFileType(\'nes\')"> NINTENDO </a></li>'+
-          					    '<li><a ng-click="filterFileType(\'sna\')">AMSTRAD </a> </li>'+
-          					    '<li><a ng-click="filterFileType(\'zip\')">DOS </a> </li>'+
-          					    '<li><a ng-click="filterFileType(\'bin\')">ATARI</a> </li>'+
-          					  '</div>'+
-          					'</div>' +
-							'<a ng-click="filterMediaType(\'video\')" style="color: #777;padding:10px 20px;">VIDEO</a>' + 
-							'<a ng-click="filerRemove()" style="color: #777;padding:10px 20px;"><span class="glyphicon glyphicon-filter" style="text-decoration: line-through"></span></a>' + 
-        					'</div>' +        					
-      					'</form>' +
-  						'<ul class="nav navbar-nav navbar-right">'+  	
-	  						'<li><a href="/{{page.site_info.address}}/user/">USER</a></li>'+  
-	  						'<li><a ng-click="showInfoModal(ev)" >FAQ</a></li>'+  
-							'<li><a href="/{{page.site_info.address}}/register.html">REGISTER</button></a></li>'+  												
-						'</ul>'+    					
-  						'</div></div>'+
+	  						'<div class="navbar-header"><span class="glyphicon glyphicon-menu-hamburger navbar-brand" id="menu-toggle" ng-click="toggleMenu($event)"></span> <a class="navbar-brand" href="/{{site_address}}">IFS - Intergalactic File Server</a></div>'+
+	  						'<div class="container">' + 
+		  						'<site-search></site-search>';
+		  						'<ul class="nav navbar-nav navbar-right">'+
+			  						'<li><a href="/{{page.site_info.address}}/user/">USER</a></li>'+  
+			  						'<li><a ng-click="showInfoModal(ev)" >FAQ</a></li>'+  
+									'<li><a href="/{{page.site_info.address}}/register.html">REGISTER</button></a></li>'+  												
+								'</ul>'+    					
+	  						'</div>' +
+	  					'</div>'+
 					'</nav>';
 		
 		return {

@@ -10,9 +10,7 @@
 		<link href="assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	
 		<!-- app -->
-		<link href="assets/master/css/simple-sidebar.css" rel="stylesheet" type="text/css"/>
 		<link href="assets/master/css/style.css" rel="stylesheet" type="text/css"/>
-		<link href="assets/master/css/style_extra.css" rel="stylesheet" type="text/css"/>
 
 	<!-- /CSS -->
 
@@ -53,6 +51,7 @@
                         	<!-- /loading -->
                             <!-- channel info -->
                             <div id="channel-info" ng-if="channel">
+                                <h2>{{channel.channel_name}}</h2>
                                 <div class="description">
                                     <figure>
                                         <img ng-if="channel.logo_src" ng-src="{{channel.logo_src}}"/>
@@ -144,9 +143,10 @@
 		<script type="text/javascript" src="app/application.js"></script>		
 		<script type="text/javascript" src="app/master/core/controllers/main.ctrl.js"></script>
 		<script type="text/javascript" src="app/master/core/directives/site-config.directive.js"></script>
-        <script type="text/javascript" src="app/master/core/directives/channel-register.directive.js"></script>        
-		<script type="text/javascript" src="app/master/core/directives/site-header.directive.js"></script>
         <script type="text/javascript" src="app/master/core/directives/sidebar.directive.js"></script>
+		<script type="text/javascript" src="app/master/core/directives/site-header.directive.js"></script>
+        <script type="text/javascript" src="app/master/core/directives/site-search.directive.js"></script>
+        <script type="text/javascript" src="app/master/core/directives/channel-register.directive.js"></script>
 		<script type="text/javascript" src="app/master/core/directives/comments.directive.js"></script>
 		<script type="text/javascript" src="app/master/core/directives/votes.directive.js"></script>
 		<script type="text/javascript" src="app/master/core/directives/views.directive.js"></script>

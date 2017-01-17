@@ -319,22 +319,14 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			$scope.toggleMenu = function(ev) {
 				ev.preventDefault();
 			    $("#wrapper").toggleClass("toggled");			   
-			    if ($("#navbar-fixed-top").position().left==0){
+			    /*if ($("#navbar-fixed-top").position().left==0){
 			    	$("#navbar-fixed-top").css({left:250});
 			    } else {
 			    	$("#navbar-fixed-top").css({left:0});
-			    };			    
+			    };*/			    
 			}
 			
 	    /* /UI */
-
-	    /* FILTER */
-
-	    	$scope.filterChannel = function(channel){
-	    		$scope.channel = channel;
-	    	};
-
-	    /* /FILTER */
 	}
 ]);
 

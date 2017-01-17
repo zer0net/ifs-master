@@ -8,6 +8,90 @@
 /* /MIXINS */
 /* COLORS */
 /* /COLORS */
+/** SIMPLE SIDEBAR **/
+/*!
+	 * Start Bootstrap - Simple Sidebar (http://startbootstrap.com/)
+	 * Copyright 2013-2016 Start Bootstrap
+	 * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
+	 */
+body {
+  overflow-x: hidden;
+}
+/* Toggle Styles */
+#wrapper {
+  padding-left: 0;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+#sidebar-wrapper {
+  z-index: 1000;
+  position: fixed;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  overflow-y: auto;
+  background: #000;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+#wrapper.toggled #sidebar-wrapper {
+  left: 0;
+}
+#page-content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+  padding-left: 0px;
+  padding-top: 0px;
+}
+#wrapper.toggled #page-content-wrapper {
+  position: absolute;
+  padding-left: 250px;
+}
+/* Sidebar Styles */
+.sidebar-nav {
+  position: absolute;
+  top: 0;
+  width: 250px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.sidebar-nav li {
+  text-indent: 20px;
+  line-height: 40px;
+}
+.sidebar-nav li a {
+  display: block;
+  text-decoration: none;
+  color: #999999;
+}
+.sidebar-nav li a:hover {
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+}
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+  text-decoration: none;
+}
+.sidebar-nav > .sidebar-brand {
+  height: 65px;
+  font-size: 18px;
+  line-height: 60px;
+}
+.sidebar-nav > .sidebar-brand a {
+  color: #999999;
+}
+.sidebar-nav > .sidebar-brand a:hover {
+  color: #fff;
+  background: none;
+}
+/** /SIMPLE SIDEBAR **/
 /** GENERAL **/
 *:focus,
 *:hover {
@@ -76,6 +160,9 @@ section.container hr.divider {
   padding: 12px;
   position: relative;
 }
+.container {
+  max-width: 100%;
+}
 /** /GENERAL **/
 /** TEMPLATE **/
 .header .site-logo {
@@ -138,6 +225,9 @@ section.container hr.divider {
 .main-content md-content + md-content {
   margin-top: 16px;
 }
+#sidebar-wrapper {
+  top: 51px;
+}
 #sidebar-wrapper .sidebar-brand {
   color: white !important;
   font-size: 22px;
@@ -155,7 +245,16 @@ section.container hr.divider {
 main {
   max-width: 100% !important;
 }
-#channel-info figure {
+#channel-info h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+#channel-info .description {
+  margin: 0 auto;
+  display: block;
+  width: 230px;
+}
+#channel-info .description figure {
   background-size: contain;
   border: 1px solid #dbdbdb;
   width: 100px;
@@ -180,11 +279,11 @@ main {
   -webkit-background-clip: padding-box;
   background-clip: padding-box;
 }
-#channel-info figure img {
+#channel-info .description figure img {
   width: 100%;
   height: 100%;
 }
-#channel-info span.items-counter {
+#channel-info .description span.items-counter {
   margin-top: 40px;
   display: block;
   float: left;
@@ -1645,3 +1744,98 @@ videogular .vg-error-message {
   text-align: center;
 }
 /** /EMULATORS **/
+/** STYLE EXTRA **/
+.sidebar {
+  position: absolute;
+  top: 0;
+  left: -160px;
+  transition: 100ms left;
+}
+#navigation-toggle {
+  position: absolute;
+  left: 160px;
+  background: rgba(3, 159, 244, 0.95);
+  color: white;
+  text-decoration: none;
+  padding: 20px;
+}
+.show {
+  left: 0;
+}
+.navigation {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.navigation-items a {
+  display: block;
+  background-color: #444;
+  color: white;
+  line-height: 2em;
+  text-decoration: none;
+  padding: 10px 30px;
+  width: 100px;
+}
+.navigation-items a:hover {
+  background-color: #222;
+}
+.imgFilehubLogo {
+  border: 1px solid #dbdbdb;
+  border-radius: 999px;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+.imgFilehubLogoBig {
+  width: 100px;
+  height: 100px;
+}
+.description {
+  margin: 0 auto;
+  display: block;
+  width: 300px;
+}
+.itemLoaded {
+  border: 3px solid #32cf32;
+}
+.clsChannelHidden {
+  text-decoration: line-through;
+}
+md-dialog.fullscreen-dialog {
+  max-width: 100%;
+  max-height: 100%;
+  margin-top: 80px;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
+/* css dropdown menu*/
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 12px 16px;
+  background-color: #000;
+  color: #777;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown ul {
+  list-style: none;
+  position: relative;
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+.dropdown ul li a {
+  padding: 10px 20px;
+  color: #777;
+}
+/** / STYLE EXTRA **/

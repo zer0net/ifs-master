@@ -1,54 +1,36 @@
-app.directive('sidebar', ['$mdDialog', '$mdMedia',
-	function($mdDialog,$mdMedia) {		
+app.directive('sidebar', ['$rootScope',
+	function($rootScope) {
 
 		// header directive controller
 		var controller = function($scope,$element) {
-
-			$scope.filterMediaType = function(type)
-			{
-				$scope.filerRemove();
-				$('#filterMediaType').val(type);				
-				$('#filterMediaType').trigger('input');
-			}
-
-			$scope.filterFileType = function(type)
-			{
-				$scope.filerRemove();
-				$('#filterFileType').val(type);			
-				$('#filterFileType').trigger('input');	
-			}
-
-			$scope.filerRemove = function()
-			{
-				$('#filterMediaType').val('');
-				$('#filterFileType').val('');
-
-				$('#filterMediaType').trigger('input');	
-				$('#filterFileType').trigger('input');
-			}
 			
-
-			
+			// on filter channel
 			$scope.onFilterChannel = function(channel) {
+				// if channel has logo
 				if (channel.logo){
 					channel.logo_src = '/'+$scope.channel_master_address+'/merged-'+$scope.merger_name+'/'+channel.channel_address+'/uploads/images/'+channel.logo;
 				}
-				$scope.filterChannel(channel)
+				// set channel
+				$scope.channel = channel;
+				// on filter channel
+				$rootScope.$broadcast('onFilterChannel',channel);
 			};
-			$scope.filterChannelRemove = function()
-			{
-				$('#filterChannel').val('');
-				$('#filterChannel').trigger('input');				
-				$('#channelInfo').html('');			
-			}
-			
+
+
+
+			// on remove filter channel
+			$scope.onRemoveFilterChannel = function(){
+				delete $scope.channel;
+				$rootScope.$broadcast('onRemoveFilterChannel');
+			};
+
 		};
 
 		var template =  '<div id="sidebar-wrapper">' +
 						    '<ul class="sidebar-nav">' +
 						       '<div channel-register ng-if="channels.length > 0">' +
 							       '<li class="sidebar-brand">' +
-							          'Channels  <span class="glyphicon glyphicon-refresh"  ng-click="filterChannelRemove()" ></span>' +
+							          'Channels  <span class="glyphicon glyphicon-refresh"  ng-click="onRemoveFilterChannel()" ></span>' +
 							        '</li>' +
 							       	'<li ng-repeat="channel in channels | orderBy:\'-date_added\'" ng-init="getChannelInfo(channel)"  ng-click="onFilterChannel(channel)">' +
 							            '<div ng-if="channel.filesLen">' +
