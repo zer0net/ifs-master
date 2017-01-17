@@ -23,18 +23,23 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$sce','$location','$wi
 					// apply to scope
 					$scope.page = Page;
 					// create an array of all user's registered sites (channels)
-					$scope.u_sites = [];
 					$scope.channels.forEach(function(channel,index){
 						if (channel.user === $scope.page.site_info.auth_address){
 							$scope.sites.forEach(function(site,index){
 								if (site.address === channel.channel_address && site.settings.own === true){
+									if (!$scope.u_sites) $scope.u_sites = [];
 									$scope.u_sites.push(site);
 								}
 							});
 						}
 					});
 					// get channel data (default - first site in array)
-					$scope.getSiteFileList($scope.u_sites[0]);
+					if ($scope.u_sites) {
+						$scope.getSiteFileList($scope.u_sites[0]);	
+					} else {
+						$scope.no_sites = true;
+						$scope.$apply();
+					}
 				});	
 			};
 

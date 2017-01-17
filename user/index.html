@@ -32,6 +32,7 @@
         <div id="page-content-wrapper" style="padding-right: 0;">
             <div class="container-fluid" style="padding-left: 0px; padding-right: 0;">
                 <div class="row">
+
                     <div class="col-lg-12">
 
 						<!-- SITE HEADER -->
@@ -51,11 +52,12 @@
 
 							<section ng-if="channels" ng-hide="loading" class="wrapper" id="user-channel-wrapper" ng-controller="ChannelMainCtrl" ng-init="init()">
 
+
 								<!-- CHANNEL HEADER -->
-								<channel-site-header></channel-site-header>
+								<channel-site-header ng-if="u_sites"></channel-site-header>
 								<!-- /CHANNEL HEADER -->
 
-								<section ng-controller="ItemsCtrl" layout="row" class="container">
+								<section ng-if="u_sites" ng-controller="ItemsCtrl" layout="row" class="container">
 
 							    	<!-- loading -->
 									<div layout="column" ng-show="loading" flex="100">
@@ -76,11 +78,19 @@
 
 								</section>
 							
+			                    <div  ng-if="no_sites">
+				                    <p style="text-align: center; margin-top: 51px;">
+										You dont seem to have any account registered yet.<br/>
+										If you like to join, please read our FAQ
+				                    </p>
+			                    </div>
+
 							</section>
 
 						</section>
 
                     </div>
+
                 </div>
             </div>
         </div>
