@@ -56,8 +56,10 @@ app.directive('fileList', ['$mdDialog','$mdMedia',
 
 		var template=  '<div class="container-fluid" id="file-list">' +
 							'<div class="select-channel">' +
+								'<label>Select channel: </label>' +
 								'<select class="form-control" ng-model="site" value="site.address" ng-options="site.address for site in u_sites" ng-change="onSelectSite(site)"></select>' +
 							'</div>' +
+							'<hr/>' +
 							'<form class="form-inline">' +
 								'<div class="form-group" id="file-search-form">' +
 									'<input id="searchfield" type="text" ng-model="query" class="form-control" placeholder="Search"> ' +

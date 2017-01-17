@@ -461,6 +461,13 @@ md-dialog.upload-dialog #multiple-files-upload ul li span {
   width: 100%;
   margin-bottom: 20px;
 }
+#file-list .select-channel label {
+  float: left;
+  display: block;
+  line-height: 30px;
+  margin-right: 10px;
+  text-transform: uppercase;
+}
 #file-list .select-channel select {
   width: 50%;
 }
