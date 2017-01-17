@@ -174,7 +174,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 		'<md-toolbar ng-if="site" layout-padding class="md-hue-2 header" layout="row">' + 			
 			'<div class="col-xs-5">' + 
 				/*'<img ng-src="uploads/images/{{chJson.channel.img ? chJson.channel.img : \'x-avatar.png\'}}" class="imgFilehubLogo"/>'+ */
-				'<img ng-src="/{{page.site_info.address}}/merged-{{merger_name}}/{{site.address}}/{{chJson.channel.img ? \'uploads/images/\'+chJson.channel.img : \'../assets/channel/img/x-avatar.png\'}}" class="imgFilehubLogo"/>' +
+				'<figure class="logo"><img ng-if="chJson.channel.img" ng-src="/{{page.site_info.address}}/merged-{{merger_name}}/{{site.address}}/{{chJson.channel.img ? \'uploads/images/\'+chJson.channel.img : \'../assets/channel/img/x-avatar.png\'}}"/></figure>' +
 				'<h3><a href="/{{master_address}}">{{master_name}}</a></h3>' + 
 				'<div class="site-title">' + 
 					'<h3>' + 
