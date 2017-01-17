@@ -318,12 +318,11 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// toggle menu
 			$scope.toggleMenu = function(ev) {
 				ev.preventDefault();
-			    $("#wrapper").toggleClass("toggled");			   
-			    /*if ($("#navbar-fixed-top").position().left==0){
-			    	$("#navbar-fixed-top").css({left:250});
-			    } else {
-			    	$("#navbar-fixed-top").css({left:0});
-			    };*/			    
+				if (!$scope.toggled || $scope.toggled === false){
+					$scope.toggled = true;
+				} else {
+					$scope.toggled = false;
+				}
 			}
 			
 	    /* /UI */

@@ -7,13 +7,8 @@ app.directive('siteSearch', ['$mdDialog', '$mdMedia','$rootScope',
 
 			// init site search
 			$scope.initSiteSearch = function(){
-				var channelAddress;
-				if ($scope.channel) channelAddress = $scope.channel.channel_address;
-				$scope.ppFilter = {
-					channel:{
-						address:channelAddress
-					}
-				};
+				$scope.filterRemove();
+				if ($scope.channel) $scope.ppFilter.channel.address = $scope.channel.channel_address;
 			};
 
 			// filter channel
@@ -36,34 +31,25 @@ app.directive('siteSearch', ['$mdDialog', '$mdMedia','$rootScope',
 	    		$scope.removeFilterChannel();
 	    	});
 
-			$scope.filterMediaType = function(type)
-			{
-				$scope.filerRemove();
-				$('#filterMediaType').val(type);				
-				$('#filterMediaType').trigger('input');
-			}
+	    	// filter media type
+	    	$scope.filterMediaType = function(type){
+	    		$scope.ppFilter.media_type = type;
+	    	};
 
-			$scope.filterFileType = function(type)
-			{
-				$scope.filerRemove();
-				$('#filterFileType').val(type);			
-				$('#filterFileType').trigger('input');	
-			}
+			$scope.filterFileType = function(file_type) {
+				$scope.filterRemove();
+				$scope.ppFilter.file_type = file_type
+			};
 
-			$scope.filerRemove = function()
-			{
-				$('#filterMediaType').val('');
-				$('#filterFileType').val('');
-
-				$('#filterMediaType').trigger('input');	
-				$('#filterFileType').trigger('input');
-			}
-
-			$scope.filterChannelRemove = function()
-			{
-				$('#filterChannel').val('');
-				$('#filterChannel').trigger('input');				
-				$('#channelInfo').html('');			
+			// filter remove
+			$scope.filterRemove = function() {
+				$scope.ppFilter = {
+					channel:{
+						address:''
+					},
+					media_type:'',
+					file_type:''
+				}
 			}
 		
 		};
@@ -84,7 +70,7 @@ app.directive('siteSearch', ['$mdDialog', '$mdMedia','$rootScope',
           					  '</div>'+
           					'</div>' +
 							'<a ng-click="filterMediaType(\'video\')" style="color: #777;padding:10px 20px;">VIDEO</a>' + 
-							'<a ng-click="filerRemove()" style="color: #777;padding:10px 20px;"><span class="glyphicon glyphicon-filter" style="text-decoration: line-through"></span></a>' + 
+							'<a ng-click="filterRemove()" style="color: #777;padding:10px 20px;"><span class="glyphicon glyphicon-filter" style="text-decoration: line-through"></span></a>' + 
         					'</div>' +        					
       					'</form>';
 		
