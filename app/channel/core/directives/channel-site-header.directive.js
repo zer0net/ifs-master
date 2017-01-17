@@ -179,7 +179,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 				'<div class="site-title">' + 
 					'<h3>' + 
 						'<a href="/{{site_address}}">File Hub : {{contentJson.title}} </a>' + 
-						'<small ng-if="site.settings.own">' + 
+						'<small>' + 
 							'<a ng- ng-click="openChannelEditDialog(chJson)">' + 
 								'<span class="glyphicon glyphicon-pencil"></span>' + 
 							'</a>' + 
@@ -199,7 +199,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 							'<md-button ng-if="optionalHelp==false" class="md-primary md-raised edgePadding pull-left" ng-click="onOptionalHelp()"> distribute all files</md-button>' + 				       							
 							'<md-button ng-if="optionalHelp==true" class="md-primary md-raised edgePadding pull-left" ng-click="onRemoveOptionalHelp()">stop distribute all files</md-button>' + 				       							
 		        	'</li>' + 			
-		        	'<li  ng-if="site.settings.own">' + 						
+		        	'<li>' + 						
 							'<md-button class="md-primary md-raised edgePadding pull-left" ng-click="multipleUploadDialog($event)">Upload</md-button>' + 				       
 		        	'</li>' + 		        	
 					'<li ng-if="site.settings.own">' + 
