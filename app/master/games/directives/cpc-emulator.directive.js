@@ -9,17 +9,17 @@ app.directive('cpcEmulator', ['$location','$rootScope','$timeout',
 				
 				if (game){
 					$scope.game = game;
-					$scope.file = '/'+Page.site_info.address+'/merged-IFS/'+$scope.game.channel + '/' + $scope.game.path;
+					$scope.file = '/'+Page.site_info.address+'/merged-'+$scope.merger_name+'/'+$scope.game.channel + '/' + $scope.game.path;
 				} else {
-					$scope.file = '/'+Page.site_info.address+'/merged-IFS/'+$scope.game.channel.address + '/' + $scope.game.path;
+					$scope.file = '/'+Page.site_info.address+'/merged-'+$scope.merger_name+'/'+$scope.game.channel.address + '/' + $scope.game.path;
 				}
 
 				$timeout(function () {
-					$scope.loadScript('/'+$scope.page.site_info.address + 'assets/lib/cpcbox/jquery-1.8.3.min.js', 'text/javascript', 'utf-8');
-					$scope.loadScript('/'+$scope.page.site_info.address + 'assets/lib/cpcbox/jquerytools.rangeinput.js', 'text/javascript', 'utf-8');
-					$scope.loadScript('/'+$scope.page.site_info.address + 'assets/lib/cpcbox/inflate.js', 'text/javascript', 'utf-8');
-					$scope.loadScript('/'+$scope.page.site_info.address + 'assets/lib/cpcbox/cpcbox.sysroms.js', 'text/javascript', 'utf-8');
-					$scope.loadScript('/'+$scope.page.site_info.address + 'assets/lib/cpcbox/cpcbox.decrypted.js', 'text/javascript', 'utf-8');
+					$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/cpcbox/jquery-1.8.3.min.js', 'text/javascript', 'utf-8');
+					$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/cpcbox/jquerytools.rangeinput.js', 'text/javascript', 'utf-8');
+					$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/cpcbox/inflate.js', 'text/javascript', 'utf-8');
+					$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/cpcbox/cpcbox.sysroms.js', 'text/javascript', 'utf-8');
+					$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/cpcbox/cpcbox.decrypted.js', 'text/javascript', 'utf-8');
 				});
 			};
 		};

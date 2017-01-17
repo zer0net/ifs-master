@@ -36,7 +36,6 @@ app.directive('nesEmulator', ['$location','$rootScope','$timeout',
 			        });
 			        // remove select options
 					nes.ui.romSelect.children().remove();
-					// nes file
 					// create select option
 					$('<option value="'+nesFile+'">'+$scope.game.title+'</option>').appendTo(nes.ui.romSelect);
 					// select rom
