@@ -65,6 +65,7 @@ app.directive('siteSearch', ['$rootScope','$location','$window',
 
 	    	// remove filter channel
 	    	$scope.removeFilterChannel = function(){
+	    		$scope.removeChannel();
 	    		delete $scope.ppFilter.channel.address;
 	    	};
 

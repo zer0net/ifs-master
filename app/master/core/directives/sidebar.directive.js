@@ -22,11 +22,11 @@ app.directive('sidebar', ['$rootScope',
 
 		var template =  '<div id="sidebar-wrapper">' +
 						    '<ul class="sidebar-nav">' +
-						       '<div channel-register ng-if="channels.length > 0">' +
+						       '<div ng-if="channels.length > 0">' +
 							       '<li class="sidebar-brand">' +
 							          'Channels  <span class="glyphicon glyphicon-refresh"  ng-click="onRemoveFilterChannel()" ></span>' +
 							        '</li>' +
-							       	'<li ng-repeat="channel in channels | orderBy:\'-date_added\'" ng-init="getChannelInfo(channel)"  ng-click="onFilterChannel(channel)">' +
+							       	'<li ng-repeat="channel in channels | orderBy:\'-date_added\'" ng-click="onFilterChannel(channel)">' +
 							            '<div ng-if="channel.filesLen">' +
 							                '<a href="#">' +
 												'<img ng-if="channel.logo" ng-src="/{{channel_master_address}}/merged-{{merger_name}}/{{channel.channel_address}}/uploads/images/{{channel.logo}}" class="imgFilehubLogo"/>' +

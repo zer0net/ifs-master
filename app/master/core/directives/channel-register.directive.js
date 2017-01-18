@@ -16,35 +16,30 @@ app.directive('channelRegister', [
 				var inner_path = 'merged-'+$scope.merger_name+'/'+channel.channel_address+'/content.json';				
 				Page.cmd("fileGet",{"inner_path":inner_path},function(data){
 					// check if site has content.json
-				   if (!data){
+				    if (!data){
 						console.log('No content.json found for '+$scope.channel_address+'!');
 					} else {
 						data = JSON.parse(data);
-						
+						// channel info
 						channel.channel_name = data.title;
 						channel.channel_description = data.description;
-						
 				    	// get channel's channel.json
 				    	var inner_path = 'merged-'+$scope.merger_name+'/'+channel.channel_address+'/data/channel.json';
-
 				    	Page.cmd("fileGet",{"inner_path":inner_path},function(data){
 				    		// check if site has channel.json
 				    		if (!data) {
 				    			console.log('no channel.json found for '+$scope.channel_address+'!');
 				    		} else {
-								data = JSON.parse(data);
-									
-							// apply to scope
+								data = JSON.parse(data);	
+								// apply to scope
 								$scope.$apply(function() {				
-								     var iLen = 0;					
+								    var iLen = 0;					
 									channel.items = data[$scope.media_type];
 									if(data.games) {channel.games = data.games; iLen+=data.games.length;}
 									if(data.videos){channel.videos = data.videos;iLen+=data.videos.length;}
 									if(data.channel.img) {channel.logo = data.channel.img;}
 									channel.filesLen = iLen;
-									
 								});	
-									    			
 				    		}
 				    	});
 					}

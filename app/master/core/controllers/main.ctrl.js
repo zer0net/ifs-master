@@ -127,7 +127,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				var query = ["SELECT * FROM channel where hide = 0 ORDER BY date_added"];
 				Page.cmd("dbQuery", query, function(channels) {	
 					if (channels.length > 0){
-						$scope.pre_channels = channels;
+						$scope.channels = channels;
 						// render channels												
 						$scope.renderChannels();
 					} else {
@@ -144,7 +144,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				// items array, named ny media type var
 				$scope[$scope.media_type] = [];
 				// for each channel
-				$scope.pre_channels.forEach(function(channel,cIndex){
+				$scope.channels.forEach(function(channel,cIndex){
 	 				// check if site exists
 					var siteExists = false;
 					// loop through sites array
@@ -152,7 +152,9 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 						// if channel's id exists in merged sites array
 						if (site.address === channel.channel_address){
 							siteExists = true;
-							channel = site;
+							for (var attr in site) { 
+								channel[attr] = site[attr]; 
+							}
 						}
 					});
 					// if site exists get channel, if not add merged site
@@ -199,18 +201,41 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// get channel
 			$scope.getChannel = function(channel,cIndex){
-				// get channel.json
-				var inner_path = 'merged-'+$scope.merger_name+'/'+channel.address+'/data/channel.json';					
+				// get channel's content.json
+				var inner_path = 'merged-'+$scope.merger_name+'/'+channel.address+'/content.json';
 				Page.cmd("fileGet",{"inner_path":inner_path},function(data){
-					// assign games
-					data = JSON.parse(data);	
-				
-					// if channel has data
-					if (data){
-						// get channel items
-						$scope.addChannelItems(data,channel,cIndex);
-					} else {
+					// check if site has content.json
+				    if (!data){
+						console.log('No content.json found for '+channel.address+'!');
 						$scope.finishLoadingChannels(cIndex);
+					} else {
+						data = JSON.parse(data);
+						// channel info
+						channel.channel_name = data.title;
+						channel.channel_description = data.description;
+						// get channel.json
+						var inner_path = 'merged-'+$scope.merger_name+'/'+channel.address+'/data/channel.json';					
+						Page.cmd("fileGet",{"inner_path":inner_path},function(data){
+							// assign games
+							data = JSON.parse(data);
+							// if channel has data
+							if (!data){
+								$scope.finishLoadingChannels(cIndex);
+							} else {
+							    var iLen = 0;
+								channel.items = data[$scope.media_type];
+								if(data.games) {channel.games = data.games; iLen+=data.games.length;}
+								if(data.videos){channel.videos = data.videos;iLen+=data.videos.length;}
+								if(data.channel.img) {channel.logo = data.channel.img;}
+								channel.filesLen = iLen;
+
+								// apply to scope
+								$scope.$apply(function() {
+									// get channel items
+									$scope.addChannelItems(data,channel,cIndex);									
+								});
+							}
+						});
 					}
 				});
 			};
@@ -218,43 +243,88 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// add channels items
 			$scope.addChannelItems = function(data,channel,cIndex){
 				Page.cmd("optionalFileList", { address: channel.address, limit:2000 }, function(site_files){
+					var totalItems = $scope.countChannelItems(data);
+					var totalItemsIndex = 0;
 		      		for (var media_type in data){
 		      			if (Object.prototype.toString.call(data[media_type]) === '[object Array]'){
-		      				console.log(media_type);
 		      				if (data[media_type].length > 0){
 			      				if ($scope.config.media_types.indexOf(media_type) > -1){
 			      					if (data[media_type].length)
 			      					// loop through items in data
 			      					data[media_type].forEach(function(item,itemIndex){
+			      						totalItemsIndex++;
 			      						// render channel item via Item service
 			      						item = Item.renderChannelItem($scope,item,site_files,channel);
 			      						// apply to scope items array						
 			      						if (!$scope[media_type]) $scope[media_type] = [];
 			      						$scope[media_type].push(item);
-			      						// if last item in channels items array
-			      						if ((itemIndex + 1) === data[media_type].length){
-			      							// finish loading
-			      							$scope.finishLoadingChannels(cIndex);
-			      						}
 			      					});
 			      				}
-		      				} else {
-								$scope.finishLoadingChannels(cIndex);
 		      				}
 		      			}
+		      		}
+		      		if (totalItemsIndex === totalItems){
+						// finish loading
+						$scope.finishLoadingChannels(cIndex);
 		      		}
 			    });
 			};
 	
+			// get channel info
+			$scope.getChannelInfo = function(channel){
+				// get channel's content.json
+				var inner_path = 'merged-'+$scope.merger_name+'/'+channel.channel_address+'/content.json';
+				Page.cmd("fileGet",{"inner_path":inner_path},function(data){
+					// check if site has content.json
+				    if (!data){
+						console.log('No content.json found for '+$scope.channel_address+'!');
+					} else {
+						data = JSON.parse(data);
+						// channel info
+						channel.channel_name = data.title;
+						channel.channel_description = data.description;
+				    	// get channel's channel.json
+				    	var inner_path = 'merged-'+$scope.merger_name+'/'+channel.channel_address+'/data/channel.json';
+				    	Page.cmd("fileGet",{"inner_path":inner_path},function(data){
+				    		// check if site has channel.json
+				    		if (!data) {
+				    			console.log('no channel.json found for '+$scope.channel_address+'!');
+				    		} else {
+								data = JSON.parse(data);	
+								// apply to scope
+								$scope.$apply(function() {				
+								    var iLen = 0;					
+									channel.items = data[$scope.media_type];
+									if(data.games) {channel.games = data.games; iLen+=data.games.length;}
+									if(data.videos){channel.videos = data.videos;iLen+=data.videos.length;}
+									if(data.channel.img) {channel.logo = data.channel.img;}
+									channel.filesLen = iLen;
+								});	
+				    		}
+				    	});
+					}
+				});
+			};
+
+			// count channel items
+			$scope.countChannelItems = function(data){
+				var totalItems = 0;
+	      		for (var media_type in data){
+	      			if (Object.prototype.toString.call(data[media_type]) === '[object Array]'){
+	      				totalItems += data[media_type].length;
+
+	      			}
+	      		}
+				return totalItems;			
+			};
+
 			// finish loading channels
 			$scope.finishLoadingChannels = function(cIndex){
 				// if channel index + 1 equals number of channels
-				if ((cIndex + 1) === $scope.pre_channels.length){
+				if ((cIndex + 1) === $scope.channels.length){
 					// finished loading & apply to scope
 					$scope.$apply(function(){
 						// finish loading
-						console.log($scope.channels);
-						$scope.channels = $scope.pre_channels;
 						console.log($scope.channels);
 						$scope.finishedLoading();
 					});
@@ -328,13 +398,17 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// set channel
 			$scope.setChannel = function(channel){
-				console.log(channel);
-				// set channel
-				$scope.channel = channel;	
 				// if channel has logo
-				if ($scope.channel.logo){
-					$scope.channel.logo_src = '/'+$scope.page.site_info.address+'/merged-'+$scope.merger_name+'/'+channel.channel_address+'/uploads/images/'+channel.logo;
+				if (channel.logo){
+					channel.logo_src = '/'+$scope.page.site_info.address+'/merged-'+$scope.merger_name+'/'+channel.channel_address+'/uploads/images/'+channel.logo;
 				}
+				// set channel
+				$scope.channel = channel;
+			};
+
+			// remove channel
+			$scope.removeChannel = function(){
+				delete $scope.channel;
 			};
 			
 	    /* /UI */
