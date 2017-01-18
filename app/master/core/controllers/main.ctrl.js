@@ -301,13 +301,11 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// clone file hub
 			$scope.cloneFileHub = function(){
 				if (Page.site_info.settings.permissions.indexOf("ADMIN") > -1){
-		    		Page.cmd("siteClone", {
-				        "address": "1FHtDQ8i5NFFeuo7Fux6TeLpwmmeUGvdc8"
-				    });
+					Page.cmd("siteClone", ["1CG6obEGoFL1fjAoNaxUnemgKES7Zh9YBG", "template-new"]);		    		
 		    	} else {
 		    		// if not, ask user for ADMIN permission
 					Page.cmd("wrapperPermissionAdd", "ADMIN", function() {
-						Page.cmd("siteClone", {"address": "1FHtDQ8i5NFFeuo7Fux6TeLpwmmeUGvdc8" });
+						Page.cmd("siteClone", ["1CG6obEGoFL1fjAoNaxUnemgKES7Zh9YBG", "template-new"]);	
 					});
 		    	}				
 			    return false;
