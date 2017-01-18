@@ -24,7 +24,7 @@
 <body class="ng-cloak" ng-controller="MainCtrl" ng-init="init()">
 
     <!-- wrapper -->
-    <div id="wrapper" ng-class="{toggled:toggled}">
+    <div id="wrapper" ng-if="channels" ng-class="{toggled:toggled}">
         <!-- sidebar -->
         <sidebar></sidebar>
         <!-- /sidebar -->

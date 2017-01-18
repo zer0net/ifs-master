@@ -13,7 +13,6 @@ app.directive('channelRegister', [
 			// get channel info
 			$scope.getChannelInfo = function(channel){
 				// get channel's content.json
-
 				var inner_path = 'merged-'+$scope.merger_name+'/'+channel.channel_address+'/content.json';				
 				Page.cmd("fileGet",{"inner_path":inner_path},function(data){
 					// check if site has content.json
@@ -165,8 +164,8 @@ app.directive('channelRegister', [
 						date_added: +(new Date),
 						user:Page.site_info.auth_address,
 						hide:0
-
 					};
+
 					// update data
 					data.channel.push(channel);
 					data.next_channel_id += 1;

@@ -23,8 +23,19 @@
 
 <body class="ng-cloak" ng-controller="MainCtrl" ng-init="init()">
 
+    <!-- loading -->
+    <div layout="column" ng-show="loading" flex>
+        <div layout="column" flex="100" style="text-align:center;">
+            <span><b ng-bind="msg"></b></span>
+        </div>
+        <div layout="row" flex="100" layout-align="space-around">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        </div>
+    </div>
+    <!-- /loading -->
+
 	<!-- wrapper -->
-    <div id="wrapper" ng-class="{toggled:toggled}">
+    <div id="wrapper" ng-if="channels" ng-class="{toggled:toggled}">
         <!-- sidebar -->
         <sidebar></sidebar>
         <!-- /sidebar -->

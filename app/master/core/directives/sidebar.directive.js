@@ -6,12 +6,6 @@ app.directive('sidebar', ['$rootScope',
 			
 			// on filter channel
 			$scope.onFilterChannel = function(channel) {
-				// if channel has logo
-				if (channel.logo){
-					channel.logo_src = '/'+$scope.channel_master_address+'/merged-'+$scope.merger_name+'/'+channel.channel_address+'/uploads/images/'+channel.logo;
-				}
-				// set channel
-				$scope.channel = channel;
 				// on filter channel
 				$rootScope.$broadcast('onFilterChannel',channel);
 			};

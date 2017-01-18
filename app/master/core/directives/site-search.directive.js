@@ -1,29 +1,71 @@
-app.directive('siteSearch', ['$mdDialog', '$mdMedia','$rootScope',
-	function($mdDialog,$mdMedia,$rootScope) {
+app.directive('siteSearch', ['$rootScope','$location','$window',
+	function($rootScope,$location,$window) {
 
 
 		// site search directive controller
 		var controller = function($scope,$element) {
 
 			// init site search
-			$scope.initSiteSearch = function(){
+			$scope.initSiteSearch = function(){				
+				// remove filter
 				$scope.filterRemove();
-				if ($scope.channel) $scope.ppFilter.channel.address = $scope.channel.channel_address;
+				// apply url path to scope
+				$scope.path = $location.$$absUrl.split($scope.page.site_info.address + '/')[1].split('?');
+				// check if index page
+				var isIndexPage = $scope.checkIfIndexPage();
+				if (isIndexPage){
+					$scope.generateFilterByUrl();
+				}
+			};
+
+			// generate filter by url
+			$scope.generateFilterByUrl = function(){
+				if ($scope.path[1].indexOf('&') > -1){
+					var subPath = $scope.path[1].split('&')[0];
+					if (subPath.indexOf('channel') > -1){
+						$scope.getFilterChannel(subPath.split('=')[1]);
+					} else if (subPath.indexOf('media_type') > -1){
+						console.log('filter media type');
+						console.log(subPath.split('=')[1]);
+					} else if (subPath.indexOf('file_type') > -1){
+						console.log('filter file type');
+						console.log(subPath.split('=')[1]);
+					}
+				} else {
+					console.log('no sub path');
+				}
+			};
+
+			// get filter channel
+			$scope.getFilterChannel = function(channel_address){
+				$scope.channels.forEach(function(channel,index){
+					if (channel.channel_address === channel_address){
+						$scope.filterChannel(channel);
+					}
+				});
 			};
 
 			// filter channel
 	    	$scope.filterChannel = function(channel){
-				$scope.ppFilter.channel.address = channel.channel_address;
+	    		var isIndexPage = $scope.checkIfIndexPage();
+	    		if (isIndexPage){
+					// set channel
+					$scope.setChannel(channel);
+					// filter channel
+					$scope.ppFilter.channel.address = channel.channel_address;
+				} else {
+					$window.location.href = '/'+ $scope.page.site_info.address +'/index.html?channel='+channel.channel_address;
+				}
 	    	};
 
 	    	// rootscope on filter channel
 	    	$rootScope.$on('onFilterChannel',function(event,mass){
-		    	$scope.filterChannel(mass);
+			    $scope.filterChannel(mass);
 	    	});
 
 	    	// remove filter channel
 	    	$scope.removeFilterChannel = function(){
-	    		delete $scope.ppFilter.channel;
+	    		delete $scope.ppFilter.channel.address;
 	    	};
 
 	    	// rootscope on remove filter channel
@@ -46,6 +88,22 @@ app.directive('siteSearch', ['$mdDialog', '$mdMedia','$rootScope',
 					channel:{}
 				}
 			}
+
+			// check if index page
+			$scope.checkIfIndexPage = function(){
+				console.log($scope.path);
+				if ($scope.path[0] === '') {
+					return true;
+				} else if ($scope.path[0] === 'index.html') {
+					return true;
+				} else if ($scope.path[0] === 'view.html') {
+					return false;
+				} else if ($scope.path[0] === 'register.html'){
+					return false;
+				} else if ($scope.path[0].indexOf('user/')){
+					return false;
+				}
+			};
 		
 		};
 
@@ -56,12 +114,14 @@ app.directive('siteSearch', ['$mdDialog', '$mdMedia','$rootScope',
           					'<input type="text" class="form-control" ng-model="ppFilter.media_type"  id="filterMediaType" style="display:none">'+
           					'<input type="text" class="form-control" ng-model="ppFilter.file_type"  id="filterFileType" style="display:none">'+
           					'<div class="dropdown">'+
-          					  '<a ng-click="filterMediaType(\'game\')" style="color:#777; padding:10px 20px;" >GAME</a>'+
-          					  '<div class="dropdown-content">'+
-          					    '<ul><li><a ng-click="filterFileType(\'nes\')"> NINTENDO </a></li>'+
-          					    '<li><a ng-click="filterFileType(\'sna\')">AMSTRAD </a> </li>'+
-          					    '<li><a ng-click="filterFileType(\'zip\')">DOS </a> </li>'+
-          					    '<li><a ng-click="filterFileType(\'bin\')">ATARI</a> </li>'+
+          					    '<a ng-click="filterMediaType(\'game\')" style="color:#777; padding:10px 20px;" >GAME</a>'+
+          					    '<div class="dropdown-content">'+
+          					    '<ul>' + 
+	          					    '<li><a ng-click="filterFileType(\'nes\')"> NINTENDO </a></li>'+
+	          					    '<li><a ng-click="filterFileType(\'sna\')">AMSTRAD </a> </li>'+
+	          					    '<li><a ng-click="filterFileType(\'zip\')">DOS </a> </li>'+
+	          					    '<li><a ng-click="filterFileType(\'bin\')">ATARI</a> </li>'+
+          					    '</ul>' +
           					  '</div>'+
           					'</div>' +
 							'<a ng-click="filterMediaType(\'video\')" style="color: #777;padding:10px 20px;">VIDEO</a>' + 

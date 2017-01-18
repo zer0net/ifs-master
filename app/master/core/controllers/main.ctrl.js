@@ -5,6 +5,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// init
 			$scope.init = function(){
+				$scope.site_ready = false;				
 				// loading
 				$scope.showLoadingMessage('Loading');
 				// get site info
@@ -123,12 +124,10 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				// loading
 				$scope.showLoadingMessage('Loading Channels');					
 				// get channels				
-				var query = ["SELECT * FROM channel where hide = 0 ORDER BY date_added"];	
-				
+				var query = ["SELECT * FROM channel where hide = 0 ORDER BY date_added"];
 				Page.cmd("dbQuery", query, function(channels) {	
-								
 					if (channels.length > 0){
-						$scope.channels = channels;
+						$scope.pre_channels = channels;
 						// render channels												
 						$scope.renderChannels();
 					} else {
@@ -145,7 +144,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				// items array, named ny media type var
 				$scope[$scope.media_type] = [];
 				// for each channel
-				$scope.channels.forEach(function(channel,cIndex){
+				$scope.pre_channels.forEach(function(channel,cIndex){
 	 				// check if site exists
 					var siteExists = false;
 					// loop through sites array
@@ -211,7 +210,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 						// get channel items
 						$scope.addChannelItems(data,channel,cIndex);
 					} else {
-						// finish loading
 						$scope.finishLoadingChannels(cIndex);
 					}
 				});
@@ -222,6 +220,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				Page.cmd("optionalFileList", { address: channel.address, limit:2000 }, function(site_files){
 		      		for (var media_type in data){
 		      			if (Object.prototype.toString.call(data[media_type]) === '[object Array]'){
+		      				console.log(media_type);
 		      				if (data[media_type].length > 0){
 			      				if ($scope.config.media_types.indexOf(media_type) > -1){
 			      					if (data[media_type].length)
@@ -250,9 +249,13 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// finish loading channels
 			$scope.finishLoadingChannels = function(cIndex){
 				// if channel index + 1 equals number of channels
-				if ((cIndex + 1) === $scope.channels.length){
+				if ((cIndex + 1) === $scope.pre_channels.length){
 					// finished loading & apply to scope
 					$scope.$apply(function(){
+						// finish loading
+						console.log($scope.channels);
+						$scope.channels = $scope.pre_channels;
+						console.log($scope.channels);
 						$scope.finishedLoading();
 					});
 				}
@@ -324,6 +327,17 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					$scope.toggled = false;
 				}
 			}
+
+			// set channel
+			$scope.setChannel = function(channel){
+				console.log(channel);
+				// set channel
+				$scope.channel = channel;	
+				// if channel has logo
+				if ($scope.channel.logo){
+					$scope.channel.logo_src = '/'+$scope.page.site_info.address+'/merged-'+$scope.merger_name+'/'+channel.channel_address+'/uploads/images/'+channel.logo;
+				}
+			};
 			
 	    /* /UI */
 	}
