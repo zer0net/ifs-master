@@ -1,5 +1,5 @@
-app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdMedia','Item',
-	function($rootScope,$scope,$location,$mdDialog,$mdMedia,Item) {
+app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdMedia','Item','Channel',
+	function($rootScope,$scope,$location,$mdDialog,$mdMedia,Item,Channel) {
 
 		/* INIT SITE */
 
@@ -222,13 +222,8 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 							if (!data){
 								$scope.finishLoadingChannels(cIndex);
 							} else {
-							    var iLen = 0;
-								channel.items = data[$scope.media_type];
-								if(data.games) {channel.games = data.games; iLen+=data.games.length;}
-								if(data.videos){channel.videos = data.videos;iLen+=data.videos.length;}
-								if(data.channel.img) {channel.logo = data.channel.img;}
-								channel.filesLen = iLen;
-
+								// render channel on get
+								channel = Channel.renderChannelOnGet(channel,data,$scope.media_type);
 								// apply to scope
 								$scope.$apply(function() {
 									// get channel items

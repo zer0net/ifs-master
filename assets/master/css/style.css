@@ -317,6 +317,10 @@ main {
   display: block;
   float: left;
 }
+#filter-info {
+  float: left;
+  width: 100%;
+}
 #filter-info .search-tag {
   color: white;
   background-color: #337ab7;

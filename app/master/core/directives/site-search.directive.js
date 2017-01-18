@@ -18,6 +18,22 @@ app.directive('siteSearch', ['$rootScope','$location','$window',
 				}
 			};
 
+			// check if index page
+			$scope.checkIfIndexPage = function(){
+				console.log($scope.path);
+				if ($scope.path[0] === '') {
+					return true;
+				} else if ($scope.path[0] === 'index.html') {
+					return true;
+				} else if ($scope.path[0] === 'view.html') {
+					return false;
+				} else if ($scope.path[0] === 'register.html'){
+					return false;
+				} else if ($scope.path[0].indexOf('user/')){
+					return false;
+				}
+			};
+
 			// generate filter by url
 			$scope.generateFilterByUrl = function(){
 				if ($scope.path[1].indexOf('&') > -1){
@@ -25,14 +41,10 @@ app.directive('siteSearch', ['$rootScope','$location','$window',
 					if (subPath.indexOf('channel') > -1){
 						$scope.getFilterChannel(subPath.split('=')[1]);
 					} else if (subPath.indexOf('media_type') > -1){
-						console.log('filter media type');
-						console.log(subPath.split('=')[1]);
+						$scope.filterMediaType(subPath.split('=')[1]);
 					} else if (subPath.indexOf('file_type') > -1){
-						console.log('filter file type');
-						console.log(subPath.split('=')[1]);
+						$scope.filterFileType(subPath.split('=')[1])
 					}
-				} else {
-					console.log('no sub path');
 				}
 			};
 
@@ -76,11 +88,24 @@ app.directive('siteSearch', ['$rootScope','$location','$window',
 
 	    	// filter media type
 	    	$scope.filterMediaType = function(type){
-	    		$scope.ppFilter.media_type = type;
+	    		var isIndexPage = $scope.checkIfIndexPage();
+	    		if (isIndexPage){
+	    			// filter media type
+					$scope.ppFilter.media_type = type;
+				} else {
+					$window.location.href = '/'+ $scope.page.site_info.address +'/index.html?media_type='+type;
+				}
 	    	};
 
 			$scope.filterFileType = function(file_type) {
-				$scope.ppFilter.file_type = file_type
+				$scope.ppFilter.file_type = file_type;
+	    		var isIndexPage = $scope.checkIfIndexPage();
+	    		if (isIndexPage){
+	    			// filter media type
+					$scope.ppFilter.file_type = file_type;
+				} else {
+					$window.location.href = '/'+ $scope.page.site_info.address +'/index.html?file_type='+file_type;
+				}
 			};
 
 			// filter remove
@@ -89,22 +114,6 @@ app.directive('siteSearch', ['$rootScope','$location','$window',
 					channel:{}
 				}
 			}
-
-			// check if index page
-			$scope.checkIfIndexPage = function(){
-				console.log($scope.path);
-				if ($scope.path[0] === '') {
-					return true;
-				} else if ($scope.path[0] === 'index.html') {
-					return true;
-				} else if ($scope.path[0] === 'view.html') {
-					return false;
-				} else if ($scope.path[0] === 'register.html'){
-					return false;
-				} else if ($scope.path[0].indexOf('user/')){
-					return false;
-				}
-			};
 		
 		};
 
