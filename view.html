@@ -114,7 +114,7 @@
 								<section class="section md-whiteframe-1dp item-info">
 									<div class="section-header item-info-header">
 										<h3 ng-bind="video.title"></h3>
-										<a href="/{{video.channel.address}}">{{video.channel.content.title}}</a>
+										<a href="/{{page.site_info.address}}/index.html?channel={{video.channel.address}}">{{video.channel.content.title}}</a>
 										<div class="video-views item-views" views ng-init="getViews(video)">
 											<!--<span>{{video.views.length}} Views</span>-->
 											<span>{{video.channel.peers}} Peers</span>

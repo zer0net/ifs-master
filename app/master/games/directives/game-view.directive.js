@@ -85,7 +85,7 @@ app.directive('gameView', ['$location','$rootScope',
 								'<section ng-if="game" class="section md-whiteframe-1dp item-info">' +
 									'<div class="section-header item-info-header">' +
 										'<h3 ng-bind="game.title"></h3>' +
-										'<a href="/{{game.channel.address}}">{{game.channel.content.title}}</a>' +
+										'<a href="/{{page.site_info.address}}/index.html?channel={{game.channel.address}}">{{game.channel.content.title}}</a>' +
 										'<div class="item-views">' +
 											'<span>{{game.site_file.peer}} Peers </span>' +
 										'</div>' +
