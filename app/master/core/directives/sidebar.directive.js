@@ -29,8 +29,7 @@ app.directive('sidebar', ['$rootScope',
 							       	'<li ng-repeat="channel in channels | orderBy:\'-date_added\'" ng-click="onFilterChannel(channel)">' +
 							            '<div ng-if="channel.filesLen">' +
 							                '<a href="#">' +
-												'<img ng-if="channel.logo" ng-src="/{{channel_master_address}}/merged-{{merger_name}}/{{channel.channel_address}}/uploads/images/{{channel.logo}}" class="imgFilehubLogo"/>' +
-							                	'<img ng-hide="channel.logo" src="assets/master/img/x-avatar.png" class="imgFilehubLogo"/>' +
+												'<figure class="channel-list-item-logo"><img ng-if="channel.logo" ng-src="/{{page.site_info.address}}/merged-{{merger_name}}/{{channel.channel_address}}/uploads/images/{{channel.logo}}"/></figure>' +
 							                	'<span>{{channel.channel_name}} [{{channel.filesLen}}]</span>' +
 							                '</a>' +
 							            '</div>' +

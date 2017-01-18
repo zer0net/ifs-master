@@ -1188,4 +1188,11 @@ th {
 .nes-roms {
   display: none;
 }
+.imgFilehubLogo {
+  border: 1px solid #dbdbdb;
+  border-radius: 999px;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
 /* /STYLE EXTRA */
