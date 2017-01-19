@@ -35,7 +35,17 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$sce','$location','$wi
 					});
 					// get channel data (default - first site in array)
 					if ($scope.u_sites) {
-						$scope.getSiteFileList($scope.u_sites[0]);	
+						var path = $location.$$absUrl.split('/user/')[1].split('&')[0];
+						if (path.indexOf('channel=') > -1){
+							var channel_address = path.split('channel=')[1];
+							$scope.u_sites.forEach(function(u_site,index){
+								if (u_site.address === channel_address){
+									$scope.getSiteFileList(u_site);
+								}
+							});
+						} else {
+							$scope.getSiteFileList($scope.u_sites[0]);
+						}
 					} else {
 						$scope.no_sites = true;
 						$scope.$apply();
@@ -170,7 +180,7 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$sce','$location','$wi
 								// apply to scope
 								$scope.$apply(function(){
 									Page.cmd("wrapperNotification", ["done", "Channel Updated!",10000]);
-									$window.location.href = '/'+ $scope.page.site_info.address +'/user/';
+									$window.location.href = '/'+ $scope.page.site_info.address +'/user/index.html?channel='+$scope.site.address;
 								});
 							} else {
 								Page.cmd("wrapperNotification", ["info", "Please clone this site to create your own channel",10000]);							
