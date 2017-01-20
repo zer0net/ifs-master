@@ -15,7 +15,7 @@
 	<!--<base href="/">-->
 </head>
 <body class="ng-cloak" ng-controller="MainCtrl" ng-init="init()">
-
+    
     <!-- loading -->
     <div layout="column" ng-show="loading" flex>
         <div layout="column" flex="100" style="text-align:center;">
@@ -28,29 +28,19 @@
     <!-- /loading -->
 
 	<!-- wrapper -->
-    <div id="wrapper" ng-if="channels" ng-class="{toggled:toggled}">
+    <div id="wrapper" ng-hide="loading" ng-if="channels" ng-class="{toggled:toggled}">
 	    <!-- sidebar -->
 	    <sidebar></sidebar>
 	    <!-- /sidebar-->
 	    <!-- page content -->
 	    <div id="page-content-wrapper">  
-			<!-- HEADER -->
+			<!-- header -->
 			<site-header></site-header>
-			<!-- /HEADER -->
-			<!-- CONTENT -->
+			<!-- /header -->
+			<!-- content -->
 			<section flex layout="row" layout-padding class="container" style="padding-top: 50px;">
-				<!-- loading -->
-				<div layout="column" ng-show="loading" flex>
-					<div layout="column" flex="100" style="text-align:center;">
-						<span><b ng-bind="msg"></b></span>
-					</div>
-					<div layout="row" flex="100" layout-align="space-around">
-						<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-					</div>
-				</div>
-				<!-- /loading -->
 				<!-- main -->
-			    <main ng-hide="loading" item-view ng-init="initItemView()" flex layout="column" class="section games-section">
+			    <main item-view ng-init="initItemView()" flex layout="column" class="section games-section">
 				    <div ng-if="item_type === 'game'">
 				    	<!-- game -->
 						<game-view ng-if="games"></game-view>
@@ -64,7 +54,7 @@
 			    </main>
 			    <!-- /main -->
 			</section>
-			<!-- /CONTENT -->
+			<!-- /content -->
 	    </div>
 	    <!-- /page content -->
 	</div>
