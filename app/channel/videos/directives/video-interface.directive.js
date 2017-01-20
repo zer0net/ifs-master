@@ -62,7 +62,7 @@ app.directive('videoInterface', ['$sce',
 							'<item-form ng-if="formTabs"></item-form>' +
 							'<!-- /form -->' +
 							'<!-- player -->' +
-							'<video-player ng-init="initVideoPlayer(player)"></video-player>' +
+							'<video-player></video-player>' +
 							'<!-- /player -->' +
 						'</div>';
 

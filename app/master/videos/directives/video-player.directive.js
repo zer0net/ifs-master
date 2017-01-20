@@ -14,18 +14,19 @@ app.directive('videoPlayer', ['$sce','$timeout',
 		    	$scope.playerErrors = 0;
 		    	$scope.video = video;
 		    	$scope.screenSize = 'normal';
-
-				$scope.player = {
-					preload: "none",
-					autoPlay:true,
-					sources: [
-						{
-							src:'merged-'+$scope.merger_name+'/' + video.channel.address + '/uploads/videos/' + video.file_name,
-							type:'video/'+video.file_type
-						}
-					],
-					theme: "assets/lib/videos/videogular-themes-default/videogular.css"
-				};
+		    	if (!$scope.player){
+					$scope.player = {
+						preload: "none",
+						autoPlay:true,
+						sources: [
+							{
+								src:'merged-'+$scope.merger_name+'/' + video.channel.address + '/uploads/videos/' + video.file_name,
+								type:'video/'+video.file_type
+							}
+						],
+						theme: "assets/lib/videos/videogular-themes-default/videogular.css"
+					};
+		    	}
 				$scope.finishedLoading();
 		    };
 
