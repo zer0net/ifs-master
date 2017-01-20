@@ -25,7 +25,10 @@ app.directive('videoView', ['$location',
 								if (site.address === video.channel){
 									video.channel = site;
 								}
-							});
+							});							
+							// get site file info
+							$scope.getSiteFileInfo(video);							
+														
 							$scope.$apply(function(){
 								$scope.loadVideo(video);
 							});
@@ -34,6 +37,24 @@ app.directive('videoView', ['$location',
 				});
 			};
 
+			// get site file info
+			$scope.getSiteFileInfo = function(video){
+				// get optional files info
+				Page.cmd("optionalFileList", { address: video.channel.address, limit:2000 }, function(site_files){
+					// for each site file
+					site_files.forEach(function(site_file){
+						if (site_file.inner_path === video.path){
+							console.log('file found');
+							// apply site file info to video obj
+							video.site_file = site_file;
+							// apply video to scope
+							$scope.video = video;
+							// apply scope
+							$scope.$apply();
+						}
+					});					
+				});
+			};
 		    // load video
 		    $scope.loadVideo = function(video){
 		    	
