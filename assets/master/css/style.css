@@ -246,6 +246,9 @@ section.container hr.divider {
 .header ul li a {
   width: 100%;
 }
+#main-loading {
+  margin-top: 60px;
+}
 .main-content {
   background-color: #f7f7f7;
 }

@@ -38,6 +38,7 @@ app.directive('itemView', [
 
 			};
 
+			// get url letter variable
 			$scope.getUrlLetterVariable = function(item_type) {
 				var urlLetterVar;
 				if (item_type === 'game'){
