@@ -4,6 +4,22 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 		// site header controller
 		var controller = function($scope,$element) {
 
+			// init
+			$scope.init = function() {
+				$scope.publishButtonStatus = 'publish';
+			};
+
+			// on publish site
+			$scope.onPublishSite = function() {
+				$scope.publishButtonStatus = 'Now Updating and Publishing...';
+				$scope.publishSite();
+			};
+
+			$rootScope.$on('resetPublishButton',function(event,mass) {
+				$scope.publishButtonStatus = 'publish';
+			});
+
+
 			// multiple upload dialog
 			$scope.multipleUploadDialog = function(ev){
 				
@@ -126,7 +142,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 		};
 
 		// site header template
-		var template = 	'<md-toolbar ng-if="site" layout-padding class="md-hue-2 header" layout="row">' +
+		var template = 	'<md-toolbar ng-init="init()" ng-if="site" layout-padding class="md-hue-2 header" layout="row">' +
 							'<div class="col-xs-5">' + 
 								'<figure class="logo"><img ng-if="chJson.channel.img" ng-src="/{{page.site_info.address}}/merged-{{merger_name}}/{{site.address}}/{{chJson.channel.img ? \'uploads/images/\'+chJson.channel.img : \'../assets/channel/img/x-avatar.png\'}}"/></figure>' +
 								'<div class="site-title">' + 
@@ -157,7 +173,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 										'<md-button class="md-primary md-raised edgePadding pull-left" ng-click="multipleUploadDialog($event)">Upload</md-button>' + 				       
 						        	'</li>' + 
 						        	'<li>' +
-										'<md-button class="md-primary md-raised edgePadding pull-left" ng-click="publishSite()">Publish</md-button>' + 				       
+										'<md-button class="md-primary md-raised edgePadding pull-left" ng-click="onPublishSite()">{{publishButtonStatus}}</md-button>' + 				       
 						        	'</li>' + 						        	
 								'</ul>' + 
 					        '</div>' + 

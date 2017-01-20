@@ -204,7 +204,7 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$sce','$location','$wi
 						// apply to scope
 						$scope.$apply(function(){
 							Page.cmd("wrapperNotification", ["done", "Channel Updated!",10000]);
-							// $window.location.href = '/'+ $scope.page.site_info.address +'/user/index.html?channel='+$scope.site.address;
+							$rootScope.$broadcast('resetPublishButton');
 						});
 					} else {
 						Page.cmd("wrapperNotification", ["info", "Please clone this site to create your own channel",10000]);
