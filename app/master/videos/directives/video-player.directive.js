@@ -11,13 +11,13 @@ app.directive('videoPlayer', ['$sce','$timeout',
 			$scope.onPlayerReady = function($API){
 				$timeout(function () {
 					$scope.item.total_time = $API.totalTime;
-					$scope.generateItemProperties();
+					// $scope.generateItemProperties();
 				}, 2000);
 			};
 
 		};
 
-		var template =	'<videogular ng-if="player"' +
+		var template =	'<videogular ng-if="player" class="md-whiteframe-1dp"' +
 							'vg-auto-play="player.autoPlay" ' +
 							'vg-player-ready="onPlayerReady($API)" ' +
 							'vg-error="onPlayerError($event)"' +

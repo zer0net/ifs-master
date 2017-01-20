@@ -58,143 +58,25 @@
 					</div>
 					<div ng-if="item_type === 'video'"  layout="row" layout-padding >
 						<!-- video  -->
-						<md-content class="item-view video-view" video-view ng-if="videos" ng-init="initVideoView()" flex="65">
-							<!-- loading -->
+						<md-content class="item-view video-view" video-view ng-if="videos" ng-init="getItem(item)" flex="65">
+							<!-- loading
 							<div layout="row" ng-show="videoLoading"  layout-sm="column" layout-align="space-around">
 								<md-progress-circular md-mode="indeterminate"></md-progress-circular>
 							</div>
-							<!-- loading -->
-							<div ng-if="video" ng-show="API.finishedLoading" ng-init="loadVideo(video)">
+							loading -->
+							<div ng-if="video" ng-init="loadVideo(video)">
 								<!-- player -->
-								<section class="md-whiteframe-1dp">
-									<videogular ng-if="player"
-										vg-auto-play="player.autoPlay" 
-										vg-player-ready="onPlayerReady($API)" 
-										vg-complete="onPlayerComplete($API)"
-										vg-error="onPlayerError($event)"
-										vg-theme="player.theme" 
-										class="{{screenSize}}"
-										style="width:100%; height:400px;">
-										<vg-media vg-src="player.sources" vg-tracks="player.tracks"></vg-media>
-										<vg-controls ng-if="!player.error"  ng-show="API.totalTime">
-											<vg-play-pause-button></vg-play-pause-button>
-											<vg-time-display>{{ currentTime | date:"mm:ss" }}</vg-time-display>
-											<vg-scrub-bar>
-												<vg-scrub-bar-buffer ng-if="!player.Buffer"></vg-scrub-bar-buffer>
-												<div class="vg-scrub-bar-buffered" ng-if="player.Buffer" style="width:{{video.loadingPercent}}%;"></div>
-												<vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-											</vg-scrub-bar>
-											<vg-time-display>{{ timeLeft | date:"mm:ss" }}</vg-time-display>
-											<div class="vg-download-button">
-												<a href="/{{video.channel.address}}/uploads/videos/{{video.file_name}}" download>
-													<span class="glyphicon glyphicon-arrow-down"></span>
-												</a>
-											</div>
-											<vg-volume>
-												<vg-mute-button></vg-mute-button>
-												<vg-volume-bar></vg-volume-bar>
-											</vg-volume>
-											<vg-fullscreen-button ng-click="onFullScreenClick()"></vg-fullscreen-button>
-										</vg-controls>
-										<vg-poster vg-url="player.plugins.poster" ng-if="player.plugins"></vg-poster>
-										<vg-overlay-play ng-hide="player.error"></vg-overlay-play>
-										<vg-buffering></vg-buffering>
-										<div class="vg-error-message" ng-if="player.error">
-											{{player.message}}
-										</div>
-										<div class="vg-loading-message" ng-hide="player.done">
-											Now loading... Connecting to {{video.channel.peers}} peers<br/>
-											(Takes approx. 1 minute / 10mb)
-										</div>
-									</videogular>
+								<section>
+									<video-player></video-player>
 								</section>
 								<!-- /player -->
 								<hr class="divider"/>
 								<!-- info -->
-								<section class="section md-whiteframe-1dp item-info">
-									<div class="section-header item-info-header">
-										<h3 ng-bind="video.title"></h3>
-										<a href="/{{page.site_info.address}}/index.html?channel={{video.channel.address}}">{{video.channel.content.title}}</a>
-										<div class="video-views item-views" views ng-init="getViews(video)">
-											<!--<span>{{video.views.length}} Views</span>-->
-											<span>{{video.site_file.peer}} Peers</span>
-										</div>
-									</div>
-									<hr/>
-									<div class="item-details">
-										<div class="votes" votes ng-init="getVotes(video)">
-											<a class="up-vote" ng-click="onUpVote(video)">
-												<span class="glyphicon glyphicon-thumbs-up"></span>
-												<span class="number">{{video.upVotes}}</span>
-											</a>
-											<a class="down-vote" ng-click="onDownVote(video)">
-												<span class="glyphicon glyphicon-thumbs-down"></span>
-												<span class="number">{{video.downVotes}}</span>
-											</a>
-										</div>
-										<ul>
-											<!--<li><b>peers:</b> {{video.channel.peers}}</li>-->
-											<li><b>size:</b> {{video.file_size|filesize}}</li>
-											<li><b>date added:</b> <span am-time-ago="video.date_added"></span>
-											
-										</ul>
-										<article layout-padding ng-show="video.description">
-											<hr/>
-											<p ng-bind="video.description"></p>
-										</article>
-									</li>
-								</section>
+								<item-view-details ng-init="initItemViewDetails(video)"></item-view-details>
 								<!-- /info -->
-
 								<hr class="divider"/>
-								
 								<!-- COMMENTS -->
-								<comments ng-init="getComments(video)">
-									<div class="item-comments">
-										<!-- comment form -->
-										<section class="comment-form section md-whiteframe-1dp"  style="margin-top:16px;">
-											<div class="section-header" layout-padding>
-												<h2>Comments</h2>
-												<span class="comment-counter">
-													<span class="glyphicon glyphicon-comment"></span>
-													<span class="number">{{comments.length}}</span>
-												</span>
-											</div>
-										    <hr/>
-											<form layout="row" layout-padding>
-												<div flex="10">
-								                	<identicon class="md-whiteframe-1dp" username="user" size="64"></identicon>
-												</div>
-												<div flex="90">
-													<md-input-container class="md-block" flex-gt-sm>
-										              	<label>Add comment as {{user}}...</label>
-														<textarea ng-model="comment" ng-focus="onTextAreaFocus()"></textarea>
-										            </md-input-container>
-											        <md-button class="md-primary md-raised edgePadding pull-right" ng-click="onPostComment(comment,video)">
-											        	<label>Post</label>
-											        </md-button>
-											    </div>
-										    </form>
-										</section>
-										<!-- /comment form -->
-										<!-- comment list -->
-										<section class="comment-list md-whiteframe-1dp" id="comments-section" layout-padding ng-show="comments.length > 0">
-											<ul>
-												<li ng-repeat="comment in comments | orderBy:'-date_added'" layout="row">
-													<div flex="10">
-									                	<identicon class="md-whiteframe-1dp" username="comment.user_id" size="56"></identicon>
-													</div>
-													<div flex="90">
-														<span ng-bind="comment.user_id" class="user-name"></span> • 
-														<span am-time-ago="comment.date_added" class="time-ago"></span>
-														<p ng-bind="comment.comment"></p>
-												    </div>
-												</li>
-											</ul>
-										</section>
-										<!-- comment list -->
-									</div>
-								</comments>
+								<item-view-comments ng-init="initItemViewComments(video)"></item-view-comments>
 								<!-- /COMMENTS -->
 							</div>
 						</md-content>
@@ -261,7 +143,10 @@
         <script type="text/javascript" src="app/master/core/directives/site-search.directive.js"></script>
 		<script type="text/javascript" src="app/master/core/directives/channel-register.directive.js"></script>        
 		<script type="text/javascript" src="app/master/core/directives/item-view.directive.js"></script>
+		<script type="text/javascript" src="app/master/core/directives/item-view-details.directive.js"></script>
+		<script type="text/javascript" src="app/master/core/directives/item-view-comments.directive.js"></script>
 		<script type="text/javascript" src="app/master/core/directives/comments.directive.js"></script>
+		<script type="text/javascript" src="app/master/core/directives/comment-form.directive.js"></script>
 		<script type="text/javascript" src="app/master/core/directives/votes.directive.js"></script>
 		<script type="text/javascript" src="app/master/core/directives/views.directive.js"></script>
         <script type="text/javascript" src="app/master/core/services/item.service.js"></script>		
@@ -275,9 +160,11 @@
 		<script type="text/javascript" src="app/master/games/directives/nes-emulator.directive.js"></script>
 		<script type="text/javascript" src="app/master/games/directives/cpc-emulator.directive.js"></script>
 		<script type="text/javascript" src="app/master/games/directives/atari-emulator.directive.js"></script>
+		<script type="text/javascript" src="app/master/games/directives/game-list-sidebar.directive.js"></script>
 
 		<!-- app videos -->
 		<script type="text/javascript" src="app/master/videos/directives/video-view.directive.js"></script>
+		<script type="text/javascript" src="app/master/videos/directives/video-player.directive.js"></script>
 
 	<!-- /JS -->  
 

@@ -1,60 +1,14 @@
 app.directive('videoView', ['$location',
 	function($location) {
 
+		// video view controller
 		var controller = function($scope,$element) {
 
 			// init video view
-			$scope.initVideoView = function(){
-				if ($location.$$absUrl.indexOf('view.html') > -1){
-					$scope.viewType = 'video';
-					var channelId = $location.$$absUrl.split('&')[0].split('c=')[1].split('v=')[0];
-					var videoId = parseInt($location.$$absUrl.split('&')[0].split('c=')[1].split('v=')[1]);
-					$scope.getRefVideo(channelId,videoId);
-				};
+			$scope.initVideoView = function(video) {
+				$scope.video = video;
 			};
 
-			// get ref video
-			$scope.getRefVideo = function(channelId,videoId){
-				$scope.showLoadingMessage('Loading Video');
-				var inner_path = 'merged-'+$scope.merger_name+'/'+channelId+'/data/channel.json';
-				Page.cmd("fileGet",{"inner_path":inner_path},function(data){
-					data = JSON.parse(data);
-					data.videos.forEach(function(video,index){
-						if (video.video_id === videoId){
-							$scope.sites.forEach(function(site,index){
-								if (site.address === video.channel){
-									video.channel = site;
-								}
-							});							
-							// get site file info
-							$scope.getSiteFileInfo(video);							
-														
-							$scope.$apply(function(){
-								$scope.loadVideo(video);
-							});
-						}
-					});
-				});
-			};
-
-			// get site file info
-			$scope.getSiteFileInfo = function(video){
-				// get optional files info
-				Page.cmd("optionalFileList", { address: video.channel.address, limit:2000 }, function(site_files){
-					// for each site file
-					site_files.forEach(function(site_file){
-						if (site_file.inner_path === video.path){
-							console.log('file found');
-							// apply site file info to video obj
-							video.site_file = site_file;
-							// apply video to scope
-							$scope.video = video;
-							// apply scope
-							$scope.$apply();
-						}
-					});					
-				});
-			};
 		    // load video
 		    $scope.loadVideo = function(video){
 		    	
@@ -65,6 +19,7 @@ app.directive('videoView', ['$location',
 		    	$scope.playerErrors = 0;
 		    	$scope.video = video;
 		    	$scope.screenSize = 'normal';
+
 				$scope.player = {
 					preload: "none",
 					autoPlay:true,
@@ -98,6 +53,7 @@ app.directive('videoView', ['$location',
 
 		    // on full screen click
 			$scope.onFullScreenClick = function() {
+				console.log($scope.screenSize);
 				if ($scope.screenSize === 'full-screen'){
 					$scope.screenSize = 'normal';
 				} else {

@@ -756,6 +756,9 @@ main {
 .item-view .item-comments .comment-list ul li .time-ago {
   font-size: 12px;
 }
+.item-view .item-comments .comment-list ul li p {
+  word-break: break-all;
+}
 .item-view .item-comments .comment-list ul li + li {
   margin-top: 16px;
 }
