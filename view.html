@@ -56,43 +56,10 @@
 						<game-view ng-if="games"></game-view>
 						<!-- /game -->
 					</div>
-					<div ng-if="item_type === 'video'"  layout="row" layout-padding >
+					<div ng-if="item_type === 'video'">
 						<!-- video  -->
-						<md-content class="item-view video-view" video-view ng-if="videos" ng-init="getItem(item)" flex="65">
-							<!-- loading
-							<div layout="row" ng-show="videoLoading"  layout-sm="column" layout-align="space-around">
-								<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-							</div>
-							loading -->
-							<div ng-if="video" ng-init="loadVideo(video)">
-								<!-- player -->
-								<section>
-									<video-player></video-player>
-								</section>
-								<!-- /player -->
-								<hr class="divider"/>
-								<!-- info -->
-								<item-view-details ng-init="initItemViewDetails(video)"></item-view-details>
-								<!-- /info -->
-								<hr class="divider"/>
-								<!-- COMMENTS -->
-								<item-view-comments ng-init="initItemViewComments(video)"></item-view-comments>
-								<!-- /COMMENTS -->
-							</div>
-						</md-content>
+						<video-view ng-if="videos"></video-view>
 						<!-- /video -->
-						<!-- video list -->
-						<md-content class="video-list" flex="35"  ng-if="videos" style="background-color: transparent;">
-							<div class="md-whiteframe-1dp" layout="column">
-								<ul ng-if="videos">
-							    	<li ng-repeat="vid in videos | orderBy:'-date_added' track by $index">
-								    	<a href="/{{site_address}}/view.html?type=video-c={{vid.channel.address}}v={{vid.video_id}}">{{vid.title}}</a>
-								    	<hr/>
-							    	</li>
-								</ul>
-							</div>
-						</md-content>
-						<!-- /video list -->
 					</div>
 			    </main>
 			    <!-- /main -->
@@ -165,6 +132,7 @@
 		<!-- app videos -->
 		<script type="text/javascript" src="app/master/videos/directives/video-view.directive.js"></script>
 		<script type="text/javascript" src="app/master/videos/directives/video-player.directive.js"></script>
+		<script type="text/javascript" src="app/master/videos/directives/video-list-sidebar.directive.js"></script>
 
 	<!-- /JS -->  
 

@@ -90,7 +90,7 @@ app.directive('commentForm', ['$rootScope','$sce','$location',
 					              	'<label>Add comment as {{user}}...</label>' +
 									'<textarea ng-model="comment" ng-focus="onTextAreaFocus()"></textarea>' +
 					            '</md-input-container>' +
-						        '<md-button class="md-primary md-raised edgePadding pull-right" ng-click="onPostComment(comment,game)">' +
+						        '<md-button class="md-primary md-raised edgePadding pull-right" ng-click="onPostComment(comment,item)">' +
 						        	'<label>Post</label>' +
 						        '</md-button>' +
 						    '</div>' +

@@ -4,20 +4,18 @@ app.directive('videoPlayer', ['$sce','$timeout',
 		// video interface player
 		var controller = function($scope,$element) {
 			$scope.initVideoPlayer = function(player){
-				console.log(player);
 				$scope.player = player;
 			};
 			// on player ready
 			$scope.onPlayerReady = function($API){
 				$timeout(function () {
 					$scope.item.total_time = $API.totalTime;
-					// $scope.generateItemProperties();
 				}, 2000);
 			};
 
 		};
 
-		var template =	'<videogular ng-if="player" class="md-whiteframe-1dp"' +
+		var template =	'<videogular ng-if="player" class="md-whiteframe-1dp {{screenSize}}"' +
 							'vg-auto-play="player.autoPlay" ' +
 							'vg-player-ready="onPlayerReady($API)" ' +
 							'vg-error="onPlayerError($event)"' +
