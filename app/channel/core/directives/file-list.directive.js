@@ -93,7 +93,7 @@ app.directive('fileList', ['$mdDialog','$mdMedia',
 							    	'<td>{{item.media_type}}</td>' +
 							    	'<td>{{item.file_type}}</td>' +
 									'<td><i am-time-ago="item.date_added"></i></td>' +
-									'<td ng-if="owner">' +
+									'<td>' +
 										'<span ng-click="deleteFile(item)" class="glyphicon glyphicon-trash"></span>' +
 										'<a href="{{item.edit_url}}">' +
 										'<span class="glyphicon glyphicon-pencil"></span></a>' +
