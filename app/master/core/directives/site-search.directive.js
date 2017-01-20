@@ -20,7 +20,6 @@ app.directive('siteSearch', ['$rootScope','$location','$window',
 
 			// check if index page
 			$scope.checkIfIndexPage = function(){
-				console.log($scope.path);
 				if ($scope.path[0] === '') {
 					return true;
 				} else if ($scope.path[0] === 'index.html') {

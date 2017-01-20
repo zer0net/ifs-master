@@ -196,6 +196,22 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$sce','$location','$wi
 				$scope.updateChannelJson();
 			});
 
+			// publish site
+			$scope.publishSite = function(){
+				// sign & publish
+				Page.cmd("sitePublish",["stored",'merged-'+$scope.merger_name+'/'+$scope.site.address+'/content.json'], function(res){
+					if (res === 'ok'){
+						// apply to scope
+						$scope.$apply(function(){
+							Page.cmd("wrapperNotification", ["done", "Channel Updated!",10000]);
+							// $window.location.href = '/'+ $scope.page.site_info.address +'/user/index.html?channel='+$scope.site.address;
+						});
+					} else {
+						Page.cmd("wrapperNotification", ["info", "Please clone this site to create your own channel",10000]);
+					}
+				});
+			};
+
 		/** /UPDATE CHANNEL **/
 
 
