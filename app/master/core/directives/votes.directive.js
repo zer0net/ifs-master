@@ -12,13 +12,7 @@ app.directive('votes', ['$rootScope','$location',
 				item.downVotes = 0;
 				item.upVotes = 0;
 				// get votes 				
-				var query = ["SELECT * FROM vote WHERE item_id="+item[item.item_id_name]+" AND channel='"+item.channel.address+"'"];
-				
-				/*var query ;
-				if(item.media_type=='game'){
-					query = ["SELECT * FROM vote WHERE item_id="+item[item.item_id_name]+" AND channel='"+item.channel.address+"'"];
-				}*/
-				
+				var query = ["SELECT * FROM vote WHERE item_id="+item[item.item_id_name]+" AND channel='"+item.channel.address+"'"];				
 				Page.cmd("dbQuery", query, function(votes) {
 					// determine if item is upvoted / downvoted by user
 					item.upVotes = 0;

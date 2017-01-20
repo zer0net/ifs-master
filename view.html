@@ -38,22 +38,7 @@
 			<site-header></site-header>
 			<!-- /header -->
 			<!-- content -->
-			<section flex layout="row" layout-padding class="container" style="padding-top: 50px;">
-				<!-- main -->
-			    <main item-view ng-init="initItemView()" flex layout="column" class="section games-section">
-				    <div ng-if="item_type === 'game'">
-				    	<!-- game -->
-						<game-view ng-if="games"></game-view>
-						<!-- /game -->
-					</div>
-					<div ng-if="item_type === 'video'">
-						<!-- video  -->
-						<video-view ng-if="videos"></video-view>
-						<!-- /video -->
-					</div>
-			    </main>
-			    <!-- /main -->
-			</section>
+			<item-view></item-view>
 			<!-- /content -->
 	    </div>
 	    <!-- /page content -->

@@ -98,10 +98,26 @@ app.directive('itemView', [
 
 		};
 
+		var template =  '<section ng-init="initItemView()" flex layout="row" layout-padding class="container" style="padding-top: 50px;">' +
+						    '<main flex layout="column" class="section games-section">' +
+							    '<div ng-if="item_type === \'game\'">' +
+							    	'<!-- game -->' +
+									'<game-view ng-if="games"></game-view>' +
+									'<!-- /game -->' +
+								'</div>' +
+								'<div ng-if="item_type === \'video\'">' +
+									'<!-- video  -->' +
+									'<video-view ng-if="videos"></video-view>' +
+									'<!-- /video -->' +
+								'</div>' +
+						    '</main>' +
+						'</section>';
+
 		return {
 			restrict: 'AE',
 			replace:false,
 			controller: controller,
+			template:template
 		}
 
 	}
