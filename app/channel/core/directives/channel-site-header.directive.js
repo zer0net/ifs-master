@@ -131,13 +131,14 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 								'<figure class="logo"><img ng-if="chJson.channel.img" ng-src="/{{page.site_info.address}}/merged-{{merger_name}}/{{site.address}}/{{chJson.channel.img ? \'uploads/images/\'+chJson.channel.img : \'../assets/channel/img/x-avatar.png\'}}"/></figure>' +
 								'<div class="site-title">' + 
 									'<h3>' + 
-										'<a target="_blank" href="/{{site.address}}">File Hub : {{contentJson.title}} </a>' + 
+										'<a target="_blank" href="/{{page.site_info.address}}/user/index.html?channel={{site.address}}">File Hub : {{contentJson.title}} </a>' + 
 										'<small>' + 
 											'<a ng-click="openChannelEditDialog(chJson)">' + 
 												'<span class="glyphicon glyphicon-pencil"></span>' + 
 											'</a>' + 
 										'</small>' + 
 									'</h3>' + 
+									'<a href="/{{site.address}}/"><small style="font-size: 10px;" ng-bind="site.address"></small></a>' +
 									'<div class="sub-title">' + 
 										'<small>{{contentJson.description}}</small>' + 
 										'<small>Site : &nbsp;{{peers}} peers' +
