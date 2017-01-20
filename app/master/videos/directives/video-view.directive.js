@@ -1,12 +1,8 @@
 app.directive('videoView', ['$location',
 	function($location) {
 
-		// video view controller
-		var controller = function($scope,$element) {
-
-		};
-
 		var template =  '<div class="item-view" layout="row" layout-padding ng-init="getItem(item)">' +
+							'<div ng-if="error_msg" flex="100" ng-hide="game" ng-bind="error_msg" style="font-weight: bold;text-align: center;"></div>' +
 							'<!-- video main -->' +
 							'<md-content class="item-view video-view" flex="65">' +
 								'<div ng-if="video" ng-init="loadVideo(video)">' +
@@ -34,7 +30,6 @@ app.directive('videoView', ['$location',
 		return {
 			restrict: 'AE',
 			replace:false,
-			controller: controller,
 			template:template
 		}
 
