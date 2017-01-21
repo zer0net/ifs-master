@@ -27,7 +27,7 @@ app.directive('sidebar', ['$rootScope',
 							          'Channels  <span class="glyphicon glyphicon-refresh"  ng-click="onRemoveFilterChannel()" ></span>' +
 							        '</li>' +
 							       	'<li ng-repeat="channel in channels | orderBy:\'-date_added\'" ng-click="onFilterChannel(channel)">' +
-							            '<div ng-if="channel.filesLen">' +
+							            '<div ng-if="channel.filesLen && channel.hide==0">' +
 							                '<a href="#">' +
 												'<figure class="channel-list-item-logo"><img ng-if="channel.logo" ng-src="/{{page.site_info.address}}/merged-{{merger_name}}/{{channel.channel_address}}/uploads/images/{{channel.logo}}"/></figure>' +
 							                	'<span>{{channel.channel_name}} [{{channel.filesLen}}]</span>' +

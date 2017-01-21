@@ -124,7 +124,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				// loading
 				$scope.showLoadingMessage('Loading Channels');					
 				// get channels				
-				var query = ["SELECT * FROM channel where hide = 0 ORDER BY date_added"];
+				var query = ["SELECT * FROM channel ORDER BY date_added"];
 				Page.cmd("dbQuery", query, function(channels) {	
 					if (channels.length > 0){
 						$scope.channels = channels;
@@ -224,10 +224,12 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 								// render channel on get
 								channel = Channel.renderChannelOnGet(channel,data,$scope.media_type);
 								// apply to scope
-								$scope.$apply(function() {
-									// get channel items
-									$scope.addChannelItems(data,channel,cIndex);									
-								});
+								if(channel.hide==0){ // add item if channel is not hidden
+									$scope.$apply(function() {
+										// get channel items
+										$scope.addChannelItems(data,channel,cIndex);									
+									});
+								}
 							}
 						});
 					}

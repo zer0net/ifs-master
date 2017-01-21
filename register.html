@@ -128,36 +128,7 @@
 
 							<!-- CHANNELS -->
 							<md-content flex class="section md-whiteframe-1dp" id="channels-section" layout="column" layout-padding>
-								<div class="section-header">
-									<h2>Channels</h2>
-									<span class="label" ng-hide="loading">total: <span ng-bind="channels.length"></span></span>
-									<hr/>
-								</div>
-								<div class="section-body">
-									<div class="channels-list" ng-if="channelsAll.length > 0">
-										<div class="channel-item" ng-repeat="channel in channelsAll | orderBy:'-date_added'" ng-init="getChannelInfo(channel)">
-											<h4><a href="/{{channel.channel_address}}/">{{channel.channel_name}}</a></h4>
-											<ul class="channel-info">
-												<li><span am-time-ago="channel.date_added"></li>
-												<li ng-if="channel.channel_desciprtion"><span ng-bind="channel.channel_description"></li>
-											</ul>
-
-											<a class="pull-right" ng-if="owner" ng-click="toggleChannel(channel,$index)">
-												<button class="btn btn-primary" ng-if="channel.hide==0"><span class="glyphicon glyphicon-minus">Hide</span></button>
-												<button class="btn btn-primary" ng-if="channel.hide==1" ><span class="glyphicon glyphicon-plus">Show</span></button>
-											</a>
-
-											<span class="pull-right" ng-if="channel.games">{{channel.games.length}} games</span>
-											<span class="pull-right" ng-if="channel.videos" style="padding-right: 20px">{{channel.videos.length}} videos</span>
-											<!--
-											<span class="pull-right">{{channel.items.length}} {{media_type}}</span>
-											<a class="label" ng-if="channel.user_id === user" ng-click="deleteChannel(channel,$index)">
-												<span class="glyphicon glyphicon-remove"></span>
-											</a>
-											-->
-										</div>
-									</div>
-								</div>
+								<channel-register-list> </channel-register-list>								
 							</md-content>
 							<!-- /CHANNELS -->
 
@@ -215,6 +186,7 @@
 		<script type="text/javascript" src="app/master/core/directives/site-header.directive.js"></script>
         <script type="text/javascript" src="app/master/core/directives/site-search.directive.js"></script>
         <script type="text/javascript" src="app/master/core/directives/channel-register.directive.js"></script>
+        <script type="text/javascript" src="app/master/core/directives/channel-register-list.directive.js"></script>        
 		<script type="text/javascript" src="app/master/core/directives/channel-input.directive.js"></script>
         <script type="text/javascript" src="app/master/core/services/item.service.js"></script>
         <script type="text/javascript" src="app/master/core/services/channel.service.js"></script>

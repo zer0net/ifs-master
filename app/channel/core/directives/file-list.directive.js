@@ -101,7 +101,7 @@ app.directive('fileList', ['$mdDialog','$mdMedia',
 								'</tr>' +
 							'</table>' +
 							'<dir-pagination-controls max-size="10" direction-links="true" boundary-links="true"></dir-pagination-controls>' +
-						'</div';
+						'</div>';
 
 
 		return {
