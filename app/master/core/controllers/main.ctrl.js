@@ -32,13 +32,12 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// get config json
 			$scope.getConfig = function(){
 				$scope.config = {
-					media_types:[
-						'all',
+					media_types:[						
 						'games',
 						'videos'
 					]
-				}
-				$scope.getMergerPermission();
+				}				
+				$scope.getMergerPermission();				
 			};
 
 			// generate config
@@ -80,7 +79,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			};
 
 			// get merger site permission
-			$scope.getMergerPermission = function(){
+			$scope.getMergerPermission = function(){						
 				// if user allready has permission for merger type
 		    	if (Page.site_info.settings.permissions.indexOf("Merger:"+$scope.merger_name) > -1){
 		    		$scope.$apply(function(){
@@ -100,12 +99,12 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 		    // get merged sites
 		    $scope.getMergedSites = function(){		    	
-		    	// loading
+		    	// loading		    	
 				$scope.showLoadingMessage('Listing merged sites');
 				// merged sites array		    	
 		    	$scope.sites = [];
 				Page.cmd("mergerSiteList", {query_site_info: true}, function(sites) {		
-					// for every site in sites obj
+					// for every site in sites obj					
 					for (var site in sites) {
 					    if (!sites.hasOwnProperty(site)) continue;
 					    var site = sites[site];
@@ -124,11 +123,11 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				// loading
 				$scope.showLoadingMessage('Loading Channels');					
 				// get channels				
-				var query = ["SELECT * FROM channel ORDER BY date_added"];
+				var query = ["SELECT * FROM channel where hide = 0 ORDER BY date_added"];
 				Page.cmd("dbQuery", query, function(channels) {	
 					if (channels.length > 0){
 						$scope.channels = channels;
-						// render channels												
+						// render channels														
 						$scope.renderChannels();
 					} else {
 						$scope.$apply(function(){
@@ -156,11 +155,13 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 								channel[attr] = site[attr]; 
 							}
 						}
-					});
+					});				
+					
 					// if site exists get channel, if not add merged site
 					if (siteExists === true){
-						// get channel
+						// get channel						
 						$scope.getChannel(channel,cIndex);
+
 					} else {						
 						console.log('site ' + channel.channel_address + ' doesnt exists! adding site...');
 						// add merger site
@@ -185,7 +186,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 								Page.cmd("wrapperNotification", ["info", "Refresh this page to view new content", 10000]);
 						    	// push site to sites array
 								$scope.sites.push(site);
-								// get channel
+								// get channel						
 								$scope.getChannel(site,cIndex);
 						    }
 						}
@@ -202,6 +203,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			$scope.getChannel = function(channel,cIndex){
 				// get channel's content.json
 				var inner_path = 'merged-'+$scope.merger_name+'/'+channel.address+'/content.json';
+						
 				Page.cmd("fileGet",{"inner_path":inner_path},function(data){
 					// check if site has content.json
 				    if (!data){
@@ -238,53 +240,52 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 	
 			// add channels items
 			$scope.addChannelItems = function(data,channel,cIndex){
+
 				Page.cmd("optionalFileList", { address: channel.address, limit:2000 }, function(site_files){
 					var totalItems = $scope.countChannelItems(data);
 					var totalItemsIndex = 0;
-		      		for (var media_type in data){
-		      			if (Object.prototype.toString.call(data[media_type]) === '[object Array]'){
-		      				if (data[media_type].length > 0){
-			      				if ($scope.config.media_types.indexOf(media_type) > -1){
-			      					if (data[media_type].length)
-			      					// loop through items in data
-			      					data[media_type].forEach(function(item,itemIndex){
-			      						totalItemsIndex++;
-			      						// render channel item via Item service
-			      						item = Item.renderChannelItem($scope,item,site_files,channel);
-			      						// apply to scope items array						
-			      						if (!$scope[media_type]) $scope[media_type] = [];
-			      						$scope[media_type].push(item);
-			      					});
-			      				}
-		      				}
-		      			}
-		      		}
+		      		//use $scope.config.media_types		      				      		
+					for (var media_type in $scope.config.media_types){
+						media_type = $scope.config.media_types[media_type];
+						if (data[media_type] && data[media_type].length>0){
+								// loop through items in data
+								data[media_type].forEach(function(item,itemIndex){
+								totalItemsIndex++;
+								// render channel item via Item service
+								item = Item.renderChannelItem($scope,item,site_files,channel);
+								// apply to scope items array						
+								if (!$scope[media_type]) $scope[media_type] = [];
+								$scope[media_type].push(item);
+
+							});
+						}
+					}
+					
 		      		if (totalItemsIndex === totalItems){
-						// finish loading
+						// finish loading					
 						$scope.finishLoadingChannels(cIndex);
 		      		}
 			    });
-			};
+			};			
 	
 			// count channel items
 			$scope.countChannelItems = function(data){
 				var totalItems = 0;
-	      		for (var media_type in data){
-	      			if (Object.prototype.toString.call(data[media_type]) === '[object Array]'){
-	      				totalItems += data[media_type].length;
-
-	      			}
-	      		}
+				for (var media_type in $scope.config.media_types){
+					if (data[media_type] && data[media_type].length>0){
+						totalItems += data[media_type].length;
+					}
+				}	      		
 				return totalItems;			
 			};
 
 			// finish loading channels
 			$scope.finishLoadingChannels = function(cIndex){
-				// if channel index + 1 equals number of channels
+				// if channel index + 1 equals number of channels				
 				if ((cIndex + 1) === $scope.channels.length){
 					// finished loading & apply to scope
 					$scope.$apply(function(){
-						// finish loading
+						// finish loading					
 						$scope.finishedLoading();
 					});
 				}
@@ -304,6 +305,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			$scope.finishedLoading = function(){
 				$scope.loading = false;
 				$scope.msg = '';
+				console.log($scope.games);
 			};
 
 		    // select user
