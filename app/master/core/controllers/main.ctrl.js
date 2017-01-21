@@ -8,6 +8,8 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				$scope.site_ready = false;				
 				// loading
 				$scope.showLoadingMessage('Loading');
+				// page
+				$scope.page = Page;
 				// get site info
 				Page.cmd("siteInfo", {}, function(site_info) {					
 					$scope.site_address = site_info.address;
@@ -17,8 +19,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					Page.site_info = site_info;
 					// owner					
 					$scope.owner = site_info.settings.own;
-					// page
-					$scope.page = Page;
+					
 					// update site
 					Page.cmd('siteUpdate',{"address":$scope.site_address});
 					// apply auth address to scope
@@ -272,6 +273,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			$scope.countChannelItems = function(data){
 				var totalItems = 0;
 				for (var media_type in $scope.config.media_types){
+					media_type = $scope.config.media_types[media_type];
 					if (data[media_type] && data[media_type].length>0){
 						totalItems += data[media_type].length;
 					}
@@ -281,7 +283,8 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// finish loading channels
 			$scope.finishLoadingChannels = function(cIndex){
-				// if channel index + 1 equals number of channels				
+				// if channel index + 1 equals number of channels				  
+			   
 				if ((cIndex + 1) === $scope.channels.length){
 					// finished loading & apply to scope
 					$scope.$apply(function(){
