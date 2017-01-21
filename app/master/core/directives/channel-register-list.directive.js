@@ -7,7 +7,12 @@ app.directive('channelRegisterList', ['$location','$rootScope',
 			$scope.sortKey = 'date_added';
 			$scope.reverse = true;			
 		    
-		    console.log($scope.channels);
+		    // on filter channel
+		    $scope.onFilterChannel = function(channel) {
+		    	// on filter channel
+		    	$rootScope.$broadcast('onFilterChannel',channel);
+		    };
+
 
 			// sort file list
 			$scope.sort = function(keyname){
@@ -40,7 +45,7 @@ app.directive('channelRegisterList', ['$location','$rootScope',
 									'</tr>' +
 								'</thead>' +
 								'<tr dir-paginate="channel in channels|orderBy:sortKey:reverse|itemsPerPage:itemsPerPage track by $index">' +
-									'<td><a href="/{{channel.channel_address}}/">{{channel.channel_name}}</a></td>' +
+									'<td><a ng-click="onFilterChannel(channel)">{{channel.channel_name}}</a></td>' +
 									'<td>{{channel.channel_address}}</td>' +
 									'<td>{{channel.channel_description }}</td>' +
 									'<td><span am-time-ago="channel.date_added"></span></td>' +
