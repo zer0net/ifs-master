@@ -304,8 +304,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// finished loading 
 			$scope.finishedLoading = function(){
 				$scope.loading = false;
-				$scope.msg = '';
-				console.log($scope.games);
+				$scope.msg = '';				
 			};
 
 		    // select user
