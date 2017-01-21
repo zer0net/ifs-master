@@ -10,6 +10,7 @@ app.directive('channelRegister', [
 					$scope.isExist = false;
 
 					// check if channel exist in db
+					/*
 					var query = ["SELECT * FROM channel where channel_address='"+$scope.channel_id+"'"];
 					Page.cmd("dbQuery", query, function(channels) {										
 						if (channels.length > 0){
@@ -17,6 +18,7 @@ app.directive('channelRegister', [
 							return;
 						} 
 					});
+					*/
 
 					// get channel's content.json
 			    	var inner_path = 'merged-'+$scope.merger_name+'/'+$scope.channel_id+'/content.json';
@@ -38,10 +40,21 @@ app.directive('channelRegister', [
 					    			$scope.errorMsg = 'no channel.json found for '+$scope.channel_id+'!';
 					    		} else {
 									data = JSON.parse(data);
+									console.log(data);
 									// apply to scope
 									$scope.$apply(function() {
 										// apply channel's items to channel
-										$scope.channel.items = data[$scope.media_type];
+										$scope.channel.items =[];      				      		
+										for (var media_type in $scope.config.media_types){
+											media_type = $scope.config.media_types[media_type];
+											if (data[media_type] && data[media_type].length>0){
+													// loop through items in data
+													data[media_type].forEach(function(item,itemIndex){													
+													$scope.channel.items.push(item);
+												});
+											}
+										}
+
 									});			    			
 					    		}
 					    	});
