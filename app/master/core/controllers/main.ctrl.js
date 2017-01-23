@@ -161,7 +161,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					if (siteExists === true){
 						// get channel						
 						$scope.getChannel(channel,cIndex);
-
 					} else {						
 						console.log('site ' + channel.channel_address + ' doesnt exists! adding site...');
 						// add merger site
@@ -295,7 +294,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					}
 					// finished loading & apply to scope
 					$scope.$apply(function(){
-						console.log($scope);
 						// finish loading					
 						$scope.finishedLoading();
 					});
@@ -303,6 +301,24 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			};
 
 		/* /INIT SITE */
+
+		/* FILTER */
+
+			$scope.mainFilterChannel = function(channel) {
+				var config = {
+					channel:channel
+				};
+				// render items before finish loading
+				if ($scope.config.listing.type === 'by media type'){
+					// render items by media types
+					$scope = Central.listItemsByMediaType($scope);
+				} else if ($scope.config.listing.type === 'by file type'){
+					// render items by file type
+					$scope = Central.listItemsByFileType($scope,config);
+				}
+			};
+
+		/* /FILTER */
 
 		/* UI */
 

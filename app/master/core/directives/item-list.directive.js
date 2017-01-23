@@ -54,8 +54,7 @@ app.directive('itemList', [
 								'<span class="item-total-number-label">{{list_items.length}}</span>' + 
 							'</div>' + 
 							'<hr/>' + 
-							'<md-grid-list ng-if="list_items" md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="5" sm-row-height="3:4" md-row-height="3:3" ' +
-						    'md-gutter="12px" md-gutter-gt-sm="8px">' +
+							'<md-grid-list ng-if="list_items" md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="5" sm-row-height="3:4" md-row-height="3:3" md-gutter="12px" md-gutter-gt-sm="8px">' +
 							    '<!-- grid item -->' +
 								'<md-grid-tile class="list-item" ng-repeat="item in list_items | orderBy:\'-date_added\' | startFrom : paging.startFrom | itemsPerPage:config.listing.items_per_page track by $index">' +
 									'<div class="inner-wrap md-whiteframe-1dp" ng-init="renderItem(item)"  ng-class="chooseStyle(item.x_is_load)">' +
@@ -91,7 +90,7 @@ app.directive('itemList', [
 									'</div>' +
 								'</md-grid-tile>' +
 								'<!-- grid item -->' +
-							'</md-grid-list>'+
+							'</md-grid-list>' +
     						'<ul ng-if="paging" uib-pagination total-items="paging.totalItems" items-per-page="config.listing.items_per_page" ng-model="paging.currentPage" ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" boundary-links="true"></ul>' +
 						'</section>';
 

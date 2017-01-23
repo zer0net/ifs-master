@@ -65,6 +65,7 @@ app.directive('siteSearch', ['$rootScope','$location','$window',
 					// filter channel
 					$scope.ppFilter.channel.address = channel.channel_address;
 					$scope.ppFilter.set = true;
+					$scope.mainFilterChannel(channel);
 				} else {
 					$window.location.href = '/'+ $scope.page.site_info.address +'/index.html?channel='+channel.channel_address;
 				}

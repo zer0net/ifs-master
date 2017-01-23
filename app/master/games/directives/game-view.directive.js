@@ -1,7 +1,7 @@
 app.directive('gameView', ['$location','$rootScope',
 	function($location,$rootScope) {
 
-		var template = '<div class="item-view" layout="row"  layout-padding ng-if="games" ng-init="getItem(item)">' +
+		var template = '<div class="item-view" layout="row"  layout-padding ng-if="items" ng-init="getItem(item)">' +
 							'<div ng-if="error_msg" flex="100" ng-hide="game" ng-bind="error_msg" style="font-weight: bold;text-align: center;"></div>' +
 							'<!-- game -->' +
 							'<md-content style="background-color:transparent;" flex="65" ng-if="game">' +

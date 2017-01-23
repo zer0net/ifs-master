@@ -22,11 +22,9 @@ app.directive('itemView', [
 				var itemId = parseInt(window.location.href.split('&')[0].split(urlLetterVar + '=')[1].split('z')[0]);
 				// item media type
 				var item_media_type = $scope.item_type + 's';
-				console.log(item_media_type);
-				console.log($scope.games);
 				// loop through games array
 				console.log($scope[item_media_type]);
-				$scope[item_media_type].forEach(function(item,index){
+				$scope.items.forEach(function(item,index){
 					console.log(item);
 					// if item id & channel exist in array
 					if (item[$scope.item_id_name] === itemId && item.channel.address === channelId){
@@ -103,12 +101,12 @@ app.directive('itemView', [
 						    '<main flex layout="column" class="section games-section">' +
 							    '<div ng-if="item_type === \'game\'">' +
 							    	'<!-- game -->' +
-									'<game-view ng-if="games"></game-view>' +
+									'<game-view ng-if="items"></game-view>' +
 									'<!-- /game -->' +
 								'</div>' +
 								'<div ng-if="item_type === \'video\'">' +
 									'<!-- video  -->' +
-									'<video-view ng-if="videos"></video-view>' +
+									'<video-view ng-if="items"></video-view>' +
 									'<!-- /video -->' +
 								'</div>' +
 						    '</main>' +
