@@ -44,7 +44,7 @@ app.directive('channelRegisterList', ['$location','$rootScope',
 										'<th ng-if="owner">Action</th>' +
 									'</tr>' +
 								'</thead>' +
-								'<tr dir-paginate="channel in channels|orderBy:sortKey:reverse|itemsPerPage:itemsPerPage track by $index">' +
+								'<tr dir-paginate="channel in channels|orderBy:sortKey:reverse|itemsPerPage:itemsPerPage track by $index" pagination-id="channel-register-list-pid">' +
 									'<td><a ng-click="onFilterChannel(channel)">{{channel.channel_name}}</a></td>' +
 									'<td>{{channel.channel_address}}</td>' +
 									'<td>{{channel.channel_description }}</td>' +
@@ -59,7 +59,7 @@ app.directive('channelRegisterList', ['$location','$rootScope',
 									'</td>' +							    	
 								'</tr>' +
 							'</table>' +
-							'<dir-pagination-controls max-size="10" direction-links="true" boundary-links="true"></dir-pagination-controls>' +
+							'<dir-pagination-controls max-size="10" direction-links="true" boundary-links="true" pagination-id="channel-register-list-pid"></dir-pagination-controls>' +
 						'</div>';					
 
 		return {

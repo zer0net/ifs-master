@@ -38,14 +38,14 @@ app.directive('channelRegisterPreview', ['$location','$rootScope',
 										'<th ng-click="sort(\'date_added\')">Date<span class="glyphicon sort-icon" ng-show="sortKey==\'date_added\'" ng-class="{\'glyphicon-chevron-up\':reverse,\'glyphicon-chevron-down\':!reverse}"></span></th>' +										
 									'</tr>' +
 								'</thead>' +
-								'<tr dir-paginate="item in channel.items|orderBy:sortKey:reverse|itemsPerPage:itemsPerPage track by $index">' +
+								'<tr dir-paginate="item in channel.items|orderBy:sortKey:reverse|itemsPerPage:itemsPerPage track by $index" pagination-id="channel-register-preview-pid">' +
 									'<td>{{item.file_name}}</td>' +
 									'<td>{{item.file_type}}</td>' +
 									'<td>{{item.media_type }}</td>' +
 									'<td><span am-time-ago="item.date_added"></span></td>' +									
 								'</tr>' +
 							'</table>' +
-							'<dir-pagination-controls max-size="10" direction-links="true" boundary-links="true"></dir-pagination-controls>' +
+							'<dir-pagination-controls max-size="10" direction-links="true" boundary-links="true" pagination-id="channel-register-preview-pid"></dir-pagination-controls>' +
 						'</div>';	
 
 		var template_ = '<h2 ng-bind="channel.channel_name"></h2>'+
