@@ -50,70 +50,83 @@
                         <!-- /HEADER -->
 
                         <!-- MAIN -->
-                        <section flex layout="column" layout-padding class="container" style="padding-top: 50px;">  
+                        <section flex layout="column" layout-padding style="padding:50px 0 0 0;">  
          
                             <!-- channel info -->
-                            <div id="channel-info" ng-if="channel">
-                                <h2>{{channel.channel_name}}</h2>
-                                <div class="description">
-                                    <figure>
-                                        <img ng-if="channel.logo_src" ng-src="{{channel.logo_src}}"/>
-                                    </figure>
-                                    <span class="items-counter">
-                                        <span ng-if="channel.videos">
-                                            {{channel.videos.length}} videos
+                            <section class="wrap-section" id="channel-info" ng-if="channel">
+                                <section class="container">
+                                    <h2>{{channel.channel_name}}</h2>
+                                    <div class="description">
+                                        <figure>
+                                            <img ng-if="channel.logo_src" ng-src="{{channel.logo_src}}"/>
+                                        </figure>
+                                        <span class="items-counter">
+                                            <span ng-if="channel.videos">
+                                                {{channel.videos.length}} videos
+                                            </span>
+                                            <span ng-if="channel.games">
+                                                {{channel.games.length}} games
+                                            </span>                                        
                                         </span>
-                                        <span ng-if="channel.games">
-                                            {{channel.games.length}} games
-                                        </span>                                        
-                                    </span>
-                                </div>
-                            </div>
+                                    </div>
+                                </section>
+                            </section>
                             <!-- /channel info -->
 
-                            <!-- home page items section -->
-                            <md-content  flex layout-padding class="section" id="hp-items-section">
-                                
-                                <!--Welcome -->
-                                <div id="welcomeInfo" ng-hide="channel" style="height:150px; width: 100%; display: block; text-align: center;">
-                                    <h1>    Welcome to IFS - Intergalactic File Server </h1>
-                                    <br/>
-                                     <h4>   
-                                        Please read FAQ to join
-                                    </h4>
-                                </div>
-                                <!--/Welcome -->
+                            <!-- welcome -->
+                            <section class="wrap-section" id="welcome-section"  ng-hide="channel" >
+                                <section class="container">
+                                    <div id="welcomeInfo" style="height:150px; width: 100%; display: block; text-align: center;">
+                                        <h1>    Welcome to IFS - Intergalactic File Server </h1>
+                                        <br/>
+                                         <h4>   
+                                            Please read FAQ to join
+                                        </h4>
+                                    </div>
+                                </section>
+                            </section>
+                            <!-- /welcome -->
 
-                                <!-- filter info -->
-                                <div id="filter-info" ng-if="ppFilter">
-                                    <span class="search-tag" ng-if="ppFilter.title">title:{{ppFilter.title}}</span>
-                                    <span class="search-tag" ng-if="ppFilter.file_type">file type: {{ppFilter.file_type}}</span>
-                                    <span class="search-tag" ng-if="ppFilter.media_type">media type: {{ppFilter.media_type}}</span>
-                                </div>
-                                <!-- /filter info -->
-                
-                            	<!-- games -->
-                            	<div  ng-if="(games|filter:ppFilter).length"  id="game-list-container">
-                        	    	<h2>Games</h2>
-                        	    	<hr/>
-                        			
+                            <!-- filter info -->
+                            <section class="wrap-section" id="filter-section" ng-if="ppFilter.set">
+                                <section class="container">
+                                    <div id="filter-info">
+                                        <span class="search-tag" ng-if="ppFilter.title">title:{{ppFilter.title}}</span>
+                                        <span class="search-tag" ng-if="ppFilter.file_type">file type: {{ppFilter.file_type}}</span>
+                                        <span class="search-tag" ng-if="ppFilter.media_type">media type: {{ppFilter.media_type}}</span>
+                                    </div>
+                                </section>
+                            </section>
+                            <!-- /filter info -->
+
+                            <!-- item listing by media type -->
+                            <section class="wrap-section main-listing-container" ng-if="config.listing.type === 'by media type'">
+                                <!-- games -->
+                                <div  ng-if="(games|filter:ppFilter).length"  id="game-list-container">
+                                    <h2>Games</h2>
+                                    <hr/>
+                                    
                                     <game-list-template filetype="nes"></game-list-template>
                                     <game-list-template filetype="sna"></game-list-template>
                                     <game-list-template filetype="bin"></game-list-template>
                                     <game-list-template filetype="zip"></game-list-template>
-                                         
+                                </div>
+                                <!-- /games -->         
+                                <!-- videos -->
+                                <div ng-if="(videos|filter:ppFilter).length" id="video-list-container">
+                                    <h2>Videos</h2>
+                                    <hr/>
+                                    <video-list ng-if="videos"></video-list>
+                                </div>
+                                <!-- /videos -->
+                            </section>
+                            <!-- /item listing by media type -->
 
-                        		</div>
-                        	    <!-- /games -->		    
-                        	    <!-- videos -->
-                        	    <div ng-if="(videos|filter:ppFilter).length" id="video-list-container">
-                        	    	<h2>Videos</h2>
-                        	    	<hr/>
-                        	    	<video-list ng-if="videos"></video-list>
-                        	    </div>
-                        	    <!-- /videos -->
-                            </md-content>
-                            <!-- / home page items section -->
+                            <!-- item listing by file type -->
+                            <section class="wrap-section main-listing-container" ng-if="config.listing.type === 'by file type'">
+                                <item-list ng-repeat="file_type in file_types|filter:ppFilter.file_type" ng-init="initItemListByFileType(file_type)"></item-list>
+                            </section>
+                            <!-- /item listing by file type -->
 
                         </section>
                         <!-- /MAIN -->
@@ -140,6 +153,7 @@
 	    <script type="text/javascript" src="assets/lib/angular/angular-route.min.js"></script>
 	    <script type="text/javascript" src="assets/lib/angular/angular-animate.min.js"></script>
 	    <script type="text/javascript" src="assets/lib/angular/angular-aria.min.js"></script>
+        <script type="text/javascript" src="assets/lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
 		<script type="text/javascript" src="assets/lib/angular-sanitize/angular-sanitize.min.js"></script>
 		<script type="text/javascript" src="assets/lib/angular-material/angular-material.min.js"></script>
 		<script type="text/javascript" src="assets/lib/moment/moment.js"></script>
@@ -168,9 +182,12 @@
 		<script type="text/javascript" src="app/master/core/directives/comments.directive.js"></script>
 		<script type="text/javascript" src="app/master/core/directives/votes.directive.js"></script>
 		<script type="text/javascript" src="app/master/core/directives/views.directive.js"></script>
+        <script type="text/javascript" src="app/master/core/directives/item-list.directive.js"></script>
         <script type="text/javascript" src="app/master/core/services/item.service.js"></script>
+        <script type="text/javascript" src="app/master/core/services/central.service.js"></script>
         <script type="text/javascript" src="app/master/core/services/channel.service.js"></script>
 		<script type="text/javascript" src="app/master/core/filters/file-size.filter.js"></script>
+        <script type="text/javascript" src="app/master/core/filters/start-from.filter.js"></script>
 
 		<!-- app games -->	
 		<script type="text/javascript" src="app/master/games/directives/game-list.directive.js"></script>
