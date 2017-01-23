@@ -237,8 +237,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					}
 				});
 			};
-
-			
 	
 			// add channels items
 			$scope.addChannelItems = function(data,channel,cIndex){
@@ -257,21 +255,9 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 								totalItemsIndex++;
 								// render channel item via Item service
 								item = Item.renderChannelItem($scope,item,site_files,channel);
-
-								// apply to scope items array						
-								if (!$scope[media_type]) $scope[media_type] = [];
-								$scope[media_type].push(item);
-
-								// init games sub category list "sna","nes","bin","zip"
-								if(media_type==="games"){
-									if (!$scope["games_"+item.file_type]) $scope["games_"+item.file_type] = [];
-									$scope["games_"+item.file_type].push(item);
-								}
-
 								// apply to general scope items array
 								if (!$scope.items) $scope.items = [];
 								$scope.items.push(item);
-
 							});
 						}
 					}

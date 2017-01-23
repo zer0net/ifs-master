@@ -3,19 +3,19 @@
 
 <head>
 
-	<!-- CSS -->
-		<!-- lib -->
-		<link href="assets/lib/angular-material/angular-material.css" rel="stylesheet" type="text/css"/>
-		<link href="assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-		<!-- app -->
-		<link href="assets/master/css/style.css" rel="stylesheet" type="text/css"/>
-	<!-- /CSS -->
+    <!-- CSS -->
+        <!-- lib -->
+        <link href="assets/lib/angular-material/angular-material.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <!-- app -->
+        <link href="assets/master/css/style.css" rel="stylesheet" type="text/css"/>
+    <!-- /CSS -->
 
-	<!-- HTML5 Shim -->
-	<!--[if lt IE 9]>
-	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-	<!--<base href="/">-->
+    <!-- HTML5 Shim -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--<base href="/">-->
 
 </head>
 
@@ -105,11 +105,7 @@
                                 <div  ng-if="(games|filter:ppFilter).length"  id="game-list-container">
                                     <h2>Games</h2>
                                     <hr/>
-                                    
-                                    <game-list-template filetype="nes"></game-list-template>
-                                    <game-list-template filetype="sna"></game-list-template>
-                                    <game-list-template filetype="bin"></game-list-template>
-                                    <game-list-template filetype="zip"></game-list-template>
+                                    <game-list></game-list>
                                 </div>
                                 <!-- /games -->         
                                 <!-- videos -->
@@ -138,65 +134,64 @@
     </div>
     <!-- /wrapper -->
 
-	<!-- JS -->
+    <!-- JS -->
 
-		<!-- zeronet -->
-		<script type="text/javascript" src="assets/lib/zeronet/class.js"></script>
-		<script type="text/javascript" src="assets/lib/zeronet/zeroframe.js"></script>
-		<script type="text/javascript" src="assets/lib/zeronet/zerochat.js"></script>
+        <!-- zeronet -->
+        <script type="text/javascript" src="assets/lib/zeronet/class.js"></script>
+        <script type="text/javascript" src="assets/lib/zeronet/zeroframe.js"></script>
+        <script type="text/javascript" src="assets/lib/zeronet/zerochat.js"></script>
     
-		<!-- jquery -->
-		<script type="text/javascript" src="assets/lib/jquery/jquery.min.js"></script>
+        <!-- jquery -->
+        <script type="text/javascript" src="assets/lib/jquery/jquery.min.js"></script>
 
-		<!-- angular -->		
-		<script type="text/javascript" src="assets/lib/angular/angular.min.js"></script>
-	    <script type="text/javascript" src="assets/lib/angular/angular-route.min.js"></script>
-	    <script type="text/javascript" src="assets/lib/angular/angular-animate.min.js"></script>
-	    <script type="text/javascript" src="assets/lib/angular/angular-aria.min.js"></script>
+        <!-- angular -->        
+        <script type="text/javascript" src="assets/lib/angular/angular.min.js"></script>
+        <script type="text/javascript" src="assets/lib/angular/angular-route.min.js"></script>
+        <script type="text/javascript" src="assets/lib/angular/angular-animate.min.js"></script>
+        <script type="text/javascript" src="assets/lib/angular/angular-aria.min.js"></script>
         <script type="text/javascript" src="assets/lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-		<script type="text/javascript" src="assets/lib/angular-sanitize/angular-sanitize.min.js"></script>
-		<script type="text/javascript" src="assets/lib/angular-material/angular-material.min.js"></script>
-		<script type="text/javascript" src="assets/lib/moment/moment.js"></script>
-		<script type="text/javascript" src="assets/lib/angular-moment/angular-moment.min.js"></script>
-	    <script type="text/javascript" src="assets/lib/identicon/pnglib.js"></script>
-	    <script type="text/javascript" src="assets/lib/identicon/identicon.js"></script>
-	    <script type="text/javascript" src="assets/lib/angular-identicon/angular-identicon.min.js"></script>
-	    <script type="text/javascript" src="assets/lib/angular-fullscreen/angular-fullscreen.js"></script>
+        <script type="text/javascript" src="assets/lib/angular-sanitize/angular-sanitize.min.js"></script>
+        <script type="text/javascript" src="assets/lib/angular-material/angular-material.min.js"></script>
+        <script type="text/javascript" src="assets/lib/moment/moment.js"></script>
+        <script type="text/javascript" src="assets/lib/angular-moment/angular-moment.min.js"></script>
+        <script type="text/javascript" src="assets/lib/identicon/pnglib.js"></script>
+        <script type="text/javascript" src="assets/lib/identicon/identicon.js"></script>
+        <script type="text/javascript" src="assets/lib/angular-identicon/angular-identicon.min.js"></script>
+        <script type="text/javascript" src="assets/lib/angular-fullscreen/angular-fullscreen.js"></script>
         <script type="text/javascript" src="assets/lib/util/dirPagination.js"></script>
 
-		<!-- videogular -->
-		<script type="text/javascript" src="assets/lib/videos/videogular/videogular.js"></script>
-		<script type="text/javascript" src="assets/lib/videos/videogular-controls/vg-controls.js"></script>
-		<script type="text/javascript" src="assets/lib/videos/videogular-buffering/vg-buffering.js"></script>
-		<script type="text/javascript" src="assets/lib/videos/videogular-overlay-play/vg-overlay-play.js"></script>
-		<script type="text/javascript" src="assets/lib/videos/videogular-poster/vg-poster.js"></script>
+        <!-- videogular -->
+        <script type="text/javascript" src="assets/lib/videos/videogular/videogular.js"></script>
+        <script type="text/javascript" src="assets/lib/videos/videogular-controls/vg-controls.js"></script>
+        <script type="text/javascript" src="assets/lib/videos/videogular-buffering/vg-buffering.js"></script>
+        <script type="text/javascript" src="assets/lib/videos/videogular-overlay-play/vg-overlay-play.js"></script>
+        <script type="text/javascript" src="assets/lib/videos/videogular-poster/vg-poster.js"></script>
 
-		<!-- app core -->
-		<script type="text/javascript" src="app/application.js"></script>		
-		<script type="text/javascript" src="app/master/core/controllers/main.ctrl.js"></script>
-		<script type="text/javascript" src="app/master/core/directives/site-config.directive.js"></script>
+        <!-- app core -->
+        <script type="text/javascript" src="app/application.js"></script>       
+        <script type="text/javascript" src="app/master/core/controllers/main.ctrl.js"></script>
+        <script type="text/javascript" src="app/master/core/directives/site-config.directive.js"></script>
         <script type="text/javascript" src="app/master/core/directives/sidebar.directive.js"></script>
-		<script type="text/javascript" src="app/master/core/directives/site-header.directive.js"></script>
+        <script type="text/javascript" src="app/master/core/directives/site-header.directive.js"></script>
         <script type="text/javascript" src="app/master/core/directives/site-search.directive.js"></script>
         <script type="text/javascript" src="app/master/core/directives/channel-register.directive.js"></script>
-		<script type="text/javascript" src="app/master/core/directives/comments.directive.js"></script>
-		<script type="text/javascript" src="app/master/core/directives/votes.directive.js"></script>
-		<script type="text/javascript" src="app/master/core/directives/views.directive.js"></script>
+        <script type="text/javascript" src="app/master/core/directives/comments.directive.js"></script>
+        <script type="text/javascript" src="app/master/core/directives/votes.directive.js"></script>
+        <script type="text/javascript" src="app/master/core/directives/views.directive.js"></script>
         <script type="text/javascript" src="app/master/core/directives/item-list.directive.js"></script>
         <script type="text/javascript" src="app/master/core/services/item.service.js"></script>
         <script type="text/javascript" src="app/master/core/services/central.service.js"></script>
         <script type="text/javascript" src="app/master/core/services/channel.service.js"></script>
-		<script type="text/javascript" src="app/master/core/filters/file-size.filter.js"></script>
+        <script type="text/javascript" src="app/master/core/filters/file-size.filter.js"></script>
         <script type="text/javascript" src="app/master/core/filters/start-from.filter.js"></script>
 
-		<!-- app games -->	
-		<script type="text/javascript" src="app/master/games/directives/game-list.directive.js"></script>
-        <script type="text/javascript" src="app/master/games/directives/game-list-template.directive.js"></script>
+        <!-- app games -->  
+        <script type="text/javascript" src="app/master/games/directives/game-list.directive.js"></script>
 
-		<!-- app videos -->	
-		<script type="text/javascript" src="app/master/videos/directives/video-list.directive.js"></script>
+        <!-- app videos --> 
+        <script type="text/javascript" src="app/master/videos/directives/video-list.directive.js"></script>
 
-	<!-- /JS -->
+    <!-- /JS -->
 
 </body>
 
