@@ -1,44 +1,43 @@
-app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdMedia','Item','Channel',
-	function($rootScope,$scope,$location,$mdDialog,$mdMedia,Item,Channel) {
+app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdMedia','Item','Channel','Central',
+	function($rootScope,$scope,$location,$mdDialog,$mdMedia,Item,Channel,Central) {
 
 		/* INIT SITE */
 
 			// init
 			$scope.init = function(){
+				// config
+				$scope.config = {
+					media_types:[						
+						'games',
+						'videos'
+					],
+					listing:{
+						type:'by file type',
+						items_per_page:5
+					}
+				}
+				// site ready var to fix loading inconsistancies
 				$scope.site_ready = false;				
 				// loading
 				$scope.showLoadingMessage('Loading');
-				// page
-				$scope.page = Page;
 				// get site info
 				Page.cmd("siteInfo", {}, function(site_info) {					
+					$scope.merger_name = site_info.content.merger_name;
 					$scope.site_address = site_info.address;
 					$scope.channel_master_address = site_info.address;	
-					$scope.merger_name = site_info.content.merger_name;
+					$scope.owner = site_info.settings.own;
 					// apply site info to Page obj
 					Page.site_info = site_info;
-					// owner					
-					$scope.owner = site_info.settings.own;
-					
+					// page
+					$scope.page = Page;
 					// update site
 					Page.cmd('siteUpdate',{"address":$scope.site_address});
 					// apply auth address to scope
 					if (Page.site_info.cert_user_id) { $scope.user = Page.site_info.cert_user_id; } 
 					else { $scope.user = Page.site_info.auth_address; }
 					// merger site permission
-					$scope.getConfig();
+					$scope.getMergerPermission();	
 		    	});
-			};
-
-			// get config json
-			$scope.getConfig = function(){
-				$scope.config = {
-					media_types:[						
-						'games',
-						'videos'
-					]
-				}				
-				$scope.getMergerPermission();				
 			};
 
 			// generate config
@@ -241,27 +240,28 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 	
 			// add channels items
 			$scope.addChannelItems = function(data,channel,cIndex){
-
+				// list optional files
 				Page.cmd("optionalFileList", { address: channel.address, limit:2000 }, function(site_files){
 					var totalItems = $scope.countChannelItems(data);
 					var totalItemsIndex = 0;
-		      		//use $scope.config.media_types		      				      		
+
+		      		// for every media type in site config				      		
 					for (var media_type in $scope.config.media_types){
 						media_type = $scope.config.media_types[media_type];
-						if (data[media_type] && data[media_type].length>0){
-								// loop through items in data
-								data[media_type].forEach(function(item,itemIndex){
+						// if channel has media type array
+						if (data[media_type] && data[media_type].length > 0){
+							// loop through items in data
+							data[media_type].forEach(function(item,itemIndex){
 								totalItemsIndex++;
 								// render channel item via Item service
 								item = Item.renderChannelItem($scope,item,site_files,channel);
-								// apply to scope items array						
-								if (!$scope[media_type]) $scope[media_type] = [];
-								$scope[media_type].push(item);
-
+								// apply to general scope items array
+								if (!$scope.items) $scope.items = [];
+								$scope.items.push(item);
 							});
 						}
 					}
-					
+
 		      		if (totalItemsIndex === totalItems){
 						// finish loading					
 						$scope.finishLoadingChannels(cIndex);
@@ -283,11 +283,19 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// finish loading channels
 			$scope.finishLoadingChannels = function(cIndex){
-				// if channel index + 1 equals number of channels				  
-			   
+				// if channel index + 1 equals number of channels
 				if ((cIndex + 1) === $scope.channels.length){
+					// render items before finish loading
+					if ($scope.config.listing.type === 'by media type'){
+						// render items by media types
+						$scope = Central.listItemsByMediaType($scope);
+					} else if ($scope.config.listing.type === 'by file type'){
+						// render items by file type
+						$scope = Central.listItemsByFileType($scope);
+					}
 					// finished loading & apply to scope
 					$scope.$apply(function(){
+						console.log($scope);
 						// finish loading					
 						$scope.finishedLoading();
 					});

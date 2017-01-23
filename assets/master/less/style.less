@@ -47,9 +47,13 @@
 	#page-content-wrapper {
 	    width: 100%;
 	    position: absolute;
-	    padding: 15px;
+	    padding: 0;
 	    padding-left: 0px;
 	    padding-top: 0px;
+
+	    .container-fluid {
+	    	padding: 0;
+	    }
 	}
 
 	#wrapper.toggled #page-content-wrapper {
@@ -198,9 +202,21 @@
     	max-width: 100%;		
 	}
 
+	.nav , .pagination, .carousel, .panel-title { 
+		a {
+			cursor: pointer;
+		} 
+	}
+
 /** /GENERAL **/
 
 /** TEMPLATE **/
+
+	.navbar {
+		.container-fluid {
+			padding: 0 15px !important;
+		}
+	}
 
 	.header {
 
@@ -375,16 +391,64 @@
 
 	/* home */
 
-		#hp-items-section {
+	.wrap-section {
+		background: white;
+		padding: 0;
+
+		&:nth-child(odd){
+			background: #f7f7f7;
+		}
+
+		item-list {
+			background: #f7f7f7;
+			float: left;
+			width: 100%;
+
+			&:nth-child(odd){
+				background: white;
+			}
+		}
+	}
+
+	/* /home */
+
+	/* item list */
+
+		.item-list-section {
 			padding: 8px 16px;
+			margin-bottom: 20px;
 			background-color: transparent;
+			max-width: 996px;
+
+			h2 {
+    			float: left;
+    			margin-right: 10px;
+    			margin-bottom: 10px;
+    			text-transform: uppercase;
+			}
+
+			span.item-total-number-label {
+			    padding: 2px 5px;
+			    background-color: #3e81bb;
+			    color: white;
+			    border: 1px solid #224c71;
+			    border-radius: 5px;
+			    font-weight: bold;
+			    font-size: 12px;
+			    display: block;
+			    float: left;	
+			}
+
+			hr {
+				clear: both;
+			}
 
 			.list-item {
 			
 				.inner-wrap {
 					width: 100%;
 					height: 99%;
-					padding-bottom: 120px;		
+					padding-bottom: 120px;
 
 					.item-img {
 						width:100%;
@@ -627,12 +691,8 @@
 
 			}
 		}
-
-		.game-list-section {
-			background-color: transparent;
-		}
 	
-	/* /home */
+	/* /item list */
 
 	/* item view */
 

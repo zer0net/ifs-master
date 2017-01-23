@@ -1,5 +1,6 @@
 var app = angular.module('PPLOAD_MASTER',[
 	'ngMaterial',
+	'ui.bootstrap',
 	'ngSanitize',
 	'angularMoment',
 	'ui.identicon',

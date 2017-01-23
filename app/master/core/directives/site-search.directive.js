@@ -64,6 +64,7 @@ app.directive('siteSearch', ['$rootScope','$location','$window',
 					$scope.setChannel(channel);
 					// filter channel
 					$scope.ppFilter.channel.address = channel.channel_address;
+					$scope.ppFilter.set = true;
 				} else {
 					$window.location.href = '/'+ $scope.page.site_info.address +'/index.html?channel='+channel.channel_address;
 				}
@@ -91,6 +92,7 @@ app.directive('siteSearch', ['$rootScope','$location','$window',
 	    		if (isIndexPage){
 	    			// filter media type
 					$scope.ppFilter.media_type = type;
+					$scope.ppFilter.set = true;					
 				} else {
 					$window.location.href = '/'+ $scope.page.site_info.address +'/index.html?media_type='+type;
 				}
@@ -102,6 +104,7 @@ app.directive('siteSearch', ['$rootScope','$location','$window',
 	    		if (isIndexPage){
 	    			// filter media type
 					$scope.ppFilter.file_type = file_type;
+					$scope.ppFilter.set = true;					
 				} else {
 					$window.location.href = '/'+ $scope.page.site_info.address +'/index.html?file_type='+file_type;
 				}
@@ -110,8 +113,8 @@ app.directive('siteSearch', ['$rootScope','$location','$window',
 			// filter remove
 			$scope.filterRemove = function() {
 				$scope.ppFilter = {
-					channel:{}
-				}
+					channel:{},
+				};
 			}
 		
 		};
