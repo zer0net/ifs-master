@@ -10,7 +10,7 @@ app.directive('channelRegister', [
 					$scope.isExist = false;
 
 					// check if channel exist in db
-					/*
+					
 					var query = ["SELECT * FROM channel where channel_address='"+$scope.channel_id+"'"];
 					Page.cmd("dbQuery", query, function(channels) {										
 						if (channels.length > 0){
@@ -18,7 +18,7 @@ app.directive('channelRegister', [
 							return;
 						} 
 					});
-					*/
+					
 
 					// get channel's content.json
 			    	var inner_path = 'merged-'+$scope.merger_name+'/'+$scope.channel_id+'/content.json';
