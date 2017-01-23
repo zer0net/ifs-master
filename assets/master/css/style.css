@@ -368,19 +368,11 @@ main {
 /** PAGES **/
 /* home */
 .wrap-section {
-  background: white;
   padding: 0;
 }
-.wrap-section:nth-child(odd) {
-  background: #f7f7f7;
-}
 .wrap-section item-list {
-  background: #f7f7f7;
   float: left;
   width: 100%;
-}
-.wrap-section item-list:nth-child(odd) {
-  background: white;
 }
 /* /home */
 /* item list */

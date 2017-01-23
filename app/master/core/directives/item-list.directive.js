@@ -30,7 +30,7 @@ app.directive('itemList', [
 			// render item 
 			$scope.renderItem = function(item) {
 				item.item_id_name = item.media_type + '_id';
-				item.view_url = $scope.page.site_info.address + '/view.html?type=' + item.media_type + '-c=' + item.channel.address + item.media_type.charAt(0) + '=' + item[item.item_id_name];
+				item.view_url = '/' + $scope.page.site_info.address + '/view.html?type=' + item.media_type + '-c=' + item.channel.address + item.media_type.charAt(0) + '=' + item[item.item_id_name];
 				// if not video
 				if (!item.media_type === 'video'){
 					// if zip file
