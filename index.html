@@ -96,7 +96,13 @@
                             	<div  ng-if="(games|filter:ppFilter).length"  id="game-list-container">
                         	    	<h2>Games</h2>
                         	    	<hr/>
-                        			<game-list></game-list>
+                        			
+                                    <game-list-template filetype="nes"></game-list-template>
+                                    <game-list-template filetype="sna"></game-list-template>
+                                    <game-list-template filetype="bin"></game-list-template>
+                                    <game-list-template filetype="zip"></game-list-template>
+                                         
+
                         		</div>
                         	    <!-- /games -->		    
                         	    <!-- videos -->
@@ -168,6 +174,7 @@
 
 		<!-- app games -->	
 		<script type="text/javascript" src="app/master/games/directives/game-list.directive.js"></script>
+        <script type="text/javascript" src="app/master/games/directives/game-list-template.directive.js"></script>
 
 		<!-- app videos -->	
 		<script type="text/javascript" src="app/master/videos/directives/video-list.directive.js"></script>

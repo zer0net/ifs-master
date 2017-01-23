@@ -238,6 +238,8 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					}
 				});
 			};
+
+			
 	
 			// add channels items
 			$scope.addChannelItems = function(data,channel,cIndex){
@@ -257,6 +259,12 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 								// apply to scope items array						
 								if (!$scope[media_type]) $scope[media_type] = [];
 								$scope[media_type].push(item);
+
+								// init games sub category list "sna","nes","bin","zip"
+								if(media_type==="games"){
+									if (!$scope["games_"+item.file_type]) $scope["games_"+item.file_type] = [];
+									$scope["games_"+item.file_type].push(item);
+								}
 
 							});
 						}
