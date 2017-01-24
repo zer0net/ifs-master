@@ -121,7 +121,7 @@
                             <!-- item listing by file type -->
                             <section class="wrap-section main-listing-container" ng-if="config.listing.type === 'by file type'">
                               <md-content class="container">
-                                <md-tabs md-dynamic-height md-border-bottom>
+                                <md-tabs class="no-animate" md-dynamic-height md-border-bottom>
                                   <md-tab ng-if="!channel_items" label="All ({{items.length}})">
                                     <md-content class="md-padding">
                                         <item-list ng-init="initItemListAll(items)"></item-list> 

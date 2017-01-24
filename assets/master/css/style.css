@@ -199,6 +199,14 @@ section.container hr.divider {
 .panel-title a {
   cursor: pointer;
 }
+.no-animate {
+  -webkit-transition: none !important;
+  transition: none !important;
+}
+.no-animate * {
+  -webkit-transition: none !important;
+  transition: none !important;
+}
 /** /GENERAL **/
 /** TEMPLATE **/
 .navbar .container-fluid {

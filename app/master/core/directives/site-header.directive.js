@@ -1,7 +1,6 @@
-app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope',
-	function($mdDialog,$mdMedia,$rootScope) {
+app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope','$location',
+	function($mdDialog,$mdMedia,$rootScope,$location) {
 
-	
 		// dialog controller
 		var DialogController= function($scope, $mdDialog,items) {
 			
@@ -27,6 +26,14 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope',
 
 		// header directive controller
 		var controller = function($scope,$element) {
+
+			$scope.initHeader = function(){
+				if ($location.$$absUrl.indexOf('type') > -1){
+					$scope.media_type = $location.$$absUrl.split('?type=')[1].split('-c')[0] + 's';
+					console.log($scope.media_type);
+					console.log('hi');
+				}
+			};
 
 		    // show info modal
 			$scope.showInfoModal = function(ev) {
@@ -68,7 +75,7 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope',
 			};
 			
 			// open site config dialog
-			$scope.openSiteConfigDialog = function(ev){				
+			$scope.openSiteConfigDialog = function(ev){
 				// dialog vars
 				$scope.status = '';
 				$scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
@@ -113,12 +120,9 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope',
 
 		};
 
-
-
-
-		var template ='<nav class="navbar navbar-default navbar-fixed-top" id="navbar-fixed-top">'+
+		var template ='<nav class="navbar navbar-default navbar-fixed-top" id="navbar-fixed-top" ng-init="initHeader()">'+
   						'<div class="container-fluid" style="background-color:#041b2c">'+
-	  						'<div class="navbar-header"><span class="glyphicon glyphicon-menu-hamburger navbar-brand" id="menu-toggle" ng-click="toggleMenu($event)"></span> <a class="navbar-brand" href="/{{site_address}}">IFS - Intergalactic File Server</a></div>'+
+	  						'<div class="navbar-header"><span class="glyphicon glyphicon-menu-hamburger navbar-brand" id="menu-toggle" ng-click="toggleMenu($event)"></span> <a class="navbar-brand" href="/{{site_address}}">IFS - Intergalactic File Server</a><a class="navbar-brand" href="/{{page.site_info.address}}/index.html?media_type={{media_type}}" ng-if="media_type"><span>/ {{media_type}}</span></a></div>'+
 	  						'<div class="container">' + 
 		  						'<site-search ng-if="!loading"></site-search>' +
 		  						'<ul class="nav navbar-nav navbar-right">'+
