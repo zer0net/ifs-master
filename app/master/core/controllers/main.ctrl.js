@@ -304,19 +304,33 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 		/* FILTER */
 
-			$scope.mainFilterChannel = function(channel) {
-				var config = {
-					channel:channel
-				};
+			// main filter function
+			$scope.mainFilter = function(ppFilter) {
+				// render items before finish loading
+				if ($scope.config.listing.type === 'by media type'){
+					// render items by media types
+					$scope = Central.listItemsByMediaType($scope,ppFilter);
+				} else if ($scope.config.listing.type === 'by file type'){
+					// render items by file type
+					$scope = Central.listItemsByFileType($scope,ppFilter);
+				}
+				// rootscope broadcast
+				$rootScope.$broadcast('mainFilter',$scope);
+			};
+
+			// main remove filter function
+			$scope.mainRemoveFilter = function() {
+				console.log('main remove flter');
 				// render items before finish loading
 				if ($scope.config.listing.type === 'by media type'){
 					// render items by media types
 					$scope = Central.listItemsByMediaType($scope);
 				} else if ($scope.config.listing.type === 'by file type'){
 					// render items by file type
-					$scope = Central.listItemsByFileType($scope,config);
+					$scope = Central.listItemsByFileType($scope);
 				}
 			};
+
 
 		/* /FILTER */
 

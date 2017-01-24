@@ -1,21 +1,41 @@
-app.directive('itemList', [
-	function() {
+app.directive('itemList', ['$rootScope',
+	function($rootScope) {
 
 		// item list directive controller
 		var controller = function($scope,$element) {			
-			
-			// init item list by file type
-			$scope.initItemListByFileType = function(file_type) {
-				$scope.list_title = file_type;
-				$scope.list_items = $scope.file_types_items[$scope.file_type];
+
+			// init item list all
+			$scope.initItemListAll = function(items) {
+				console.log(items);
+				// reset
+				$scope.list_items = items;
+				$scope.list_type = 'all';				
 				// paging object
 			    $scope.paging = {
 			        totalItems: $scope.list_items.length,
-			        numPages: Math.ceil($scope.list_items.length / $scope.config.listing.items_per_page),
+			        numPages: Math.ceil( $scope.list_items.length / $scope.config.listing.items_per_page),
 			        currentPage: 1,
 			    };
 			    // start from var for item list paging
 			    $scope.paging.startFrom = $scope.config.listing.items_per_page * ($scope.paging.currentPage - 1);
+			};
+			
+			// init item list by file type
+			$scope.initItemListByFileType = function(file_type) {
+				// reset
+				$scope.file_type = file_type;
+				if ($scope.file_types_items[$scope.file_type]){
+					$scope.list_items = $scope.file_types_items[$scope.file_type];
+					$scope.list_type = 'by file type';
+					// paging object
+				    $scope.paging = {
+				        totalItems: $scope.list_items.length,
+				        numPages: Math.ceil( $scope.list_items.length / $scope.config.listing.items_per_page),
+				        currentPage: 1,
+				    };
+				    // start from var for item list paging
+				    $scope.paging.startFrom = $scope.config.listing.items_per_page * ($scope.paging.currentPage - 1);
+				}
 			};
 
 			// choose item style
@@ -46,14 +66,18 @@ app.directive('itemList', [
 			$scope.pageChanged = function() {
 				$scope.paging.startFrom = $scope.config.listing.items_per_page * ($scope.paging.currentPage - 1);
 			};
+
+			// on main filter
+			$rootScope.$on('mainFilter',function(event,mass){
+				if ($scope.list_type === 'by file type'){
+					$scope.initItemListByFileType($scope.file_type);
+				} else if ($scope.list_type === 'all'){
+					$scope.initItemListAll(mass.channel_items);
+				}
+			});
 		};
 
 		var template =  '<section class="item-list-section container">' +
-							'<div class="item-list-header">' +
-								'<h2>{{list_title}}</h2>' + 
-								'<span class="item-total-number-label">{{list_items.length}}</span>' + 
-							'</div>' + 
-							'<hr/>' + 
 							'<md-grid-list ng-if="list_items" md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="5" sm-row-height="3:4" md-row-height="3:3" md-gutter="12px" md-gutter-gt-sm="8px">' +
 							    '<!-- grid item -->' +
 								'<md-grid-tile class="list-item" ng-repeat="item in list_items | orderBy:\'-date_added\' | startFrom : paging.startFrom | itemsPerPage:config.listing.items_per_page track by $index">' +
@@ -83,7 +107,7 @@ app.directive('itemList', [
 													'<span class="glyphicon glyphicon-comment"></span>' +
 													'<span>{{commentCount}}</span>' +
 							    				'</li>' +
-							    				'<li class="peers-count"><span> {{item.channel.peers}} peers</span></li>' +
+							    				'<li class="peers-count"><span> {{item.x_peer}} peers</span></li>' +
 											'</ul>' +
 										'</md-grid-tile-footer>' +
 										'<!-- /info -->' +

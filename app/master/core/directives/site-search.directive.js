@@ -7,8 +7,10 @@ app.directive('siteSearch', ['$rootScope','$location','$window',
 
 			// init site search
 			$scope.initSiteSearch = function(){				
-				// remove filter
-				$scope.filterRemove();
+				// set filter
+				$scope.ppFilter = {
+					channel:{},
+				};
 				// apply url path to scope
 				$scope.path = $location.$$absUrl.split($scope.page.site_info.address + '/')[1].split('?');
 				// check if index page
@@ -65,7 +67,7 @@ app.directive('siteSearch', ['$rootScope','$location','$window',
 					// filter channel
 					$scope.ppFilter.channel.address = channel.channel_address;
 					$scope.ppFilter.set = true;
-					$scope.mainFilterChannel(channel);
+					$scope.mainFilter($scope.ppFilter);
 				} else {
 					$window.location.href = '/'+ $scope.page.site_info.address +'/index.html?channel='+channel.channel_address;
 				}
@@ -79,7 +81,7 @@ app.directive('siteSearch', ['$rootScope','$location','$window',
 	    	// remove filter channel
 	    	$scope.removeFilterChannel = function(){
 	    		$scope.removeChannel();
-	    		delete $scope.ppFilter.channel.address;
+	    		$scope.filterRemove();
 	    	};
 
 	    	// rootscope on remove filter channel
@@ -93,7 +95,8 @@ app.directive('siteSearch', ['$rootScope','$location','$window',
 	    		if (isIndexPage){
 	    			// filter media type
 					$scope.ppFilter.media_type = type;
-					$scope.ppFilter.set = true;					
+					$scope.ppFilter.set = true;	
+					$scope.mainFilter($scope.ppFilter);
 				} else {
 					$window.location.href = '/'+ $scope.page.site_info.address +'/index.html?media_type='+type;
 				}
@@ -116,6 +119,7 @@ app.directive('siteSearch', ['$rootScope','$location','$window',
 				$scope.ppFilter = {
 					channel:{},
 				};
+				$scope.mainRemoveFilter();
 			}
 		
 		};

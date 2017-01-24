@@ -35,7 +35,7 @@
     <!-- /loading -->
 
 	<!-- wrapper -->
-    <div id="wrapper" ng-if="channels" ng-class="{toggled:toggled}">
+    <div id="wrapper" ng-class="{toggled:toggled}">
         <!-- sidebar -->
         <sidebar></sidebar>
         <!-- /sidebar -->
@@ -48,9 +48,9 @@
 					<site-header></site-header>
 					<!-- /HEADER -->
 					<!-- MAIN -->
-					<section channel-register id="channel-register-view" layout="column" class="container" style="padding-top: 50px;">						
+					<section channel-register id="channel-register-view" layout="column" class="container" style="padding-top: 50px;" ng-if="!loading">						
 
-						<main flex="100" layout-padding ng-hide="loading">
+						<main flex="100" layout-padding>
 
 							<!-- CHANNEL REGISTER -->
 								<!-- channel input -->

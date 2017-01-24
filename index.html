@@ -33,10 +33,10 @@
     <!-- /loading -->
 
     <!-- wrapper -->
-    <div id="wrapper" ng-class="{toggled:toggled}" ng-if="!loading">
+    <div id="wrapper" ng-class="{toggled:toggled}">
         
         <!-- sidebar -->
-        <sidebar></sidebar>
+        <sidebar ng-if="!loading"></sidebar>
         <!-- /sidebar -->
 
         <!-- page Content -->
@@ -50,7 +50,7 @@
                         <!-- /HEADER -->
 
                         <!-- MAIN -->
-                        <section flex layout="column" layout-padding style="padding:50px 0 0 0;">  
+                        <section flex layout="column" layout-padding style="padding:50px 0 0 0;" ng-if="!loading">  
          
                             <!-- channel info -->
                             <section class="wrap-section" id="channel-info" ng-if="channel">
@@ -120,7 +120,25 @@
 
                             <!-- item listing by file type -->
                             <section class="wrap-section main-listing-container" ng-if="config.listing.type === 'by file type'">
-                                <item-list ng-repeat="file_type in file_types|filter:ppFilter.file_type" ng-init="initItemListByFileType(file_type)"></item-list>
+                              <md-content class="container">
+                                <md-tabs md-dynamic-height md-border-bottom>
+                                  <md-tab ng-if="!channel_items" label="All ({{items.length}})">
+                                    <md-content class="md-padding">
+                                        <item-list ng-init="initItemListAll(items)"></item-list> 
+                                    </md-content>
+                                  </md-tab>
+                                  <md-tab ng-if="channel_items" label="All ({{channel_items.length}})">
+                                    <md-content class="md-padding">
+                                        <item-list ng-init="initItemListAll(channel_items)"></item-list> 
+                                    </md-content>
+                                  </md-tab>
+                                  <md-tab ng-if="file_types_items" ng-repeat="file_type in file_types|filter:ppFilter.file_type" label="{{file_type}} ({{file_types_items[file_type].length}})">
+                                    <md-content class="md-padding">
+                                        <item-list ng-init="initItemListByFileType(file_type)"></item-list>          
+                                    </md-content>
+                                  </md-tab>
+                                </md-tabs>
+                              </md-content>
                             </section>
                             <!-- /item listing by file type -->
 

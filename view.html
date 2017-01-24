@@ -28,7 +28,7 @@
     <!-- /loading -->
 
 	<!-- wrapper -->
-    <div id="wrapper" ng-hide="loading" ng-if="channels" ng-class="{toggled:toggled}">
+    <div id="wrapper" ng-hide="loading" ng-class="{toggled:toggled}">
 	    <!-- sidebar -->
 	    <sidebar></sidebar>
 	    <!-- /sidebar-->
@@ -38,7 +38,7 @@
 			<site-header></site-header>
 			<!-- /header -->
 			<!-- content -->
-			<item-view></item-view>
+			<item-view ng-if="!loading"></item-view>
 			<!-- /content -->
 	    </div>
 	    <!-- /page content -->

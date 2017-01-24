@@ -120,7 +120,7 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope',
   						'<div class="container-fluid" style="background-color:#041b2c">'+
 	  						'<div class="navbar-header"><span class="glyphicon glyphicon-menu-hamburger navbar-brand" id="menu-toggle" ng-click="toggleMenu($event)"></span> <a class="navbar-brand" href="/{{site_address}}">IFS - Intergalactic File Server</a></div>'+
 	  						'<div class="container">' + 
-		  						'<site-search></site-search>' +
+		  						'<site-search ng-if="!loading"></site-search>' +
 		  						'<ul class="nav navbar-nav navbar-right">'+
 			  						'<li><a href="/{{page.site_info.address}}/user/">USER</a></li>'+  
 			  						'<li><a ng-click="showInfoModal(ev)" >FAQ</a></li>'+  
