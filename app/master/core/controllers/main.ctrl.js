@@ -13,7 +13,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					],
 					listing:{
 						type:'by file type',
-						items_per_page:5
+						items_per_page:10
 					}
 				}
 				// site ready var to fix loading inconsistancies
@@ -243,7 +243,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				Page.cmd("optionalFileList", { address: channel.address, limit:2000 }, function(site_files){
 					var totalItems = $scope.countChannelItems(data);
 					var totalItemsIndex = 0;
-
 		      		// for every media type in site config				      		
 					for (var media_type in $scope.config.media_types){
 						media_type = $scope.config.media_types[media_type];
@@ -284,6 +283,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			$scope.finishLoadingChannels = function(cIndex){
 				// if channel index + 1 equals number of channels
 				if ((cIndex + 1) === $scope.channels.length){
+					console.log($scope.items);
 					// render items before finish loading
 					if ($scope.config.listing.type === 'by media type'){
 						// render items by media types
@@ -320,7 +320,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// main remove filter function
 			$scope.mainRemoveFilter = function() {
-				console.log('main remove flter');
 				// render items before finish loading
 				if ($scope.config.listing.type === 'by media type'){
 					// render items by media types

@@ -36,7 +36,7 @@ if (typeof jQuery !== 'undefined') {
                  * Create UI
                  */
                 self.root = $('<div></div>');
-                self.screen = $('<canvas class="nes-screen" width="256" height="240" style="width: 512px; display: inline-block; height: 480px;"></canvas>').appendTo(self.root);
+                self.screen = $('<canvas class="nes-screen" width="256" height="240" style="width: 100%; display: inline-block; height: 480px;"></canvas>').appendTo(self.root);
                 
                 if (!self.screen[0].getContext) {
                     parent.html("Your browser doesn't support the <code>&lt;canvas&gt;</code> tag. Try Google Chrome, Safari, Opera or Firefox!");
@@ -44,7 +44,7 @@ if (typeof jQuery !== 'undefined') {
                 }
                 
                 self.romContainer = $('<div class="nes-roms"></div>').appendTo(self.root);
-                self.romSelect = $('<select style="width:100%;"></select>').appendTo(self.romContainer);
+                self.romSelect = $('<select class="form-control" style="width:100%;"></select>').appendTo(self.romContainer);
                 
                 self.controls = $('<div class="nes-controls"></div>').appendTo(self.root);
                 self.buttons = {
@@ -107,7 +107,7 @@ if (typeof jQuery !== 'undefined') {
                     }
                     else {
                         self.screen.animate({
-                            width: '512px',
+                            width: '100%',
                             height: '480px'
                         });
                         self.buttons.zoom.attr("value", "zoom out");

@@ -208,13 +208,18 @@
 		} 
 	}
 
-	.no-animate {
+	md-tabs.no-animate {
 	    -webkit-transition: none !important;
 	    transition: none !important;
 
-		* {
+		md-tab-content {
 		    -webkit-transition: none !important;
 		    transition: none !important;
+
+		    md-content {
+		    	background: transparent;
+		    	padding: 0;
+		    }
 		}
 	}
 
@@ -400,6 +405,12 @@
 		}
 	}
 
+	.main-listing-container {
+		.container {
+			background: transparent;
+		}
+	}
+
 /** /TEMPLATE **/
 
 /** PAGES **/
@@ -420,7 +431,7 @@
 	/* item list */
 
 		.item-list-section {
-			padding: 8px 16px;
+			padding: 8px 0;
 			margin-bottom: 20px;
 			background-color: transparent;
 
@@ -2039,7 +2050,7 @@
 	}
 
 	#nes-emulator-container {
-		width: 512px;
+		width: 100%;
 		margin: 0 auto;
 
 		#emulator {
@@ -2053,8 +2064,15 @@
 			    }
 			}
 
-			#nes-controls {
+			.nes-controls {
+				margin-top: 5px;
 				margin-bottom: 5px;
+				display: flex;
+				justify-content: space-between;
+
+				input {
+					width: 20%;
+				}
 			}
 
 

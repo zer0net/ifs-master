@@ -92,7 +92,7 @@ app.directive('itemList', ['$rootScope',
 											'<h3><a href="{{item.view_url}}">{{item.title}}</a></h3>' +
 											'<ul class="video-info">' +
 							    				'<li><span>{{item.channel.content.title}}</span></li>' +
-							    				'<li><span><i am-time-ago="item.date_added"></i></span></li>' +
+							    				'<li><span> {{item.x_peer}} peers</span></li>' +
 							    				'<li class="votes-count" votes ng-init="getVotes(item)">' +
 													'<span class="up-vote">' +
 														'<span class="glyphicon glyphicon-thumbs-up"></span>' +
@@ -107,7 +107,7 @@ app.directive('itemList', ['$rootScope',
 													'<span class="glyphicon glyphicon-comment"></span>' +
 													'<span>{{commentCount}}</span>' +
 							    				'</li>' +
-							    				'<li class="peers-count"><span> {{item.x_peer}} peers</span></li>' +
+							    				'<li class="peers-count"><span><i am-time-ago="item.date_added"></i></span></li>' +
 											'</ul>' +
 										'</md-grid-tile-footer>' +
 										'<!-- /info -->' +
@@ -115,7 +115,7 @@ app.directive('itemList', ['$rootScope',
 								'</md-grid-tile>' +
 								'<!-- grid item -->' +
 							'</md-grid-list>' +
-    						'<ul ng-if="paging" uib-pagination total-items="paging.totalItems" items-per-page="config.listing.items_per_page" ng-model="paging.currentPage" ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" boundary-links="true"></ul>' +
+    						'<ul ng-show="paging" ng-if="paging.numPages > 1" uib-pagination total-items="paging.totalItems" items-per-page="config.listing.items_per_page" ng-model="paging.currentPage" ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" boundary-links="true"></ul>' +
 						'</section>';
 
 		return {

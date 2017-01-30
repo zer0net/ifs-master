@@ -8,7 +8,6 @@ app.directive('nesEmulator', ['$location','$rootScope','$timeout',
 				// render nes url
 				var nesFile;
 				if (game) { 
-					console.log(game.channel);
 					$scope.game = game;
 					nesFile = "/"+$scope.site_address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel+"/"+$scope.game.path;
 				} else {
@@ -50,54 +49,58 @@ app.directive('nesEmulator', ['$location','$rootScope','$timeout',
 		var template = 	'<center id="nes-emulator-container">' +
 						    '<div id="emulator"></div>' +
 						    '<div id="emcontrols" style="display: none">' +
-							    '<h2>Controls</h2>' +
-							    '<table id="controls">' +
-							        '<tr>' +
-							            '<th>Button</th>' +
-							            '<th>Player 1</th>' +
-							            '<th>Player 2</th>' +
-							        '</tr>' +
-							        '<tr>' +
-							            '<td>Left</td>' +
-							            '<td>Left</td>' +
-							            '<td>Num-4</td>' +
-							        '</tr>' +
-							        '<tr>' +
-							            '<td>Right</td>' +
-							            '<td>Right</td>' +
-							            '<td>Num-6</td>' +
-							        '</tr>' +
-							        '<tr>' +
-							            '<td>Up</td>' +
-							            '<td>Up</td>' +
-							            '<td>Num-8</td>' +
-							        '</tr>' +
-							        '<tr>' +
-							            '<td>Down</td>' +
-							            '<td>Down</td>' +
-							            '<td>Num-2</td>' +
-							        '</tr>' +
-							        '<tr>' +
-							            '<td>A</td>' +
-							            '<td>X</td>' +
-							            '<td>Num-7</td>' +
-							        '</tr>' +
-							        '<tr>' +
-							            '<td>B</td>' +
-							            '<td>Z/Y</td>' +
-							            '<td>Num-9</td>' +
-							        '</tr>' +
-							        '<tr>' +
-							            '<td>Start</td>' +
-							            '<td>Enter</td>' +
-							            '<td>Num-1</td>' +
-							        '</tr>' +
-							        '<tr>' +
-							            '<td>Select</td>' +
-							            '<td>Ctrl</td>' +
-							            '<td>Num-3</td>' +
-							        '</tr>' +
-							    '</table>' +
+						    	'<section class="section-header item-info-header">' +
+							    	'<h2>Controls</h2>' +
+							    '</section>' +
+							    '<section class="section md-whiteframe-1dp item-info">' +
+							    	'<ul>' +
+							    		'<li>' +
+								            '<span>Button</span>' +
+								            '<span>Player 1</span>' +
+								            '<span>Player 2</span>' +
+							            '</li>' + 
+							            '<li>' +
+								            '<td>Left</td>' +
+								            '<td>Left</td>' +
+								            '<td>Num-4</td>' +
+							            '</li>' +
+							    		'<li>' +
+								            '<td>Right</td>' +
+								            '<td>Right</td>' +
+								            '<td>Num-6</td>' +
+							            '</li>' + 
+								        '<li>' +
+								            '<span>Up</span>' +
+								            '<span>Up</span>' +
+								            '<span>Num-8</span>' +
+								        '</li>' +
+								        '<li>' +
+								            '<span>Down</span>' +
+								            '<span>Down</span>' +
+								            '<span>Num-2</span>' +
+								        '</li>' +
+								        '<li>' +
+								            '<span>A</span>' +
+								            '<span>X</span>' +
+								            '<span>Num-7</span>' +
+								        '</li>' +
+								        '<li>' +
+								            '<span>B</span>' +
+								            '<span>Z/Y</span>' +
+								            '<span>Num-9</span>' +
+								        '</li>' +
+								        '<li>' +
+								            '<span>Start</span>' +
+								            '<span>Enter</span>' +
+								            '<span>Num-1</span>' +
+								        '</li>' +
+								        '<li>' +
+								            '<span>Select</span>' +
+								            '<span>Clil</span>' +
+								            '<span>Num-3</span>' +
+								        '</li>' +
+							    	'</ul>' +
+							    '</section>' +
 						    '</div>' +
 						'</center>';
 

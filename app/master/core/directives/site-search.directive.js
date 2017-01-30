@@ -126,24 +126,7 @@ app.directive('siteSearch', ['$rootScope','$location','$window',
 
 		var template =  '<form class="navbar-form navbar-left" ng-init="initSiteSearch()">'+
         					'<div class="form-group">'+
-          					'<input type="text" class="form-control" placeholder="Search" ng-model="ppFilter.title">'+
-          					'<input type="text" class="form-control" ng-model="ppFilter.channel.address"  id="filterChannel" style="display:none">'+
-          					'<input type="text" class="form-control" ng-model="ppFilter.media_type"  id="filterMediaType" style="display:none">'+
-          					'<input type="text" class="form-control" ng-model="ppFilter.file_type"  id="filterFileType" style="display:none">'+
-          					'<div class="dropdown">'+
-          					    '<a ng-click="filterMediaType(\'game\')" style="color:#777; padding:10px 20px;" >GAME</a>'+
-          					    '<div class="dropdown-content">'+
-          					    '<ul>' + 
-	          					    '<li><a ng-click="filterFileType(\'nes\')"> NINTENDO </a></li>'+
-	          					    '<li><a ng-click="filterFileType(\'sna\')">AMSTRAD </a> </li>'+
-	          					    '<li><a ng-click="filterFileType(\'zip\')">DOS </a> </li>'+
-	          					    '<li><a ng-click="filterFileType(\'bin\')">ATARI</a> </li>'+
-          					    '</ul>' +
-          					  '</div>'+
-          					'</div>' +
-							'<a ng-click="filterMediaType(\'video\')" style="color: #777;padding:10px 20px;">VIDEO</a>' + 
-							'<a ng-click="filterRemove()" style="color: #777;padding:10px 20px;"><span class="glyphicon glyphicon-filter" style="text-decoration: line-through"></span></a>' + 
-        					'</div>' +        					
+          					'<input type="text" class="form-control" placeholder="Search" ng-model="ppFilter.title">'+  					
       					'</form>';
 		
 		return {

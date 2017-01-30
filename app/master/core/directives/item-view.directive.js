@@ -23,12 +23,9 @@ app.directive('itemView', [
 				// item media type
 				var item_media_type = $scope.item_type + 's';
 				// loop through games array
-				console.log($scope[item_media_type]);
 				$scope.items.forEach(function(item,index){
-					console.log(item);
 					// if item id & channel exist in array
 					if (item[$scope.item_id_name] === itemId && item.channel.address === channelId){
-						console.log(item);
 						// get site file info
 						$scope.getSiteFileInfo(item);
 					}
@@ -63,7 +60,6 @@ app.directive('itemView', [
 							item.site_file = site_file;
 							// apply game to scope
 							$scope[$scope.item_type] = item;
-							console.log($scope[$scope.item_type]);
 							// apply scope
 							$scope.$apply();
 						}

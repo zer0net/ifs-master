@@ -534,8 +534,8 @@
 /* MULTIPLE FILE UPLOAD */
 
 	md-dialog.upload-dialog{   
-	    width: 600px;
-	    min-width: 600px;
+	    width: 800px;
+	    min-width: 800px;
 	    height:auto;
 	    border-radius: 0;
 
@@ -562,6 +562,137 @@
 						overflow: hidden;
 						text-overflow: ellipsis;				
 					}
+				}
+			}
+		}
+	}
+
+	#files-upload {
+
+		> ul {
+			padding: 0;
+
+			> li {
+			    height: auto;
+			    padding: 2px 0;
+
+			    .file-title {
+				    overflow: hidden;
+				    white-space: nowrap;
+				    text-overflow: ellipsis;
+				    display: block;	    	
+			    }
+
+				.file-category,
+				.file-subcategory {
+					padding-right: 4px;
+
+					.select-menu-container {
+						position: relative;
+
+						.toggle-select-menu {
+						    width: 100%;
+						    text-align: left;
+						    background: white;
+						    border: 1px solid #ccc;
+						    .border-radius(5px,5px,5px,5px);
+
+						    span.arrow {
+						    	display: block;
+							    float: right;
+							    border-left: 1px solid #ccc;
+							    padding-left: 5px;
+
+							    .glyphicon {
+							    	top: 2px;
+							    }
+						    }
+						}
+
+						.select-menu {
+							display: none;
+						    position: absolute;
+						    background-color: white;
+						    z-index: 10;
+						    width: 100%;
+						    border: 1px solid #ccc;
+						    box-shadow: 1px 1px 1px rgba(0,0,0,0.15);
+						    border-top: 0;
+						    .border-radius(0,5px,5px,0);
+
+						    ul {
+						    	list-style-type: none;
+						    	padding: 0;
+						    	margin: 0;
+
+						    	li {
+								    width: 100%;
+								    padding: 0 5px;
+								    cursor: pointer;
+								    height: 25px;
+								    line-height: 25px;
+								    .transition();
+
+								    &:hover,
+								    &.selected {
+								    	background-color: #f7f7f7;
+								    }	
+						    	}
+
+						    	li.divider {
+								    border-top: 1px solid #ccc;
+								    height: 0px;
+								    padding: 0;
+						    	}
+
+						    	li.new-category-form-container {
+						    		height: auto;
+						    		line-height: 0;
+						    		padding: 5px;
+
+						    		input[type="text"]{
+									    height: 25px;
+									    padding: 5px;
+									    font-size: 12px;
+									    .border-radius(0,0,3px,0);
+						    		}
+
+						    		button {
+						    			.border-radius(0,3px,0,0);
+						    		}
+						    	}
+						    }
+						}
+
+						&.active {
+
+							.toggle-select-menu {
+								.border-radius(5px,0,0,5px);
+							}
+
+							.select-menu {
+								display: block;
+							}
+						}
+					}
+				}
+
+				.file-actions {
+					padding: 3px;
+				}
+
+				.errors {
+					span {
+						color: red;
+						font: 12px;
+					}
+				}
+
+				&.list-header {
+				    padding-bottom: 10px;
+				    margin-bottom: 10px;
+				    border-bottom: 1px solid #ccc;
+				    font-weight: bold;			
 				}
 			}
 		}
@@ -1270,57 +1401,54 @@
 		padding: 0;
 	}
 
-
 /* /EMULATORS */
 
 /* STYLE EXTRA */
 
+	md-content.md-default-theme, md-content
+	{
+		background-color: transparent;
+		padding-top: 0px;
+	}
 
 
-md-content.md-default-theme, md-content
-{
-	background-color: transparent;
-	padding-top: 0px;
-}
+	body{
+	    font-family: "Open Sans","lucida grande","Segoe UI",arial,verdana,"lucida sans unicode",tahoma,sans-serif;
+	    font-size: 13px;
+	    color: #3d464d;
+	    font-weight: normal;
+	}
 
+	.sort-icon {
+	    font-size: 9px;
+	    margin-left: 5px;
+	}
 
-body{
-    font-family: "Open Sans","lucida grande","Segoe UI",arial,verdana,"lucida sans unicode",tahoma,sans-serif;
-    font-size: 13px;
-    color: #3d464d;
-    font-weight: normal;
-}
+	th {
+	    cursor:pointer;
+	}
 
-.sort-icon {
-    font-size: 9px;
-    margin-left: 5px;
-}
+	.header { 
+	    min-height: 120px;
+	}
 
-th {
-    cursor:pointer;
-}
+	.nes-controls
+	{
+	    display: none;
+	}
 
-.header { 
-    min-height: 120px;
-}
+	.nes-roms
+	{
+	 display: none;   
+	}
 
-.nes-controls
-{
-    display: none;
-}
-
-.nes-roms
-{
- display: none;   
-}
-
-.imgFilehubLogo {
-    border: 1px solid #dbdbdb;
-    border-radius: 999px;
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
-}
+	.imgFilehubLogo {
+	    border: 1px solid #dbdbdb;
+	    border-radius: 999px;
+	    width: 50px;
+	    height: 50px;
+	    margin-right: 10px;
+	}
 
 /* /STYLE EXTRA */
 
