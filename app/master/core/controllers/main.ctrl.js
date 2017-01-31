@@ -40,44 +40,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    	});
 			};
 
-			// generate config
-			$scope.generateConfig = function(){
-				// dialog vars
-				$scope.status = '';
-				$scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
-			    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
-			    // dialog template
-			    var dialogTemplate = 
-			    	'<md-dialog aria-label="Configuration">' +
-					    '<md-toolbar>' +
-					    	'<div class="md-toolbar-tools">' +
-						        '<h2>Configuration</h2>' +
-						        '<span flex></span>' +
-						        '<md-button class="md-icon-button" ng-click="cancel()">' +
-						            '<md-icon md-svg-src="img/icons/ic_close_24px.svg" aria-label="Close dialog"></md-icon>' +
-						        '</md-button>' +
-					    	'</div>' +
-					    '</md-toolbar>' +
-					    '<md-dialog-content site-config ng-init="initSiteConfig()" layout-padding style="width:400px" layout="column">' +
-			    			'<label style="margin: 0;padding: 0 8px;">media type</label>' +
-							'<md-input-container style="margin:0;" flex>' +
-								'<md-checkbox ng-repeat="mediaType in mediaTypes" ng-model="config[mediaType]" aria-label="{{mediaType}}" ng-click="updateMediaTypes(config,mediaType)">{{mediaType}}</md-checkbox>' +
-			    			'</md-input-container>' +
-				            '<md-button flex="100" class="md-primary md-raised edgePadding pull-right" ng-click="updateConfig(config)">' +
-				            	'<label>Update Configuration</label>' +
-				            '</md-button>' +
-					    '</md-dialog-content>' +				    
-					'</md-dialog>';
-				// show dialog
-			    $mdDialog.show({
-					controller: DialogController,
-					template: dialogTemplate,
-					parent: angular.element(document.body),
-					clickOutsideToClose:true,
-					fullscreen: useFullScreen
-			    });
-			};
-
 			// get merger site permission
 			$scope.getMergerPermission = function(){						
 				// if user allready has permission for merger type
@@ -142,9 +104,18 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			$scope.renderChannels = function(){
 				// items array, named ny media type var
 				$scope[$scope.media_type] = [];
-				// for each channel
-				$scope.channels.forEach(function(channel,cIndex){
-	 				// check if site exists
+				$scope.cIndex = 0;
+				$scope.renderChannel($scope.channels[$scope.cIndex]);
+			};
+
+			// render channel 
+			$scope.renderChannel = function(channel){
+				console.log('render channel ' + $scope.cIndex);
+				$scope.cIndex += 1;
+				console.log($scope.channels.length);
+				console.log($scope.cIndex);
+				console.log($scope.channels.length > $scope.cIndex + 1);
+				if ($scope.channels.length > $scope.cIndex){
 					var siteExists = false;
 					// loop through sites array
 					$scope.sites.forEach(function(site,sIndex){
@@ -152,25 +123,28 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 						if (site.address === channel.channel_address){
 							siteExists = true;
 							for (var attr in site) { 
-								channel[attr] = site[attr]; 
+								channel[attr] = site[attr];
 							}
 						}
-					});				
-					
+					});
 					// if site exists get channel, if not add merged site
 					if (siteExists === true){
+						console.log('before get channel ' + ($scope.cIndex - 1 ));
 						// get channel						
-						$scope.getChannel(channel,cIndex);
+						$scope.getChannel(channel);
 					} else {						
 						console.log('site ' + channel.channel_address + ' doesnt exists! adding site...');
 						// add merger site
-						$scope.addSite(channel,cIndex);
+						$scope.addSite(channel);
 					}
-				});
+				} else {
+					console.log('finished loading before');
+					$scope.finishLoadingChannels();
+				}
 			};
 			
 			// add merger site
-			$scope.addSite = function(channel,cIndex){
+			$scope.addSite = function(channel){
 				Page.cmd("mergerSiteAdd",{"addresses":channel.channel_address},function(data){
 					// list merger sites					
 					Page.cmd("mergerSiteList", {query_site_info: true}, function(sites) {						
@@ -199,15 +173,14 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			};
 
 			// get channel
-			$scope.getChannel = function(channel,cIndex){
+			$scope.getChannel = function(channel){
 				// get channel's content.json
 				var inner_path = 'merged-'+$scope.merger_name+'/'+channel.address+'/content.json';
-						
 				Page.cmd("fileGet",{"inner_path":inner_path},function(data){
 					// check if site has content.json
 				    if (!data){
 						console.log('No content.json found for '+channel.address+'!');
-						$scope.finishLoadingChannels(cIndex);
+						$scope.renderChannel($scope.channels[$scope.cIndex])
 					} else {
 						data = JSON.parse(data);
 						// channel info
@@ -220,15 +193,17 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 							data = JSON.parse(data);
 							// if channel has data
 							if (!data){
-								$scope.finishLoadingChannels(cIndex);
+								console.log('no data');
+								$scope.renderChannel($scope.channels[$scope.cIndex]);
 							} else {
+								console.log('yes data');
 								// render channel on get
 								channel = Channel.renderChannelOnGet(channel,data,$scope.media_type);
 								// apply to scope
-								if(channel.hide==0){ // add item if channel is not hidden
+								if (channel.hide==0){ // add item if channel is not hidden
 									$scope.$apply(function() {
 										// get channel items
-										$scope.addChannelItems(data,channel,cIndex);									
+										$scope.addChannelItems(data,channel);
 									});
 								}
 							}
@@ -238,7 +213,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			};
 	
 			// add channels items
-			$scope.addChannelItems = function(data,channel,cIndex){
+			$scope.addChannelItems = function(data,channel){
 				// list optional files
 				Page.cmd("optionalFileList", { address: channel.address, limit:2000 }, function(site_files){
 					var totalItems = $scope.countChannelItems(data);
@@ -259,10 +234,9 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 							});
 						}
 					}
-
 		      		if (totalItemsIndex === totalItems){
-						// finish loading					
-						$scope.finishLoadingChannels(cIndex);
+		      			console.log('finished adding channel items ' + + ($scope.cIndex - 1));
+						$scope.renderChannel($scope.channels[$scope.cIndex])
 		      		}
 			    });
 			};			
@@ -280,24 +254,20 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			};
 
 			// finish loading channels
-			$scope.finishLoadingChannels = function(cIndex){
-				// if channel index + 1 equals number of channels
-				if ((cIndex + 1) === $scope.channels.length){
-					console.log($scope.items);
-					// render items before finish loading
-					if ($scope.config.listing.type === 'by media type'){
-						// render items by media types
-						$scope = Central.listItemsByMediaType($scope);
-					} else if ($scope.config.listing.type === 'by file type'){
-						// render items by file type
-						$scope = Central.listItemsByFileType($scope);
-					}
-					// finished loading & apply to scope
-					$scope.$apply(function(){
-						// finish loading					
-						$scope.finishedLoading();
-					});
+			$scope.finishLoadingChannels = function(){
+				// render items before finish loading
+				if ($scope.config.listing.type === 'by media type'){
+					// render items by media types
+					$scope = Central.listItemsByMediaType($scope);
+				} else if ($scope.config.listing.type === 'by file type'){
+					// render items by file type
+					$scope = Central.listItemsByFileType($scope);
 				}
+				// finished loading & apply to scope
+				$scope.$apply(function(){
+					// finish loading					
+					$scope.finishedLoading();
+				});
 			};
 
 		/* /INIT SITE */
@@ -412,6 +382,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			};
 			
 	    /* /UI */
+
 	}
 ]);
 

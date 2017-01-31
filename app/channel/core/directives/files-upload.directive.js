@@ -153,7 +153,7 @@ app.directive('filesUpload', ['$location','Item',
 						$scope.errors = true;
 						var error = {
 							type:'subcategory',
-							msg:'please select category'
+							msg:'please select subcategory'
 						};
 						file.errors.push(error);						
 					}
