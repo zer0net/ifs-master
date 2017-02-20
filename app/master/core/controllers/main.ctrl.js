@@ -131,7 +131,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					} else {						
 						console.log('site ' + channel.channel_address + ' doesnt exists! adding site...');
 						// add merger site
-						$scope.addSite(channel,cIndex);
+						$scope.addSite(channel);
 					}
 				} else {
 					console.log('finished loading before');
@@ -140,7 +140,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			};
 			
 			// add merger site
-			$scope.addSite = function(channel,cIndex){
+			$scope.addSite = function(channel){
 				Page.cmd("mergerSiteAdd",{"addresses":channel.channel_address},function(data){
 					// list merger sites					
 					Page.cmd("mergerSiteList", {query_site_info: true}, function(sites) {						
@@ -156,13 +156,13 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 						    	// push site to sites array
 								$scope.sites.push(site);
 								// get channel						
-								$scope.getChannel(site,cIndex);
+								$scope.getChannel(site);
 						    }
 						}
 						// if no matching site found in merger site list after adding
 						if (siteFound === false){
 						// finish loading		    	
-						    $scope.finishLoadingChannels(cIndex);								
+						    $scope.finishLoadingChannels();								
 						}
 					});					
 				});
@@ -209,7 +209,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			};
 	
 			// add channels items
-			$scope.addChannelItems = function(data,channel,cIndex){
+			$scope.addChannelItems = function(data,channel){
 				// list optional files
 				Page.cmd("optionalFileList", { address: channel.address, limit:2000 }, function(site_files){
 					var totalItems = $scope.countChannelItems(data);
