@@ -110,11 +110,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// render channel 
 			$scope.renderChannel = function(channel){
-				console.log('render channel ' + $scope.cIndex);
 				$scope.cIndex += 1;
-				console.log($scope.channels.length);
-				console.log($scope.cIndex);
-				console.log($scope.channels.length > $scope.cIndex + 1);
 				if ($scope.channels.length > $scope.cIndex){
 					var siteExists = false;
 					// loop through sites array
@@ -135,7 +131,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					} else {						
 						console.log('site ' + channel.channel_address + ' doesnt exists! adding site...');
 						// add merger site
-						$scope.addSite(channel);
+						$scope.addSite(channel,cIndex);
 					}
 				} else {
 					console.log('finished loading before');
@@ -144,7 +140,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			};
 			
 			// add merger site
-			$scope.addSite = function(channel){
+			$scope.addSite = function(channel,cIndex){
 				Page.cmd("mergerSiteAdd",{"addresses":channel.channel_address},function(data){
 					// list merger sites					
 					Page.cmd("mergerSiteList", {query_site_info: true}, function(sites) {						
@@ -213,7 +209,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			};
 	
 			// add channels items
-			$scope.addChannelItems = function(data,channel){
+			$scope.addChannelItems = function(data,channel,cIndex){
 				// list optional files
 				Page.cmd("optionalFileList", { address: channel.address, limit:2000 }, function(site_files){
 					var totalItems = $scope.countChannelItems(data);
@@ -235,7 +231,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 						}
 					}
 		      		if (totalItemsIndex === totalItems){
-		      			console.log('finished adding channel items ' + + ($scope.cIndex - 1));
+		      			console.log('finished adding channel items ' + ($scope.cIndex - 1));
 						$scope.renderChannel($scope.channels[$scope.cIndex])
 		      		}
 			    });
