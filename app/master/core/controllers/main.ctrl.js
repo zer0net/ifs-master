@@ -125,7 +125,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					});
 					// if site exists get channel, if not add merged site
 					if (siteExists === true){
-						console.log('before get channel ' + ($scope.cIndex - 1 ));
 						// get channel						
 						$scope.getChannel(channel);
 					} else {						
@@ -189,10 +188,8 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 							data = JSON.parse(data);
 							// if channel has data
 							if (!data){
-								console.log('no data');
 								$scope.renderChannel($scope.channels[$scope.cIndex]);
 							} else {
-								console.log('yes data');
 								// render channel on get
 								channel = Channel.renderChannelOnGet(channel,data,$scope.media_type);
 								// apply to scope
@@ -231,7 +228,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 						}
 					}
 		      		if (totalItemsIndex === totalItems){
-		      			console.log('finished adding channel items ' + ($scope.cIndex - 1));
 						$scope.renderChannel($scope.channels[$scope.cIndex])
 		      		}
 			    });
