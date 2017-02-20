@@ -21,8 +21,8 @@ app.directive('sidebar', ['$rootScope',
 		};
 
 		var template =  '<div id="sidebar-wrapper">' +
-						    '<ul class="sidebar-nav">' +
-						       '<div ng-if="channels.length > 0">' +
+						    '<div ng-if="channels.length > 0">' +
+						    	'<ul class="sidebar-nav">' +
 							       '<li class="sidebar-brand">' +
 							          'Channels  <span class="glyphicon glyphicon-refresh"  ng-click="onRemoveFilterChannel()" ></span>' +
 							        '</li>' +
@@ -34,8 +34,8 @@ app.directive('sidebar', ['$rootScope',
 							                '</a>' +
 							            '</div>' +
 							        '</li>' +
-						        '</div>' +
-						    '</ul>' +
+						        '</ul>' +
+						    '</div>' +
 						'</div>';
 		
 		return {
