@@ -243,7 +243,8 @@
 				// remove item from channel.json
 				$scope.chJson[media_type].splice(itemIndex,1);
 				// delete item file
-				Page.cmd("fileDelete", [item.path], function(res) {	
+				Page.cmd("fileDelete", ['merged-'+$scope.merger_name+'/'+$scope.site.address+'/'+item.path], function(res) {	
+					console.log(res);
 					// delete item img
 					if (item.imgPath){
 						Page.cmd("fileDelete", [item.imgPath], function(res) {
