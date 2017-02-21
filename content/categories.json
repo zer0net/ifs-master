@@ -1,5 +1,5 @@
 {
-	"next_category_id": 21,
+	"next_category_id": 22,
 	"categories": [
 		{
 			"category_name": "games",
@@ -85,17 +85,24 @@
 			"visible":1,
 			"subcategories":[
 				{
-					"category_name": "misc",
+					"category_name": "other",
 					"date_added": 1485454585326,
 					"category_parent": "5",
 					"category_id": 18,
 					"visible":1			
 				},
 				{
-					"category_name": "humor",
+					"category_name": "funny",
 					"date_added": 1485454585326,
 					"category_parent": "5",
 					"category_id": 11,
+					"visible":1			
+				},
+				{
+					"category_name": "documentary",
+					"date_added": 1485454585354,
+					"category_parent": "5",
+					"category_id": 21,
 					"visible":1			
 				}
 			]
