@@ -19,6 +19,10 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 				$scope.publishButtonStatus = 'publish';
 			});
 
+			// on select site
+			$scope.onSelectSite = function(site){
+				$scope.getSiteFileList(site);
+			};
 
 			// multiple upload dialog
 			$scope.multipleUploadDialog = function(ev){
@@ -141,8 +145,17 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 
 		};
 
+		
+
 		// site header template
-		var template = 	'<md-toolbar ng-init="init()" ng-if="site" layout-padding class="md-hue-2 header" layout="row">' +
+			
+		var template = 	'<div class="wrapper" style="height:40px;background-color:#000;">'+
+							'<div class="container-fluid select-channel">' +
+										'<label>Select channel: </label>' +											
+										'<select class="form-control" ng-model="site" value="site.address" ng-options="site.address for site in u_sites" ng-change="onSelectSite(site)"></select>' +
+							'</div>' +
+						'</div>'+
+						'<md-toolbar ng-init="init()" ng-if="site" layout-padding class="md-hue-2 header" layout="row">' +
 							'<div class="col-xs-5">' + 
 								'<figure class="logo"><img ng-if="chJson.channel.img" ng-src="/{{page.site_info.address}}/merged-{{merger_name}}/{{site.address}}/{{chJson.channel.img ? \'uploads/images/\'+chJson.channel.img : \'../assets/channel/img/x-avatar.png\'}}"/></figure>' +
 								'<div class="site-title">' + 
@@ -178,7 +191,6 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 								'</ul>' + 
 					        '</div>' + 
 						'</md-toolbar>';
-
 		return {
 			restrict: 'AE',
 			replace:false,

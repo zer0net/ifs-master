@@ -125,10 +125,10 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope','$location',
 	  						'<div class="navbar-header"><span class="glyphicon glyphicon-menu-hamburger navbar-brand" id="menu-toggle" ng-click="toggleMenu($event)"></span> <a class="navbar-brand" href="/{{site_address}}">IFS - Intergalactic File Server</a><a class="navbar-brand" href="/{{page.site_info.address}}/index.html?media_type={{media_type}}" ng-if="media_type"><span>/ {{media_type}}</span></a></div>'+
 	  						'<div class="container">' + 
 		  						'<site-search ng-if="!loading"></site-search>' +
-		  						'<ul class="nav navbar-nav navbar-right">'+
-			  						'<li><a href="/{{page.site_info.address}}/user/">USER</a></li>'+  
+		  						'<ul class="nav navbar-nav navbar-right">'+			  						
 			  						'<li><a ng-click="showInfoModal(ev)" >FAQ</a></li>'+  
-									'<li><a href="/{{page.site_info.address}}/register.html">REGISTER</button></a></li>'+  												
+									'<li><a href="/{{page.site_info.address}}/register.html">All Channels</button></a></li>'+  												
+									'<li><a href="/{{page.site_info.address}}/user/">My Channels</a></li>'+  
 								'</ul>'+    					
 	  						'</div>' +
 	  					'</div>'+
