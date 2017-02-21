@@ -24,7 +24,7 @@ app.factory('Item', [
 			// get category name by file type
 			var catName;
 			var subCatName;
-			// games
+
 			if (file.file_type === 'zip' ||  file.file_type === 'nes' ||  file.file_type === 'sna' ||  file.file_type === 'dsk' || file.file_type === 'bin') {
 				catName = 'games';
 				file.media_type = 'game';
@@ -58,27 +58,6 @@ app.factory('Item', [
 					}
 				}
 			});
-			return file;
-		};
-
-		// assign default sub category
-		Item.assignDefaultSubcategory = function(file){
-			var subcatName;
-			// games
-			if (file.category.category_name === 'games'){
-				if (file.file_type === 'zip'){ subcatName = 'dos';}
-				else if (file.file_type === 'nes') {subcatName = 'nes';}
-				else if (file.file_type === 'sna') {subcatName = 'amstrad';}
-				else if (file.file_type === 'bin') {subcatName = 'atari';}
-			}
-			// find subcategory
-			var subCat;
-			file.category.subcategories.forEach(function(cat,index){
-				if (cat.category_name === subcatName){
-					subCat = cat;
-				}
-			});
-			file.subcategory = subCat;
 			return file;
 		};
 

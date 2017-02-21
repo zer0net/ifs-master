@@ -12,7 +12,6 @@ app.directive('categories', [
 					$scope.categories.forEach(function(category,index){
 						$scope.getSubcategories(category);
 					});
-					console.log($scope.categories);
 					$scope.$apply();
 				});
 			};

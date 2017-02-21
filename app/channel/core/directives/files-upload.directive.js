@@ -1,18 +1,8 @@
-app.directive('filesUpload', ['$location','Item',
-	function($location,Item) {
+app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
+	function($location,Item,$mdDialog,$mdMedia) {
 
 		// image upload controller
 		var controller = function($scope,$element) {
-
-			// loading & msg
-			$scope.showUploadImg = function(){				
-				$scope.uploading = true;
-			};
-
-			// finish loading
-			$scope.finishUploadImg = function(){
-				$scope.uploading = false;
-			};
 
 			// init
 			$scope.init = function(chJson,site,merger_name){
@@ -30,6 +20,16 @@ app.directive('filesUpload', ['$location','Item',
 				};
 			};
 
+			// loading & msg
+			$scope.showUploadImg = function(){				
+				$scope.uploading = true;
+			};
+
+			// finish loading
+			$scope.finishUploadImg = function(){
+				$scope.uploading = false;
+			};
+
 			// read files
 			$scope.readFile = function(file,xhr,formData){
 				file.state = 'pending';	
@@ -39,42 +39,38 @@ app.directive('filesUpload', ['$location','Item',
 				$scope.reader.onload = function(){
 					// render file on read
 					file = Item.renderFileOnRead(file,this);
-					// select menus
-					file.catToggleMenu = false;
-					file.subCatToggleMenu = false;
+
 					// if zip file, get inner file
 					if (file.file_type === 'zip'){
 						// js zip instance
 						var zip = new JSZip();
 						// js zip - loop through files in zip in file
 						zip.loadAsync(file).then(function(zip) {
+							file.zip_files = [];
 							// for every file in zip
 							for (var i in zip.files){ 
 								var f = zip.files[i];
+								file.zip_files.push(f);
 								// if file is .com / .exe
 								if (f.name.indexOf(".COM") > -1 || 
 									f.name.indexOf(".EXE") > -1 || 
 									f.name.indexOf(".com") > -1 ||
 									f.name.indexOf(".exe") > -1){
+									console.log(file.inner_file);
 									// inner file
 									file.inner_file  = f.name;
-									// files array
-									if (!$scope.files) $scope.files = [];
-									// push file to files array
-									$scope.files.push(file);
-									// apply to scope
 									$scope.$apply();
 								}
 							}
 						});
-					} else {
-						// files array
-						if (!$scope.files) $scope.files = [];
-						// push file to files array
-						$scope.files.push(file);
-						// apply to scope
-						$scope.$apply();
 					}
+
+					// files array
+					if (!$scope.files) $scope.files = [];
+					// push file to files array
+					$scope.files.push(file);
+					// apply to scope
+					$scope.$apply();
 				};
 				// reader read file
 				$scope.reader.readAsDataURL(file);
@@ -85,40 +81,10 @@ app.directive('filesUpload', ['$location','Item',
 				file = Item.assignDefaultCategory(file,categories);
 			};
 
-			// select category 
-			$scope.selectCategory = function(category,file){
-				file.category = category;
-				var type = 'category';
-				$scope.removeError(type);
-				$scope.toggleCategorySelectMenu(file);
-			};
-
-			// toggle category select menu
-			$scope.toggleCategorySelectMenu = function(file){
-				console.log(file.catToggleMenu);
-				if (file.catToggleMenu === false){
-					file.catToggleMenu = true;
-				} else {
-					file.catToggleMenu = false;
-				}
-			};
-
-			// select category 
-			$scope.selectSubCategory = function(category,file){
-				file.subcategory = category;
-				var type = 'subcategory';
-				$scope.removeError(file,type);
-				$scope.toggleSubCategorySelectMenu(file);
-			};
-
-			// toggle category select menu
-			$scope.toggleSubCategorySelectMenu = function(file){
-				console.log(file.subCatToggleMenu);
-				if (file.subCatToggleMenu === false){
-					file.subCatToggleMenu = true;
-				} else {
-					file.subCatToggleMenu = false;
-				}
+			// on select category
+			$scope.onSelectCategory = function(category){
+				$scope.getSubcategories(category);
+				console.log($scope.subcategories);
 			};
 
 			// remove error
@@ -220,8 +186,65 @@ app.directive('filesUpload', ['$location','Item',
 				}
 			};
 			
+
+			// select inner file dialog
+			$scope.selectInnerFileDialog = function(ev,file){
+				
+				$scope.status = '';
+				$scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
+			    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+			    var dialogTemplate = '<md-dialog aria-label="Select Inner File">' +
+									    '<md-toolbar>' +
+									    	'<div class="md-toolbar-tools">' +
+										        '<h2>Select Inner File</h2>' +
+									    	'</div>' +
+									    '</md-toolbar>' +
+									    '<md-dialog-content layout-padding class="select-inner-file-dialog">' +
+									    	'<div class="file-item" ng-repeat="inner_file in items.file.zip_files"><a ng-click="selectInnerFile(items.file,inner_file)" ng-bind="inner_file.name"></a></div>' +
+									    '</md-dialog-content>' +
+									'</md-dialog>';
+
+			    $mdDialog.show({
+					controller: DialogController,
+					template: dialogTemplate,
+					parent: angular.element(document.body),
+					targetEvent: ev,
+					clickOutsideToClose:true,
+					fullscreen: useFullScreen,
+					locals: {
+						items: {
+							file:file
+						}
+					}
+			    });
+
+			};
+
 		};
 
+		// dialog controller
+		var DialogController = function($scope, $mdDialog,$rootScope,items) {
+			// items
+			$scope.items = items;
+
+			$scope.selectInnerFile = function(file,inner_file){
+				file.inner_file = inner_file.name;
+				$scope.hide();
+			};
+
+			$scope.hide = function() {
+				$mdDialog.hide();
+			};
+			
+			$scope.cancel = function() {
+				$mdDialog.cancel();
+			};
+			
+			$scope.answer = function(answer) {
+				$mdDialog.hide(answer);
+			};
+
+		};
 
 
 		var template = '<div id="files-upload" ng-init="init()">' +
@@ -233,50 +256,16 @@ app.directive('filesUpload', ['$location','Item',
 								'<li ng-repeat="file in files" layout="column">' +
 									'<div layout="row">' + 
 										'<div flex="35" class="file-title">' +  
-											'<span ng-bind="file.f_name"></span>' + 
-											'<span ng-if="file.inner_file"> ({{file.inner_file}})</span>' + 
+											'<span ng-bind="file.f_name"></span><br/>' + 
+											'<a ng-click="selectInnerFileDialog($event,file)"><small ng-if="file.inner_file">Inner file: ({{file.inner_file}})</small></a>' + 
 										'</div>' +
 										'<div flex="5" ng-bind="file.file_type" class="file-type"></div>' +
 										'<div flex="10" class="file-size">{{file.size|filesize}}</div>' +
 										'<div flex="20" class="file-category" ng-init="assignDefaultCategory(file,categories)">' +
-											'<div class="select-menu-container" ng-class="{active: file.catToggleMenu}">' +
-												'<button class="toggle-select-menu" ng-click="toggleCategorySelectMenu(file)">' + 
-													'<span class="selected-category-name" ng-bind="file.category.category_name"></span>' +
-													'<span class="arrow"><span class="glyphicon glyphicon-triangle-bottom"></span></span>' +
-												'</button>' +
-												'<div class="select-menu">' +
-													'<ul class="select-options">' +
-														'<li ng-click="selectCategory(category,file)" ng-repeat="category in categories" ng-class="{selected: category.category_name == file.category.category_name}">{{category.category_name}}</li>' + 
-														'<li class="divider"></li>' + 
-														'<li class="new-category-form-container">' +
-															'<form name="newCategoryForm" layout="row">' +
-																'<input flex="80" class="form-control" type="text" ng-model="category_name" placeholder="Add New Category.."/>' +
-																'<button flex="20" ng-click="createCategory(category_name)">Add</button>' +
-															'</form>' +  
-														'</li>' + 
-													'</ul>' + 
-												'</div>' + 
-											'</div>' +
+											'<select class="form-control" ng-model="file.category" value="category.category_name" ng-options="category.category_name for category in categories"></select>' +
 										'</div>' +
-										'<div flex="20" class="file-subcategory">' +
-											'<div class="select-menu-container" ng-class="{active: file.subCatToggleMenu}">' +
-												'<button class="toggle-select-menu" ng-click="toggleSubCategorySelectMenu(file)">' + 
-													'<span class="selected-category-name" ng-bind="file.subcategory.category_name"></span>' +
-													'<span class="arrow"><span class="glyphicon glyphicon-triangle-bottom"></span></span>' +
-												'</button>' +
-												'<div class="select-menu">' +
-													'<ul class="select-options">' +
-														'<li ng-click="selectSubCategory(category,file)" ng-repeat="category in file.category.subcategories" ng-class="{selected: category.category_name == file.subcategory.category_name}">{{category.category_name}}</li>' + 
-														'<li class="divider"></li>' + 
-														'<li class="new-category-form-container">' +
-															'<form name="newCategoryForm" layout="row">' +
-																'<input flex="80" class="form-control" type="text" ng-model="subcategory_name" placeholder="Add New Category.."/>' +
-																'<button flex="20" ng-click="createCategory(subcategory_name)">Add</button>' +
-															'</form>' +  
-														'</li>' + 
-													'</ul>' + 
-												'</div>' + 
-											'</div>' +
+										'<div flex="20" class="file-subcategory" ng-if="file.category">' +
+											'<select class="form-control" ng-model="file.subcategory" value="subcategory.category_name" ng-options="subcategory.category_name for subcategory in file.category.subcategories"></select>' +
 										'</div>' +
 										'<div flex="5" class="file-actions">' +
 											'<span ng-if="file.state === \'pending\'" class="glyphicon glyphicon-option-horizontal"></span>' +

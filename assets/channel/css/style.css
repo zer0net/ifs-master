@@ -1386,3 +1386,7 @@ th {
   margin-right: 10px;
 }
 /* /STYLE EXTRA */
+.select-inner-file-dialog .file-item {
+  width: 33%;
+  float: left;
+}
