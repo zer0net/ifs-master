@@ -6,7 +6,7 @@ app.directive('categories', [
 
 			// get categories
 			$scope.getCategories = function(){
-				var query = ["SELECT * FROM category WHERE category_parent=0 ORDER BY date_added"];
+				var query = ["SELECT * FROM category WHERE category_parent=0 AND visible=1 ORDER BY date_added"];
 				Page.cmd("dbQuery", query, function(categories) {
 					$scope.categories = categories;
 					$scope.categories.forEach(function(category,index){
@@ -18,7 +18,7 @@ app.directive('categories', [
 
 			// get sub categories
 			$scope.getSubcategories = function(category){
-				var query = ["SELECT * FROM category WHERE category_parent='"+category.category_id+"' ORDER BY date_added"];
+				var query = ["SELECT * FROM category WHERE category_parent='"+category.category_id+"' AND visible=1 ORDER BY date_added"];
 				Page.cmd("dbQuery", query, function(subcategories) {
 					category.subcategories = subcategories;
 					$scope.$apply();
