@@ -199,7 +199,14 @@
 	}
 
 	.container {
-    	max-width: 100%;		
+    	max-width: 100%;
+    	overflow: inherit;
+	}
+
+	@media (min-width: 1200px) {
+		.container {
+		    width: 960px;
+		}
 	}
 
 	.nav , .pagination, .carousel, .panel-title { 
@@ -432,11 +439,15 @@
 
 	div[type="pills"] {
 		ul.nav-pills {
-		    float: left;
-		    width: 15%;
+			position: absolute;
+			left: 0;
+			top: 0;
+		    width: 150px;
+		    margin-left: -150px;
+		    z-index: 1;
 		}
 		.tab-content {
-			width: 85%;
+			width: 100%;
 			float: left;
 		}
 	}
@@ -448,7 +459,7 @@
 		.item-list-section {
 			margin-bottom: 20px;
 		    margin-top: 0px !important;
-		    padding: 0 0 0 8px;			
+		    padding: 0;			
 			background-color: transparent;
 
 			h2 {

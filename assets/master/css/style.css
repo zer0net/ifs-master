@@ -192,6 +192,12 @@ section.container hr.divider {
 }
 .container {
   max-width: 100%;
+  overflow: inherit;
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 960px;
+  }
 }
 .nav a,
 .pagination a,
@@ -396,11 +402,15 @@ main {
   width: 100%;
 }
 div[type="pills"] ul.nav-pills {
-  float: left;
-  width: 15%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 150px;
+  margin-left: -150px;
+  z-index: 1;
 }
 div[type="pills"] .tab-content {
-  width: 85%;
+  width: 100%;
   float: left;
 }
 /* /home */
@@ -408,7 +418,7 @@ div[type="pills"] .tab-content {
 .item-list-section {
   margin-bottom: 20px;
   margin-top: 0px !important;
-  padding: 0 0 0 8px;
+  padding: 0;
   background-color: transparent;
 }
 .item-list-section h2 {
