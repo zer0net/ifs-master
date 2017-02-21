@@ -34,7 +34,7 @@
                 ["category_name", "TEXT"],
                 ["category_parent", "TEXT"],
                 ["date_added", "INTEGER"],
-                ["hide", "INTEGER"],
+                ["visible", "INTEGER"],
                 ["json_id", "INTEGER REFERENCES json (json_id)"]
             ],
             "indexes": ["CREATE UNIQUE INDEX category_key ON category(json_id, date_added)"],
