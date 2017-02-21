@@ -6,29 +6,39 @@ app.directive('categories', [
 
 			// get categories
 			$scope.getCategories = function(){
-				var query = ["SELECT * FROM category WHERE category_parent=0 AND visible=1 ORDER BY date_added"];
-				Page.cmd("dbQuery", query, function(categories) {
-					$scope.categories = categories;
-					$scope.categories.forEach(function(category,index){
-						$scope.getSubcategories(category);
+				var inner_path = "content/categories.json";			
+				Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(catJson) {
+					catJson = JSON.parse(catJson);
+					var categories = [];
+					catJson.categories.forEach(function(category,index){
+						if (category.category_parent === 0){
+							category.subcategories = $scope.getSubcategories(category,catJson.categories);
+							categories.push(category);
+						}
 					});
+					$scope.categories = categories;
 					$scope.$apply();
 				});
 			};
 
 			// get sub categories
-			$scope.getSubcategories = function(category){
-				var query = ["SELECT * FROM category WHERE category_parent='"+category.category_id+"' AND visible=1 ORDER BY date_added"];
-				Page.cmd("dbQuery", query, function(subcategories) {
-					category.subcategories = subcategories;
-					$scope.$apply();
+			$scope.getSubcategories = function(category,categories){
+				var subcategories = [];
+				categories.forEach(function(cat,index){
+					console.log(index);
+					if (parseInt(cat.category_parent) === category.category_id){
+						console.log('hi');
+						subcategories.push(cat);
+					}
 				});
+				console.log(subcategories);
+				return subcategories;
 			};
 
 			// create category
 			$scope.createCategory = function(category_name,parent){
 				if (category_name && category_name.length > 2){
-					// get user's comment.json
+					// get user's categories.json
 					var inner_path = "data/users/"+Page.site_info.auth_address+"/category.json";			
 					Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(data) {
 						// data file
