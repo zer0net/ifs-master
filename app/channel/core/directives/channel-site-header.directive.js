@@ -149,10 +149,10 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 
 		// site header template
 			
-		var template = 	'<div class="wrapper" style="height:40px;background-color:#000;">'+
+		var template = 	'<div class="wrapper channel-menu">'+
 							'<div class="container-fluid select-channel">' +
 										'<label>Select channel: </label>' +											
-										'<select class="form-control" ng-model="site" value="site.address" ng-options="site.address for site in u_sites" ng-change="onSelectSite(site)"></select>' +
+										'<select class="form-control" ng-model="site" value="site.address" ng-options="site.option_label for site in u_sites" ng-change="onSelectSite(site)"></select>' +
 							'</div>' +
 						'</div>'+
 						'<md-toolbar ng-init="init()" ng-if="site" layout-padding class="md-hue-2 header" layout="row">' +
@@ -160,7 +160,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 								'<figure class="logo"><img ng-if="chJson.channel.img" ng-src="/{{page.site_info.address}}/merged-{{merger_name}}/{{site.address}}/{{chJson.channel.img ? \'uploads/images/\'+chJson.channel.img : \'../assets/channel/img/x-avatar.png\'}}"/></figure>' +
 								'<div class="site-title">' + 
 									'<h3>' + 
-										'<a target="_blank" href="/{{page.site_info.address}}/user/index.html?channel={{site.address}}">File Hub : {{contentJson.title}} </a>' + 
+										'<a target="_blank" href="/{{page.site_info.address}}/user/index.html?channel={{site.address}}"> {{contentJson.title}} </a>' + 
 										'<small>' + 
 											'<a ng-click="openChannelEditDialog(chJson)">' + 
 												'<span class="glyphicon glyphicon-pencil"></span>' + 
