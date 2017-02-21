@@ -5,9 +5,6 @@
     More info at: http://lesselements.com
   ---------------------------------------------------*/
 /* MIXINS */
-/* /MIXINS */
-/* COLORS */
-/* /COLORS */
 /** GENERAL **/
 *:focus,
 *:hover {
@@ -1385,4 +1382,14 @@ th {
   height: 50px;
   margin-right: 10px;
 }
-/* /STYLE EXTRA */
+.select-channel label {
+  float: left;
+  display: block;
+  line-height: 30px;
+  margin-right: 10px;
+  text-transform: uppercase;
+  color: #ccc;
+}
+.select-channel select {
+  width: 350px;
+}

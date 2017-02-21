@@ -183,7 +183,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 										'<md-button ng-if="optionalHelp==true" class="md-primary md-raised edgePadding pull-left" ng-click="onRemoveOptionalHelp()">stop distribute all files</md-button>' +
 						        	'</li>' + 			
 						        	'<li>' +
-										'<md-button class="md-primary md-raised edgePadding pull-left"><a href="/{{page.site_info.address}}/user/upload.html">Upload</a></md-button>' + 				       
+										'<md-button class="md-primary md-raised edgePadding pull-left" href="/{{page.site_info.address}}/user/upload.html" >Upload</md-button>' + 				       
 						        	'</li>' + 
 						        	'<li>' +
 										'<md-button class="md-primary md-raised edgePadding pull-left" ng-click="onPublishSite()">{{publishButtonStatus}}</md-button>' + 				       
