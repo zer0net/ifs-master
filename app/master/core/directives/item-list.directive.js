@@ -6,7 +6,6 @@ app.directive('itemList', ['$rootScope',
 
 			// init item list all
 			$scope.initItemListAll = function(items) {
-				console.log(items);
 				// reset
 				$scope.list_items = items;
 				$scope.list_type = 'all';				
@@ -27,6 +26,27 @@ app.directive('itemList', ['$rootScope',
 				if ($scope.file_types_items[$scope.file_type]){
 					$scope.list_items = $scope.file_types_items[$scope.file_type];
 					$scope.list_type = 'by file type';
+					// paging object
+				    $scope.paging = {
+				        totalItems: $scope.list_items.length,
+				        numPages: Math.ceil( $scope.list_items.length / $scope.config.listing.items_per_page),
+				        currentPage: 1,
+				    };
+				    // start from var for item list paging
+				    $scope.paging.startFrom = $scope.config.listing.items_per_page * ($scope.paging.currentPage - 1);
+				}
+			};
+
+
+			
+			// init item list by media type
+			$scope.initItemListByMediaType = function(media_type) {
+				console.log(media_type);
+				// reset
+				$scope.media_type = media_type;
+				if ($scope.media_types_items[$scope.media_type]){
+					$scope.list_items = $scope.media_types_items[$scope.media_type];
+					$scope.list_type = 'by media type';
 					// paging object
 				    $scope.paging = {
 				        totalItems: $scope.list_items.length,

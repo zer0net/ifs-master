@@ -62,16 +62,17 @@
 			"visible":1,
 			"subcategories":[
 				{
-					"category_name": "classics",
-					"date_added": 1485520192892,
-					"category_parent": "4",
-					"category_id": 15,
-					"visible":1			
-				},{
 					"category_name": "misc",
 					"date_added": 1485454585326,
 					"category_parent": "4",
 					"category_id": 20,
+					"visible":1			
+				},
+				{
+					"category_name": "classics",
+					"date_added": 1485520192892,
+					"category_parent": "4",
+					"category_id": 15,
 					"visible":1			
 				}
 			]
@@ -84,16 +85,17 @@
 			"visible":1,
 			"subcategories":[
 				{
-					"category_name": "humor",
-					"date_added": 1485454585326,
-					"category_parent": "5",
-					"category_id": 11,
-					"visible":1			
-				},{
 					"category_name": "misc",
 					"date_added": 1485454585326,
 					"category_parent": "5",
 					"category_id": 18,
+					"visible":1			
+				},
+				{
+					"category_name": "humor",
+					"date_added": 1485454585326,
+					"category_parent": "5",
+					"category_id": 11,
 					"visible":1			
 				}
 			]
@@ -106,6 +108,13 @@
 			"visible":1,
 			"subcategories":[
 				{
+					"category_name": "misc",
+					"date_added": 1485528655543,
+					"category_parent": "6",
+					"category_id": 17,
+					"visible":1			
+				},
+				{
 					"category_name": "music",
 					"date_added": 1485519371225,
 					"category_parent": "6",
@@ -117,13 +126,6 @@
 					"category_parent": "6",
 					"category_id": 19,
 					"visible":1
-				},
-				{
-					"category_name": "misc",
-					"date_added": 1485528655543,
-					"category_parent": "6",
-					"category_id": 17,
-					"visible":1			
 				}
 			]
 		}

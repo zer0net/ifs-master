@@ -4,12 +4,20 @@ app.factory('Central', [
 
 		// render items by media type - games, videos, books etc'
 		Central.listItemsByMediaType = function(scope) {
+			// remove existing file types & file types items arrays
+			delete scope.media_types;
+			delete scope.media_types_items;
+			delete scope.channel_items;
+			// create file types array's container
+			scope.media_types = [];
+			scope.media_types_items = {};
 			// loop through every item in scope.items
 			scope.items.forEach(function(item,index) {
-				var media_type = item.media_type + 's';
-				if (!scope[media_type]) scope[media_type] = [];
-				scope[media_type].push(item);
+				if (scope.media_types.indexOf(item.media_type + 's') === -1) scope.media_types.push(item.media_type + 's');
+				if (!scope.media_types_items[item.media_type + 's']) scope.media_types_items[item.media_type + 's'] = [];
+				scope.media_types_items[item.media_type + 's'].push(item);
 			});
+			console.log(scope);
 			return scope;
 		};
 

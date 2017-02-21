@@ -142,6 +142,30 @@
                             </section>
                             <!-- /item listing by file type -->
 
+                            <!-- item listing by media type -->
+                            <section class="wrap-section main-listing-container" ng-if="config.listing.type === 'by media type'">
+                              <md-content class="container">
+                                <md-tabs class="no-animate" md-dynamic-height md-border-bottom>
+                                  <md-tab ng-if="!channel_items" label="All ({{items.length}})">
+                                    <md-content class="md-padding">
+                                        <item-list ng-init="initItemListAll(items)"></item-list> 
+                                    </md-content>
+                                  </md-tab>
+                                  <md-tab ng-if="channel_items" label="All ({{channel_items.length}})">
+                                    <md-content class="md-padding">
+                                        <item-list ng-init="initItemListAll(channel_items)"></item-list> 
+                                    </md-content>
+                                  </md-tab>
+                                  <md-tab ng-if="media_types_items" ng-repeat="media_type in media_types" label="{{media_type}} ({{media_types_items[media_type].length}})">
+                                    <md-content class="md-padding">
+                                        <item-list ng-init="initItemListByMediaType(media_type)"></item-list>          
+                                    </md-content>
+                                  </md-tab>
+                                </md-tabs>
+                              </md-content>
+                            </section>
+                            <!-- /item listing by media type -->
+
                         </section>
                         <!-- /MAIN -->
                     </div>

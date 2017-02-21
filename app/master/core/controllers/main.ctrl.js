@@ -12,7 +12,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 						'videos'
 					],
 					listing:{
-						type:'by file type',
+						type:'by media type',
 						items_per_page:10
 					}
 				}
