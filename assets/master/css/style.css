@@ -395,11 +395,20 @@ main {
   float: left;
   width: 100%;
 }
+div[type="pills"] ul.nav-pills {
+  float: left;
+  width: 15%;
+}
+div[type="pills"] .tab-content {
+  width: 85%;
+  float: left;
+}
 /* /home */
 /* item list */
 .item-list-section {
-  padding: 8px 0;
   margin-bottom: 20px;
+  margin-top: 0px !important;
+  padding: 0 0 0 8px;
   background-color: transparent;
 }
 .item-list-section h2 {
