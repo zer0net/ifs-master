@@ -9,30 +9,9 @@ app.directive('categories', [
 				var inner_path = "content/categories.json";			
 				Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(catJson) {
 					catJson = JSON.parse(catJson);
-					var categories = [];
-					catJson.categories.forEach(function(category,index){
-						if (category.category_parent === 0){
-							category.subcategories = $scope.getSubcategories(category,catJson.categories);
-							categories.push(category);
-						}
-					});
-					$scope.categories = categories;
+					$scope.categories = catJson.categories;
 					$scope.$apply();
 				});
-			};
-
-			// get sub categories
-			$scope.getSubcategories = function(category,categories){
-				var subcategories = [];
-				categories.forEach(function(cat,index){
-					console.log(index);
-					if (parseInt(cat.category_parent) === category.category_id){
-						console.log('hi');
-						subcategories.push(cat);
-					}
-				});
-				console.log(subcategories);
-				return subcategories;
 			};
 
 			// create category

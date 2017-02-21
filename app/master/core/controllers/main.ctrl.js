@@ -133,7 +133,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 						$scope.addSite(channel);
 					}
 				} else {
-					console.log('finished loading before');
 					$scope.finishLoadingChannels();
 				}
 			};

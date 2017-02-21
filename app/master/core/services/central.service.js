@@ -15,8 +15,6 @@ app.factory('Central', [
 
 		// render items by file type
 		Central.listItemsByFileType = function(scope,ppFilter) {
-			console.log('central listItemsByFileType');
-			console.log(scope.items);
 			// remove existing file types & file types items arrays
 			delete scope.file_types;
 			delete scope.file_types_items;
