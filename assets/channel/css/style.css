@@ -1385,6 +1385,23 @@ th {
   height: 50px;
   margin-right: 10px;
 }
+.select-channel label {
+  float: left;
+  display: block;
+  line-height: 30px;
+  margin-right: 10px;
+  text-transform: uppercase;
+  color: #ccc;
+}
+.select-channel select {
+  width: 500px;
+}
+.channel-menu {
+  height: 45px;
+  background-color: #000;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
 /* /STYLE EXTRA */
 .select-inner-file-dialog .file-item {
   width: 33%;

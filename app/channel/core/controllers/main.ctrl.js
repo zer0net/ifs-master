@@ -28,11 +28,13 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$sce','$location','$wi
 							$scope.sites.forEach(function(site,index){
 								if (site.address === channel.channel_address && site.settings.own === true){
 									if (!$scope.u_sites) $scope.u_sites = [];
+									// set u_sites option label in select options
+									site.option_label = site.address + " [" +site.content.title +"]";									
 									$scope.u_sites.push(site);
 								}
 							});
 						}
-					});
+					});					
 					// get channel data (default - first site in array)
 					if ($scope.u_sites) {
 						var path = $location.$$absUrl.split('/user/')[1].split('&')[0];

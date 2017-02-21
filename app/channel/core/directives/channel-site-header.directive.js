@@ -19,6 +19,10 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 				$scope.publishButtonStatus = 'publish';
 			});
 
+			// on select site
+			$scope.onSelectSite = function(site){
+				$scope.getSiteFileList(site);
+			};
 
 			// multiple upload dialog
 			$scope.multipleUploadDialog = function(ev){
@@ -141,13 +145,22 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 
 		};
 
+		
+
 		// site header template
-		var template = 	'<md-toolbar ng-init="init()" ng-if="site" layout-padding class="md-hue-2 header" layout="row">' +
+			
+		var template = 	'<div class="wrapper channel-menu">'+
+							'<div class="container-fluid select-channel">' +
+										'<label>Select channel: </label>' +											
+										'<select class="form-control" ng-model="site" value="site.address" ng-options="site.option_label for site in u_sites" ng-change="onSelectSite(site)"></select>' +
+							'</div>' +
+						'</div>'+
+						'<md-toolbar ng-init="init()" ng-if="site" layout-padding class="md-hue-2 header" layout="row">' +
 							'<div class="col-xs-5">' + 
 								'<figure class="logo"><img ng-if="chJson.channel.img" ng-src="/{{page.site_info.address}}/merged-{{merger_name}}/{{site.address}}/{{chJson.channel.img ? \'uploads/images/\'+chJson.channel.img : \'../assets/channel/img/x-avatar.png\'}}"/></figure>' +
 								'<div class="site-title">' + 
 									'<h3>' + 
-										'<a target="_blank" href="/{{page.site_info.address}}/user/index.html?channel={{site.address}}">File Hub : {{contentJson.title}} </a>' + 
+										'<a target="_blank" href="/{{page.site_info.address}}/user/index.html?channel={{site.address}}"> {{contentJson.title}} </a>' + 
 										'<small>' + 
 											'<a ng-click="openChannelEditDialog(chJson)">' + 
 												'<span class="glyphicon glyphicon-pencil"></span>' + 
@@ -170,7 +183,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 										'<md-button ng-if="optionalHelp==true" class="md-primary md-raised edgePadding pull-left" ng-click="onRemoveOptionalHelp()">stop distribute all files</md-button>' +
 						        	'</li>' + 			
 						        	'<li>' +
-										'<md-button class="md-primary md-raised edgePadding pull-left"><a href="/{{page.site_info.address}}/user/upload.html">Upload</a></md-button>' + 				       
+										'<md-button class="md-primary md-raised edgePadding pull-left" href="/{{page.site_info.address}}/user/upload.html" >Upload</md-button>' + 				       
 						        	'</li>' + 
 						        	'<li>' +
 										'<md-button class="md-primary md-raised edgePadding pull-left" ng-click="onPublishSite()">{{publishButtonStatus}}</md-button>' + 				       
@@ -178,7 +191,6 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 								'</ul>' + 
 					        '</div>' + 
 						'</md-toolbar>';
-
 		return {
 			restrict: 'AE',
 			replace:false,
