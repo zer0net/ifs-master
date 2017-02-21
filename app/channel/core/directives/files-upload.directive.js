@@ -139,8 +139,8 @@ app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
 			// check if file existing
 			$scope.ifFileExist = function(file){
 				var b = false;
-				for (var i = 0, len = $scope.chJson.games.length; i < len; i++) {
-				  if ($scope.chJson.games[i].file_name == file.name) {
+				for (var i = 0, len = $scope.chJson[file.media_type + 's'].length; i < len; i++) {
+				  if ($scope.chJson[file.media_type + 's'][i].file_name == file.name) {
 				    b = true;
 				    break;
 				  }				 
