@@ -49,12 +49,14 @@ app.factory('Item', [
 			categories.forEach(function(cat,index){
 				if (cat.category_name === catName){
 					file.category = cat;
-					if (subCatName !== ''){
+					if (subCatName){
 						file.category.subcategories.forEach(function(sub,index){
 							if (sub.category_name === subCatName){
 								file.subcategory = sub;
 							}
 						});
+					} else {
+						file.subcategory = file.category.subcategories[0];
 					}
 				}
 			});
