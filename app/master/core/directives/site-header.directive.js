@@ -49,14 +49,13 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope','$location',
 					    	  '<md-button class="md-icon-button" ng-click="hide()">'+
 					            '<span class="glyphicon glyphicon-remove"></span>'+
 					          '</md-button>'+
-						        '<h2>How to upload?</h2>' +
+						        '<h2>FAQ</h2>' +
 						        '<span flex></span>' +						        
 					    	'</div>' +
 					    '</md-toolbar>' +
 					    '<md-dialog-content >' +
-							'<ol style="padding: 8px 24px;"><li>click on button "new Filehub" below and confirm to create your filehub <br/><button  ng-click="handleCloneClick()"> new Filehub </button> </li>' +						
-							'<li>upload stuff on your newly created filehub</li>' +
-							'<li>click "Register" button on header to add your hub.</li><li>done!</li></ol>'+
+					    	'<p> comming soon ... '+
+					    	'<p><button  ng-click="handleCloneClick()"> new Channel </button> click on button to create new channel'+							
 					    '</md-dialog-content>' +
 					'</md-dialog>';
 				// show dialog
