@@ -153,7 +153,7 @@
                                         <item-list ng-init="initItemListAll(channel_items)"></item-list> 
                                     </uib-tab>
                                     <uib-tab index="$index + 1" ng-if="media_types_items" ng-repeat="media_type in media_types" heading="{{media_type}} ({{media_types_items[media_type].length}})">
-                                        <item-list ng-init="initItemListByMediaType(media_type)"></item-list>   
+                                        <item-list ng-init="initItemListByMediaType(media_type)"></item-list>
                                     </uib-tab>
                                   </uib-tabset>
                               </md-content>
