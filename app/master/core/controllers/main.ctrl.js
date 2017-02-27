@@ -5,25 +5,25 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// init
 			$scope.init = function(){
-				// site ready var to fix loading inconsistancies
-				$scope.site_ready = false;
-				// loading
-				$scope.showLoadingMessage('Loading');
-				// get site info
-				Page.cmd("siteInfo", {}, function(site_info) {			
-					// apply site info to Page obj
-					Page.site_info = site_info;
-					// page
-					$scope.page = Page;
-					// update site
-					Page.cmd('siteUpdate',{"address":$scope.page.site_info.address});
-					// get config
-					Page.cmd("fileGet",{"inner_path":"content/config.json"},function(data){
-						$scope.config = JSON.parse(data);
-						// get channels
-						$scope.getMergerPermission();	
-					});
-		    	});
+					// site ready var to fix loading inconsistancies
+					$scope.site_ready = false;
+					// loading
+					$scope.showLoadingMessage('Loading');
+					// get site info
+					Page.cmd("siteInfo", {}, function(site_info) {			
+						// apply site info to Page obj
+						Page.site_info = site_info;
+						// page
+						$scope.page = Page;
+						// update site
+						Page.cmd('siteUpdate',{"address":$scope.page.site_info.address});
+						// get config
+						Page.cmd("fileGet",{"inner_path":"content/config.json"},function(data){
+							$scope.config = JSON.parse(data);
+							// get channels
+							$scope.getMergerPermission();	
+						});
+			    	});
 			};
 
 			// get merger site permission
@@ -32,36 +32,59 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    	if (Page.site_info.settings.permissions.indexOf("Merger:"+$scope.page.site_info.content.merger_name) > -1){
 		    		$scope.$apply(function(){
 		    			// get merged sites
-		    			$scope.getClusters();
+		    			$scope.getMergerSites();
 		    		});
 		    	} else {
 		    		// if not, ask user for permission
 					Page.cmd("wrapperPermissionAdd", "Merger:"+$scope.page.site_info.content.merger_name, function() {
 						$scope.$apply(function(){
 			    			// get merged sites
-			    			$scope.getClusters();
+			    			$scope.getMergerSites();
 						});
 					});
 		    	}
-			};  
+			};
+
+			// get merged sites
+			$scope.getMergerSites = function(){
+				Page.cmd("mergerSiteList", {query_site_info: true}, function(sites) {						
+					// for each site in merger site list
+					for (var site in sites) {
+						if (!$scope.sites) $scope.sites = [];
+						$scope.sites.push(site);
+					}
+					$scope.getClusters();
+				});	
+			};
 
 		    // get clusters
 		    $scope.getClusters = function(){
 				Page.cmd("fileGet",{"inner_path":"content/clusters.json"},function(data){
 					data = JSON.parse(data);
 					$scope.clusters = data.clusters;
-					/*$scope.clusters.forEach(function(cluster,index){
-						$scope.getClusterChannels(cluster);
-					});*/
-					$scope.getChannels();
+					$scope.clIndex = 0;
+					$scope.varifyClusters();
+					// $scope.getChannels();
 				});
 		    };
 
-		    // get cluster channels
-		    $scope.getClusterChannels = function(cluster){
-		    	Page.cmd("fileQuery",["merged-IFS/"+cluster.cluster_id+"/data/users/*/channels.json", ""],function(fileQuery){
-		    		console.log(fileQuery);
-		    	});
+		    // varify cluster
+		    $scope.varifyClusters = function(){
+		    	if ($scope.clIndex === $scope.clusters.length){
+					if ($scope.sites.indexOf($scope.clusters[$scope.clIndex].cluster_id) > -1){
+						$scope.clIndex += 1;
+						$scope.varifyClusters();
+						console.log('ok');
+					} else {
+						Page.cmd("mergerSiteAdd",{"addresses":$scope.clusters[$scope.clIndex].cluster_id},function(data){
+							console.log('got cluster');
+							$scope.cIndex += 1;
+							$scope.varifyClusters();
+						});
+					}
+		    	} else {
+		    		$scope.getChannels();
+		    	}
 		    };
 
 			// get channels
