@@ -1,5 +1,6 @@
 data/*
-content/*
+content/clusters.json
+content/config.json
 !data/users/content.json
 content.json
 data/ifs.db
