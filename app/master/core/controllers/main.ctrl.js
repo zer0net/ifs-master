@@ -58,6 +58,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    // get clusters
 		    $scope.getClusters = function(){
 				Page.cmd("fileGet",{"inner_path":"content/clusters.json"},function(data){
+					console.log(data);
 					data = JSON.parse(data);
 					$scope.clusters = data.clusters;
 					$scope.getChannels();
@@ -71,13 +72,15 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				// get channels				
 				var query = ["SELECT * FROM channel WHERE cluster_id IS NOT NULL ORDER BY date_added"];
 				Page.cmd("dbQuery", query, function(channels) {	
+					console.log(channels);
 					if (channels.length > 0){
 						$scope.channels = channels;
 						$scope.cIndex = 0;
 						$scope.getChannel($scope.channels[$scope.cIndex]);
 					} else {
-						$scope.showLoadingMessage('No Channels!'); 
-						// $scope.finishedLoading();
+						$scope.showLoadingMessage('No Channels!');
+						$scope.finishedLoading();
+						$scope.$apply();
 					}
 				});
 			};
