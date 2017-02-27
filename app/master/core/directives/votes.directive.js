@@ -12,7 +12,7 @@ app.directive('votes', ['$rootScope','$location',
 				item.downVotes = 0;
 				item.upVotes = 0;
 				// get votes 				
-				var query = ["SELECT * FROM vote WHERE item_id="+item[item.item_id_name]+" AND channel='"+item.channel.address+"'"];				
+				var query = ["SELECT * FROM vote WHERE item_id='"+item.item_id+"'"];				
 				Page.cmd("dbQuery", query, function(votes) {
 					// determine if item is upvoted / downvoted by user
 					item.upVotes = 0;
@@ -79,16 +79,12 @@ app.directive('votes', ['$rootScope','$location',
 					else { data = {"next_vote_id":1,"vote":[]}; }
 					// vote
 					var vote = {
-						channel:item.channel.address,
+						item_id:item.item_id,
 						vote:1,
+						user_id:$scope.page.site_info.cert_user_id,
 						date_added:+(new Date)
 					};
-					// vote item id
-					vote.item_id = item[$scope.item_id_name];
-					// user
-					if ($scope.user) { vote.user_id = $scope.user; } 
-					else { vote.user_id = Page.site_info.auth_address; }
-					// comment id
+					// vote id
 					vote.vote_id = data.next_vote_id;
 					data.next_vote_id += 1;
 					// push vote to votes.json
@@ -120,18 +116,14 @@ app.directive('votes', ['$rootScope','$location',
 					// data file
 					if (data) { data = JSON.parse(data); } 
 					else { data = {"next_vote_id":1,"vote":[]}; }
-					// comment
+					// vote
 					var vote = {
-						channel:item.channel.address,
+						item_id:item.item_id,
 						vote:0,
+						user_id:$scope.page.site_info.cert_user_id,
 						date_added:+(new Date)
 					};
-					// vote item id
-					vote.item_id = item[$scope.item_id_name];
-					// user
-					if ($scope.user) { vote.user_id = $scope.user; } 
-					else { vote.user_id = Page.site_info.auth_address; }
-					// comment id
+					// vote id
 					vote.vote_id = data.next_vote_id;
 					data.next_vote_id += 1;
 					// push vote to vote.json

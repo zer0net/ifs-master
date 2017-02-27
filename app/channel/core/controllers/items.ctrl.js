@@ -223,36 +223,21 @@
 			// delete item
 			$scope.deleteItem = function(item) {
 				// loading				
-				$scope.showLoadingMsg('deleting ' + item.media_type);
-				// prepare item
-				var media_type = item.media_type + 's';
-				var item_id_name = item.media_type + '_id';				
-				var file_name_field;
-				if (item.file_type === 'zip'){
-					file_name_field = 'zip_name';
-				} else {
-					file_name_field = 'file_name';
-				}
+				$scope.showLoadingMsg('deleting ' + item.content_type);
 				// get item index
 				var itemIndex;
-				$scope.chJson[media_type].forEach(function(itm,index) {
-					if (item[item_id_name] === itm[item_id_name]){
+				$scope.chJson.items[item.content_type + 's'].forEach(function(itm,index) {
+					if (item.item_id === itm.item_id){
 						itemIndex = index;
 					}
 				});
 				// remove item from channel.json
-				$scope.chJson[media_type].splice(itemIndex,1);
+				$scope.chJson.items[item.content_type + 's'].splice(itemIndex,1);
 				// delete item file
-				Page.cmd("fileDelete", ['merged-'+$scope.merger_name+'/'+$scope.site.address+'/'+item.path], function(res) {	
+				var inner_path = 'merged-IFS/'+$scope.channel.cluster_id+'/data/users/'+$scope.page.site_info.auth_address+'/'+item.file_name;
+				Page.cmd("fileDelete", [inner_path], function(res) {	
 					console.log(res);
-					// delete item img
-					if (item.imgPath){
-						Page.cmd("fileDelete", [item.imgPath], function(res) {
-							$scope.updateChannelJson();
-						});
-					} else {
-						$scope.updateChannelJson();
-					}
+					$scope.updateChannelJson();
 				});
 			};
 

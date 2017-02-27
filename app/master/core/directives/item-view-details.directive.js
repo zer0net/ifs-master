@@ -15,9 +15,9 @@ app.directive('itemViewDetails', ['$location','$rootScope',
 		var template =  '<section ng-if="item" class="section md-whiteframe-1dp item-info">' +
 							'<div class="section-header item-info-header">' +
 								'<h3 ng-bind="item.title"></h3>' +
-								'<a href="/{{page.site_info.address}}/index.html?channel={{item.channel.address}}">{{item.channel.content.title}}</a>' +
+								'<a href="/{{page.site_info.address}}/index.html?channel={{item.channel.channel_address}}">{{item.channel.channel_name}}</a>' +
 								'<div class="item-views">' +
-									'<span>{{item.site_file.peer}} Peers </span>' +
+									'<span>{{item.peer}} Peers </span>' +
 								'</div>' +
 							'</div>' +
 							'<hr/>' +

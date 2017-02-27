@@ -4,14 +4,14 @@ app.directive('atariEmulator', ['$location','$timeout',
 		var controller = function($scope,$element) {
 			console.log('atari emulator controller');
 			// init atari emulator
-			$scope.initAtariEmulator = function(game){
-				if (game){
-					$scope.game = game;
-					$scope.file = '/'+Page.site_info.address+'/merged-'+$scope.merger_name+'/'+$scope.game.channel + '/' + $scope.game.path;
-				} else {
-					$scope.file = '/'+Page.site_info.address+'/merged-'+$scope.merger_name+'/'+$scope.game.channel.address + '/' + $scope.game.path;
-				}
+			$scope.initAtariEmulator = function(item){
+
+				// nes file url
+				if (item) { $scope.item = item; }
+				$scope.file = "/"+$scope.page.site_info.address+"/merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.item.channel.cluster_id+"/data/users/"+$scope.item.channel.user_id+"/"+$scope.item.file_name;
+
 				$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/games/javatari/javatari.js', 'text/javascript', 'utf-8');
+
 				Javatari.ROM_AUTO_LOAD_URL = $scope.file;
 				Javatari.IMAGES_PATH = window.Javatari_IMAGES_PATH || '/' + $scope.page.site_info.address+'/assets/lib/games/javatari/';
 				Javatari.start();

@@ -4,16 +4,10 @@ app.directive('nesEmulator', ['$location','$rootScope','$timeout',
 		var controller = function($scope,$element) {
 
 			// init nes emulator
-			$scope.initNesEmulator = function(game){
-				// render nes url
-				var nesFile;
-				if (game) { 
-					$scope.game = game;
-					nesFile = "/"+$scope.site_address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel+"/"+$scope.game.path;
-				} else {
-					nesFile = "/"+$scope.site_address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/"+$scope.game.path;
-				}
-
+			$scope.initNesEmulator = function(item){
+				// nes file url
+				if (item) { $scope.item = item; }
+				var nesFile = "/"+$scope.page.site_info.address+"/merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.item.channel.cluster_id+"/data/users/"+$scope.item.channel.user_id+"/"+$scope.item.file_name;
 				// load scripts 
 				$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/games/nes/lib/dynamicaudio-min.js', 'text/javascript', 'utf-8');
 				$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/games/nes/nes.js', 'text/javascript', 'utf-8');
@@ -36,7 +30,7 @@ app.directive('nesEmulator', ['$location','$rootScope','$timeout',
 			        // remove select options
 					nes.ui.romSelect.children().remove();
 					// create select option
-					$('<option value="'+nesFile+'">'+$scope.game.title+'</option>').appendTo(nes.ui.romSelect);
+					$('<option value="'+nesFile+'">'+$scope.item.title+'</option>').appendTo(nes.ui.romSelect);
 					// select rom
 					nes.ui.romSelect.val(nesFile);
 					// load nes

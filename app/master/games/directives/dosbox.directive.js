@@ -4,15 +4,10 @@ app.directive('dosbox', ['$location','$timeout',
 		var controller = function($scope,$element) {
 
 			// run dosbox
-			$scope.initDosBox = function(game){
+			$scope.initDosBox = function(item){
 				// render zip url
-				var zipUrl;
-				if (game) { 
-					$scope.game = game;
-					zipUrl = "/"+$scope.site_address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel+"/uploads/games/"+$scope.game.zip_name;
-				} else {
-					zipUrl = "/"+$scope.site_address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/uploads/games/"+$scope.game.zip_name;
-				}
+				if (item) { $scope.item = item; }
+				var zipUrl = "/"+$scope.page.site_info.address+"/merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.item.channel.cluster_id+"/data/users/"+$scope.item.channel.user_id+"/"+$scope.item.file_name;
 				// script url
 				$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/games/js-dos/js-dos.js', 'text/javascript', 'utf-8');
 				// dosbox size
@@ -26,13 +21,13 @@ app.directive('dosbox', ['$location','$timeout',
 						id: "dosbox",
 						onrun: function (dosbox, app) {
 							console.log("App '" + app + "' is runned");
-							console.log($scope.game.site_file);
+							console.log($scope.item);
 							$scope.emulator_status = 'Running';
 							$scope.$apply();
 						},
 						onload: function (dosbox) {
-							console.log($scope.game.title + ' running ...');
-							dosbox.run(zipUrl, "./"+$scope.game.file_name);
+							console.log($scope.item.title + ' running ...');
+							dosbox.run(zipUrl, "./"+$scope.item.inner_file);
 							$scope.emulator_status = 'Extracting ...';
 							$scope.$apply();
 						}
@@ -52,7 +47,7 @@ app.directive('dosbox', ['$location','$timeout',
 		var template = 	'<section id="dosbox-section-container">' +	
 							'<div id="dosbox-section" class="{{dosboxSize}} md-whiteframe-1dp">' +
 								'<style type="text/css">' +
-									'.dosbox-overlay {background-image: url("{{game.img}}");}' +
+									'.dosbox-overlay {background-image: url("{{item.img}}");}' +
 								'</style>' +
 								'<div id="dosbox"></div>' +
 								'<div ng-if="dosboxSize === \'full\'" class="dosbox-exit-fullscreen">' +

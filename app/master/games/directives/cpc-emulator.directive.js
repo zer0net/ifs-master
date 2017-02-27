@@ -5,14 +5,11 @@ app.directive('cpcEmulator', ['$location','$rootScope','$timeout',
 		var controller = function($scope,$element) {
 
 			// init cpc emulator
-			$scope.initCpcEmulator = function(game){
+			$scope.initCpcEmulator = function(item){
 				
-				if (game){
-					$scope.game = game;
-					$scope.file = '/'+Page.site_info.address+'/merged-'+$scope.merger_name+'/'+$scope.game.channel + '/' + $scope.game.path;
-				} else {
-					$scope.file = '/'+Page.site_info.address+'/merged-'+$scope.merger_name+'/'+$scope.game.channel.address + '/' + $scope.game.path;
-				}
+				// cpc file url
+				if (item) { $scope.item = item; }
+				$scope.file = "/"+$scope.page.site_info.address+"/merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.item.channel.cluster_id+"/data/users/"+$scope.item.channel.user_id+"/"+$scope.item.file_name;
 
 				$timeout(function () {
 					$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/cpcbox/jquery-1.8.3.min.js', 'text/javascript', 'utf-8');
@@ -140,7 +137,7 @@ app.directive('cpcEmulator', ['$location','$rootScope','$timeout',
 							'<div id="status">Paused</div>' +
 							'<div class="control-panel">' +
 								'<select id="snapshot" rows="1" autocomplete="off" value="{{file}}">' +
-									'<option value="{{file}}">{{game.title}}</option>' +
+									'<option value="{{file}}">{{item.title}}</option>' +
 								'</select>' +
 								'<div id="button-run" class="button-size1 disabled-button"><span class="guifx2">d </span> Resume</div>' +
 								'<div id="button-reset" title="Reset CPC" class="button-size1 disabled-button guifx2">q</div>' +

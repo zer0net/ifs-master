@@ -64,79 +64,35 @@ app.factory('Item', [
 		};
 
 		// create new item
-		Item.createNewItem = function(file,chJson,site){
+		Item.createNewItem = function(file,chJson,channel){
 
 			// render file name
-			var file_name = file.name.split(' ').join('_').normalize('NFKD').replace(/[\u0300-\u036F]/g, '').replace(/ß/g,"ss").split('.' + file.file_type)[0].replace(/[^\w\s]/gi, '_') + '.' + file.file_type;
+			var file_name = chJson.channel.channel_id + '__' + file.name.split(' ').join('_').normalize('NFKD').replace(/[\u0300-\u036F]/g, '').replace(/ß/g,"ss").split('.' + file.file_type)[0].replace(/[^\w\s]/gi, '_') + '.' + file.file_type;
+
 			// item obj
 			var item = {
 				"category":file.category.category_id,
 				"subcategory":file.subcategory.category_id,
 				"file_type":file.file_type,
-				"media_type":file.media_type,
-				"channel": site.address,
+				"file_name":file_name,
+				"file_size":file.size,
+				"content_type":file.media_type,
+				"channel": channel.channel_address,
 				"title": file.name.split('.'+file.file_type)[0],
-				"date_added": +(new Date),
-				"published":false
+				"date_added": +(new Date)
 			};
-
-			// render item
-			var item_id_name;
-			var item_file_name;
 			
-			// game
-			if (file.media_type === 'game') {
-				item_id_name = 'game_id';
-				item.file_size = file.size;
-				item.path = 'uploads/games/'+file_name;
-				if (file.file_type === 'zip'){
-					item.file_name = file.inner_file;
-					item.zip_size = file.size;
-					item_file_name = 'zip_name';							
-				} else {
-					item_file_name = 'file_name';
-				}
-			} 
-			// video
-			else if (file.media_type === 'video') {
-				item_id_name = 'video_id';
-				item.file_size = file.size;
-				item.path = 'uploads/videos/'+file_name;
-				item_file_name = 'file_name';
-			} 
-			// audio
-			else if (file.media_type === 'audio'){
-				item_id_name = 'audio_id';
-				item.file_size = file.size;
-				item.path = 'uploads/audios/'+file_name;						
-				item_file_name = 'file_name';
+			// if zip, assign selected inner file
+			if (item.file_type === 'zip'){
+				item.inner_file = file.inner_file;
 			}
-			// book
-			else if (file.media_type === 'book'){
-				item_id_name = 'book_id';
-				item.file_size = file.size;
-				item.path = 'uploads/books/' + file_name;
-				item_file_name = 'file_name';
-			} 
-			// image
-			else if (file.media_type === 'image'){
-				item_id_name = 'image_id';
-				item.file_size = file.size;
-				item.path = 'uploads/images/' + file_name;
-				item_file_name = 'file_name';
-			}		
 
-			// item file name
-			item[item_file_name] = file_name;
 			// item id
 			var next_item_id;
-			if (!chJson){
-				next_item_id = 1;
-			} else {
-				next_item_id = chJson.next_item_id;
-			}
-			item[item_id_name] = next_item_id;
-
+			if (!chJson){ next_item_id = 1; } 
+			else { next_item_id = chJson.next_item_id; }
+			item.item_id = chJson.channel.channel_address + '_' + next_item_id;
+			console.log(item);
 			return item;
 		};
 

@@ -21,75 +21,54 @@
 
 <body class="ng-cloak" ng-controller="MainCtrl" ng-init="init()">
 
-    <!-- loading -->
-    <div id="main-loading" layout="column" ng-show="loading" flex>
-        <div layout="column" flex="100" style="text-align:center;">
-            <span><b ng-bind="msg"></b></span>
-        </div>
-        <div layout="row" flex="100" layout-align="space-around">
-            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-        </div>
-    </div>
-    <!-- /loading -->
-
     <!-- wrapper -->
     <div id="wrapper" ng-class="{toggled:toggled}">
+        
         <!-- sidebar -->
         <sidebar></sidebar>
         <!-- /sidebar -->
+
         <!-- page Content -->
         <div id="page-content-wrapper" style="padding-right: 0;">
             <div class="container-fluid" style="padding-left: 0px; padding-right: 0;">
                 <div class="row">
-
                     <div class="col-lg-12">
 
-						<!-- SITE HEADER -->
+						<!-- site header -->
 						<site-header></site-header>
-						<!-- /SITE HEADER -->
+						<!-- /site header -->
 						
-						
+						<!-- user area -->
+						<section class="wrapper" id="user-channel-wrapper" ng-controller="ChannelMainCtrl" ng-init="init()">
 
-						<section class="wrapper" id="user-channel-wrapper" ng-if="!loading">
+						    <!-- loading -->
+						    <div id="main-loading" layout="column" ng-show="loading" flex>
+						        <div layout="column" flex="100" style="text-align:center;">
+						            <span><b ng-bind="msg"></b></span>
+						        </div>
+						        <div layout="row" flex="100" layout-align="space-around">
+						            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+						        </div>
+						    </div>
+						    <!-- /loading -->
 
-							<div layout="column" ng-show="loading" flex>
-								<div layout="column" flex="100" style="text-align:center;">
-									<span><b ng-bind="msg"></b></span>
-								</div>
-								<div layout="row" flex="100" layout-align="space-around">
-									<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-								</div>
-							</div>
+							<!-- channel site header -->
+							<channel-site-header ng-hide="loading" ng-if="channels"></channel-site-header>
+							<!-- /channel site  header -->
 
-							<section ng-if="channels" ng-hide="loading" class="wrapper" id="user-channel-wrapper" ng-controller="ChannelMainCtrl" ng-init="init()">
+							<!-- channel site main  -->
+							<section ng-hide="loading" ng-if="channels" ng-controller="ItemsCtrl" layout="row" class="container">
 
+							    <md-content ng-if="chJson" ng-hide="loading" flex layout-padding class="main-content">
+									<!-- file list -->
+									<file-list ng-if="ch_files.total > 0"></file-list>
+									<!-- files list -->
+									<p ng-if="ch_files.total === 0">
+										no files found, <a href="/{{page.site_info.address}}/user/upload.html{{url_suffix}}">upload something!</a>
+									</p>
+							    </md-content>
 
-								<!-- CHANNEL HEADER -->
-								<channel-site-header ng-if="u_sites"></channel-site-header>
-								<!-- /CHANNEL HEADER -->
-
-								<section ng-if="u_sites" ng-controller="ItemsCtrl" layout="row" class="container">
-
-							    	<!-- loading -->
-									<div layout="column" ng-show="loading" flex="100">
-										<div layout="column" flex="100" style="text-align:center;">
-											<span ng-hide="pendingItems"><b ng-bind="msg"></b></span>
-										</div>
-										<div layout="row" flex="100" layout-align="space-around">
-											<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-										</div>
-									</div>
-									<!-- /loading -->
-
-								    <!-- MAIN -->
-								    <md-content ng-if="chJson" ng-hide="loading" flex layout-padding class="main-content">
-										<file-list></file-list>
-								    </md-content>
-								    <!-- /MAIN -->
-
-								</section>
-							
-			                    <div  ng-if="no_sites">
+			                    <div ng-if="!chJson">
 				                    <p style="text-align: center; margin-top: 51px;">
 										You dont seem to have any account registered yet.<br/>
 										If you like to join, please read our FAQ
@@ -97,11 +76,12 @@
 			                    </div>
 
 							</section>
+							<!-- channel site main  -->
 
 						</section>
+						<!-- /user area -->
 
                     </div>
-
                 </div>
             </div>
         </div>
@@ -151,24 +131,26 @@
 		<script type="text/javascript" src="../assets/lib/videos/videogular-overlay-play/vg-overlay-play.js"></script>
 		<script type="text/javascript" src="../assets/lib/videos/videogular-poster/vg-poster.js"></script>
 
-		<!-- app -->
+		<!-- app (master) -->
 		<script type="text/javascript" src="../app/application.js"></script>		
 		<script type="text/javascript" src="../app/master/core/controllers/main.ctrl.js"></script>
 		<script type="text/javascript" src="../app/master/core/directives/categories.directive.js"></script>
 		<script type="text/javascript" src="../app/master/core/directives/sidebar.directive.js"></script>
 		<script type="text/javascript" src="../app/master/core/directives/site-header.directive.js"></script>
 		<script type="text/javascript" src="../app/master/core/directives/site-search.directive.js"></script>
-		<script type="text/javascript" src="../app/channel/core/controllers/main.ctrl.js"></script>
-		<script type="text/javascript" src="../app/channel/core/controllers/items.ctrl.js"></script>
-		<script type="text/javascript" src="../app/channel/core/directives/channel-site-header.directive.js"></script>
-		<script type="text/javascript" src="../app/channel/core/directives/my-channel.directive.js"></script>
-		<script type="text/javascript" src="../app/channel/core/directives/files-upload.directive.js"></script>
-		<script type="text/javascript" src="../app/channel/core/directives/dropzone.directive.js"></script>
-		<script type="text/javascript" src="../app/channel/core/directives/file-list.directive.js"></script>
-		<script type="text/javascript" src="../app/channel/core/filters/file-size.filter.js"></script>
 		<script type="text/javascript" src="../app/master/core/services/item.service.js"></script>
 		<script type="text/javascript" src="../app/master/core/services/channel.service.js"></script>
         <script type="text/javascript" src="../app/master/core/services/central.service.js"></script>
+
+		<!-- app (channel) -->
+		<script type="text/javascript" src="../app/channel/core/controllers/main.ctrl.js"></script>
+		<script type="text/javascript" src="../app/channel/core/controllers/items.ctrl.js"></script>
+		<script type="text/javascript" src="../app/channel/core/directives/channel-edit.directive.js"></script>
+		<script type="text/javascript" src="../app/channel/core/directives/channel-site-header.directive.js"></script>
+		<script type="text/javascript" src="../app/channel/core/directives/dropzone.directive.js"></script>
+		<script type="text/javascript" src="../app/channel/core/directives/file-list.directive.js"></script>
+		<script type="text/javascript" src="../app/channel/core/directives/files-upload.directive.js"></script>
+		<script type="text/javascript" src="../app/channel/core/filters/file-size.filter.js"></script>
 		
 	<!-- /JS -->  
 

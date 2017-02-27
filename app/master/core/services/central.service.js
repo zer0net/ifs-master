@@ -12,12 +12,12 @@ app.factory('Central', [
 			scope.media_types = [];
 			scope.media_types_items = {};
 			// loop through every item in scope.items
+			// TO DO - add channel filter!
 			scope.items.forEach(function(item,index) {
 				if (scope.media_types.indexOf(item.media_type + 's') === -1) scope.media_types.push(item.media_type + 's');
 				if (!scope.media_types_items[item.media_type + 's']) scope.media_types_items[item.media_type + 's'] = [];
 				scope.media_types_items[item.media_type + 's'].push(item);
 			});
-			console.log(scope);
 			return scope;
 		};
 
@@ -72,6 +72,20 @@ app.factory('Central', [
 				}
 			});
 			return scope;
+		};
+
+		// merge channel items to scope items
+		Central.mergeChannelItems = function(items,items_total,media_types,chJson){
+			for (var i in chJson.items){
+				if (!items[i]) items[i] = [];
+				if (media_types.indexOf(i) === -1) media_types.push(i);
+				items_total += chJson.items[i].length;
+				items[i] = items[i].concat(chJson.items[i]);
+				chJson.items[i].forEach(function(item,index){
+					item.channel = chJson.channel;
+				});
+			}
+			return items;
 		};
 
 		return Central;

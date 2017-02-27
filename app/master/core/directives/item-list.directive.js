@@ -6,8 +6,13 @@ app.directive('itemList', ['$rootScope',
 
 			// init item list all
 			$scope.initItemListAll = function(items) {
+				console.log(items);
 				// reset
-				$scope.list_items = items;
+				var list_items = [];
+				for (var i in items){
+					list_items = list_items.concat(items[i]);
+				}
+				$scope.list_items = list_items;
 				$scope.list_type = 'all';				
 				// paging object
 			    $scope.paging = {
@@ -41,11 +46,10 @@ app.directive('itemList', ['$rootScope',
 			
 			// init item list by media type
 			$scope.initItemListByMediaType = function(media_type) {
-				console.log(media_type);
 				// reset
 				$scope.media_type = media_type;
-				if ($scope.media_types_items[$scope.media_type]){
-					$scope.list_items = $scope.media_types_items[$scope.media_type];
+				if ($scope.items[$scope.media_type]){
+					$scope.list_items = $scope.items[$scope.media_type];
 					$scope.list_type = 'by media type';
 					// paging object
 				    $scope.paging = {
@@ -69,8 +73,7 @@ app.directive('itemList', ['$rootScope',
 
 			// render item 
 			$scope.renderItem = function(item) {
-				item.item_id_name = item.media_type + '_id';
-				item.view_url = '/' + $scope.page.site_info.address + '/view.html?type=' + item.media_type + '-c=' + item.channel.address + item.media_type.charAt(0) + '=' + item[item.item_id_name];
+				item.view_url = '/' + $scope.page.site_info.address + '/view.html?type=' + item.content_type + '-c=' + item.channel.channel_address + item.content_type.charAt(0) + '=' + item.item_id;
 				// if not video
 				if (!item.media_type === 'video'){
 					// if zip file
@@ -100,21 +103,21 @@ app.directive('itemList', ['$rootScope',
 		var template =  '<section class="item-list-section container">' +
 							'<md-grid-list ng-if="list_items" md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="5" sm-row-height="3:4" md-row-height="3:3" md-gutter="12px" md-gutter-gt-sm="8px">' +
 							    '<!-- grid item -->' +
-								'<md-grid-tile class="list-item" ng-repeat="item in list_items | orderBy:\'-date_added\' | startFrom : paging.startFrom | itemsPerPage:config.listing.items_per_page track by $index">' +
+								'<md-grid-tile class="list-item {{file_type}}-file" ng-repeat="item in list_items | orderBy:\'-date_added\' | startFrom : paging.startFrom">' + // | itemsPerPage:config.listing.items_per_page track by $index
 									'<div class="inner-wrap md-whiteframe-1dp" ng-init="renderItem(item)"  ng-class="chooseStyle(item.x_is_load)">' +
 										'<!-- img -->' +
-										'<div class="item-img md-whiteframe-1dp" style="background-position: center;background-repeat: no-repeat;background-size: {{item.imgSize}};background-image:url(\'{{item.img}}\');">' +
-											'<a href="{{item.view_url}}"></a>' +
+										'<div class="item-img md-whiteframe-1dp">' +
+											'<a style="background-position: center;background-repeat: no-repeat;background-size: {{item.imgSize}};background-image:url(\'{{item.img}}\');" href="/{{page.site_info.address}}/view.html?type={{item.content_type}}+id={{item.item_id}}"></a>' +
 										'</div>' +
 										'<!-- img -->' +
 										'<!-- info -->' +
 										'<md-grid-tile-footer>' +
-											'<h3><a href="{{item.view_url}}">{{item.title}}</a></h3>' +
+											'<h3><a href="/{{page.site_info.address}}/view.html?type={{item.content_type}}+id={{item.item_id}}">{{item.title}}</a></h3>' +
 											'<ul class="video-info">' +
-							    				'<li><span>{{item.channel.content.title}}</span></li>' +
-							    				'<li><span> {{item.x_peer}} peers</span></li>' +
+							    				'<li><span>{{item.channel.channel_name}}</span></li>' +
+							    				'<li><span> {{item.peers}} peers</span></li>' +
 							    				'<li class="votes-count" votes ng-init="getVotes(item)">' +
-													'<span class="up-vote">' +
+													'<span class="up-vote" ng-click="onUpVote(item)">' +
 														'<span class="glyphicon glyphicon-thumbs-up"></span>' +
 														'<span class="number">{{item.upVotes}}</span>' +
 													'</span>' +

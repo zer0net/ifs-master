@@ -3,8 +3,8 @@ app.directive('videoListSidebar', [
 
 		var template =	'<div class="md-whiteframe-1dp" layout="column">' +
 							'<ul>' +
-						    	'<li ng-repeat="vid in items | orderBy:\'-date_added\' track by $index" ng-if="vid.media_type === \'video\'">' +
-							    	'<a href="/{{site_address}}/view.html?type=video-c={{vid.channel.address}}v={{vid.video_id}}">{{vid.title}}</a>' +
+						    	'<li ng-repeat="video in items.videos | orderBy:\'-date_added\' track by $index">' +
+							    	'<a href="/{{site_address}}/view.html?type={{video.content_type}}+id={{video.item_id}}">{{video.title}}</a>' +
 							    	'<hr/>' +
 						    	'</li>' +
 							'</ul>' +

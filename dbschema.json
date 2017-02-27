@@ -45,10 +45,11 @@
                 ["channel_id", "TEXT"],
                 ["channel_address", "TEXT"],
                 ["channel_name", "TEXT"],
+                ["cluster_id", "TEXT"],
                 ["date_added", "INTEGER"],
-                ["user", "TEXT"],
-                ["owner","TEXT"],
                 ["hide", "INTEGER"],
+                ["user", "TEXT"],
+                ["user_id", "TEXT"],
                 ["json_id", "INTEGER REFERENCES json (json_id)"]
             ],
             "indexes": ["CREATE UNIQUE INDEX channel_key ON channel(json_id, date_added)"],

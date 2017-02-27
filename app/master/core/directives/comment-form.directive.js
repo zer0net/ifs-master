@@ -40,22 +40,20 @@ app.directive('commentForm', ['$rootScope','$sce','$location',
 			// post comment
 			$scope.postComment = function(comment,item){
 				// get user's comment.json
-				var inner_path = "data/users/"+Page.site_info.auth_address+"/comment.json";			
+				var inner_path = "data/users/"+$scope.page.site_info.auth_address+"/comment.json";			
 				Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(data) {
 					// data file
 					if (data) { data = JSON.parse(data); } 
 					else { data = {"next_comment_id":1,"comment":[]}; }
 					// comment
 					comment = {
-						channel:item.channel.address,
+						channel:item.channel.channel_address,
 						comment:comment,
+						user_id:$scope.page.site_info.cert_user_id,
 						date_added:+(new Date)
 					};
 					// item id
-					comment.item_id = item[$scope.item_id_name];
-					// user
-					if (Page.site_info.cert_user_id) { comment.user_id = Page.site_info.cert_user_id; } 
-					else { comment.user_id = Page.site_info.auth_address; }
+					comment.item_id = item.item_id;
 					// comment id
 					comment.comment_id = data.next_comment_id;
 					data.next_comment_id += 1;
@@ -69,9 +67,7 @@ app.directive('commentForm', ['$rootScope','$sce','$location',
 							// apply to scope
 							$scope.$apply(function() {
 								Page.cmd("wrapperNotification", ["done", "Comment posted!", 10000]);
-								$scope.user = Page.site_info.cert_user_id;
-								if (!$scope.comments) $scope.comments = [];
-								$scope.comments.push(comment);
+								$scope.pushComment(comment);
 								$scope.comment = "";
 							});
 						});

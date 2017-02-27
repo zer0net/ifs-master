@@ -48,25 +48,15 @@
 						<site-header></site-header>
 						<!-- /SITE HEADER -->
 						
-						<section class="wrapper" id="user-channel-wrapper" ng-if="!loading">
+						<section class="wrapper" id="user-channel-wrapper">
 
-							<div layout="column" ng-show="loading" flex>
-								<div layout="column" flex="100" style="text-align:center;">
-									<span><b ng-bind="msg"></b></span>
-								</div>
-								<div layout="row" flex="100" layout-align="space-around">
-									<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-								</div>
-							</div>
-
-							<section ng-if="channels" ng-hide="loading" class="wrapper" id="user-channel-wrapper" ng-controller="ChannelMainCtrl" ng-init="init()">
-
+							<section ng-hide="loading" class="wrapper" id="user-channel-wrapper" ng-controller="ChannelMainCtrl" ng-init="init()">
 
 								<!-- CHANNEL HEADER -->
-								<channel-site-header ng-if="u_sites"></channel-site-header>
+								<channel-site-header ng-if="channels"></channel-site-header>
 								<!-- /CHANNEL HEADER -->
 
-								<section ng-if="u_sites" ng-controller="ItemsCtrl" layout="row" class="container">
+								<section ng-if="channels" ng-controller="ItemsCtrl" layout="row" class="container">
 
 								    <!-- MAIN -->
 								    <md-content ng-if="chJson" ng-hide="loading" flex layout-padding class="main-content">
@@ -76,9 +66,9 @@
 
 								</section>
 							
-			                    <div  ng-if="no_sites">
+			                    <div ng-if="!channels">
 				                    <p style="text-align: center; margin-top: 51px;">
-										You dont seem to have any account registered yet.<br/>
+										You dont seem to have any channel registered yet.<br/>
 										If you like to join, please read our FAQ
 				                    </p>
 			                    </div>

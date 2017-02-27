@@ -6,70 +6,23 @@ app.directive('itemView', [
 
 			// init item view
 			$scope.initItemView = function(){
-				// item type & id name
-				$scope.item_type = window.location.href.split('&')[0].split('type=')[1].split('-')[0];
-				$scope.item_id_name = $scope.item_type + '_id';
+				// item type & id 
+				$scope.item_type = window.location.href.split('&')[0].split('type=')[1].split('+id=')[0];
+				$scope.item_id = window.location.href.split('&')[0].split('type=')[1].split('+id=')[1];
 			};
 
 			// get item
 			$scope.getItem = function(){
-				// item type & id name
-				$scope.item_type = window.location.href.split('&')[0].split('type=')[1].split('-')[0];
-				$scope.item_id_name = $scope.item_type + '_id';
-				// get channels & item id from url
-				var urlLetterVar = $scope.getUrlLetterVariable($scope.item_type);
-				var channelId = window.location.href.split('&')[0].split('c=')[1].split(urlLetterVar + '=')[0];
-				var itemId = parseInt(window.location.href.split('&')[0].split(urlLetterVar + '=')[1].split('z')[0]);
-				// item media type
-				var item_media_type = $scope.item_type + 's';
 				// loop through games array
-				$scope.items.forEach(function(item,index){
+				$scope.items[$scope.item_type + 's'].forEach(function(item,index){
 					// if item id & channel exist in array
-					if (item[$scope.item_id_name] === itemId && item.channel.address === channelId){
-						// get site file info
-						$scope.getSiteFileInfo(item);
-					}
-				});
-
-			};
-
-			// get url letter variable
-			$scope.getUrlLetterVariable = function(item_type) {
-				var urlLetterVar;
-				if (item_type === 'game'){
-					urlLetterVar = 'g';
-				} else if (item_type === 'video'){
-					urlLetterVar = 'v';
-				} else if (item_type === 'audio'){
-					urlLetterVar = 'a';
-				} else if (item_type === 'book'){
-					urlLetterVar = 'b';
-				}
-				return urlLetterVar;
-			};
-
-			// get site file info
-			$scope.getSiteFileInfo = function(item){
-				// get optional files info
-				Page.cmd("optionalFileList", { address: item.channel.address, limit:2000 }, function(site_files){
-					// for each site file
-					site_files.forEach(function(site_file){
-						if (site_file.inner_path === item.path){
-							console.log('file found');
-							// apply site file info to game obj
-							item.site_file = site_file;
-							// apply game to scope
-							$scope[$scope.item_type] = item;
-							// apply scope
-							$scope.$apply();
-						}
-					});
-					// if file is not in site_files
-					if (!item.site_file){
-						$scope.$apply(function(){
-							$scope.error_msg = 'File not found. downloading ...';
+					if (item.item_id === $scope.item_id){
+						if (!item.is_downloaded){
+							$scope.error_msg = 'file not found! downloading ...';
 							$scope.forceFileDownload(item);
-						});
+						} else {
+							$scope.item = item;
+						}
 					}
 				});
 			};
@@ -77,18 +30,40 @@ app.directive('itemView', [
 			// force file download
 			$scope.forceFileDownload = function(item){
 				// xhttp get dos file
-				var inner_path = "merged-"+$scope.merger_name+"/"+item.channel.address+"/"+item.path;
+				var inner_path = "merged-"+$scope.page.site_info.content.merger_name+"/"+item.channel.cluster_id+"/data/users/"+item.channel.user_id+"/"+item.file_name;
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function() {
+					console.log(this);
 					if (this.readyState === 4){
 						console.log('file ready');
 						$scope.getSiteFileInfo(item);
+						$scope.item = item;
+						$scope.$apply();
 					} else {
 						console.log("file not found!");
 					}
 				};
 				xhttp.open("GET", inner_path, true);
 				xhttp.send();
+			};
+
+			// get site file info
+			$scope.getSiteFileInfo = function(item){
+				// get optional files info
+				Page.cmd("optionalFileList", { address: item.channel.cluster_id, limit:2000 }, function(site_files){
+					// for each site file
+					site_files.forEach(function(site_file){
+						if (site_file.inner_path === 'data/users/'+item.channel.user_id+'/'+item.file_name){
+							for (var attr in site_file){
+								// assign corresponding site_file attributes to item
+								item[attr] = site_file[attr]
+							}
+							$scope.item = item;
+							// apply scope
+							$scope.$apply();
+						}
+					});
+				});
 			};
 
 		};

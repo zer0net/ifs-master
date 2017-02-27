@@ -1,5 +1,5 @@
-app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMedia',
-	function($rootScope,$location,$mdDialog,$mdMedia) {
+app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMedia','$window',
+	function($rootScope,$location,$mdDialog,$mdMedia,$window) {
 
 		// site header controller
 		var controller = function($scope,$element) {
@@ -20,84 +20,27 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 			});
 
 			// on select site
-			$scope.onSelectSite = function(site){
-				$scope.getSiteFileList(site);
+			$scope.onSelectSite = function(channel){
+				$window.location.href = '/'+ $scope.page.site_info.address +'/user/index.html?cl='+channel.cluster_id + '+ch=' + channel.channel_address;
 			};
 
-			// multiple upload dialog
-			$scope.multipleUploadDialog = function(ev){
-				
-				$scope.status = '';
-				$scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
-			    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
-			    var dialogTemplate = '<md-dialog aria-label="Multiple File Upload" class="upload-dialog">' +
-									    '<md-toolbar>' +
-									    	'<div class="md-toolbar-tools">' +
-										        '<h2>Upload Files</h2>' +
-									    	'</div>' +
-									    '</md-toolbar>' +
-									    '<md-dialog-content layout-padding>' +
-											'<files-upload ng-init="init(items.chJson,items.site,items.merger_name)"></files-upload>'
-									    '</md-dialog-content>' +
-									'</md-dialog>';
-
-			    $mdDialog.show({
-					controller: DialogController,
-					template: dialogTemplate,
-					parent: angular.element(document.body),
-					targetEvent: ev,
-					clickOutsideToClose:true,
-					fullscreen: useFullScreen,
-					locals: {
-						items: {
-							chJson:$scope.chJson,
-							site:$scope.site,
-							merger_name:$scope.merger_name
-						}
-					}
-			    });
-
-			};
+			/** DIALOGS **/
 
 			// open edit channel dialog
 			$scope.openChannelEditDialog = function(ev) {
-
 				$scope.status = '';
 				$scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
 			    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
-
-			    var dialogTemplate = 
-			    '<md-dialog aria-label="Edit Channel">' +
-				    '<md-toolbar>' +
-				    	'<div class="md-toolbar-tools">' +
-					        '<h2>Edit Channel Info</h2>' +
-				    	'</div>' +
-				    '</md-toolbar>' +
-				    '<md-dialog-content layout-padding>' +
-						'<md-content my-channel ng-init="initChannelEdit(items.chJson,items.page,items.merger_name,items.site)">' +
-							'<div class="section-body" layout="row">' +
-								'<figure flex="20">' +
-									'<img style="width:100%;" ng-src="uploads/images/{{chJson.channel.img}}" ng-show="chJson.channel.img" id="image"/>' +
-									'<button dropzone="dropzoneConfig" ng-hide="imgSrc"> Drag and drop files here or click to upload</button>' +
-									'<img style="width:100%;" ng-src="{{imgSrc}}" ng-show="imgSrc" id="image"/>' +
-								'</figure>' +
-								'<div class="channel-info" flex="80" layout-padding>' +
-						        '<md-input-container class="md-block" flex-gt-sm>' +
-						          	'<label>Channel Name</label>' +
-									'<input type="text" ng-model="chJson.channel.name">' +
-						        '</md-input-container>' +
-						        '<md-input-container class="md-block" flex-gt-sm>' +
-						          	'<label>Channel Description</label>' +
-									'<textarea ng-model="chJson.channel.description"></textarea>' +
-						        '</md-input-container>' +
-								'<md-button class="md-primary md-raised edgePadding pull-right" ng-click="saveChannelDetails(chJson)">' +
-						        	'<label>Update Channel</label>' +
-						        '</md-button> ' +
-								'</div>' +
-							'</div>' +
-						'</md-content>' +
-				    '</md-dialog-content>' +
-				'</md-dialog>';
+			    var dialogTemplate = 	'<md-dialog aria-label="Edit Channel">' +
+										    '<md-toolbar>' +
+										    	'<div class="md-toolbar-tools">' +
+											        '<h2>Edit Channel Info</h2>' +
+										    	'</div>' +
+										    '</md-toolbar>' +
+										    '<md-dialog-content layout-padding>' +
+										    	'<channel-edit ng-init="initChannelEdit(items.chJson,items.page,items.merger_name,items.channel)"></channel-edit>' +
+										    '</md-dialog-content>' +
+										'</md-dialog>';
 
 			    $mdDialog.show({
 					controller: DialogController,
@@ -110,71 +53,43 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 						items:{
 							chJson:$scope.chJson,
 							page:$scope.page,
-							merger_name:$scope.merger_name,
-							site:$scope.site
+							merger_name:$scope.page.site_info.content.merger_name,
+							channel:$scope.channel
 						}
 					}
 			    });
-
 			};
 
 		};
 
-		// dialog controller
-		var DialogController = function($scope, $mdDialog,$rootScope,items) {
-
-			// items
-			$scope.items = items;
-
-			$scope.hide = function() {
-				$mdDialog.hide();
-			};
-			
-			$scope.cancel = function() {
-				$mdDialog.cancel();
-			};
-			
-			$scope.answer = function(answer) {
-				$mdDialog.hide(answer);
-			};
-			
-			$scope.updateChannelJson = function(){
-				$scope.hide();
-				$rootScope.$broadcast('onUpdateChannel');
-			};
-
-		};
-
-		
-
-		// site header template
-			
+		// site header template	
 		var template = 	'<div class="wrapper channel-menu">'+
 							'<div class="container-fluid select-channel">' +
-										'<label>Select channel: </label>' +											
-										'<select class="form-control" ng-model="site" value="site.address" ng-options="site.option_label for site in u_sites" ng-change="onSelectSite(site)"></select>' +
+								'<label>Select channel: </label>' +											
+								'<select class="form-control" ng-model="channel" value="channel.channel_address" ng-options="channel.option_label for channel in channels" ng-change="onSelectSite(channel)"></select>' +
 							'</div>' +
 						'</div>'+
-						'<md-toolbar ng-init="init()" ng-if="site" layout-padding class="md-hue-2 header" layout="row">' +
+						'<md-toolbar ng-init="init()" ng-if="channel" layout-padding class="md-hue-2 header" layout="row">' +
 							'<div class="col-xs-5">' + 
-								'<figure class="logo"><img ng-if="chJson.channel.img" ng-src="/{{page.site_info.address}}/merged-{{merger_name}}/{{site.address}}/{{chJson.channel.img ? \'uploads/images/\'+chJson.channel.img : \'../assets/channel/img/x-avatar.png\'}}"/></figure>' +
-								'<div class="site-title">' + 
-									'<h3>' + 
-										'<a target="_blank" href="/{{page.site_info.address}}/user/index.html?channel={{site.address}}"> {{contentJson.title}} </a>' + 
-										'<small>' + 
-											'<a ng-click="openChannelEditDialog(chJson)">' + 
-												'<span class="glyphicon glyphicon-pencil"></span>' + 
-											'</a>' + 
-										'</small>' + 
-									'</h3>' + 
-									'<a href="/{{site.address}}/"><small style="font-size: 10px;" ng-bind="site.address"></small></a>' +
+								'<div class="channel-header-top">' + 
+									'<figure class="logo">' + 
+										'<img ng-if="chJson.channel.logo" ng-src="/{{page.site_info.address}}/merged-IFS/{{channel.cluster_id}}/data/users/{{channel.user_id}}/{{chJson.channel.logo}}"/>' + 
+									'</figure>' +
+									'<div class="site-title">' + 
+										'<h3>' + 
+											'<a target="_blank" href="/{{page.site_info.address}}/user/index.html{{url_suffix}}"> {{channel.channel_name}} </a>' + 
+											'<small><a ng-click="openChannelEditDialog(chJson)"><span class="glyphicon glyphicon-pencil"></span></a></small>' + 
+										'</h3>' + 
+										'<a class="channel-address" href="/{{channel.channel_address}}/"><small ng-bind="channel.channel_address"></small></a>' +
+									'</div>' + 
+								'</div>' +
+								'<div class="channel-header-bottom">' + 
 									'<div class="sub-title">' + 
-										'<small>{{contentJson.description}}</small>' + 
-										'<small>Site : &nbsp;{{peers}} peers' +
-										' &nbsp; • &nbsp; Files &nbsp;  {{optionalFileList.length}} / {{fileTotalLength}} &nbsp;• &nbsp; Size : &nbsp;{{site.settings.optional_downloaded|filesize}} / {{site.settings.size_optional|filesize}} Total' +
+										'<small>' + 
+											'Site : &nbsp;{{cluster.peers}} peers &nbsp; • &nbsp; Files &nbsp;  {{ch_files.total_downloaded}} / {{ch_files.total}} Total &nbsp;• &nbsp; Size : &nbsp;{{ch_files.total_downloaded_size|filesize}} / {{ch_files.total_size|filesize}} Total' +
 										'</small>' + 
 									'</div>' + 
-								'</div>' + 
+								'</div>' +
 							'</div>' + 
 							'<div class="pull-right col-xs-7">' + 
 								'<ul>' + 		
@@ -183,7 +98,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 										'<md-button ng-if="optionalHelp==true" class="md-primary md-raised edgePadding pull-left" ng-click="onRemoveOptionalHelp()">stop distribute all files</md-button>' +
 						        	'</li>' + 			
 						        	'<li>' +
-										'<md-button class="md-primary md-raised edgePadding pull-left" href="/{{page.site_info.address}}/user/upload.html" >Upload</md-button>' + 				       
+										'<md-button class="md-primary md-raised edgePadding pull-left" href="/{{page.site_info.address}}/user/upload.html{{url_suffix}}" >Upload</md-button>' + 				       
 						        	'</li>' + 
 						        	'<li>' +
 										'<md-button class="md-primary md-raised edgePadding pull-left" ng-click="onPublishSite()">{{publishButtonStatus}}</md-button>' + 				       

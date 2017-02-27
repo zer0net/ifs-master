@@ -5,23 +5,24 @@ app.directive('videoPlayer', ['$sce','$timeout',
 		var controller = function($scope,$element) {
 
 		    // load video
-		    $scope.loadVideo = function(video){
+		    $scope.loadVideo = function(item){
 		    	
-		    	if (video.file_type === 'ogv'){
-		    		video.file_type = 'ogg';
+		    	if (item.file_type === 'ogv'){
+		    		item.file_type = 'ogg';
 		    	}
 
 		    	$scope.playerErrors = 0;
-		    	$scope.video = video;
+		    	$scope.item = item;
 		    	$scope.screenSize = 'normal';
+
 		    	if (!$scope.player){
 					$scope.player = {
 						preload: "none",
 						autoPlay:true,
 						sources: [
 							{
-								src:'merged-'+$scope.merger_name+'/' + video.channel.address + '/uploads/videos/' + video.file_name,
-								type:'video/'+video.file_type
+								src:'merged-'+$scope.page.site_info.content.merger_name+'/' + item.channel.cluster_id + '/data/users/' + item.channel.user_id + '/' + item.file_name,
+								type:'video/'+item.file_type
 							}
 						],
 						theme: "assets/lib/videos/videogular-themes-default/videogular.css"
@@ -59,7 +60,7 @@ app.directive('videoPlayer', ['$sce','$timeout',
 
 		};
 
-		var template =	'<section ng-init="loadVideo(video)">' +
+		var template =	'<section ng-init="loadVideo(item)">' +
 							'<videogular ng-if="player" class="md-whiteframe-1dp {{screenSize}}"' +
 								'vg-auto-play="player.autoPlay" ' +
 								'vg-player-ready="onPlayerReady($API)" ' +
@@ -73,7 +74,7 @@ app.directive('videoPlayer', ['$sce','$timeout',
 										'<vg-time-display>{{ currentTime | date:"mm:ss" }}</vg-time-display>' +
 										'<vg-scrub-bar>' +
 											'<vg-scrub-bar-buffer ng-if="!player.Buffer"></vg-scrub-bar-buffer>' +
-											'<div class="vg-scrub-bar-buffered" ng-if="player.Buffer" style="width:{{video.loadingPercent}}%;"></div>' +
+											'<div class="vg-scrub-bar-buffered" ng-if="player.Buffer" style="width:{{item.loadingPercent}}%;"></div>' +
 											'<vg-scrub-bar-current-time></vg-scrub-bar-current-time>' +
 										'</vg-scrub-bar>' +
 										'<vg-time-display>{{ timeLeft | date:"mm:ss" }}</vg-time-display>' +

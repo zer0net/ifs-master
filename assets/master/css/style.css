@@ -194,11 +194,6 @@ section.container hr.divider {
   max-width: 100%;
   overflow: inherit;
 }
-@media (min-width: 1200px) {
-  .container {
-    width: 960px;
-  }
-}
 .nav a,
 .pagination a,
 .carousel a,
@@ -389,6 +384,7 @@ main {
   background-clip: padding-box;
 }
 .main-listing-container .container {
+  width: 960px;
   background: transparent;
 }
 /** /TEMPLATE **/

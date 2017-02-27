@@ -130,23 +130,72 @@
 		padding: 4px;
 		min-height: 150px;
 
-		figure.logo {
-			background-image: url('../img/x-avatar.png');
-			background-size: contain;
-			width: 90px;
+		.channel-header-top {
+			width: 100%;
+			float: left;
+			padding-left: 110px;
+			position: relative;
 			height: 90px;
-			overflow: hidden;
-			border: 1px solid #dbdbdb;
-		    float: left;
-		    display: block;
-		    margin-right: 20px;
-		    margin-bottom: 10px;
-			.border-radius(100%,100%,100%,100%);
+			margin-bottom: 20px;
 
-			img {
-				width: 100%;
-				height: 100%;
+			figure.logo {
+				background-image: url('../img/x-avatar.png');
+				background-size: contain;
+				width: 90px;
+				height: 90px;
+				overflow: hidden;
+				border: 1px solid #dbdbdb;
+			    float: left;
+			    display: block;
+			    position: absolute;
+			    left: 0;
+			    top: 0;
+				.border-radius(100%,100%,100%,100%);
+
+				img {
+					width: 100%;
+					height: 100%;
+				}
 			}
+
+			.site-title {
+
+			   	h3 {
+			   		margin:0;
+				    padding: 0;
+				    float: left;
+				    width: 100%;
+				   
+				    small {
+				    	color:white;
+				    }
+			    }
+
+			    a.channel-address {
+				    float: left;
+				    display: block;
+				    width: 100%;
+				    height: 10px;
+				    line-height: 10px;	
+
+				    small {
+				    	font-size: 10px;
+				    }			    	
+			    }
+
+			}
+
+		}
+
+		.channel-header-bottom {
+		    div.sub-title {
+		    	small {
+		    		float: left;
+		    		width: 100%;
+		    		display: block;
+		    		font-size: 12px;
+		    	}
+		    }			
 		}
 
 		.how-to-btn {
@@ -171,30 +220,6 @@
 				width: 100%;
 				height: 100%;
 			}
-		}
-
-		.site-title {
-			
-			
-		    h3 {
-			   
-			    margin: 10px 0 0 0;
-			    padding: 0;
-			   
-			    small {
-			    	color:white;
-			    }
-		    }
-
-		    div.sub-title {
-		    	small {
-		    		float: left;
-		    		width: 100%;
-		    		display: block;
-		    		font-size: 12px;
-		    	}
-		    }
-
 		}
 
 		a {
@@ -1450,25 +1475,25 @@
 	    margin-right: 10px;
 	}
 
-	.select-channel label {
-	    float: left;
-	    display: block;
-	    line-height: 30px;
-	    margin-right: 10px;
-	    text-transform: uppercase;
-	    color:#ccc;
-	}
-	
-	.select-channel select {
-    	width: 500px;
-	}
+	.channel-menu {
+	    height: auto;
+	    background-color: #000;
+	    padding: 8px 18px;	
 
-	.channel-menu
-	{
-		height:45px;
-		background-color:#000;
-		padding-top: 5px;
-		padding-bottom: 5px;		
+		select {
+	    	width: auto;
+	    	float: left;
+		}
+		
+		label {
+		    float: left;
+		    display: block;
+		    line-height: 30px;
+		    margin-right: 10px;
+		    text-transform: uppercase;
+		    color:#ccc;
+		}
+
 	}
 /* /STYLE EXTRA */
 

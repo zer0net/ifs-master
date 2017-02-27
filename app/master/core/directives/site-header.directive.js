@@ -1,37 +1,12 @@
 app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope','$location',
 	function($mdDialog,$mdMedia,$rootScope,$location) {
 
-		// dialog controller
-		var DialogController= function($scope, $mdDialog,items) {
-			
-			// items
-			$scope.items = items;	
-			
-			// hide dialog		
-			$scope.hide = function() {
-				$mdDialog.hide();
-			};
-			
-			// cancel dialog
-			$scope.cancel = function() {
-				$mdDialog.cancel();
-			};
-
-			// handle clone click
-			$scope.handleCloneClick = function() {
-		    	$rootScope.$broadcast('onCloneFileHub');
-			};
-
-		};
-
 		// header directive controller
 		var controller = function($scope,$element) {
 
 			$scope.initHeader = function(){
 				if ($location.$$absUrl.indexOf('type') > -1){
-					$scope.media_type = $location.$$absUrl.split('?type=')[1].split('-c')[0] + 's';
-					console.log($scope.media_type);
-					console.log('hi');
+					$scope.media_type = $location.$$absUrl.split('?type=')[1].split('+')[0] + 's';
 				}
 			};
 
@@ -53,9 +28,9 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope','$location',
 						        '<span flex></span>' +						        
 					    	'</div>' +
 					    '</md-toolbar>' +
-					    '<md-dialog-content >' +
+					    '<md-dialog-content channel-register>' +
 					    	'<p> comming soon ... '+
-					    	'<p><button  ng-click="handleCloneClick()"> new Channel </button> click on button to create new channel'+							
+					    	'<p><button  ng-click="handleCloneClick(items.scope)"> new Channel </button> click on button to create new channel'+							
 					    '</md-dialog-content>' +
 					'</md-dialog>';
 				// show dialog
@@ -67,7 +42,9 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope','$location',
 					clickOutsideToClose:true,
 					fullscreen: true,
 					locals:{
-						items:null
+						items:{
+							scope:$scope
+						}
 					}		
 
 			    });
@@ -119,9 +96,32 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope','$location',
 
 		};
 
+		// dialog controller
+		var DialogController= function($scope, $mdDialog,items) {
+			
+			// items
+			$scope.items = items;	
+			
+			// hide dialog		
+			$scope.hide = function() {
+				$mdDialog.hide();
+			};
+			
+			// cancel dialog
+			$scope.cancel = function() {
+				$mdDialog.cancel();
+			};
+
+			// handle clone click
+			$scope.handleCloneClick = function() {
+		    	$rootScope.$broadcast('onCreateChannel',$scope.items.scope);
+			};
+
+		};
+
 		var template ='<nav class="navbar navbar-default navbar-fixed-top" id="navbar-fixed-top" ng-init="initHeader()">'+
   						'<div class="container-fluid" style="background-color:#041b2c">'+
-	  						'<div class="navbar-header"><span class="glyphicon glyphicon-menu-hamburger navbar-brand" id="menu-toggle" ng-click="toggleMenu($event)"></span> <a class="navbar-brand" href="/{{site_address}}">IFS - Intergalactic File Server</a><a class="navbar-brand" href="/{{page.site_info.address}}/index.html?media_type={{media_type}}" ng-if="media_type"><span>/ {{media_type}}</span></a></div>'+
+	  						'<div class="navbar-header"><span class="glyphicon glyphicon-menu-hamburger navbar-brand" id="menu-toggle" ng-click="toggleMenu($event)"></span> <a class="navbar-brand" href="/{{page.site_info.address}}">IFS - Intergalactic File Server</a><a class="navbar-brand" href="/{{page.site_info.address}}/index.html?media_type={{media_type}}" ng-if="media_type"><span>/ {{media_type}}</span></a></div>'+
 	  						'<div class="container">' + 
 		  						'<site-search ng-if="!loading"></site-search>' +
 		  						'<ul class="nav navbar-nav navbar-right">'+			  						

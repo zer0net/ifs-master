@@ -56,7 +56,6 @@ app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
 									f.name.indexOf(".EXE") > -1 || 
 									f.name.indexOf(".com") > -1 ||
 									f.name.indexOf(".exe") > -1){
-									console.log(file.inner_file);
 									// inner file
 									file.inner_file  = f.name;
 									$scope.$apply();
@@ -135,15 +134,17 @@ app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
 				$scope.file_index = 0;
 				$scope.uploadFile($scope.files[$scope.file_index]);
 			};
-
+			
 			// check if file existing
 			$scope.ifFileExist = function(file){
 				var b = false;
-				for (var i = 0, len = $scope.chJson[file.media_type + 's'].length; i < len; i++) {
-				  if ($scope.chJson[file.media_type + 's'][i].file_name == file.name) {
-				    b = true;
-				    break;
-				  }				 
+				if ($scope.chJson[file.media_type + 's']){
+					for (var i = 0, len = $scope.chJson[file.media_type + 's'].length; i < len; i++) {
+					    if ($scope.chJson[file.media_type + 's'][i].file_name == file.name) {
+					   		b = true;
+					    	break;
+					    }
+					}
 				}
 				return b;
 			};
@@ -157,18 +158,23 @@ app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
 					// file state
 					file.state = 'uploading';
 					// create new item
-					var item = Item.createNewItem(file,$scope.chJson,$scope.site);					
+					var item = Item.createNewItem(file,$scope.chJson,$scope.channel);
+					console.log(item);
+					var inner_path = 'merged-IFS/'+$scope.channel.cluster_id+'/data/users/'+$scope.page.site_info.auth_address+'/'+item.file_name;
+					console.log(inner_path);
 					// write to file
-					Page.cmd("fileWrite",['merged-'+$scope.merger_name+'/'+$scope.site.address+'/'+item.path, file.data.split('base64,')[1]], function(res) {
+					Page.cmd("fileWrite",[inner_path, file.data.split('base64,')[1]], function(res) {
 						$scope.$apply(function(){
 							// file state
 							file.state = 'done';
 							// item id update
 							$scope.chJson.next_item_id += 1;
 							// push item to channel json items
-							var media_type = item.media_type + 's';
-							if (!$scope.chJson[media_type]){$scope.chJson[media_type] = [];}
-							$scope.chJson[media_type].push(item);
+							var media_type = item.content_type + 's';
+							if (!$scope.chJson.items[media_type]){$scope.chJson.items[media_type] = [];}
+							$scope.chJson.items[media_type].push(item);
+							console.log(media_type);
+							console.log($scope.chJson);
 							// upload next file
 							$scope.uploadNextFile();
 						});
