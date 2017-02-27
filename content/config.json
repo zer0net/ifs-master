@@ -1,0 +1,9 @@
+{
+	"cluster":{
+		"cluster_id":"1N4T7wM5smyaGcJLxa8uTfNrnrKLaDT1p6"
+	},
+	"listing":{
+		"type":"by media type",
+		"items_per_page":10
+	}
+}

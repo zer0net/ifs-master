@@ -5,35 +5,25 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// init
 			$scope.init = function(){
-				// config
-				$scope.config = {
-					cluster:{
-						cluster_id:'1N4T7wM5smyaGcJLxa8uTfNrnrKLaDT1p6'
-					},
-					media_types:[						
-						'games',
-						'videos'
-					],
-					listing:{
-						type:'by media type',
-						items_per_page:10
-					}
-				};
-				// site ready var to fix loading inconsistancies
-				$scope.site_ready = false;
-				// loading
-				$scope.showLoadingMessage('Loading');
-				// get site info
-				Page.cmd("siteInfo", {}, function(site_info) {			
-					// apply site info to Page obj
-					Page.site_info = site_info;
-					// page
-					$scope.page = Page;
-					// update site
-					Page.cmd('siteUpdate',{"address":$scope.page.site_info.address});
-					// get channels
-					$scope.getMergerPermission();
-		    	});
+					// site ready var to fix loading inconsistancies
+					$scope.site_ready = false;
+					// loading
+					$scope.showLoadingMessage('Loading');
+					// get site info
+					Page.cmd("siteInfo", {}, function(site_info) {			
+						// apply site info to Page obj
+						Page.site_info = site_info;
+						// page
+						$scope.page = Page;
+						// update site
+						Page.cmd('siteUpdate',{"address":$scope.page.site_info.address});
+						// get config
+						Page.cmd("fileGet",{"inner_path":"content/config.json"},function(data){
+							$scope.config = JSON.parse(data);
+							// get channels
+							$scope.getMergerPermission();	
+						});
+			    	});
 			};
 
 			// get merger site permission
