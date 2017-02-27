@@ -1,4 +1,5 @@
 data/*
+content/*.json
 content/clusters.json
 content/config.json
 !data/users/content.json
