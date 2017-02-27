@@ -448,6 +448,8 @@ div[type="pills"] .tab-content {
   background-size: contain;
   position: relative;
   background-color: white;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .item-list-section .list-item .inner-wrap .item-img > a {
   display: block;
@@ -484,6 +486,7 @@ div[type="pills"] .tab-content {
   background-image: url('../img/logo_atari.jpg');
 }
 .item-list-section .list-item .inner-wrap .item-img.sna-file {
+  background-size: cover;
   background-image: url('../img/logo_sna.jpg');
 }
 .item-list-section .list-item .inner-wrap.itemLoaded {

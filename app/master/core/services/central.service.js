@@ -3,7 +3,8 @@ app.factory('Central', [
 		var Central = {};
 
 		// render items by media type - games, videos, books etc'
-		Central.listItemsByMediaType = function(scope) {
+		Central.listItemsByMediaType = function(scope,filters) {
+			console.log('hello');
 			// remove existing file types & file types items arrays
 			delete scope.media_types;
 			delete scope.media_types_items;
@@ -14,9 +15,22 @@ app.factory('Central', [
 			// loop through every item in scope.items
 			// TO DO - add channel filter!
 			scope.items.forEach(function(item,index) {
-				if (scope.media_types.indexOf(item.media_type + 's') === -1) scope.media_types.push(item.media_type + 's');
-				if (!scope.media_types_items[item.media_type + 's']) scope.media_types_items[item.media_type + 's'] = [];
-				scope.media_types_items[item.media_type + 's'].push(item);
+				if (filters){
+					if (filters.channel_address){
+						// add item to channel_items
+						if (item.channel.channel_address === ppFilter.channel_address){
+							if (!scope.channel_items) scope.channel_items = [];
+							scope.channel_items.push(item);
+							if (scope.media_types.indexOf(item.media_type + 's') === -1) scope.media_types.push(item.media_type + 's');
+							if (!scope.media_types_items[item.media_type + 's']) scope.media_types_items[item.media_type + 's'] = [];
+							scope.media_types_items[item.media_type + 's'].push(item);
+						}						
+					} else {
+
+					}
+				} else {
+					if (scope.media_types.indexOf(item.media_type + 's') === -1) scope.media_types.push(item.media_type + 's');
+				}
 			});
 			return scope;
 		};
@@ -78,14 +92,33 @@ app.factory('Central', [
 		Central.mergeChannelItems = function(items,items_total,media_types,chJson){
 			for (var i in chJson.items){
 				if (!items[i]) items[i] = [];
-				if (media_types.indexOf(i) === -1) media_types.push(i);
-				items_total += chJson.items[i].length;
+				items.total += chJson.items[i].length;
 				items[i] = items[i].concat(chJson.items[i]);
 				chJson.items[i].forEach(function(item,index){
 					item.channel = chJson.channel;
 				});
+				if (media_types.indexOf(i) === -1 && i !== 'total') media_types.push(i);
 			}
 			return items;
+		};
+
+		// filter items by channel
+		Central.filterItemsByChannel = function(channel,items,filters){
+			channel.items = {};
+			channel.content_types = [];
+			for (var i in items){
+				console.log(items[i]);
+				if (i !== 'total'){
+					items[i].forEach(function(item,index){
+						if (item.channel.channel_address === channel.channel_address){
+							if (channel.content_types.indexOf(item.content_type + 's') === -1) channel.content_types.push(item.content_type + 's');
+							if (!channel.items[i]) channel.items[i] = [];
+							channel.items[i].push(item);
+						}
+					});
+				}
+			}
+			return channel;
 		};
 
 		return Central;

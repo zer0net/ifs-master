@@ -27,8 +27,6 @@ app.factory('Channel', [
 		Channel.findClusterInMergerSiteList = function(sites,cluster_id){
 			var cluster;
 			for (var site in sites) {
-				console.log();
-				console.log(cluster_id === site);
 			    if (site === cluster_id){
 					cluster = sites[site];
 			    }
@@ -38,9 +36,11 @@ app.factory('Channel', [
 
 		// match items with corresponding site files
 		Channel.matchItemsWithSiteFiles = function(chJson,site_files){
+			chJson.items_total = 0;
 			// for every array under chJson.items
 			for (var i in chJson.items){
 				if (chJson.items[i].length > 0){
+					chJson.items_total += chJson.items[i].length;
 					// for each item in array
 					chJson.items[i].forEach(function(item,index){
 						// for each site_file in site_files list
@@ -55,6 +55,7 @@ app.factory('Channel', [
 					});
 				}
 			}
+			console.log(chJson)
 			return chJson;
 		};
 

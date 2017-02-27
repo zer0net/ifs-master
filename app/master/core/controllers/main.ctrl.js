@@ -5,25 +5,25 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// init
 			$scope.init = function(){
-					// site ready var to fix loading inconsistancies
-					$scope.site_ready = false;
-					// loading
-					$scope.showLoadingMessage('Loading');
-					// get site info
-					Page.cmd("siteInfo", {}, function(site_info) {			
-						// apply site info to Page obj
-						Page.site_info = site_info;
-						// page
-						$scope.page = Page;
-						// update site
-						Page.cmd('siteUpdate',{"address":$scope.page.site_info.address});
-						// get config
-						Page.cmd("fileGet",{"inner_path":"content/config.json"},function(data){
-							$scope.config = JSON.parse(data);
-							// get channels
-							$scope.getMergerPermission();	
-						});
-			    	});
+				// site ready var to fix loading inconsistancies
+				$scope.site_ready = false;
+				// loading
+				$scope.showLoadingMessage('Loading');
+				// get site info
+				Page.cmd("siteInfo", {}, function(site_info) {			
+					// apply site info to Page obj
+					Page.site_info = site_info;
+					// page
+					$scope.page = Page;
+					// update site
+					Page.cmd('siteUpdate',{"address":$scope.page.site_info.address});
+					// get config
+					Page.cmd("fileGet",{"inner_path":"content/config.json"},function(data){
+						$scope.config = JSON.parse(data);
+						// get channels
+						$scope.getMergerPermission();	
+					});
+		    	});
 			};
 
 			// get merger site permission
@@ -48,11 +48,20 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    // get clusters
 		    $scope.getClusters = function(){
 				Page.cmd("fileGet",{"inner_path":"content/clusters.json"},function(data){
-					console.log(data);
 					data = JSON.parse(data);
 					$scope.clusters = data.clusters;
+					/*$scope.clusters.forEach(function(cluster,index){
+						$scope.getClusterChannels(cluster);
+					});*/
 					$scope.getChannels();
 				});
+		    };
+
+		    // get cluster channels
+		    $scope.getClusterChannels = function(cluster){
+		    	Page.cmd("fileQuery",["merged-IFS/"+cluster.cluster_id+"/data/users/*/channels.json", ""],function(fileQuery){
+		    		console.log(fileQuery);
+		    	});
 		    };
 
 			// get channels
@@ -127,10 +136,12 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				Page.cmd("optionalFileList", { address: channel.cluster_id, limit:2000 }, function(site_files){
 					// assign to each file in chJson.items its correspoding site_file
 					chJson = Channel.matchItemsWithSiteFiles(chJson,site_files);
+					channel.items_total = chJson.items_total;
 					// merge chJson.items to $scope.items
 					if (!$scope.items) {
-						$scope.items = {};	
-						$scope.items_total = 0;
+						$scope.items = {
+							total:0
+						};	
 					}
 					if (!$scope.media_types) $scope.media_types = [];
 					$scope.items = Central.mergeChannelItems($scope.items,$scope.items_total,$scope.media_types,chJson);
@@ -160,7 +171,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				// finished loading & apply to scope
 				$scope.$apply(function(){
 					// finish loading
-					console.log($scope.items);	
 					$scope.finishedLoading();
 				});
 			};
@@ -169,24 +179,27 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 		/* FILTER */
 
-			// main filter function
-			$scope.mainFilter = function(ppFilter) {
-				// render items before finish loading
-				if ($scope.config.listing.type === 'by media type'){
-					// render items by media types
-					$scope = Central.listItemsByMediaType($scope,ppFilter);
-				} else if ($scope.config.listing.type === 'by file type'){
-					// render items by file type
-					$scope = Central.listItemsByFileType($scope,ppFilter);
+			// filter channel
+			$scope.filterChannel = function(channel){
+				$scope.channel = channel;
+				if (!$scope.filters) {
+					$scope.filters = {channel_address:channel.channel_address}	
+				} 
+				else {
+					$scope.filters.channel_address = channel.channel_address;
 				}
-				// rootscope broadcast
-				$rootScope.$broadcast('mainFilter',$scope);
+				$scope.mainFilter();
+			};
+
+			// main filter function
+			$scope.mainFilter = function() {
+				$scope.channel = Central.filterItemsByChannel($scope.channel,$scope.items,$scope.filters);
 			};
 
 			// main remove filter function
 			$scope.mainRemoveFilter = function() {
 				// render items before finish loading
-				if ($scope.config.listing.type === 'by media type'){
+				if ($scope.config.listing.type === 'by content type'){
 					// render items by media types
 					$scope = Central.listItemsByMediaType($scope);
 				} else if ($scope.config.listing.type === 'by file type'){
