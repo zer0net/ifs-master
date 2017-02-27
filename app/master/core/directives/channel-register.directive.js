@@ -32,7 +32,7 @@ app.directive('channelRegister', ['Channel','$rootScope','$window',
 				// loop through clusters
 				$scope.clusters.forEach(function(cluster,index){
 					// get cluster content.json
-					var inner_path = "merged-"+$scope.merger_name+"/"+cluster.cluster_id+"/data/users/"+$scope.page.site_info.auth_address+"/content.json";
+					var inner_path = "merged-"+$scope.page.site_info.content.merger_name+"/"+cluster.cluster_id+"/data/users/"+$scope.page.site_info.auth_address+"/content.json";
 					Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(contentJson) {
 						if (contentJson){
 							// if a content.json in USERID directory exists
@@ -40,7 +40,7 @@ app.directive('channelRegister', ['Channel','$rootScope','$window',
 							// parse data
 							$scope.contentJson = JSON.parse(contentJson);
 							// set global inner_path var
-							$scope.inner_path = 'merged-'+$scope.merger_name+'/'+cluster.cluster_id+'/data/users/' + $scope.page.site_info.auth_address + '/';
+							$scope.inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+cluster.cluster_id+'/data/users/' + $scope.page.site_info.auth_address + '/';
 							// get users channels.json
 							$scope.getUserChannelsJson(channel,cluster.cluster_id);
 						} else {
@@ -49,7 +49,7 @@ app.directive('channelRegister', ['Channel','$rootScope','$window',
 								// if no channels.json for user found
 								console.log('no user directory in registered clusters found');
 								// inner path					
-								$scope.inner_path = 'merged-'+$scope.merger_name+'/'+ cluster_id +'/data/users/' + $scope.page.site_info.auth_address + '/';
+								$scope.inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+ cluster_id +'/data/users/' + $scope.page.site_info.auth_address + '/';
 								// on create user channels json
 								$scope.createUserChannelsJson(channel,cluster_id);
 							}
