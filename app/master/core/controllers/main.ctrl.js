@@ -8,7 +8,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				// config
 				$scope.config = {
 					cluster:{
-						cluster_id:'15H6Ck4h9TFhwfnnvF1j1sk31KiM4hCYEM'
+						cluster_id:'1N4T7wM5smyaGcJLxa8uTfNrnrKLaDT1p6'
 					},
 					media_types:[						
 						'games',
@@ -76,7 +76,8 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 						$scope.cIndex = 0;
 						$scope.getChannel($scope.channels[$scope.cIndex]);
 					} else {
-						$scope.finishedLoading();
+						$scope.showLoadingMessage('No Channels!'); 
+						// $scope.finishedLoading();
 					}
 				});
 			};

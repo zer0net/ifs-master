@@ -63,8 +63,8 @@ app.directive('itemList', ['$rootScope',
 			};
 
 			// choose item style
-			$scope.chooseStyle = function(x_is_load) {
-				if(x_is_load) {
+			$scope.chooseStyle = function(is_loaded) {
+				if(is_loaded) {
 					return 'itemLoaded';
 				} else {
 					return 'itemNotLoaded';					
@@ -103,10 +103,10 @@ app.directive('itemList', ['$rootScope',
 		var template =  '<section class="item-list-section container">' +
 							'<md-grid-list ng-if="list_items" md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="5" sm-row-height="3:4" md-row-height="3:3" md-gutter="12px" md-gutter-gt-sm="8px">' +
 							    '<!-- grid item -->' +
-								'<md-grid-tile class="list-item {{file_type}}-file" ng-repeat="item in list_items | orderBy:\'-date_added\' | startFrom : paging.startFrom">' + // | itemsPerPage:config.listing.items_per_page track by $index
-									'<div class="inner-wrap md-whiteframe-1dp" ng-init="renderItem(item)"  ng-class="chooseStyle(item.x_is_load)">' +
+								'<md-grid-tile class="list-item" ng-repeat="item in list_items | orderBy:\'-date_added\' | startFrom : paging.startFrom">' + // | itemsPerPage:config.listing.items_per_page track by $index
+									'<div class="inner-wrap md-whiteframe-1dp" ng-init="renderItem(item)"  ng-class="chooseStyle(item.is_loaded)">' +
 										'<!-- img -->' +
-										'<div class="item-img md-whiteframe-1dp">' +
+										'<div class="item-img {{item.file_type}}-file md-whiteframe-1dp">' +
 											'<a style="background-position: center;background-repeat: no-repeat;background-size: {{item.imgSize}};background-image:url(\'{{item.img}}\');" href="/{{page.site_info.address}}/view.html?type={{item.content_type}}+id={{item.item_id}}"></a>' +
 										'</div>' +
 										'<!-- img -->' +
@@ -115,7 +115,7 @@ app.directive('itemList', ['$rootScope',
 											'<h3><a href="/{{page.site_info.address}}/view.html?type={{item.content_type}}+id={{item.item_id}}">{{item.title}}</a></h3>' +
 											'<ul class="video-info">' +
 							    				'<li><span>{{item.channel.channel_name}}</span></li>' +
-							    				'<li><span> {{item.peers}} peers</span></li>' +
+							    				'<li><span>{{item.peer}} peers</span></li>' +
 							    				'<li class="votes-count" votes ng-init="getVotes(item)">' +
 													'<span class="up-vote" ng-click="onUpVote(item)">' +
 														'<span class="glyphicon glyphicon-thumbs-up"></span>' +
