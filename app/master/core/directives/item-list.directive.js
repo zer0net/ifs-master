@@ -6,11 +6,14 @@ app.directive('itemList', ['$rootScope',
 
 			// init item list all
 			$scope.initItemListAll = function(items) {
-				// reset
+				// reset				
 				var list_items = [];
 				for (var i in items){
-					list_items = list_items.concat(items[i]);
-				}
+					// check if items[i] is array then concat					
+					if( Object.prototype.toString.call( items[i] ) === '[object Array]' ) {
+						   list_items = list_items.concat(items[i]);
+						}					
+				}				
 				$scope.list_items = list_items;
 				$scope.list_type = 'all';				
 				// paging object
@@ -110,7 +113,7 @@ app.directive('itemList', ['$rootScope',
 		var template =  '<section class="item-list-section container">' +
 							'<md-grid-list ng-if="list_items" md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="5" sm-row-height="3:4" md-row-height="3:3" md-gutter="12px" md-gutter-gt-sm="8px">' +
 							    '<!-- grid item -->' +
-								'<md-grid-tile class="list-item" ng-repeat="item in list_items | orderBy:\'-date_added\' | startFrom : paging.startFrom" ng-if="item.channel">' + // | itemsPerPage:config.listing.items_per_page track by $index
+								'<md-grid-tile class="list-item" ng-repeat="item in list_items | orderBy:\'-date_added\' | startFrom : paging.startFrom | limitTo:config.listing.items_per_page" ng-if="item.channel">' + // | itemsPerPage:config.listing.items_per_page track by $index
 									'<div class="inner-wrap md-whiteframe-1dp" ng-init="renderItem(item)"  ng-class="chooseStyle(item.is_loaded)">' +
 										'<!-- img -->' +
 										'<div class="item-img {{item.file_type}}-file md-whiteframe-1dp">' +
