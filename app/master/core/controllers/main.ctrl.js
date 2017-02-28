@@ -134,7 +134,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					}
 					if (!$scope.media_types) $scope.media_types = [];
 					$scope.items = Central.mergeChannelItems($scope.items,$scope.items_total,$scope.media_types,chJson);
-					console.log($scope.items);
 					$scope.finishLoadingChannel();
 			    });
 			};
@@ -150,6 +149,8 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// finish loading channels
 			$scope.finishLoadingChannels = function(){
+				// sort media types alphabetically
+				$scope.media_types.sort();
 				// finished loading & apply to scope
 				$scope.$apply(function(){
 					// finish loading
