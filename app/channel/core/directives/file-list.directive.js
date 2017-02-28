@@ -19,21 +19,6 @@ app.directive('fileList', ['$mdDialog','$mdMedia',
 					if ($scope.sortKey=='date_added' || $scope.sortKey=='x_peer'||$scope.sortKey=='x_is_load') $scope.reverse=true; // special case
 				}			
 		    };
-
-		    // render file list item
-		    $scope.renderFileListItem = function(item){
-		    	if (item){
-			    	item.edit_url = '/' + $scope.page.site_info.address + '/user/edit.html?item=';
-			    	item.view_url = '/' + $scope.page.site_info.address + '/view.html?type=';
-			    	if (item.media_type === 'game'){
-			    		item.edit_url += item.game_id + 'type=' + item.media_type;
-			    		item.view_url += 'game-c=' + $scope.site.address + 'g=' + item.game_id + 'z=' + item.zip_name + 'f=' + item.file_name;
-			    	} else if (item.media_type === 'video'){
-			    		item.edit_url += item.video_id + 'type=' + item.media_type;
-			    		item.view_url += 'video-c=' + $scope.site.address + 'v=' + item.video_id;
-			    	}
-		    	}
-		    };
 			
 		    // delete File
 		    $scope.deleteFile = function(item){
@@ -74,8 +59,8 @@ app.directive('fileList', ['$mdDialog','$mdMedia',
 										'<th ng-if="owner">Action</th>' +
 									'</tr>' +
 								'</thead>' +
-								'<tr dir-paginate="item in ch_files.files | orderBy:sortKey:reverse | filter:query | itemsPerPage:itemsPerPage track by $index" ng-init="renderFileListItem(item)">' +
-									'<td><a href="{{item.view_url}}">{{item.file_name}}</a></td>' +
+								'<tr dir-paginate="item in ch_files.files | orderBy:sortKey:reverse | filter:query | itemsPerPage:itemsPerPage track by $index">' +
+									'<td><a href="/{{page.site_info.address}}/view.html?type={{item.content_type}}+id={{item.item_id}}">{{item.file_name}}</a></td>' +
 									'<td><span ng-if="item.is_loaded" style="color:green">\u2713</span></td>' +
 									'<td><span>{{item.peers}}</span> </td>' +
 							    	'<td>{{item.file_size|filesize}}</td>' +
@@ -84,7 +69,7 @@ app.directive('fileList', ['$mdDialog','$mdMedia',
 									'<td><i am-time-ago="item.date_added"></i></td>' +
 									'<td>' +
 										'<span ng-click="deleteFile(item)" class="glyphicon glyphicon-trash"></span>' +
-										'<a href="{{item.edit_url}}">' +
+										'<a href="edit.html{{url_suffix}}+type={{item.content_type}}+id={{item.item_id}}">' +
 										'<span class="glyphicon glyphicon-pencil"></span></a>' +
 									'</td>' +
 								'</tr>' +

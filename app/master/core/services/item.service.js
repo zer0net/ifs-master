@@ -67,7 +67,7 @@ app.factory('Item', [
 		Item.createNewItem = function(file,chJson,channel){
 
 			// render file name
-			var file_name = chJson.channel.channel_id + '__' + file.name.split(' ').join('_').normalize('NFKD').replace(/[\u0300-\u036F]/g, '').replace(/ß/g,"ss").split('.' + file.file_type)[0].replace(/[^\w\s]/gi, '_') + '.' + file.file_type;
+			var file_name = file.name.split(' ').join('_').normalize('NFKD').replace(/[\u0300-\u036F]/g, '').replace(/ß/g,"ss").split('.' + file.file_type)[0].replace(/[^\w\s]/gi, '_') + '.' + file.file_type;
 
 			// item obj
 			var item = {

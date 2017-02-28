@@ -7,9 +7,10 @@ app.directive('zipContent', [
 			// show zip content
 			$scope.showZipContent = function(){
 				$scope.zipFiles = [];
-				console.log($scope.item);
+				var zipPath = '/'+$scope.page.site_info.address + '/merged-'+$scope.page.site_info.content.merger_name + '/' + $scope.channel.cluster_id + '/data/users/' + $scope.channel.user_id + '/' + $scope.item.file_name;
+				console.log(zipPath);
 				// get remote zip file
-				JSZipUtils.getBinaryContent('/'+$scope.page.site_info.address + '/merged-'+$scope.merger_name + '/' + $scope.item.channel + '/' + $scope.item.path, function(err, data) {
+				JSZipUtils.getBinaryContent(zipPath, function(err, data) {
 				    if(err) {
 				        throw err; // or handle err
 				    }

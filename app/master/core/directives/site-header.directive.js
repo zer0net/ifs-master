@@ -5,7 +5,7 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope','$location',
 		var controller = function($scope,$element) {
 
 			$scope.initHeader = function(){
-				if ($location.$$absUrl.indexOf('type') > -1){
+				if ($location.$$absUrl.indexOf('view.html') > -1 && $location.$$absUrl.indexOf('type') > -1){
 					$scope.media_type = $location.$$absUrl.split('?type=')[1].split('+')[0] + 's';
 				}
 			};

@@ -8,16 +8,14 @@ app.directive('editItem', [
 			$scope.init = function(){
 				// scope mode
 				$scope.mode = 'edit';
-				// generate items properties array
-				$scope.generateItemProperties();
 			};
 
 			// on update item
-			$scope.onUpdateItem = function(){
-				if ($scope.item.img){
-					$scope.uploadPosterImage();
+			$scope.onUpdateItem = function(item,mode){
+				if (item.poster){
+					$scope.uploadPosterImage(item,mode);
 				} else {
-					$scope.updateItem();
+					$scope.updateItem(item);
 				}
 			};
 

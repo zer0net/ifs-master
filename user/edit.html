@@ -71,30 +71,21 @@
 							<section class="container edit-item-view" layout="column" 
 								ng-controller="ItemsCtrl" ng-if="chJson" ng-init="getItem()">
 
-								<!-- loading -->
-								<div layout="column" ng-show="loading" flex>
-									<div layout="column" flex="100" style="text-align:center;"><b ng-bind="msg"></b></div>
-									<div layout="row" flex="100" layout-align="space-around">
-										<md-progress-circular md-mode="indeterminate"></md-progress-circular>
-									</div>
-								</div>
-								<!-- /loading -->
-
 								<!-- edit item section -->
-								<md-content class="edit-item-section" edit-item  ng-init="init()" ng-hide="loading" ng-if="item" layout="row" flex>
+								<md-content class="edit-item-section" edit-item  ng-init="init()" ng-if="item" layout="row" flex>
 									<!-- item sidebar -->
 									<side-bar></side-bar>
 									<!-- /item sidebar -->
 									<!-- item main -->
 									<section flex="70" layout="column" class="item-main" style="position: relative;" id="item-upload-form" layout-padding>
 						        		<!-- game interface -->
-						        		<game-interface ng-if="item.media_type === 'game'"></game-interface>
+						        		<game-interface ng-if="item.content_type === 'game'"></game-interface>
 						        		<!-- /game interface -->
 						        		<!-- video interface -->
-						        		<video-interface ng-if="item.media_type === 'video'"></video-interface>
+						        		<video-interface ng-if="item.content_type === 'video'"></video-interface>
 						        		<!-- /video interface -->
-							            <md-button flex="100" style="margin: 16px 0;" class="md-primary md-raised edgePadding pull-right" ng-click="onUpdateItem()">
-							            	<label>Update {{item.media_type}}</label>
+							            <md-button flex="100" style="margin: 16px 0;" class="md-primary md-raised edgePadding pull-right update-item-button" ng-click="onUpdateItem(item,mode)">
+							            	<label>Update {{item.content_type}}</label>
 							            </md-button>
 									</section>
 									<!-- /item main -->

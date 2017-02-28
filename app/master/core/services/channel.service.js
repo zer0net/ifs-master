@@ -95,6 +95,38 @@ app.factory('Channel', [
 			return ch_files;
 		};
 
+		// render chJson items before chJson update
+		Channel.renderChannelItemsBeforeUpdate = function(chJson){
+			// allowed fields array
+			var allowedFields = [
+				'category',
+				'subcategory',
+				'file_type',
+				'file_name',
+				'file_size',
+				'inner_file',
+				'poster_file',
+				'content_type',
+				'channel',
+				'title',
+				'date_added',
+				'item_id'
+			];
+
+			for (var i in chJson.items){
+				chJson.items[i].forEach(function(item,index){
+					item.channel = chJson.channel.channel_address;
+					for (var i in item){
+						if (allowedFields.indexOf(i) === -1){
+							delete item[i];
+						}
+					}
+				});
+			}
+
+			return chJson;
+		};
+
 		return Channel;
 	}
 ]);

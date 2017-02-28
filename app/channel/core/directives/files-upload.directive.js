@@ -159,9 +159,7 @@ app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
 					file.state = 'uploading';
 					// create new item
 					var item = Item.createNewItem(file,$scope.chJson,$scope.channel);
-					console.log(item);
 					var inner_path = 'merged-IFS/'+$scope.channel.cluster_id+'/data/users/'+$scope.page.site_info.auth_address+'/'+item.file_name;
-					console.log(inner_path);
 					// write to file
 					Page.cmd("fileWrite",[inner_path, file.data.split('base64,')[1]], function(res) {
 						$scope.$apply(function(){

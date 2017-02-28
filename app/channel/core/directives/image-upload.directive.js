@@ -6,7 +6,7 @@ app.directive('imageUpload', [
 			// reader instance
 			$scope.reader = new FileReader();
 			// image upload config
-			$scope.imageUploadConfig = {
+			$scope.posterUploadConfig = {
 			    'options': { // passed into the Dropzone constructor
 			      'url': 'content.json'
 			    },
@@ -19,14 +19,15 @@ app.directive('imageUpload', [
 			// read image file
 			$scope.readImageFile = function(file){
 				$scope.reader.onload = function(){
-					$scope.item.img = this.result;
+					$scope.item.poster = this.result;
+					$scope.item.poster_file = '' + $scope.item.file_name.split('.')[0] + '__poster.' + file.type.split('/')[1];
 					$scope.$apply();
 				};
 				$scope.reader.readAsDataURL(file);
 			};
 		};
 
-		var template = '<button style="width:100%;height:100px;" dropzone="imageUploadConfig" ng-hide="item.img">upload poster image</button>';
+		var template = '<button style="width:100%;height:100px;" dropzone="posterUploadConfig" ng-hide="item.poster">upload poster image</button>';
 
 		return {
 			restrict: 'AE',

@@ -73,10 +73,8 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					if ($scope.sites.indexOf($scope.clusters[$scope.clIndex].cluster_id) > -1){
 						$scope.clIndex += 1;
 						$scope.varifyClusters();
-						console.log('ok');
 					} else {
 						Page.cmd("mergerSiteAdd",{"addresses":$scope.clusters[$scope.clIndex].cluster_id},function(data){
-							console.log('got cluster');
 							$scope.cIndex += 1;
 							$scope.varifyClusters();
 						});
@@ -93,7 +91,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				// get channels				
 				var query = ["SELECT * FROM channel WHERE cluster_id IS NOT NULL ORDER BY date_added"];
 				Page.cmd("dbQuery", query, function(channels) {	
-					console.log(channels);
 					if (channels.length > 0){
 						$scope.channels = channels;
 						$scope.cIndex = 0;
@@ -101,8 +98,8 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					} else {
 						$scope.showLoadingMessage('No Channels!');
 						$scope.finishedLoading();
-						$scope.$apply();
 					}
+					$scope.$apply();
 				});
 			};
 
@@ -152,14 +149,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// finish loading channels
 			$scope.finishLoadingChannels = function(){
-				// render items before finish loading
-				/*if ($scope.config.listing.type === 'by media type'){
-					// render items by media types
-					$scope = Central.listItemsByMediaType($scope);
-				} else if ($scope.config.listing.type === 'by file type'){
-					// render items by file type
-					$scope = Central.listItemsByFileType($scope);
-				}*/
 				// finished loading & apply to scope
 				$scope.$apply(function(){
 					// finish loading
@@ -192,7 +181,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// main filter function
 			$scope.mainFilter = function() {
 				$scope.channel = Central.filterItemsByChannel($scope.channel,$scope.items,$scope.filters);
-				console.log($scope.channel);
 			};
 
 			// main remove filter function

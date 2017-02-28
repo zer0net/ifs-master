@@ -53,11 +53,11 @@
 						    <!-- /loading -->
 
 							<!-- channel site header -->
-							<channel-site-header ng-hide="loading" ng-if="channels"></channel-site-header>
+							<channel-site-header ng-hide="loading" ng-if="u_channels"></channel-site-header>
 							<!-- /channel site  header -->
 
 							<!-- channel site main  -->
-							<section ng-hide="loading" ng-if="channels" ng-controller="ItemsCtrl" layout="row" class="container">
+							<section ng-hide="loading" ng-if="u_channels" ng-controller="ItemsCtrl" layout="row" class="container">
 
 							    <md-content ng-if="chJson" ng-hide="loading" flex layout-padding class="main-content">
 									<!-- file list -->

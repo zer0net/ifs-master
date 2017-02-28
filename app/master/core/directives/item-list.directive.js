@@ -40,8 +40,6 @@ app.directive('itemList', ['$rootScope',
 				    $scope.paging.startFrom = $scope.config.listing.items_per_page * ($scope.paging.currentPage - 1);
 				}
 			};
-
-
 			
 			// init item list by media type
 			$scope.initItemListByMediaType = function(media_type,channel) {
@@ -80,16 +78,10 @@ app.directive('itemList', ['$rootScope',
 
 			// render item 
 			$scope.renderItem = function(item) {
-				item.view_url = '/' + $scope.page.site_info.address + '/view.html?type=' + item.content_type + '-c=' + item.channel.channel_address + item.content_type.charAt(0) + '=' + item.item_id;
-				// if not video
-				if (!item.media_type === 'video'){
-					// if zip file
-					if (item.file_type === 'zip') {
-	 					item.view_url += 'z=' + item.zip_name + 'f=' + item.file_name;
-					} else {
-						item.view_url += 'z=f=' + item.file_name;
-					}
+				if (item.poster_file){
+					item.poster_path = '/'+$scope.page.site_info.address+'/merged-'+$scope.page.site_info.content.merger_name+'/'+item.channel.cluster_id+'/data/users/'+item.channel.user_id+'/'+item.poster_file;
 				}
+				console.log(item);
 			}
 
 			// on item list page change
@@ -108,13 +100,13 @@ app.directive('itemList', ['$rootScope',
 		};
 
 		var template =  '<section class="item-list-section container">' +
-							'<md-grid-list ng-if="list_items" md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="5" sm-row-height="3:4" md-row-height="3:3" md-gutter="12px" md-gutter-gt-sm="8px">' +
+							'<md-grid-list ng-if="list_items" md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="5" sm-row-height="4:5" md-row-height="4:5" md-gutter="12px" md-gutter-gt-sm="8px">' +
 							    '<!-- grid item -->' +
-								'<md-grid-tile class="list-item" ng-repeat="item in list_items | orderBy:\'-date_added\' | startFrom : paging.startFrom" ng-if="item.channel">' + // | itemsPerPage:config.listing.items_per_page track by $index
+								'<md-grid-tile class="list-item" ng-repeat="item in list_items | orderBy:\'-date_added\' | startFrom : paging.startFrom" ng-if="item.channel" ng-init="renderItem(item)">' + // | itemsPerPage:config.listing.items_per_page track by $index
 									'<div class="inner-wrap md-whiteframe-1dp" ng-init="renderItem(item)"  ng-class="chooseStyle(item.is_loaded)">' +
 										'<!-- img -->' +
 										'<div class="item-img {{item.file_type}}-file md-whiteframe-1dp">' +
-											'<a style="background-position: center;background-repeat: no-repeat;background-size: {{item.imgSize}};background-image:url(\'{{item.img}}\');" href="/{{page.site_info.address}}/view.html?type={{item.content_type}}+id={{item.item_id}}"></a>' +
+											'<a style="background-position: center;background-repeat: no-repeat;background-size: cover;background-image:url(\'{{item.poster_path}}\');" href="/{{page.site_info.address}}/view.html?type={{item.content_type}}+id={{item.item_id}}"></a>' +
 										'</div>' +
 										'<!-- img -->' +
 										'<!-- info -->' +

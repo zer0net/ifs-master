@@ -66,7 +66,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 		var template = 	'<div class="wrapper channel-menu">'+
 							'<div class="container-fluid select-channel">' +
 								'<label>Select channel: </label>' +											
-								'<select class="form-control" ng-model="channel" value="channel.channel_address" ng-options="channel.option_label for channel in channels" ng-change="onSelectSite(channel)"></select>' +
+								'<select class="form-control" ng-model="channel" value="channel.channel_address" ng-options="channel.option_label for channel in u_channels" ng-change="onSelectSite(channel)"></select>' +
 							'</div>' +
 						'</div>'+
 						'<md-toolbar ng-init="init()" ng-if="channel" layout-padding class="md-hue-2 header" layout="row">' +
@@ -77,7 +77,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 									'</figure>' +
 									'<div class="site-title">' + 
 										'<h3>' + 
-											'<a target="_blank" href="/{{page.site_info.address}}/user/index.html{{url_suffix}}"> {{channel.channel_name}} </a>' + 
+											'<a href="/{{page.site_info.address}}/user/index.html{{url_suffix}}"> {{channel.channel_name}} </a>' + 
 											'<small><a ng-click="openChannelEditDialog(chJson)"><span class="glyphicon glyphicon-pencil"></span></a></small>' + 
 										'</h3>' + 
 										'<a class="channel-address" href="/{{channel.channel_address}}/"><small ng-bind="channel.channel_address"></small></a>' +

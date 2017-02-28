@@ -5,6 +5,7 @@ app.directive('nesEmulator', ['$location','$rootScope','$timeout',
 
 			// init nes emulator
 			$scope.initNesEmulator = function(item){
+				console.log(item);
 				// nes file url
 				if (item) { $scope.item = item; }
 				var nesFile = "/"+$scope.page.site_info.address+"/merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.item.channel.cluster_id+"/data/users/"+$scope.item.channel.user_id+"/"+$scope.item.file_name;

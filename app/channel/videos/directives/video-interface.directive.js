@@ -6,7 +6,6 @@ app.directive('videoInterface', ['$sce',
 
 			// init video interface
 			$scope.init = function(){
-				console.log('init video interface');
 				// config form tabs & fields
 				$scope.formTabs = [
 					{
@@ -27,15 +26,14 @@ app.directive('videoInterface', ['$sce',
 						}]
 					}
 				];
-
-				$scope.video = '/' + $scope.page.site_info.address + '/merged-' + $scope.merger_name + '/'+$scope.site.address+'/uploads/videos/'+$scope.item.file_name;
-
 				// read video file
 				$scope.readVideoFile();
 			};
 
 			// read video file
 			$scope.readVideoFile = function(){
+				// video
+				$scope.video = '/' + $scope.page.site_info.address + '/merged-' + $scope.page.site_info.content.merger_name + '/'+$scope.channel.cluster_id+'/data/users/' + $scope.channel.user_id + '/'+$scope.item.file_name;
 				// video player
 				$scope.player = {
 					autoPlay:true,
@@ -45,7 +43,7 @@ app.directive('videoInterface', ['$sce',
 							type:'video/'+$scope.item.file_type
 						}
 					],
-					theme: "/" + $scope.site_address + "/assets/lib/videos/videogular-themes-default/videogular.css"
+					theme: "/" + $scope.page.site_info.address + "/assets/lib/videos/videogular-themes-default/videogular.css"
 				};
 				console.log($scope.player);
 			};

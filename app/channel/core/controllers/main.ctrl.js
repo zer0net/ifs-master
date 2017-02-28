@@ -21,7 +21,7 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 				Page.cmd("dbQuery", query, function(channels) {
 					if (channels.length > 0){
 						// render channel list
-						$scope.channels = Channel.renderChannels(channels);
+						$scope.u_channels = Channel.renderChannels(channels);
 						// assign current user channel
 						$scope.assignCurrentUserChannel();
 					}
@@ -31,6 +31,7 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 			// assign current user site
 			$scope.assignCurrentUserChannel = function(){
 				var path = $location.$$absUrl.split('/user/')[1].split('&')[0];
+				if (path.indexOf('+type=') > -1) path = path.split('+type=')[0];
 				// if path has "?cl=" (cluster id url prefix)
 				if (path.indexOf('?cl=') > -1){
 					// channel address
@@ -38,10 +39,10 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 					// url suffix for inner links
 					$scope.url_suffix = '?cl=' + path.split('?cl=')[1];
 					// find channel by channel address
-					$scope.channel = Channel.findChannelByAddress($scope.channels,channel_address);
+					$scope.channel = Channel.findChannelByAddress($scope.u_channels,channel_address);
 				} else {
 					// apply first channel to scope
-					$scope.channel = $scope.channels[0];
+					$scope.channel = $scope.u_channels[0];
 				}
 				// set current channels cluster merged site info
 				$scope.getClusterSiteInfo();
@@ -78,7 +79,7 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 					// render channel files
 					$scope.ch_files = Channel.renderChannelFiles(site_files,$scope.chJson.items);
 					// finish loading
-					$scope.finishLoadingChannel();
+					$scope.finishLoading();
 				});
 			};
 
@@ -89,6 +90,8 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 			// update & save channel json
 			$scope.updateChannelJson = function(){
 				$scope.showLoadingMsg('updating ' + $scope.chJson.channel.channel_address + '.json');
+				$scope.chJson = Channel.renderChannelItemsBeforeUpdate($scope.chJson);
+				console.log($scope.chJson.items);
 				var json_raw = unescape(encodeURIComponent(JSON.stringify($scope.chJson, void 0, '\t')));
 				Page.cmd("fileWrite", [$scope.inner_path  + $scope.chJson.channel.channel_address + '.json', btoa(json_raw)], function(res) {
 					console.log(res);

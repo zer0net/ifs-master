@@ -8,7 +8,7 @@ app.directive('itemForm', [
 						    			'<md-input-container ng-repeat="field in section.fields" flex="{{field.flex}}">' +
 						    				'<label ng-if="field.label" ng-bind="field.label"></label>' +
 						    				'<input ng-if="field.type === \'input\'" ng-model="item[field.model]"/>' +
-									    	'<input ng-if="field.type === \'executable-file\'" executable-file-input ng-model="item.file_name"/>' +
+									    	'<input ng-if="field.type === \'executable-file\'" executable-file-input ng-model="item.inner_file"/>' +
 										    '<textarea ng-if="field.type === \'textarea\'" ng-model="item[field.model]"></textarea>' +
 											'<md-select ng-if="field.type === \'select\'" ng-model="item[field.model]">' +
 								        		'<md-option ng-repeat="option in field.options" ng-bind="option" ng-value="option"></md-option>' +
@@ -16,6 +16,27 @@ app.directive('itemForm', [
 								            '<zip-content ng-if="field.type === \'zip-contents\'"></zip-content>' +
 						    			'</md-input>' +
 						    		'</md-content>' +
+					    			'<md-content class="preview-container" ng-if="tab.title === \'preview\'">' +
+					    				'<div ng-if="item.content_type === \'game\'">' +
+					    					'<md-button class="md-primary md-raised edgePadding" ng-click="showEmulator()">show emulator</md-button>' +
+					    					'<div ng-if="show_emulator">' +
+												'<!-- player -->' +
+												'<div id="js-dos-container" ng-if="item.file_type === \'zip\'">' +
+													'<dosbox ng-init="initDosBox(item)"></dosbox>' +
+												'</div>' +
+												'<div id="nes-container" ng-if="item.file_type === \'nes\'">' +
+													'<nes-emulator ng-init="initNesEmulator(item)"></nes-emulator>' +
+												'</div>' +
+												'<div id="atari-container" ng-if="item.file_type === \'bin\'">' +
+													'<atari-emulator style="margin:0 auto;" ng-init="initAtariEmulator(item)"></atari-emulator>' +
+												'</div>' +
+												'<div id="cpc-container" ng-if="item.file_type === \'sna\'">' +
+													'<cpc-emulator ng-init="initCpcEmulator(item)"></cpc-emulator>' +
+												'</div>' +
+												'<!-- /player -->' +
+											'</div>' +
+										'</div>' +
+					    			'</md-content>' +
 						    	'</md-tab>' +
 						    '</md-tabs>' +
 						'</div>';

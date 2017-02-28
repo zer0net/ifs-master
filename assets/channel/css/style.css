@@ -59,6 +59,9 @@ button.md-button a {
   cursor: pointer;
   font-weight: normal;
 }
+md-button {
+  cursor: pointer;
+}
 videogular,
 [videogular] {
   max-height: 400px;
@@ -336,6 +339,9 @@ section.container {
 #items-section .item-list li:nth-child(even) a {
   color: white;
 }
+.edit-item-view .item-main {
+  background-color: transparent;
+}
 .edit-item-view md-content {
   background-color: transparent;
 }
@@ -372,6 +378,9 @@ section.container {
 }
 .edit-item-view aside .thumb-image-section img {
   width: 100%;
+}
+.edit-item-view .update-item-button {
+  max-height: 20px;
 }
 /* GAME VIEW PAGE */
 #dosbox-section {

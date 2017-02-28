@@ -6,7 +6,7 @@ app.directive('gameInterface', [
 
 			// init game interface
 			$scope.init = function(){
-				console.log('init game interface');
+
 				// config form tabs & fields
 				$scope.formTabs = [
 					{
@@ -21,7 +21,7 @@ app.directive('gameInterface', [
 							}]
 						}]
 					},{
-						title:$scope.item.media_type + ' Info',
+						title:$scope.item.content_type + ' Info',
 						sections:[{
 							type:'row',
 							fields:[{
@@ -56,6 +56,9 @@ app.directive('gameInterface', [
 								flex:'100'
 							}]
 						}]
+					},{
+						title:'preview',
+						sections:[]
 					}
 				];
 
@@ -65,7 +68,7 @@ app.directive('gameInterface', [
 					var exeField = {
 						label:'Executable File Name',
 						type:'executable-file',
-						model:'file_name',
+						model:'inner_file',
 						flex:'100'
 					};
 					// executable file list
@@ -79,26 +82,17 @@ app.directive('gameInterface', [
 				}
 			};
 
+			// show emulator
+			$scope.showEmulator = function(){
+				$scope.show_emulator = true;
+			};
+
 		};
 
 		var template = '<div class="game-interface" style="padding: 0;" ng-init="init()">' +
 							'<!-- form -->' +
 							'<item-form ng-if="formTabs"></item-form>' +
 							'<!-- /form -->' +
-							'<!-- player -->' +
-							'<div id="js-dos-container" ng-if="item.file_type === \'zip\'">' +
-								'<dosbox ng-init="initDosBox(item)"></dosbox>' +
-							'</div>' +
-							'<div id="nes-container" ng-if="item.file_type === \'nes\'">' +
-								'<nes-emulator ng-init="initNesEmulator(item)"></nes-emulator>' +
-							'</div>' +
-							'<div id="atari-container" ng-if="item.file_type === \'bin\'">' +
-								'<atari-emulator style="margin:0 auto;" ng-init="initAtariEmulator(item)"></atari-emulator>' +
-							'</div>' +
-							'<div id="cpc-container" ng-if="item.file_type === \'sna\'">' +
-								'<cpc-emulator ng-init="initCpcEmulator(item)"></cpc-emulator>' +
-							'</div>' +																	
-							'<!-- /player -->' +
 						'</div>';
 
 		return {
