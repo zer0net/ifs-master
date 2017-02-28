@@ -23,8 +23,6 @@ app.directive('channelEdit', ['$sce','$location',
 				    },
 					'eventHandlers': {
 						'sending': function (file, xhr, formData) {
-							$scope.file = file;
-							$scope.chJson.channel.img = file.name;
 							$scope.showPreviewImage(file);
 						}
 					}
@@ -35,25 +33,22 @@ app.directive('channelEdit', ['$sce','$location',
 			$scope.showPreviewImage = function(file){
 				// reader on load
 				reader.onload = function(){
+					var file_name = file.name.split(' ').join('_').normalize('NFKD').replace(/[\u0300-\u036F]/g, '').replace(/ß/g,"ss").split('.' + file.file_type)[0].replace(/[^\w\s]/gi, '') + '.' + file.type.split('/')[1];
+					$scope.file = file;
+					$scope.chJson.channel.logo_file = file_name;
 					// apply to scope
 					$scope.$apply(function() {
-						// file url
-						var dataURL = reader.result;
-						var src = $sce.trustAsResourceUrl(dataURL);
-						// temp scope var
-						$scope.imgSrc = dataURL;
+						$scope.imgSrc = reader.result;
 					});
 				};
 				reader.readAsDataURL(file);
 			};
 
-			// upload preview image
-			$scope.uploadPreviewImage = function(){
-			    var path = 'merged-' + $scope.merger_name + '/' + $scope.site.address + '/uploads/images/' + $scope.chJson.channel.img;
-			    var previewImgUrl = $scope.imgSrc.split(',')[1];
-				Page.cmd("fileWrite",{"inner_path":path,"content_base64": previewImgUrl, "ignore_bad_files": true}, function(res) {
-					console.log(res);
-					if (res === 'ok') $scope.updateChannelJson();
+			// upload logo image
+			$scope.uploadLogoImage = function(chJson){
+				var logo_path = 'merged-IFS/'+$scope.chJson.channel.cluster_id+'/data/users/'+$scope.page.site_info.auth_address+'/'+$scope.chJson.channel.logo_file;
+				Page.cmd("fileWrite",[logo_path, $scope.imgSrc.split('base64,')[1] ], function(res) {
+					$scope.updateChannelRecord(chJson.channel);
 				});
 			};
 
@@ -61,7 +56,7 @@ app.directive('channelEdit', ['$sce','$location',
 			$scope.onUpdateChannel = function(chJson) {
 				console.log(chJson);
 				if ($scope.file){ 
-					$scope.uploadPreviewImage();
+					$scope.uploadLogoImage(chJson);
 				} else { 
 					$scope.updateChannelRecord(chJson.channel);
 				}
@@ -72,7 +67,7 @@ app.directive('channelEdit', ['$sce','$location',
 		var template = '<md-content>' +
 							'<div class="section-body" layout="row">' +
 								'<figure flex="20">' +
-									'<img  ng-if="chJson.channel.img" style="width:100%;" ng-src="/{{page.site_info.address}}/{{channel.cluster_id}}/data/users/{{channel.user_id}}/{{chJson.channel.img}}" id="current_image"/>' +
+									'<img  ng-if="channel.logo_file" style="width:100%;" ng-src="/{{page.site_info.address}}/{{channel.cluster_id}}/data/users/{{channel.user_id}}/{{chJson.channel.logo_file}}" id="current_image"/>' +
 									'<button dropzone="dropzoneConfig" ng-hide="imgSrc"> Drag and drop files here or click to upload</button>' +
 									'<img style="width:100%;" ng-src="{{imgSrc}}" ng-show="imgSrc" id="image"/>' +
 								'</figure>' +

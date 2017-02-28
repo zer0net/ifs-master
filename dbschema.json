@@ -45,6 +45,8 @@
                 ["channel_id", "TEXT"],
                 ["channel_address", "TEXT"],
                 ["channel_name", "TEXT"],
+                ["channel_description", "TEXT"],
+                ["logo_file", "TEXT"],
                 ["cluster_id", "TEXT"],
                 ["date_added", "INTEGER"],
                 ["hide", "INTEGER"],

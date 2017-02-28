@@ -190,6 +190,12 @@ md-dialog-content {
 .header .channel-header-top .site-title a.channel-address small {
   font-size: 10px;
 }
+.header .channel-header-top .site-title div.channel-description {
+  float: left;
+  width: 100%;
+  margin-top: 10px;
+  font-size: 12px;
+}
 .header .channel-header-bottom div.sub-title small {
   float: left;
   width: 100%;

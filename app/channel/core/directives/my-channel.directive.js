@@ -7,11 +7,12 @@ app.directive('myChannel', ['$sce','$location',
 			var reader = new FileReader();
 
 			// init
-			$scope.initChannelEdit = function (chJson,page,merger_name,site) {
+			$scope.initChannelEdit = function (chJson,page,merger_name,channel) {
+				// bind vars to scope
 				$scope.chJson = chJson;
 				$scope.page = page;
 				$scope.merger_name = merger_name;
-				$scope.site = site;
+				$scope.channel = channel;
 				// dropzone config
 				$scope.dropzoneConfig = {	
 				    'options': { // passed into the Dropzone constructor
@@ -20,7 +21,7 @@ app.directive('myChannel', ['$sce','$location',
 					'eventHandlers': {
 						'sending': function (file, xhr, formData) {
 							$scope.file = file;
-							$scope.chJson.channel.img = file.name;
+							$scope.chJson.channel.logo_file = file.name;
 							$scope.showPreviewImage(file);
 						}
 					}
@@ -33,15 +34,24 @@ app.directive('myChannel', ['$sce','$location',
 				reader.onload = function(){
 					// apply to scope
 					$scope.$apply(function() {
-						// file url
-						var dataURL = reader.result;
-						var src = $sce.trustAsResourceUrl(dataURL);
-						// temp scope var
-						$scope.imgSrc = dataURL;
+						$scope.imgSrc = reader.result;
 					});
 				};
 				reader.readAsDataURL(file);
 			};
+
+			// upload poster image
+			$scope.uploadLogoImage = function(){
+				var logo_path = 'merged-IFS/'+$scope.channel.cluster_id+'/data/users/'+$scope.page.site_info.auth_address+'/'+item.poster_file;
+				Page.cmd("fileWrite",[logo_path, $scope.imgSrc.split('base64,')[1] ], function(res) {
+					if (mode === 'create'){
+						$scope.createItem(item);
+					} else if (mode === 'edit') {
+						$scope.updateItem(item);
+					}
+				});
+			};
+
 
 			// upload preview image
 			$scope.uploadPreviewImage = function(){
@@ -56,7 +66,7 @@ app.directive('myChannel', ['$sce','$location',
 			// save channel details
 			$scope.saveChannelDetails = function() {
 				console.log('save details');
-				if ($scope.file){ $scope.uploadPreviewImage();}
+				if ($scope.imgSrc){ $scope.uploadPreviewImage();}
 				else { $scope.updateChannelJson(); }
 			};
 

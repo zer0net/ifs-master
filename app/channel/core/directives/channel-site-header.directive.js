@@ -73,7 +73,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 							'<div class="col-xs-5">' + 
 								'<div class="channel-header-top">' + 
 									'<figure class="logo">' + 
-										'<img ng-if="chJson.channel.logo" ng-src="/{{page.site_info.address}}/merged-IFS/{{channel.cluster_id}}/data/users/{{channel.user_id}}/{{chJson.channel.logo}}"/>' + 
+										'<img ng-if="chJson.channel.logo_file" ng-src="/{{page.site_info.address}}/merged-IFS/{{channel.cluster_id}}/data/users/{{channel.user_id}}/{{chJson.channel.logo_file}}"/>' + 
 									'</figure>' +
 									'<div class="site-title">' + 
 										'<h3>' + 
@@ -81,6 +81,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 											'<small><a ng-click="openChannelEditDialog(chJson)"><span class="glyphicon glyphicon-pencil"></span></a></small>' + 
 										'</h3>' + 
 										'<a class="channel-address" href="/{{channel.channel_address}}/"><small ng-bind="channel.channel_address"></small></a>' +
+										'<div class="channel-description">{{chJson.channel.channel_description}}</div>' +
 									'</div>' + 
 								'</div>' +
 								'<div class="channel-header-bottom">' + 
