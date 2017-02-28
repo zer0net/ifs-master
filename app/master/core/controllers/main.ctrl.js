@@ -137,6 +137,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					}
 					if (!$scope.media_types) $scope.media_types = [];
 					$scope.items = Central.mergeChannelItems($scope.items,$scope.items_total,$scope.media_types,chJson);
+					console.log($scope.items);
 					$scope.finishLoadingChannel();
 			    });
 			};

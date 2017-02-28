@@ -71,9 +71,9 @@ app.directive('itemList', ['$rootScope',
 			};
 
 			// choose item style
-			$scope.chooseStyle = function(is_loaded) {
+			$scope.chooseStyle = function(is_downloaded) {
 				var css_class;
-				if(is_loaded) {
+				if(is_downloaded && is_downloaded>0) {
 					css_class = 'itemLoaded';
 				} else {
 					css_class = 'itemNotLoaded';					
@@ -114,7 +114,7 @@ app.directive('itemList', ['$rootScope',
 							'<md-grid-list ng-if="list_items" md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="5" sm-row-height="3:4" md-row-height="3:3" md-gutter="12px" md-gutter-gt-sm="8px">' +
 							    '<!-- grid item -->' +
 								'<md-grid-tile class="list-item" ng-repeat="item in list_items | orderBy:\'-date_added\' | startFrom : paging.startFrom | limitTo:config.listing.items_per_page" ng-if="item.channel">' + // | itemsPerPage:config.listing.items_per_page track by $index
-									'<div class="inner-wrap md-whiteframe-1dp" ng-init="renderItem(item)"  ng-class="chooseStyle(item.is_loaded)">' +
+									'<div class="inner-wrap md-whiteframe-1dp" ng-init="renderItem(item)"  ng-class="chooseStyle(item.is_downloaded)">' +
 										'<!-- img -->' +
 										'<div class="item-img {{item.file_type}}-file md-whiteframe-1dp">' +
 											'<a style="background-position: center;background-repeat: no-repeat;background-size: {{item.imgSize}};background-image:url(\'{{item.img}}\');" href="/{{page.site_info.address}}/view.html?type={{item.content_type}}+id={{item.item_id}}"></a>' +
