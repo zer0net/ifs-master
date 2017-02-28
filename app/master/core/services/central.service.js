@@ -4,7 +4,6 @@ app.factory('Central', [
 
 		// render items by media type - games, videos, books etc'
 		Central.listItemsByMediaType = function(scope,filters) {
-			console.log('hello');
 			// remove existing file types & file types items arrays
 			delete scope.media_types;
 			delete scope.media_types_items;
@@ -107,7 +106,6 @@ app.factory('Central', [
 			channel.items = {};
 			channel.content_types = [];
 			for (var i in items){
-				console.log(items[i]);
 				if (i !== 'total'){
 					items[i].forEach(function(item,index){
 						if (item.channel.channel_address === channel.channel_address){

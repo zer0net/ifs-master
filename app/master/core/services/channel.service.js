@@ -55,7 +55,6 @@ app.factory('Channel', [
 					});
 				}
 			}
-			console.log(chJson)
 			return chJson;
 		};
 
@@ -93,7 +92,6 @@ app.factory('Channel', [
 					}
 				}
 			});
-			console.log(ch_files);
 			return ch_files;
 		};
 

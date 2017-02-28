@@ -12,8 +12,7 @@ app.directive('sidebar', ['$rootScope',
 
 			// on remove filter channel
 			$scope.onRemoveFilterChannel = function(){
-				delete $scope.channel;
-				$rootScope.$broadcast('onRemoveFilterChannel');
+				$scope.removeFilterChannel();
 			};
 
 		};

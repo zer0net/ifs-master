@@ -64,7 +64,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					$scope.clusters = data.clusters;
 					$scope.clIndex = 0;
 					$scope.varifyClusters();
-					// $scope.getChannels();
 				});
 		    };
 
@@ -106,36 +105,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					}
 				});
 			};
-
-			/*
-			// add merger site
-			$scope.addSite = function(channel){
-				Page.cmd("mergerSiteAdd",{"addresses":channel.channel_address},function(data){
-					// list merger sites					
-					Page.cmd("mergerSiteList", {query_site_info: true}, function(sites) {						
-						// for each site in merger site list
-						for (var site in sites) {
-						    var site = sites[site];
-						    var siteFound = false;
-							// if channel's id exists in merged sites array
-						    if (site.address === channel.channel_address){
-						    	siteFound = true;
-						    	// info prompt
-								Page.cmd("wrapperNotification", ["info", "Refresh this page to view new content", 10000]);
-						    	// push site to sites array
-								$scope.sites.push(site);
-								// get channel						
-								$scope.getChannel(site);
-						    }
-						}
-						// if no matching site found in merger site list after adding
-						if (siteFound === false){
-						// finish loading		    	
-						    $scope.finishLoadingChannels();								
-						}
-					});					
-				});
-			};*/
 
 			// get channel
 			$scope.getChannel = function(channel){
@@ -204,6 +173,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// filter channel
 			$scope.filterChannel = function(channel){
+				delete $scope.channel;
 				$scope.channel = channel;
 				if (!$scope.filters) {
 					$scope.filters = {channel_address:channel.channel_address}	
@@ -214,9 +184,15 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				$scope.mainFilter();
 			};
 
+			$scope.removeFilterChannel = function(){
+				delete $scope.channel;
+				delete $scope.filters.channel_address;
+			};
+
 			// main filter function
 			$scope.mainFilter = function() {
 				$scope.channel = Central.filterItemsByChannel($scope.channel,$scope.items,$scope.filters);
+				console.log($scope.channel);
 			};
 
 			// main remove filter function

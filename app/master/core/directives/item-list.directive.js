@@ -69,11 +69,13 @@ app.directive('itemList', ['$rootScope',
 
 			// choose item style
 			$scope.chooseStyle = function(is_loaded) {
+				var css_class;
 				if(is_loaded) {
-					return 'itemLoaded';
+					css_class = 'itemLoaded';
 				} else {
-					return 'itemNotLoaded';					
+					css_class = 'itemNotLoaded';					
 				}
+				return css_class;
 			}
 
 			// render item 
