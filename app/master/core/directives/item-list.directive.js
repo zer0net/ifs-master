@@ -116,7 +116,7 @@ app.directive('itemList', ['$rootScope',
 											'<h3><a href="/{{page.site_info.address}}/view.html?type={{item.content_type}}+id={{item.item_id}}">{{item.title}}</a></h3>' +
 											'<ul class="video-info">' +
 							    				'<li><span>{{item.channel.channel_name}}</span></li>' +
-							    				'<li><span>{{item.peer}} peers</span></li>' +
+							    				'<li><span>{{(item.peer>0)?item.peer:" - "}} peers</span></li>' +
 							    				'<li class="votes-count" votes ng-init="getVotes(item)">' +
 													'<span class="up-vote" ng-click="onUpVote(item)">' +
 														'<span class="glyphicon glyphicon-thumbs-up"></span>' +
