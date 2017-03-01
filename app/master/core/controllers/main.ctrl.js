@@ -149,6 +149,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// finish loading channels
 			$scope.finishLoadingChannels = function(){
+				console.log($scope);
 				// sort media types alphabetically
 				$scope.media_types.sort();
 				// finished loading & apply to scope
@@ -164,7 +165,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// filter channel
 			$scope.filterChannel = function(channel){
-				$scope.showLoadingMessage(channel.channel_name);
+				$scope.loading_list = true;
 				if (!$scope.filters) {
 					$scope.filters = {channel_address:channel.channel_address}	
 				} 
@@ -178,13 +179,13 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// main filter function
 			$scope.mainFilter = function() {
 				$scope.channel = Central.filterItemsByChannel($scope.channel,$scope.items,$scope.filters);
-				$scope.finishedLoading();
+				$scope.loading_list = false;
 			};
 
 			// remove filter channel
 			$scope.removeFilterChannel = function(){
-				delete $scope.channel;
-				delete $scope.filters.channel_address;
+				if ($scope.channel) delete $scope.channel;
+				if ($scope.filters) delete $scope.filters.channel_address;
 			};
 
 			// main remove filter function

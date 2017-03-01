@@ -1,5 +1,5 @@
-app.directive('sidebar', ['$rootScope',
-	function($rootScope) {
+app.directive('sidebar', ['$rootScope','$timeout',
+	function($rootScope,$timeout) {
 
 		// header directive controller
 		var controller = function($scope,$element) {
@@ -13,8 +13,12 @@ app.directive('sidebar', ['$rootScope',
 			$scope.onFilterChannel = function(channel) {
 				if ($scope.channel){
 					$scope.removeFilterChannel();
+					$timeout(function () {
+						$scope.filterChannel(channel);
+					});
+				} else {
+					$scope.filterChannel(channel);
 				}
-				$scope.filterChannel(channel);
 			};
 
 			// on remove filter channel

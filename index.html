@@ -125,22 +125,26 @@
 
                             <!-- item listing by media type -->
                             <section class="wrap-section main-listing-container" ng-if="config.listing.type === 'by content type'">
-                              <md-content class="container" ng-if="items">
-                                 <uib-tabset active="activePill" vertical="true" type="pills">
-                                    <uib-tab index="0" ng-if="!channel" heading="All ({{items.total}})">
-                                        <item-list ng-init="initItemListAll(items)"></item-list> 
-                                    </uib-tab>
-                                    <uib-tab index="0" ng-if="channel" heading="All ({{channel.items_total}})">
-                                        <item-list ng-init="initItemListAll(channel.items)"></item-list> 
-                                    </uib-tab>
-                                    <uib-tab index="$index + 1" ng-if="!channel" ng-repeat="media_type in media_types" heading="{{media_type}} ({{items[media_type].length}})">
-                                        <item-list ng-init="initItemListByMediaType(media_type)"></item-list>
-                                    </uib-tab>
-                                    <uib-tab index="$index + 1" ng-if="channel" ng-repeat="media_type in media_types" heading="{{media_type}} ({{channel.items[media_type].length}})">
-                                        <item-list ng-init="initItemListByMediaType(media_type,channel)"></item-list>
-                                    </uib-tab>
-                                  </uib-tabset>
-                              </md-content>
+                                <md-content class="container" ng-if="items">
+                                    <div ng-if="!loading_list">
+                                        <uib-tabset ng-if="!channel" active="activePill" vertical="true" type="pills">
+                                            <uib-tab index="0" heading="All ({{items.total}})">
+                                                <item-list ng-init="initItemListAll(items)"></item-list> 
+                                            </uib-tab>
+                                            <uib-tab index="$index + 1" ng-repeat="media_type in media_types" heading="{{media_type}} ({{items[media_type].length}})">
+                                                <item-list ng-init="initItemListByMediaType(media_type)"></item-list>
+                                            </uib-tab>
+                                        </uib-tabset>
+                                        <uib-tabset ng-if="channel" active="activePill" vertical="true" type="pills">
+                                            <uib-tab index="0" ng-if="channel" heading="All ({{channel.items_total}})">
+                                                <item-list ng-init="initItemListAll(channel.items)"></item-list> 
+                                            </uib-tab>
+                                            <uib-tab index="$index + 1" ng-if="channel" ng-repeat="media_type in channel.media_types" heading="{{media_type}} ({{channel.items[media_type].length}})">
+                                                <item-list ng-init="initItemListByMediaType(media_type,channel)"></item-list>
+                                            </uib-tab>
+                                        </uib-tabset>
+                                    </div>
+                                </md-content>
                             </section>
                             <!-- /item listing by media type -->
 

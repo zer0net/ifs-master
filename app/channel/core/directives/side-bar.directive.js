@@ -4,6 +4,13 @@ app.directive('sideBar', [
 		// site header controller
 		var controller = function($scope,$element) {
 
+			$scope.init = function(){
+				if ($scope.item.poster_file){
+					$scope.item.poster_path = '/' + $scope.page.site_info.address + '/merged-' + $scope.page.site_info.content.merger_name + '/' + $scope.item.channel.cluster_id + '/data/users/' + $scope.item.channel.user_id + '/' + $scope.item.poster_file;
+				}
+				$scope.generateItemProperties();
+			};
+
 			// generate item properties
 			$scope.generateItemProperties = function(){
 				$scope.itemProperties = [];
@@ -36,7 +43,7 @@ app.directive('sideBar', [
 
 		// site header template
 		var template = 	'<aside flex="30" layout="column" layout-padding>' +
-							'<ul class="item-details md-whiteframe-1dp" flex="100" ng-init="generateItemProperties()">' +
+							'<ul class="item-details md-whiteframe-1dp" flex="100" ng-init="init()">' +
 								'<li class="item-property" ng-repeat="property in itemProperties">' +
 									'<b class="key">{{property.key}}:</b> ' +
 									'<span class="value" ng-if="property.type === \'normal\'">{{property.value}}</span>' +
@@ -48,7 +55,7 @@ app.directive('sideBar', [
 								'<h3>Image</h3>'+
 								'<hr/>'+
 								'<!-- item image -->' +
-								'<img ng-src="{{item.poster_file}}" ng-if="!item.poster" ng-show="item.poster_file" style="margin-bottom:8px;"/>' +
+								'<img ng-src="{{item.poster_path}}" ng-if="!item.poster" ng-show="item.poster_file" style="margin-bottom:8px;"/>' +
 								'<img ng-src="{{item.poster}}" ng-if="item.poster" ng-show="item.poster" style="margin-bottom:8px;"/>' +
 								'<!-- /item image -->' +
 								'<!-- image upload -->' +
