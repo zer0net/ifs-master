@@ -43,9 +43,9 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 				} else {
 					// apply first channel to scope
 					$scope.channel = $scope.u_channels[0];
-					// url suffix for inner links
-					$scope.url_suffix = '?cl=' + $scope.channel.cluster_id + '+ch=' + $scope.channel.channel_address;
 				}
+				// url suffix for inner links
+				$scope.url_suffix = '?cl=' + $scope.channel.cluster_id + '+ch=' + $scope.channel.channel_address;
 				// set current channels cluster merged site info
 				$scope.getClusterSiteInfo();
 			};
