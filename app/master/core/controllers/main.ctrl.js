@@ -164,25 +164,27 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// filter channel
 			$scope.filterChannel = function(channel){
-				delete $scope.channel;
-				$scope.channel = channel;
+				$scope.showLoadingMessage(channel.channel_name);
 				if (!$scope.filters) {
 					$scope.filters = {channel_address:channel.channel_address}	
 				} 
 				else {
 					$scope.filters.channel_address = channel.channel_address;
 				}
+				$scope.channel = channel;
 				$scope.mainFilter();
-			};
-
-			$scope.removeFilterChannel = function(){
-				delete $scope.channel;
-				delete $scope.filters.channel_address;
 			};
 
 			// main filter function
 			$scope.mainFilter = function() {
 				$scope.channel = Central.filterItemsByChannel($scope.channel,$scope.items,$scope.filters);
+				$scope.finishedLoading();
+			};
+
+			// remove filter channel
+			$scope.removeFilterChannel = function(){
+				delete $scope.channel;
+				delete $scope.filters.channel_address;
 			};
 
 			// main remove filter function

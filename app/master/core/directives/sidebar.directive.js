@@ -11,7 +11,9 @@ app.directive('sidebar', ['$rootScope',
 
 			// on filter channel
 			$scope.onFilterChannel = function(channel) {
-				// on filter channel
+				if ($scope.channel){
+					$scope.removeFilterChannel();
+				}
 				$scope.filterChannel(channel);
 			};
 
