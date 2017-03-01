@@ -6,7 +6,7 @@ app.directive('videoPlayer', ['$sce','$timeout',
 
 		    // load video
 		    $scope.loadVideo = function(item){
-		    	
+		    	console.log(item);
 		    	if (item.file_type === 'ogv'){
 		    		item.file_type = 'ogg';
 		    	}
@@ -22,7 +22,7 @@ app.directive('videoPlayer', ['$sce','$timeout',
 						sources: [
 							{
 								src:'merged-'+$scope.page.site_info.content.merger_name+'/' + item.channel.cluster_id + '/data/users/' + item.channel.user_id + '/' + item.file_name,
-								type:'video/'+item.file_type
+								type:item.content_type + '/' + item.file_type
 							}
 						],
 						theme: "assets/lib/videos/videogular-themes-default/videogular.css"

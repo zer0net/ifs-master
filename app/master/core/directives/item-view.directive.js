@@ -75,7 +75,7 @@ app.directive('itemView', [
 									'<game-view ng-if="items"></game-view>' +
 									'<!-- /game -->' +
 								'</div>' +
-								'<div ng-if="item_type === \'video\'">' +
+								'<div ng-if="item_type === \'video\' || item_type === \'audio\'">' +
 									'<!-- video  -->' +
 									'<video-view ng-if="items"></video-view>' +
 									'<!-- /video -->' +

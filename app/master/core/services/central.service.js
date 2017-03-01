@@ -90,13 +90,15 @@ app.factory('Central', [
 		// merge channel items to scope items
 		Central.mergeChannelItems = function(items,items_total,media_types,chJson){
 			for (var i in chJson.items){
-				if (!items[i]) items[i] = [];
-				items.total += chJson.items[i].length;
-				items[i] = items[i].concat(chJson.items[i]);
-				chJson.items[i].forEach(function(item,index){
-					item.channel = chJson.channel;
-				});
-				if (media_types.indexOf(i) === -1 && i !== 'total') media_types.push(i);
+				if (i !== 'images' && i !== 'total'){
+					if (!items[i]) items[i] = [];
+					items.total += chJson.items[i].length;
+					items[i] = items[i].concat(chJson.items[i]);
+					chJson.items[i].forEach(function(item,index){
+						item.channel = chJson.channel;
+					});
+					if (media_types.indexOf(i) === -1) media_types.push(i);
+				}
 			}
 			return items;
 		};
