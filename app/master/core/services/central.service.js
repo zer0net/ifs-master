@@ -121,6 +121,20 @@ app.factory('Central', [
 			return channel;
 		};
 
+		// join channel moderation
+		Central.joinChannelModeration = function(channels,moderations){
+			channels.forEach(function(channel,index){
+				moderations.forEach(function(mod,mIndex){
+					if (mod.item_id === channel.channel_address){
+						for (var i in mod){
+							channel[i] = mod[i];
+						}
+					}
+				});
+			});
+			return channels;
+		}
+
 		return Central;
 	}
 ]);

@@ -43,78 +43,26 @@
 	    <div id="page-content-wrapper">
 	        <div class="container-fluid" style="padding-left: 0px">
 	            <div class="row">
-	                <div class="col-lg-12"> 
-					<!-- HEADER -->
-					<site-header></site-header>
-					<!-- /HEADER -->
-					<!-- MAIN -->
-					<section channel-register id="channel-register-view" layout="column" class="container" style="padding-top: 50px;" ng-if="!loading">						
+	                <div class="col-lg-12">
 
-						<main flex="100" layout-padding>
+						<!-- HEADER -->
+						<site-header></site-header>
+						<!-- /HEADER -->
 
-							<!-- CHANNEL REGISTER -->
-								<!-- channel input -->
-								<!--
-								<md-content class="md-whiteframe-1dp section"  layout="column" layout-padding>
-									<div class="section-header">
-										<h2>Add Channel</h2>
-										<hr/>
-									</div>
-									<div class="section-body">
-							            <md-input-container class="md-block" flex-gt-sm>
-							              	<label>Channel id (site_address)</label>
-							              	<div class="row">
-							              		<div class="col-xs-10">
-													<input ng-model="channel_id" channel-input>
-												</div>
-												<div class="col-xs-2" style="padding-right:8px;">
-												    <md-button class="md-primary md-raised pull-right" ng-click="showChannel()">
-												    	Check Site
-												    </md-button>
-											    </div>
-										    </div>
-											<div ng-message="min">
-											
-												<b color="red" ng-hide="nonValid">*channel operator only permits non-adult {{media_type}} channels</b>
-											
-												<b color="red" ng-show="nonValid">not a valid channel address!</b>
+						<!-- MAIN -->
+						<section channel-register id="channel-register-view" layout="column" class="container" style="padding-top: 50px;" ng-if="!loading">						
+							<main flex="100" layout-padding>
 
-												<b color="red" ng-show="isExist">channel address existing!</b>
-												
-											</div>
-							            </md-input-container>
-						            </div>
+								<!-- CHANNELS -->
+								<md-content flex class="section md-whiteframe-1dp" id="channels-section" layout="column" layout-padding>
+									<channel-register-list> </channel-register-list>
 								</md-content>
-								-->
-								<!-- /channel input -->
+								<!-- /CHANNELS -->
 
-								<!-- /channel -->
-								<!--
-							    <md-content ng-if="channel && !isExist" class="md-whiteframe-1dp section">
-							    	<channel-register-preview> </channel-register-preview>								 										    
-									<md-button class="md-hue-2 md-primary md-raised edgePadding pull-right" ng-click="addChannel(channel_id,channel)">
-										Add Channel
-									</md-button>
-							    </md-content>
-							    -->
-							    <!-- /channel -->
-							<!-- /CHANNEL REGISTER -->
-							
-							<hr/>
-
-							<!-- CHANNELS -->
-							<md-content flex class="section md-whiteframe-1dp" id="channels-section" layout="column" layout-padding>
-								<channel-register-list> </channel-register-list>								
-							</md-content>
-							<!-- /CHANNELS -->
-
-						</main>
+							</main>
+						</section>
 						<!-- /MAIN -->
-
-						<hr/>
-					
-					</section>
-					<!-- /MAIN -->
+							
 		            </div>
 		        </div>
 		    </div>
@@ -165,6 +113,7 @@
         <script type="text/javascript" src="app/master/core/directives/channel-register.directive.js"></script>
         <script type="text/javascript" src="app/master/core/directives/channel-register-list.directive.js"></script> 
         <script type="text/javascript" src="app/master/core/directives/channel-register-preview.directive.js"></script> 
+        <script type="text/javascript" src="app/master/core/directives/moderations.directive.js"></script>
                
 		<script type="text/javascript" src="app/master/core/directives/channel-input.directive.js"></script>
         <script type="text/javascript" src="app/master/core/services/item.service.js"></script>

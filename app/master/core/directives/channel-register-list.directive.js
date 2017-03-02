@@ -41,21 +41,21 @@ app.directive('channelRegisterList', ['$location','$rootScope',
 										'<th ng-click="sort(\'date_added\')">Date<span class="glyphicon sort-icon" ng-show="sortKey==\'date_added\'" ng-class="{\'glyphicon-chevron-up\':reverse,\'glyphicon-chevron-down\':!reverse}"></span></th>' +
 										'<th ng-click="sort(\'games\')">Games<span class="glyphicon sort-icon" ng-show="sortKey==\'games\'" ng-class="{\'glyphicon-chevron-down\':reverse,\'glyphicon-chevron-up\':!reverse}"></span></th>' +
 										'<th ng-click="sort(\'videos\')">Videos<span class="glyphicon sort-icon" ng-show="sortKey==\'videos\'" ng-class="{\'glyphicon-chevron-down\':reverse,\'glyphicon-chevron-up\':!reverse}"></span></th>' +
-										'<th ng-if="owner">Action</th>' +
+										'<th ng-if="page.site_info.settings.own">Action</th>' +
 									'</tr>' +
 								'</thead>' +
-								'<tr dir-paginate="channel in channels|orderBy:sortKey:reverse|itemsPerPage:itemsPerPage track by $index" pagination-id="channel-register-list-pid">' +
+								'<tr dir-paginate="channel in channels|orderBy:sortKey:reverse|itemsPerPage:itemsPerPage track by $index" pagination-id="channel-register-list-pid" moderations>' +
 									'<td><a ng-click="onFilterChannel(channel)">{{channel.channel_name}}</a></td>' +
 									'<td>{{channel.channel_address}}</td>' +
 									'<td>{{channel.channel_description }}</td>' +
 									'<td><span am-time-ago="channel.date_added"></span></td>' +
 									'<td>{{channel.games.length}}</td>' +
 									'<td>{{channel.videos.length}}</td>' +
-									'<td ng-if="owner">'+
-									'<a class="pull-right" ng-if="owner" ng-click="toggleChannel(channel,$index)">'+
-										'<button class="btn btn-primary" ng-if="channel.hide==0"><span class="glyphicon glyphicon-minus">Hide</span></button>'+
-										'<button class="btn btn-primary" ng-if="channel.hide==1" ><span class="glyphicon glyphicon-plus">Show</span></button>'+
-									'</a>'+
+									'<td ng-if="page.site_info.settings.own" >'+
+										'<a class="pull-right" ng-click="toggleChannelVisibility(channel)">'+
+											'<button class="btn btn-primary" ng-if="!channel.hide || channel.hide === 0"><span class="glyphicon glyphicon-minus">Hide</span></button>'+
+											'<button class="btn btn-primary" ng-if="channel.hide==1" ><span class="glyphicon glyphicon-plus">Show</span></button>'+
+										'</a>'+
 									'</td>' +							    	
 								'</tr>' +
 							'</table>' +

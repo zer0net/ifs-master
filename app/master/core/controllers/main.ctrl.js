@@ -86,15 +86,22 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// get channels
 			$scope.getChannels = function(){
+
 				// loading
-				$scope.showLoadingMessage('Loading Channels');					
-				// get channels				
-				var query = ["SELECT * FROM channel WHERE cluster_id IS NOT NULL ORDER BY date_added"];
-				Page.cmd("dbQuery", query, function(channels) {	
+				$scope.showLoadingMessage('Loading Channels');
+
+				// get channels
+				var query = ["SELECT * FROM channel WHERE cluster_id IS NOT NULL"];
+				Page.cmd("dbQuery", query, function(channels) {
+					console.log(channels);
 					if (channels.length > 0){
-						$scope.channels = channels;
-						$scope.cIndex = 0;
-						$scope.getChannel($scope.channels[$scope.cIndex]);
+						var query = ["SELECT * FROM moderation WHERE current = 1"];
+						Page.cmd("dbQuery", query ,function(moderations){
+							$scope.channels = Central.joinChannelModeration(channels,moderations);
+							console.log($scope.channels);
+							$scope.cIndex = 0;
+							$scope.getChannel($scope.channels[$scope.cIndex]);
+						});
 					} else {
 						$scope.showLoadingMessage('No Channels!');
 						$scope.finishedLoading();
@@ -107,16 +114,20 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			$scope.getChannel = function(channel){
 				// update cIndex
 				$scope.cIndex += 1;
-				// get channel.json
-				var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+channel.cluster_id+'/data/users/'+channel.user_id+'/'+channel.channel_address+'.json';
-				Page.cmd("fileGet",{"inner_path":inner_path},function(chJson){
-				    if (chJson){
-						chJson = JSON.parse(chJson);
-						$scope.addChannelItems(chJson,channel);
-					} else {
-						console.log('No content.json found for '+channel.channel_address+'!');
-					}
-				});
+				if (channel.hide !== 1){
+					// get channel.json
+					var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+channel.cluster_id+'/data/users/'+channel.user_id+'/'+channel.channel_address+'.json';
+					Page.cmd("fileGet",{"inner_path":inner_path},function(chJson){
+					    if (chJson){
+							chJson = JSON.parse(chJson);
+							$scope.addChannelItems(chJson,channel);
+						} else {
+							console.log('No content.json found for '+channel.channel_address+'!');
+						}
+					});
+				} else {
+					$scope.finishLoadingChannel();
+				}
 			};
 	
 			// add channels items

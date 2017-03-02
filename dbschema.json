@@ -18,6 +18,10 @@
             "to_table": ["comment"],
             "to_keyvalue": ["next_comment_id"]
         },
+        "users/.+/moderation.json":{
+            "to_table": ["moderation"],
+            "to_keyvalue": ["next_moderation_id"]
+        },        
         "users/.+/view.json":{
             "to_table": ["view"],
             "to_keyvalue": ["next_view_id"]
@@ -68,6 +72,19 @@
                 ["json_id", "INTEGER REFERENCES json (json_id)"]
             ],
             "indexes": ["CREATE UNIQUE INDEX comment_key ON comment(json_id, date_added)"],
+            "schema_changed": 1
+        },
+        "moderation": {
+            "cols": [
+                ["moderation_id", "INTEGER"],
+                ["moderation_type", "TEXT"],
+                ["item_id", "INTEGER"],
+                ["hide", "INTEGER"],
+                ["current", "INTEGER"],
+                ["date_added", "INTEGER"],
+                ["json_id", "INTEGER REFERENCES json (json_id)"]
+            ],
+            "indexes": ["CREATE UNIQUE INDEX moderation_key ON moderation(json_id, date_added)"],
             "schema_changed": 1
         },
         "subcategory": {

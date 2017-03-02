@@ -34,7 +34,7 @@ app.directive('sidebar', ['$rootScope','$timeout',
 							       '<li class="sidebar-brand">' +
 							          'Channels  <span class="glyphicon glyphicon-refresh"  ng-click="onRemoveFilterChannel()" ></span>' +
 							        '</li>' +
-							       	'<li ng-repeat="channel in channels | orderBy:\'-date_added\'" ng-init="renderChannelItem(channel)" ng-click="onFilterChannel(channel)">' +
+							       	'<li ng-repeat="channel in channels | orderBy:\'-date_added\'" ng-if="channel.hide !== 1" ng-init="renderChannelItem(channel)" ng-click="onFilterChannel(channel)">' +
 							            '<div>' +
 							                '<a href="#">' +
 												'<figure class="channel-list-item-logo"><img ng-if="channel.logo_file" ng-src="{{channel.logo_path}}"/></figure>' +

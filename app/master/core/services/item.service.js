@@ -146,6 +146,18 @@ app.factory('Item', [
 			return item;
 		};
 
+		// remove current moderation
+		Item.removeCurrentModeration = function(moderations,moderation){
+			if (moderations.length > 0){
+				moderations.forEach(function(mod,index){
+					if (mod.item_type === moderation.item_type && mod.item_id === moderation.item_id && mod.current === 1){
+						mod.current = 0;
+					}
+				});
+			}
+			return moderations;
+		};
+
 		return Item;
 	}
 ]);
