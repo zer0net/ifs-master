@@ -24,6 +24,12 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 				$window.location.href = '/'+ $scope.page.site_info.address +'/user/index.html?cl='+channel.cluster_id + '+ch=' + channel.channel_address;
 			};
 
+			// on create new channel
+			$scope.onCreateNewChannel = function(){
+				console.log('on create new channel');
+		    	$rootScope.$broadcast('onCreateChannel',$scope);
+			};
+
 			/** DIALOGS **/
 
 			// open edit channel dialog
@@ -64,18 +70,21 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 
 		// site header template	
 		var template = 	'<div class="wrapper channel-menu">'+
-							'<div class="container-fluid select-channel">' +
+							'<div class="container-fluid select-channel" ng-if="u_channels">' +
 								'<label>Select channel: </label>' +											
 								'<select class="form-control" ng-model="channel" value="channel.channel_address" ng-options="channel.option_label for channel in u_channels" ng-change="onSelectSite(channel)"></select>' +
 							'</div>' +
-						'</div>'+
-						'<md-toolbar ng-init="init()" ng-if="channel" layout-padding class="md-hue-2 header" layout="row">' +
+							'<div class="container-fluid select-channel">' +
+								'<span style="color:white;"> no registered channels</span>' + 
+							'</div>' + 
+						'</div>' +
+						'<md-toolbar ng-init="init()" layout-padding class="md-hue-2 header" layout="row">' +
 							'<div class="col-xs-5">' + 
 								'<div class="channel-header-top">' + 
 									'<figure class="logo">' + 
 										'<img ng-if="chJson.channel.logo_file" ng-src="/{{page.site_info.address}}/merged-IFS/{{channel.cluster_id}}/data/users/{{channel.user_id}}/{{chJson.channel.logo_file}}"/>' + 
 									'</figure>' +
-									'<div class="site-title">' + 
+									'<div class="site-title" ng-if="channel">' + 
 										'<h3>' + 
 											'<a href="/{{page.site_info.address}}/user/index.html{{url_suffix}}"> {{channel.channel_name}} </a>' + 
 											'<small><a ng-click="openChannelEditDialog(chJson)"><span class="glyphicon glyphicon-pencil"></span></a></small>' + 
@@ -84,7 +93,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 										'<div class="channel-description">{{chJson.channel.channel_description}}</div>' +
 									'</div>' + 
 								'</div>' +
-								'<div class="channel-header-bottom">' + 
+								'<div class="channel-header-bottom" ng-if="channel">' + 
 									'<div class="sub-title">' + 
 										'<small>' + 
 											'Site : &nbsp;{{cluster.peers}} peers &nbsp; • &nbsp; Files &nbsp;  {{ch_files.total_downloaded}} / {{ch_files.total}} Total &nbsp;• &nbsp; Size : &nbsp;{{ch_files.total_downloaded_size|filesize}} / {{ch_files.total_size|filesize}} Total' +
@@ -93,18 +102,19 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 								'</div>' +
 							'</div>' + 
 							'<div class="pull-right col-xs-7">' + 
-								'<ul>' + 		
-									'<li>' + 						
-										'<md-button ng-if="optionalHelp==false" class="md-primary md-raised edgePadding pull-left" ng-click="onOptionalHelp()"> distribute all files</md-button>' +
-										'<md-button ng-if="optionalHelp==true" class="md-primary md-raised edgePadding pull-left" ng-click="onRemoveOptionalHelp()">stop distribute all files</md-button>' +
-						        	'</li>' + 			
+								'<ul ng-if="channel">' +	
 						        	'<li>' +
 										'<md-button class="md-primary md-raised edgePadding pull-left" href="/{{page.site_info.address}}/user/upload.html{{url_suffix}}" >Upload</md-button>' + 				       
-						        	'</li>' + 
+						        	'</li>' +
 						        	'<li>' +
 										'<md-button class="md-primary md-raised edgePadding pull-left" ng-click="onPublishSite()">{{publishButtonStatus}}</md-button>' + 				       
 						        	'</li>' + 						        	
 								'</ul>' + 
+								'<ul ng-if="!channel">' +
+					        		'<li>' +
+										'<md-button class="md-primary md-raised edgePadding pull-left" channel-register ng-click="createNewChannel()">New Channel</md-button>' + 				       
+						        	'</li>' +
+								'</ul>' +
 					        '</div>' + 
 						'</md-toolbar>';
 		return {
