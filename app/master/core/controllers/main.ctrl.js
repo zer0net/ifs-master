@@ -134,6 +134,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					// assign to each file in chJson.items its correspoding site_file
 					chJson = Channel.matchItemsWithSiteFiles(chJson,site_files);
 					channel.items_total = chJson.items_total;
+					channel.items = chJson.items;
 					// merge chJson.items to $scope.items
 					if (!$scope.items) {
 						$scope.items = {
@@ -141,7 +142,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 						};	
 					}
 					if (!$scope.media_types) $scope.media_types = [];
-					$scope.items = Central.mergeChannelItems($scope.items,$scope.items_total,$scope.media_types,chJson);
+					$scope.items = Central.mergeChannelItems($scope.items,$scope.items_total,$scope.media_types,chJson);					
 					$scope.finishLoadingChannel();
 			    });
 			};
