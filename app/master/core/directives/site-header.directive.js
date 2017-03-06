@@ -96,8 +96,9 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope','$location',
 
 		};
 
+
 		// dialog controller
-		var DialogController= function($scope, $mdDialog,items) {
+		var DialogController= function($scope, $mdDialog ,items) {
 			
 			// items
 			$scope.items = items;	
@@ -114,6 +115,7 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope','$location',
 
 			// handle clone click
 			$scope.handleCloneClick = function() {
+				console.log('handle clone click')
 		    	$rootScope.$broadcast('onCreateChannel',$scope.items.scope);
 			};
 

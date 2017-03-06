@@ -24,6 +24,8 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 						$scope.u_channels = Channel.renderChannels(channels);
 						// assign current user channel
 						$scope.assignCurrentUserChannel();
+					} else {
+						$scope.finishLoading();
 					}
 				});
 			};
@@ -93,10 +95,8 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 			$scope.updateChannelJson = function(){
 				$scope.showLoadingMsg('updating ' + $scope.chJson.channel.channel_address + '.json');
 				$scope.chJson = Channel.renderChannelItemsBeforeUpdate($scope.chJson);
-				console.log($scope.chJson.items);
 				var json_raw = unescape(encodeURIComponent(JSON.stringify($scope.chJson, void 0, '\t')));
 				Page.cmd("fileWrite", [$scope.inner_path  + $scope.chJson.channel.channel_address + '.json', btoa(json_raw)], function(res) {
-					console.log(res);
 					if (res === 'ok'){
 						console.log('channel json updated');
 						$scope.publishSite();
@@ -134,7 +134,7 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 				$scope.showLoadingMsg('updating channel record');
 				// get users channel.json file
 				var inner_path = "data/users/"+$scope.page.site_info.auth_address+"/channel.json";
-				Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(data) {		        	
+				Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(data) {        	
 		        	// data
 		        	data = JSON.parse(data);
 		        	// find channel in user channels array
@@ -153,8 +153,6 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 						console.log(res);
 						// sign & publish site
 						Page.cmd("sitePublish",{"inner_path":inner_path}, function(res) {
-							console.log(res);
-							console.log('channel record updated');
 							// update channel json 
 							$scope.chJson.channel = channel;
 							$scope.updateChannelJson(channel);

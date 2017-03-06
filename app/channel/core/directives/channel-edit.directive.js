@@ -37,28 +37,29 @@ app.directive('channelEdit', ['$sce','$location',
 				// reader on load
 				reader.onload = function(){
 					var file_name = file.name.split(' ').join('_').normalize('NFKD').replace(/[\u0300-\u036F]/g, '').replace(/ß/g,"ss").split('.' + file.file_type)[0].replace(/[^\w\s]/gi, '') + '.' + file.type.split('/')[1];
-					$scope.file = file;
 					$scope.chJson.channel.logo_file = file_name;
+					$scope.imgSrc = reader.result;
 					// apply to scope
-					$scope.$apply(function() {
-						$scope.imgSrc = reader.result;
-					});
+					$scope.$apply();
 				};
 				reader.readAsDataURL(file);
 			};
 
 			// upload logo image
 			$scope.uploadLogoImage = function(chJson){
-				var logo_path = 'merged-IFS/'+$scope.chJson.channel.cluster_id+'/data/users/'+$scope.page.site_info.auth_address+'/'+$scope.chJson.channel.logo_file;
-				Page.cmd("fileWrite",[logo_path, $scope.imgSrc.split('base64,')[1] ], function(res) {
+				var inner_path = 'merged-IFS/'+chJson.channel.cluster_id+'/data/users/'+$scope.page.site_info.auth_address+'/'+chJson.channel.logo_file;
+				console.log(chJson.channel.logo_file);
+				console.log(inner_path);
+				Page.cmd("fileWrite",[inner_path, $scope.imgSrc.split('base64,')[1] ], function(res) {
+					console.log(res);
 					$scope.updateChannelRecord(chJson.channel);
 				});
 			};
 
 			// save channel details
 			$scope.onUpdateChannel = function(chJson) {
-				console.log(chJson);
-				if ($scope.file){ 
+				console.log('on update channel');
+				if ($scope.imgSrc){ 
 					$scope.uploadLogoImage(chJson);
 				} else { 
 					$scope.updateChannelRecord(chJson.channel);

@@ -15,8 +15,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 						Page.site_info = site_info;
 						// page
 						$scope.page = Page;
-						// update site
-						Page.cmd('siteUpdate',{"address":$scope.page.site_info.address});
 						// get config
 						Page.cmd("fileGet",{"inner_path":"content/config.json"},function(data){
 							$scope.config = JSON.parse(data);
@@ -60,6 +58,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    // get clusters
 		    $scope.getClusters = function(){
 				Page.cmd("fileGet",{"inner_path":"content/clusters.json"},function(data){
+					console.log(data);
 					data = JSON.parse(data);
 					$scope.clusters = data.clusters;
 					$scope.clIndex = 0;
@@ -93,12 +92,10 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				// get channels
 				var query = ["SELECT * FROM channel WHERE cluster_id IS NOT NULL"];
 				Page.cmd("dbQuery", query, function(channels) {
-					console.log(channels);
 					if (channels.length > 0){
 						var query = ["SELECT * FROM moderation WHERE current = 1"];
 						Page.cmd("dbQuery", query ,function(moderations){
 							$scope.channels = Central.joinChannelModeration(channels,moderations);
-							console.log($scope.channels);
 							$scope.cIndex = 0;
 							$scope.getChannel($scope.channels[$scope.cIndex]);
 						});
@@ -160,7 +157,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// finish loading channels
 			$scope.finishLoadingChannels = function(){
-				console.log($scope);
 				// sort media types alphabetically
 				$scope.media_types.sort();
 				// finished loading & apply to scope
@@ -296,23 +292,3 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 	}
 ]);
-
-// dialog controller
-var DialogController = function($scope, $mdDialog, $rootScope, items) {
-
-	// items
-	$scope.items = items;
-
-	$scope.hide = function() {
-		$mdDialog.hide();
-	};
-	
-	$scope.cancel = function() {
-		$mdDialog.cancel();
-	};
-	
-	$scope.answer = function(answer) {
-		$mdDialog.hide(answer);
-	};
-	
-};

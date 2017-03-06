@@ -171,8 +171,6 @@ app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
 							var media_type = item.content_type + 's';
 							if (!$scope.chJson.items[media_type]){$scope.chJson.items[media_type] = [];}
 							$scope.chJson.items[media_type].push(item);
-							console.log(media_type);
-							console.log($scope.chJson);
 							// upload next file
 							$scope.uploadNextFile();
 						});

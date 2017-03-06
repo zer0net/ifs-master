@@ -5,7 +5,7 @@ app.directive('channelRegister', ['Channel','$rootScope','$window',
 		var controller = function($scope,$element) {
 
 			// on create channel
-			$scope.onCreateChannel = function() {
+			$scope.createNewChannel = function() {
 				console.log('create channel start');				
 				// channel record
 				var channel = {
@@ -22,8 +22,7 @@ app.directive('channelRegister', ['Channel','$rootScope','$window',
 				$scope.config = scope.config;
 				$scope.merger_name = scope.merger_name;
 				$scope.page = scope.page;
-				console.log('on create channel');
-				$scope.onCreateChannel();
+				$scope.createNewChannel();
 			});
 
 			// find user directory in clusters
