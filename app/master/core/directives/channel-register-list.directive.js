@@ -35,8 +35,7 @@ app.directive('channelRegisterList', ['$location','$rootScope',
 							'<table class="table table-striped table-hover">' +
 								'<thead>' +
 									'<tr>' +
-										'<th ng-click="sort(\'channel_name\')">Name<span class="glyphicon sort-icon" ng-show="sortKey==\'channel_name\'" ng-class="{\'glyphicon-chevron-down\':reverse,\'glyphicon-chevron-up\':!reverse}"></span></th>' +
-										'<th ng-click="sort(\'channel_address\')">Address<span class="glyphicon sort-icon" ng-show="sortKey==\'channel_address\'" ng-class="{\'glyphicon-chevron-down\':reverse,\'glyphicon-chevron-up\':!reverse}"></span></th>' +
+										'<th ng-click="sort(\'channel_name\')">Name<span class="glyphicon sort-icon" ng-show="sortKey==\'channel_name\'" ng-class="{\'glyphicon-chevron-down\':reverse,\'glyphicon-chevron-up\':!reverse}"></span></th>' +										
 										'<th ng-click="sort(\'channel_description\')">Description<span class="glyphicon sort-icon" ng-show="sortKey==\'channel_description\'" ng-class="{\'glyphicon-chevron-down\':reverse,\'glyphicon-chevron-up\':!reverse}"></span></th>' +
 										'<th ng-click="sort(\'date_added\')">Date<span class="glyphicon sort-icon" ng-show="sortKey==\'date_added\'" ng-class="{\'glyphicon-chevron-up\':reverse,\'glyphicon-chevron-down\':!reverse}"></span></th>' +
 										'<th ng-click="sort(\'games\')">Games<span class="glyphicon sort-icon" ng-show="sortKey==\'games\'" ng-class="{\'glyphicon-chevron-down\':reverse,\'glyphicon-chevron-up\':!reverse}"></span></th>' +
@@ -45,8 +44,7 @@ app.directive('channelRegisterList', ['$location','$rootScope',
 									'</tr>' +
 								'</thead>' +
 								'<tr dir-paginate="channel in channels|orderBy:sortKey:reverse|itemsPerPage:itemsPerPage track by $index" pagination-id="channel-register-list-pid" moderations>' +
-									'<td><a ng-click="onFilterChannel(channel)">{{channel.channel_name}}</a></td>' +
-									'<td>{{channel.channel_address}}</td>' +
+									'<td><a ng-click="onFilterChannel(channel)">{{channel.channel_name}}</a></td>' +									
 									'<td>{{channel.channel_description }}</td>' +
 									'<td><span am-time-ago="channel.date_added"></span></td>' +
 									'<td>{{channel.games.length}}</td>' +
