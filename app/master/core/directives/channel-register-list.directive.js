@@ -7,6 +7,8 @@ app.directive('channelRegisterList', ['$location','$rootScope',
 			$scope.sortKey = 'date_added';
 			$scope.reverse = true;			
 		    
+		    console.log("-------------------------------------");
+		    console.log($scope.channels);
 		    // on filter channel
 		    $scope.onFilterChannel = function(channel) {
 		    	// on filter channel
@@ -38,6 +40,8 @@ app.directive('channelRegisterList', ['$location','$rootScope',
 										'<th ng-click="sort(\'channel_name\')">Name<span class="glyphicon sort-icon" ng-show="sortKey==\'channel_name\'" ng-class="{\'glyphicon-chevron-down\':reverse,\'glyphicon-chevron-up\':!reverse}"></span></th>' +										
 										'<th ng-click="sort(\'channel_description\')">Description<span class="glyphicon sort-icon" ng-show="sortKey==\'channel_description\'" ng-class="{\'glyphicon-chevron-down\':reverse,\'glyphicon-chevron-up\':!reverse}"></span></th>' +
 										'<th ng-click="sort(\'date_added\')">Date<span class="glyphicon sort-icon" ng-show="sortKey==\'date_added\'" ng-class="{\'glyphicon-chevron-up\':reverse,\'glyphicon-chevron-down\':!reverse}"></span></th>' +
+										'<th ng-click="sort(\'audios\')">Audios<span class="glyphicon sort-icon" ng-show="sortKey==\'audios\'" ng-class="{\'glyphicon-chevron-down\':reverse,\'glyphicon-chevron-up\':!reverse}"></span></th>' +
+										'<th ng-click="sort(\'books\')">Books<span class="glyphicon sort-icon" ng-show="sortKey==\'books\'" ng-class="{\'glyphicon-chevron-down\':reverse,\'glyphicon-chevron-up\':!reverse}"></span></th>' +
 										'<th ng-click="sort(\'games\')">Games<span class="glyphicon sort-icon" ng-show="sortKey==\'games\'" ng-class="{\'glyphicon-chevron-down\':reverse,\'glyphicon-chevron-up\':!reverse}"></span></th>' +
 										'<th ng-click="sort(\'videos\')">Videos<span class="glyphicon sort-icon" ng-show="sortKey==\'videos\'" ng-class="{\'glyphicon-chevron-down\':reverse,\'glyphicon-chevron-up\':!reverse}"></span></th>' +
 										'<th ng-if="page.site_info.settings.own">Action</th>' +
@@ -47,8 +51,10 @@ app.directive('channelRegisterList', ['$location','$rootScope',
 									'<td><a ng-click="onFilterChannel(channel)">{{channel.channel_name}}</a></td>' +									
 									'<td>{{channel.channel_description }}</td>' +
 									'<td><span am-time-ago="channel.date_added"></span></td>' +
-									'<td>{{channel.games.length}}</td>' +
-									'<td>{{channel.videos.length}}</td>' +
+									'<td>{{channel.items.audios.length}}</td>' +
+									'<td>{{channel.items.books.length}}</td>' +
+									'<td>{{channel.items.games.length}}</td>' +
+									'<td>{{channel.items.videos.length}}</td>' +
 									'<td ng-if="page.site_info.settings.own" >'+
 										'<a class="pull-right" ng-click="toggleChannelVisibility(channel)">'+
 											'<button class="btn btn-primary" ng-if="!channel.hide || channel.hide === 0"><span class="glyphicon glyphicon-minus">Hide</span></button>'+
