@@ -7,7 +7,7 @@ app.factory('Channel', [
 		Channel.renderChannels = function(channels){
 			channels.forEach(function(channel,index){
 				// channel option label - for user area channel select labels
-				channel.option_label = channel.channel_address + ' [' + channel.channel_name + ']';
+				channel.option_label = channel.channel_name;
 			});
 			return channels;
 		};

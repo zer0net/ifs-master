@@ -11,8 +11,7 @@ app.directive('channelRegister', ['Channel','$rootScope','$window',
 				var channel = {
 					channel_name:'Default channel name',
 					user_id:$scope.page.site_info.auth_address
-				};
-				consle.log(channel);
+				};				
 				// 0. check if user directory exists in clusters
 				// $scope.findUserDirectory(channel);
 			};

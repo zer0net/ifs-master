@@ -97,15 +97,14 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 										'<h3>' + 
 											'<a ng-click="onChannelMainClick()"> {{channel.channel_name}} </a>' + 
 											'<small><a ng-click="openChannelEditDialog(chJson)"><span class="glyphicon glyphicon-pencil"></span></a></small>' + 
-										'</h3>' + 
-										'<a class="channel-address" href="/{{channel.channel_address}}/"><small ng-bind="channel.channel_address"></small></a>' +
+										'</h3>' + 										
 										'<div class="channel-description">{{chJson.channel.channel_description}}</div>' +
 									'</div>' + 
 								'</div>' +
 								'<div class="channel-header-bottom" ng-if="channel">' + 
 									'<div class="sub-title">' + 
 										'<small>' + 
-											'Site : &nbsp;{{cluster.peers}} peers &nbsp; • &nbsp; Files &nbsp;  {{ch_files.total_downloaded}} / {{ch_files.total}} Total &nbsp;• &nbsp; Size : &nbsp;{{ch_files.total_downloaded_size|filesize}} / {{ch_files.total_size|filesize}} Total' +
+											'Cluster : &nbsp;{{cluster.content.title}} &nbsp; • &nbsp; Files &nbsp;  {{ch_files.total_downloaded}} / {{ch_files.total}} Total &nbsp;• &nbsp; Size : &nbsp;{{ch_files.total_downloaded_size|filesize}} / {{ch_files.total_size|filesize}} Total' +
 										'</small>' + 
 									'</div>' + 
 								'</div>' +
