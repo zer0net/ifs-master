@@ -84,6 +84,19 @@ md-dialog-content {
 #user-channel-wrapper {
   margin-top: 51px;
 }
+.inner-nav {
+  float: left;
+  width: 100%;
+  padding: 0;
+}
+.inner-nav button.md-button {
+  padding: 5px;
+  width: 50px;
+  min-width: 50px;
+  height: 15px;
+  line-height: 15px;
+  min-height: 25px;
+}
 .main-content {
   background-color: #f7f7f7;
 }

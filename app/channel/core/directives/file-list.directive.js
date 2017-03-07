@@ -20,6 +20,12 @@ app.directive('fileList', ['$mdDialog','$mdMedia',
 				}			
 		    };
 			
+		    // edit item
+		    $scope.onEditItem = function(item){
+		    	var view = 'edit';
+		    	$scope.routeUserView(view,item);
+		    };
+
 		    // delete File
 		    $scope.deleteFile = function(item){
 		    	var file_name_field;
@@ -69,7 +75,7 @@ app.directive('fileList', ['$mdDialog','$mdMedia',
 									'<td><i am-time-ago="item.date_added"></i></td>' +
 									'<td>' +
 										'<span ng-click="deleteFile(item)" class="glyphicon glyphicon-trash"></span>' +
-										'<a href="edit.html{{url_suffix}}+type={{item.content_type}}+id={{item.item_id}}">' +
+										'<a ng-click="onEditItem(item)">' +
 										'<span class="glyphicon glyphicon-pencil"></span></a>' +
 									'</td>' +
 								'</tr>' +

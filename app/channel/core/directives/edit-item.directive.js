@@ -8,6 +8,7 @@ app.directive('editItem', [
 			$scope.init = function(){
 				// scope mode
 				$scope.mode = 'edit';
+				console.log($scope.mode);
 			};
 
 			// on update item

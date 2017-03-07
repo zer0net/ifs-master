@@ -25,7 +25,9 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 						// assign current user channel
 						$scope.assignCurrentUserChannel();
 					} else {
-						$scope.finishLoading();
+						// route user section
+						$scope.$apply();
+						$scope.routeUserView();
 					}
 				});
 			};
@@ -82,9 +84,24 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 				Page.cmd("optionalFileList", { address: $scope.channel.cluster_id, limit:2000 }, function(site_files){
 					// render channel files
 					$scope.ch_files = Channel.renderChannelFiles(site_files,$scope.chJson.items);
-					// finish loading
-					$scope.finishLoading();
+					// route user section
+					$scope.$apply();					
+					$scope.routeUserView();
 				});
+			};
+
+			// route user section
+			$scope.routeUserView = function(view, item){
+				if (view) { 
+					$scope.user_view = view; 
+					if (item) $scope.item = item;
+				}
+				else { 
+					$scope.user_view = 'main'; 
+					delete $scope.item;
+				}
+				console.log($scope.item);
+				$scope.finishLoading();
 			};
 
 		/** INIT **/
@@ -180,30 +197,7 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 			// finish loading
 			$scope.finishLoading = function(){
 				$scope.loading = false;
-				$scope.$apply();
 			};
-
-			// on optional help
-			$scope.onOptionalHelp = function() {				
-				$scope.optionalHelp = true;	
-				 return Page.cmd("OptionalHelpAll", [true, $scope.site_address], (function(_this) {
-		          return function() {
-		            Page.site_info.settings.autodownloadoptional =true;
-		            return true;
-		          };
-		        })(this));
-			};
-
-			// on remove optional help
-			$scope.onRemoveOptionalHelp = function() {
-				Page.cmd("OptionalHelpAll", [false, $scope.site_address], (function(_this) {
-				          return function() {
-				            Page.site_info.settings.autodownloadoptional = false;				           				            
-				          };
-				        })(this));
-				//Page.cmd("OptionalHelpRemove", ["uploads"]);		
-				$scope.optionalHelp = false;
-			};  
 
 		/** /UI **/
 

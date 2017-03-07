@@ -58,16 +58,50 @@
 
 							<!-- channel site main  -->
 							<section ng-hide="loading" ng-if="u_channels" ng-controller="ItemsCtrl" layout="row" class="container">
-
 							    <md-content ng-if="chJson" ng-hide="loading" flex layout-padding class="main-content">
-									<!-- file list -->
-									<file-list ng-if="ch_files.total > 0"></file-list>
-									<!-- files list -->
-									<p ng-if="ch_files.total === 0">
-										no files found, <a href="/{{page.site_info.address}}/user/upload.html{{url_suffix}}">upload something!</a>
-									</p>
+									<div ng-if="user_view !== 'main'" class="inner-nav">
+										<md-button class="md-primary md-raised edgePadding pull-left" ng-click="routeUserView()">Back</md-button>
+									</div>
+							    	<!-- main view -->
+							    	<div ng-if="user_view === 'main'">
+										<!-- file list -->
+										<file-list ng-if="ch_files.total > 0"></file-list>
+										<!-- files list -->
+										<p ng-if="ch_files.total === 0">
+											no files found, <a href="/{{page.site_info.address}}/user/upload.html{{url_suffix}}">upload something!</a>
+										</p>
+									</div>
+									<!-- /main view -->
+									<!-- upload view -->
+									<div ng-if="user_view === 'upload'">
+										<files-upload></files-upload>
+									</div>
+									<!-- /upload view -->
+									<!-- edit view -->
+									<div class="edit-item-view" ng-if="user_view === 'edit'" layout="column">
+										<!-- edit item section -->
+										<md-content class="edit-item-section" edit-item ng-init="init()" ng-if="item" layout="row" flex="100">
+											<!-- item sidebar -->
+											<side-bar></side-bar>
+											<!-- /item sidebar -->
+											<!-- item main -->
+											<section flex="70" layout="column" class="item-main" style="position: relative;" id="item-upload-form" layout-padding>
+								        		<!-- game interface -->
+								        		<game-interface ng-if="item.content_type === 'game'"></game-interface>
+								        		<!-- /game interface -->
+								        		<!-- video interface -->
+								        		<video-interface ng-if="item.content_type === 'video'"></video-interface>
+								        		<!-- /video interface -->
+									            <md-button flex="100" style="margin: 16px 0;" class="md-primary md-raised edgePadding pull-right update-item-button" ng-click="onUpdateItem(item,mode)">
+									            	<label>Update {{item.content_type}}</label>
+									            </md-button>
+											</section>
+											<!-- /item main -->
+										</md-content>
+										<!-- /edit item section -->
+									</div>
+									<!-- /edit view -->
 							    </md-content>
-
 							</section>
 							<!-- channel site main  -->
 
@@ -95,7 +129,6 @@
 		<script type="text/javascript" src="../assets/lib/zeronet/zeroframe.js"></script>
 		<script type="text/javascript" src="../assets/lib/zeronet/zerochat.js"></script>
 
-
 		<!-- jquery -->
 		<script type="text/javascript" src="../assets/lib/jquery/jquery.min.js"></script>
 
@@ -115,7 +148,6 @@
 	    <script type="text/javascript" src="../assets/lib/angular-identicon/angular-identicon.min.js"></script>
 	    <script type="text/javascript" src="../assets/lib/angular-fullscreen/angular-fullscreen.js"></script>
         <script type="text/javascript" src="../assets/lib/util/dirPagination.js"></script>
-
 
 		<!--uitls -->		
 		<script type="text/javascript" src="../assets/lib/util/dirPagination.js"></script>
@@ -146,13 +178,31 @@
 		<!-- app (channel) -->
 		<script type="text/javascript" src="../app/channel/core/controllers/main.ctrl.js"></script>
 		<script type="text/javascript" src="../app/channel/core/controllers/items.ctrl.js"></script>
+		<script type="text/javascript" src="../app/channel/core/directives/category-select-menu.directive.js"></script>
 		<script type="text/javascript" src="../app/channel/core/directives/channel-edit.directive.js"></script>
 		<script type="text/javascript" src="../app/channel/core/directives/channel-site-header.directive.js"></script>
 		<script type="text/javascript" src="../app/channel/core/directives/dropzone.directive.js"></script>
 		<script type="text/javascript" src="../app/channel/core/directives/file-list.directive.js"></script>
 		<script type="text/javascript" src="../app/channel/core/directives/files-upload.directive.js"></script>
 		<script type="text/javascript" src="../app/channel/core/filters/file-size.filter.js"></script>
-		
+		<script type="text/javascript" src="../app/channel/core/directives/side-bar.directive.js"></script>
+		<script type="text/javascript" src="../app/channel/core/directives/edit-item.directive.js"></script>
+		<script type="text/javascript" src="../app/channel/core/directives/image-upload.directive.js"></script>
+		<script type="text/javascript" src="../app/channel/core/directives/item-form.directive.js"></script>		
+		<script type="text/javascript" src="../app/channel/core/directives/zip-content.directive.js"></script>
+
+		<!-- app - games -->
+		<script type="text/javascript" src="../app/channel/games/directives/game-interface.directive.js"></script>
+		<script type="text/javascript" src="../app/channel/games/directives/executable-file-input.directive.js"></script>
+		<script type="text/javascript" src="../app/master/games/directives/dosbox.directive.js"></script>
+		<script type="text/javascript" src="../app/master/games/directives/nes-emulator.directive.js"></script>
+		<script type="text/javascript" src="../app/master/games/directives/atari-emulator.directive.js"></script>
+		<script type="text/javascript" src="../app/master/games/directives/cpc-emulator.directive.js"></script>
+
+		<!-- app - videos -->
+		<script type="text/javascript" src="../app/channel/videos/directives/video-interface.directive.js"></script>
+		<script type="text/javascript" src="../app/master/videos/directives/video-player.directive.js"></script>
+
 	<!-- /JS -->  
 
 </body>

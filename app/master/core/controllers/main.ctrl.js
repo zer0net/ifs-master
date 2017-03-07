@@ -58,7 +58,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    // get clusters
 		    $scope.getClusters = function(){
 				Page.cmd("fileGet",{"inner_path":"content/clusters.json"},function(data){
-					console.log(data);
 					data = JSON.parse(data);
 					$scope.clusters = data.clusters;
 					$scope.clIndex = 0;

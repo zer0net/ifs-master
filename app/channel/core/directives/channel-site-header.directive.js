@@ -9,6 +9,18 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 				$scope.publishButtonStatus = 'publish';
 			};
 
+			// on upload click
+			$scope.onUploadClick = function(){
+				var view = 'upload';
+				$scope.routeUserView(view);
+			};
+
+			// on channel main click
+			$scope.onChannelMainClick = function(){
+				var view = 'main';
+				$scope.routeUserView(view);
+			};
+
 			// on publish site
 			$scope.onPublishSite = function() {
 				$scope.publishButtonStatus = 'Now Updating and Publishing...';
@@ -70,15 +82,12 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 
 		// site header template	
 		var template = 	'<div class="wrapper channel-menu">'+
-							'<div class="container-fluid select-channel" ng-if="u_channels">' +
+							'<div class="container-fluid select-channel">' +
 								'<label>Select channel: </label>' +											
 								'<select class="form-control" ng-model="channel" value="channel.channel_address" ng-options="channel.option_label for channel in u_channels" ng-change="onSelectSite(channel)"></select>' +
 							'</div>' +
-							'<div class="container-fluid select-channel">' +
-								'<span style="color:white;"> no registered channels</span>' + 
-							'</div>' + 
 						'</div>' +
-						'<md-toolbar ng-init="init()" layout-padding class="md-hue-2 header" layout="row">' +
+						'<md-toolbar ng-if="u_channels" ng-init="init()" layout-padding class="md-hue-2 header" layout="row">' +
 							'<div class="col-xs-5">' + 
 								'<div class="channel-header-top">' + 
 									'<figure class="logo">' + 
@@ -86,7 +95,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 									'</figure>' +
 									'<div class="site-title" ng-if="channel">' + 
 										'<h3>' + 
-											'<a href="/{{page.site_info.address}}/user/index.html{{url_suffix}}"> {{channel.channel_name}} </a>' + 
+											'<a ng-click="onChannelMainClick()"> {{channel.channel_name}} </a>' + 
 											'<small><a ng-click="openChannelEditDialog(chJson)"><span class="glyphicon glyphicon-pencil"></span></a></small>' + 
 										'</h3>' + 
 										'<a class="channel-address" href="/{{channel.channel_address}}/"><small ng-bind="channel.channel_address"></small></a>' +
@@ -104,7 +113,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 							'<div class="pull-right col-xs-7">' + 
 								'<ul ng-if="channel">' +	
 						        	'<li>' +
-										'<md-button class="md-primary md-raised edgePadding pull-left" href="/{{page.site_info.address}}/user/upload.html{{url_suffix}}" >Upload</md-button>' + 				       
+										'<md-button class="md-primary md-raised edgePadding pull-left" ng-click="onUploadClick()">Upload</md-button>' + 				       
 						        	'</li>' +
 						        	'<li>' +
 										'<md-button class="md-primary md-raised edgePadding pull-left" ng-click="onPublishSite()">{{publishButtonStatus}}</md-button>' + 				       
