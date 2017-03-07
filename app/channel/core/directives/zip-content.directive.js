@@ -27,8 +27,8 @@ app.directive('zipContent', [
 			};
 
 			// select executable file
-			$scope.selectExecutableFile = function(file){
-				$scope.item.file_name = file.name;
+			$scope.selectExecutableFile = function(file,item){
+				item.inner_file = file.name;
 			};		
 		};
 
@@ -36,7 +36,7 @@ app.directive('zipContent', [
 							'<pre>' +
 								'<h3>ZIP CONTENT</h3>' +
 								'<hr/>' +							
-								'<ul flex="100" layout="column"><li ng-repeat="file in zipFiles"><a ng-click="selectExecutableFile(file)">{{file.name}}</a></li></ul>' +
+								'<ul flex="100" layout="column"><li ng-repeat="file in zipFiles"><a ng-click="selectExecutableFile(file,item)">{{file.name}}</a></li></ul>' +
 							'</pre>' +
 						'</div>';
 
