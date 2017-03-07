@@ -217,6 +217,24 @@ md-tabs.no-animate md-tab-content md-content {
 .navbar .container-fluid {
   padding: 0 15px !important;
 }
+.navbar .container-fluid ul.navbar-nav li a {
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+.navbar .container-fluid ul.navbar-nav li a:hover {
+  color: white;
+}
+.navbar .container-fluid a.navbar-brand {
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  -o-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+.navbar .container-fluid a.navbar-brand:hover {
+  color: white;
+}
 .header .site-logo {
   background-image: url('../img/videorama-zero.png');
   width: 194px;
@@ -397,13 +415,47 @@ main {
   float: left;
   width: 100%;
 }
-div[type="pills"] ul.nav-pills {
+.wrap-section item-list .item-list-section .item-list-categories {
   position: absolute;
-  left: 0;
-  top: 0;
+  left: -150px;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
   width: 150px;
-  margin-left: -150px;
-  z-index: 1;
+}
+.wrap-section item-list .item-list-section .item-list-categories li {
+  width: 100%;
+}
+.wrap-section item-list .item-list-section .item-list-categories li a {
+  display: block;
+  width: 100%;
+  padding: 5px;
+  cursor: pointer;
+  -webkit-border-top-right-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  -webkit-border-top-left-radius: 4px;
+  -moz-border-radius-topright: 4px;
+  -moz-border-radius-bottomright: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  -moz-border-radius-topleft: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  -moz-background-clip: padding-box;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+}
+.wrap-section item-list .item-list-section .item-list-categories li a:hover {
+  text-decoration: none;
+}
+.wrap-section item-list .item-list-section .item-list-categories li a.selected {
+  background-color: #337ab7;
+  color: white;
+}
+div[type="pills"] ul.nav-pills {
+  margin-bottom: 15px;
 }
 div[type="pills"] .tab-content {
   width: 100%;
@@ -540,6 +592,10 @@ div[type="pills"] .tab-content {
   float: left;
   display: block;
 }
+.item-list-section .list-item md-grid-tile-footer ul.video-info li.votes-count .up-vote span.glyphicon,
+.item-list-section .list-item md-grid-tile-footer ul.video-info li.votes-count .down-vote span.glyphicon {
+  margin-right: 2px;
+}
 .item-list-section .list-item md-grid-tile-footer ul.video-info li.votes-count .up-vote {
   color: green;
   margin-right: 10px;
@@ -549,6 +605,9 @@ div[type="pills"] .tab-content {
 }
 .item-list-section .list-item md-grid-tile-footer ul.video-info li.comments-count {
   color: #337ab7;
+}
+.item-list-section .list-item md-grid-tile-footer ul.video-info li.comments-count span.glyphicon {
+  margin-right: 2px;
 }
 .item-list-section .list-item md-grid-tile-footer ul.video-info li.peers-count {
   text-align: right;

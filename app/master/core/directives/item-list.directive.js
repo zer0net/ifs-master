@@ -26,24 +26,6 @@ app.directive('itemList', ['$rootScope',
 			    $scope.paging.startFrom = $scope.config.listing.items_per_page * ($scope.paging.currentPage - 1);
 			};
 			
-			// init item list by file type
-			$scope.initItemListByFileType = function(file_type) {
-				// reset
-				$scope.file_type = file_type;
-				if ($scope.file_types_items[$scope.file_type]){
-					$scope.list_items = $scope.file_types_items[$scope.file_type];
-					$scope.list_type = 'by file type';
-					// paging object
-				    $scope.paging = {
-				        totalItems: $scope.list_items.length,
-				        numPages: Math.ceil( $scope.list_items.length / $scope.config.listing.items_per_page),
-				        currentPage: 1,
-				    };
-				    // start from var for item list paging
-				    $scope.paging.startFrom = $scope.config.listing.items_per_page * ($scope.paging.currentPage - 1);
-				}
-			};
-			
 			// init item list by media type
 			$scope.initItemListByMediaType = function(media_type,channel) {
 				// reset
@@ -57,6 +39,8 @@ app.directive('itemList', ['$rootScope',
 				if (items[$scope.media_type]){
 					$scope.list_items = items[$scope.media_type];
 					$scope.list_type = 'by content type';
+					$scope.categories = $scope.listCategories(media_type,$scope.config.categories);
+					console.log($scope.list_items);
 					// paging object
 				    $scope.paging = {
 				        totalItems: $scope.list_items.length,
@@ -66,6 +50,31 @@ app.directive('itemList', ['$rootScope',
 				    // start from var for item list paging
 				    $scope.paging.startFrom = $scope.config.listing.items_per_page * ($scope.paging.currentPage - 1);
 				}
+			};
+
+			// list categories
+			$scope.listCategories = function(media_type,categories) {
+				var cats;
+				categories.forEach(function(category,index) {
+					if (category.category_name === media_type){
+						cats = category.subcategories;
+					}
+				});
+				return cats;
+			};
+
+			// filter 
+			$scope.filterItemListByCategory = function(categories,category) {
+				categories.forEach(function(cat,index) {
+					if (category && cat.category_id === category.category_id){
+						cat.selected = true;
+						$scope.subcategoryId = cat.category_id;
+					} else {
+						cat.selected = false;
+					}
+					console.log(cat.selected);
+				});
+				if (!category) delete $scope.subcategoryId;
 			};
 
 			// choose item style
@@ -102,9 +111,14 @@ app.directive('itemList', ['$rootScope',
 		};
 
 		var template =  '<section class="item-list-section container">' +
+							'<ul class="item-list-categories" ng-if="categories.length > 0">' +
+								'<li><a class="selected" ng-if="!subcategoryId" ng-click="filterItemListByCategory(categories)">all</a></li>' +
+								'<li><a ng-if="subcategoryId" ng-click="filterItemListByCategory(categories)">all</a></li>' +
+								'<li ng-repeat="category in categories"><a ng-class="{selected:category.selected}" ng-click="filterItemListByCategory(categories,category)" ng-bind="category.category_name"></a></li>' +
+							'</ul>' +
 							'<md-grid-list ng-if="list_items" md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="5" sm-row-height="3:4" md-row-height="4:5" md-gutter="12px" md-gutter-gt-sm="8px">' +
 							    '<!-- grid item -->' +
-								'<md-grid-tile class="list-item" ng-repeat="item in list_items | orderBy:\'-date_added\' | startFrom : paging.startFrom | limitTo:config.listing.items_per_page" ng-if="item.channel">' + // | itemsPerPage:config.listing.items_per_page track by $index
+								'<md-grid-tile class="list-item" ng-repeat="item in list_items | orderBy:\'-date_added\' | startFrom : paging.startFrom | limitTo:config.listing.items_per_page | filter:{subcategory:subcategoryId}" ng-if="item.channel">' + // | itemsPerPage:config.listing.items_per_page track by $index
 									'<div class="inner-wrap md-whiteframe-1dp" ng-init="renderItem(item)"  ng-class="chooseStyle(item.is_downloaded)">' +
 										'<!-- img -->' +
 										'<div class="item-img {{item.file_type}}-file md-whiteframe-1dp">' +

@@ -47,7 +47,7 @@ app.directive('channelRegisterList', ['$location','$rootScope',
 										'<th ng-if="page.site_info.settings.own">Action</th>' +
 									'</tr>' +
 								'</thead>' +
-								'<tr dir-paginate="channel in channels|orderBy:sortKey:reverse|itemsPerPage:itemsPerPage track by $index" pagination-id="channel-register-list-pid" moderations>' +
+								'<tr dir-paginate="channel in channels|orderBy:sortKey:reverse|itemsPerPage:itemsPerPage track by $index" pagination-id="channel-register-list-pid" moderations ng-if="channel.hide !== 1 || channel.hide === 1 && page.site_info.settings.own">' +
 									'<td><a ng-click="onFilterChannel(channel)">{{channel.channel_name}}</a></td>' +									
 									'<td>{{channel.channel_description }}</td>' +
 									'<td><span am-time-ago="channel.date_added"></span></td>' +

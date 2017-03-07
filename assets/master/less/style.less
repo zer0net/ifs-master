@@ -231,6 +231,26 @@
 	.navbar {
 		.container-fluid {
 			padding: 0 15px !important;
+
+			ul.navbar-nav {
+
+				li {
+
+					a {
+						.transition();
+						&:hover {
+							color: white;
+						}
+					}
+				}
+			}
+
+			a.navbar-brand {
+				.transition();
+				&:hover {
+					color: white;
+				}
+			}
 		}
 	}
 
@@ -428,18 +448,42 @@
 
 			.item-list-section  {
 
+				.item-list-categories {
+				    position: absolute;
+				    left: -150px;
+				    padding: 0;
+				    margin: 0;
+				    list-style-type: none;
+				    width: 150px;
+
+				    li {
+				    	width: 100%;
+
+				    	a {
+				    		display: block;
+				    		width: 100%;
+				    		padding: 5px;
+				    		cursor: pointer;
+				    		.border-radius(4px,4px,4px,4px);
+
+				    		&:hover {
+				    			text-decoration: none;
+				    		}
+
+				    		&.selected {
+				    			background-color: #337ab7;
+				    			color: white;
+				    		}
+				    	}
+				    }
+				}
 			}
 		}
 	}
 
 	div[type="pills"] {
 		ul.nav-pills {
-			position: absolute;
-			left: 0;
-			top: 0;
-		    width: 150px;
-		    margin-left: -150px;
-		    z-index: 1;
+			margin-bottom: 15px;
 		}
 		.tab-content {
 			width: 100%;
@@ -593,6 +637,10 @@
 								.up-vote,.down-vote {
 									float: left;
 									display: block;
+
+									span.glyphicon {
+										margin-right: 2px;
+									}
 								}
 
 								.up-vote {
@@ -608,6 +656,9 @@
 
 							&.comments-count {
 								color: #337ab7;
+								span.glyphicon {
+									margin-right: 2px;
+								}
 							}
 
 							&.peers-count {

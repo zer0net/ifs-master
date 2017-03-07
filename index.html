@@ -79,9 +79,7 @@
                                     <div id="welcomeInfo" style="height:150px; width: 100%; display: block; text-align: center;">
                                         <h1>Welcome to IFS - Intergalactic File Server</h1>
                                         <br/>
-                                         <h4>   
-                                            Please read FAQ to join
-                                        </h4>
+                                         <h4>Please read FAQ to join</h4>
                                     </div>
                                 </section>
                             </section>
@@ -99,35 +97,11 @@
                             </section>
                             <!-- /filter info -->
 
-                            <!-- item listing by file type -->
-                            <section class="wrap-section main-listing-container" ng-if="config.listing.type === 'by file type'">
-                              <md-content class="container">
-                                <md-tabs class="no-animate" md-dynamic-height md-border-bottom>
-                                  <md-tab ng-if="!channel_items" label="All ({{items.length}})">
-                                    <md-content class="md-padding">
-                                        <item-list ng-init="initItemListAll(items)"></item-list> 
-                                    </md-content>
-                                  </md-tab>
-                                  <md-tab ng-if="channel_items" label="All ({{channel_items.length}})">
-                                    <md-content class="md-padding">
-                                        <item-list ng-init="initItemListAll(channel_items)"></item-list> 
-                                    </md-content>
-                                  </md-tab>
-                                  <md-tab ng-if="file_types_items" ng-repeat="file_type in file_types|filter:ppFilter.file_type" label="{{file_type}} ({{file_types_items[file_type].length}})">
-                                    <md-content class="md-padding">
-                                        <item-list ng-init="initItemListByFileType(file_type)"></item-list>          
-                                    </md-content>
-                                  </md-tab>
-                                </md-tabs>
-                              </md-content>
-                            </section>
-                            <!-- /item listing by file type -->
-
                             <!-- item listing by media type -->
                             <section class="wrap-section main-listing-container" ng-if="config.listing.type === 'by content type'">
                                 <md-content class="container" ng-if="items">
                                     <div ng-if="!loading_list">
-                                        <uib-tabset ng-if="!channel" active="activePill" vertical="true" type="pills">
+                                        <uib-tabset ng-if="!channel" active="activePill" type="pills">
                                             <uib-tab index="0" heading="All ({{items.total}})">
                                                 <item-list ng-init="initItemListAll(items)"></item-list> 
                                             </uib-tab>

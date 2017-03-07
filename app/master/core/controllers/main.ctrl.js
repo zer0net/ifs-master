@@ -5,23 +5,23 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// init
 			$scope.init = function(){
-					// site ready var to fix loading inconsistancies
-					$scope.site_ready = false;
-					// loading
-					$scope.showLoadingMessage('Loading');
-					// get site info
-					Page.cmd("siteInfo", {}, function(site_info) {			
-						// apply site info to Page obj
-						Page.site_info = site_info;
-						// page
-						$scope.page = Page;
-						// get config
-						Page.cmd("fileGet",{"inner_path":"content/config.json"},function(data){
-							$scope.config = JSON.parse(data);
-							// get channels
-							$scope.getMergerPermission();	
-						});
-			    	});
+				// site ready var to fix loading inconsistancies
+				$scope.site_ready = false;
+				// loading
+				$scope.showLoadingMessage('Loading');
+				// get site info
+				Page.cmd("siteInfo", {}, function(site_info) {			
+					// apply site info to Page obj
+					Page.site_info = site_info;
+					// page
+					$scope.page = Page;
+					// get config
+					Page.cmd("fileGet",{"inner_path":"content/config.json"},function(data){
+						$scope.config = JSON.parse(data);
+						// get channels
+						$scope.getMergerPermission();	
+					});
+		    	});
 			};
 
 			// get merger site permission
@@ -119,6 +119,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 							$scope.addChannelItems(chJson,channel);
 						} else {
 							console.log('No content.json found for '+channel.channel_address+'!');
+							$scope.finishLoadingChannel();
 						}
 					});
 				} else {
