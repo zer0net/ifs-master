@@ -37,10 +37,9 @@ app.directive('itemList', ['$rootScope',
 					items = channel.items;
 				}
 				if (items[$scope.media_type]){
-					$scope.list_items = items[$scope.media_type];
+					$scope.list_items = items[$scope.media_type];					
 					$scope.list_type = 'by content type';
-					$scope.categories = $scope.listCategories(media_type,$scope.config.categories);
-					console.log($scope.list_items);
+					$scope.categories = $scope.listCategories(media_type,$scope.config.categories,items[$scope.media_type]);										
 					// paging object
 				    $scope.paging = {
 				        totalItems: $scope.list_items.length,
@@ -53,13 +52,26 @@ app.directive('itemList', ['$rootScope',
 			};
 
 			// list categories
-			$scope.listCategories = function(media_type,categories) {
+			$scope.listCategories = function(media_type,categories,list_items) {
 				var cats;
 				categories.forEach(function(category,index) {
 					if (category.category_name === media_type){
 						cats = category.subcategories;
 					}
-				});
+				});		
+				
+				// get subcategory file length
+				cats.forEach(function(subcats,index) {
+						var size = 0;
+						list_items.forEach(function(item,index) {
+							if (item.subcategory === subcats.category_id){
+								 ++size;
+							}
+						});							
+						subcats.size = size;
+						subcats.title = subcats.category_name+" ("+size+")";
+				});	
+				
 				return cats;
 			};
 
@@ -114,7 +126,7 @@ app.directive('itemList', ['$rootScope',
 							'<ul class="item-list-categories" ng-if="categories.length > 0">' +
 								'<li><a class="selected" ng-if="!subcategoryId" ng-click="filterItemListByCategory(categories)">all</a></li>' +
 								'<li><a ng-if="subcategoryId" ng-click="filterItemListByCategory(categories)">all</a></li>' +
-								'<li ng-repeat="category in categories"><a ng-class="{selected:category.selected}" ng-click="filterItemListByCategory(categories,category)" ng-bind="category.category_name"></a></li>' +
+								'<li ng-repeat="category in categories |orderBy:\'category_name\'"><a ng-class="{selected:category.selected}" ng-click="filterItemListByCategory(categories,category)" ng-bind="category.title"></a></li>' +
 							'</ul>' +
 							'<md-grid-list ng-if="list_items" md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="5" sm-row-height="3:4" md-row-height="4:5" md-gutter="12px" md-gutter-gt-sm="8px">' +
 							    '<!-- grid item -->' +
