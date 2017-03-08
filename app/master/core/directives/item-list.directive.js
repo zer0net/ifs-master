@@ -40,7 +40,6 @@ app.directive('itemList', ['$rootScope',
 					$scope.list_items = items[$scope.media_type];
 					$scope.list_type = 'by content type';
 					$scope.categories = $scope.listCategories(media_type,$scope.config.categories);
-					console.log($scope.list_items);
 					// paging object
 				    $scope.paging = {
 				        totalItems: $scope.list_items.length,
@@ -72,7 +71,6 @@ app.directive('itemList', ['$rootScope',
 					} else {
 						cat.selected = false;
 					}
-					console.log(cat.selected);
 				});
 				if (!category) delete $scope.subcategoryId;
 			};

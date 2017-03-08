@@ -85,6 +85,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 							'<div class="container-fluid select-channel">' +
 								'<label>Select channel: </label>' +											
 								'<select class="form-control" ng-model="channel" value="channel.channel_address" ng-options="channel.option_label for channel in u_channels" ng-change="onSelectSite(channel)"></select>' +
+								'<md-button class="md-primary md-raised edgePadding pull-right" style="margin:0;" channel-register ng-click="createNewChannel()">New Channel</md-button>' + 				       
 							'</div>' +
 						'</div>' +
 						'<md-toolbar ng-if="u_channels" ng-init="init()" layout-padding class="md-hue-2 header" layout="row">' +
@@ -110,7 +111,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 								'</div>' +
 							'</div>' + 
 							'<div class="pull-right col-xs-7">' + 
-								'<ul ng-if="channel">' +	
+								'<ul>' +	
 						        	'<li>' +
 										'<md-button class="md-primary md-raised edgePadding pull-left" ng-click="onUploadClick()">Upload</md-button>' + 				       
 						        	'</li>' +
@@ -118,11 +119,6 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 										'<md-button class="md-primary md-raised edgePadding pull-left" ng-click="onPublishSite()">{{publishButtonStatus}}</md-button>' + 				       
 						        	'</li>' + 						        	
 								'</ul>' + 
-								'<ul ng-if="!channel">' +
-					        		'<li>' +
-										'<md-button class="md-primary md-raised edgePadding pull-left" channel-register ng-click="createNewChannel()">New Channel</md-button>' + 				       
-						        	'</li>' +
-								'</ul>' +
 					        '</div>' + 
 						'</md-toolbar>';
 		return {

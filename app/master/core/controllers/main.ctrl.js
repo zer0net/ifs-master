@@ -5,19 +5,24 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// init
 			$scope.init = function(){
+				console.log('Init');
+				console.log('--------------------------');
 				// site ready var to fix loading inconsistancies
 				$scope.site_ready = false;
 				// loading
 				$scope.showLoadingMessage('Loading');
 				// get site info
-				Page.cmd("siteInfo", {}, function(site_info) {			
+				Page.cmd("siteInfo", {}, function(site_info) {
 					// apply site info to Page obj
 					Page.site_info = site_info;
 					// page
 					$scope.page = Page;
 					// get config
 					Page.cmd("fileGet",{"inner_path":"content/config.json"},function(data){
+						console.log('get config file');
 						$scope.config = JSON.parse(data);
+						console.log($scope.config);
+						console.log('--------------------------');
 						// get channels
 						$scope.getMergerPermission();	
 					});
@@ -26,6 +31,8 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// get merger site permission
 			$scope.getMergerPermission = function(){
+				console.log('get merger permission');
+				console.log('--------------------------');
 				// if user allready has permission for merger type
 		    	if (Page.site_info.settings.permissions.indexOf("Merger:"+$scope.page.site_info.content.merger_name) > -1){
 		    		$scope.$apply(function(){
@@ -45,7 +52,10 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// get merged sites
 			$scope.getMergerSites = function(){
-				Page.cmd("mergerSiteList", {query_site_info: true}, function(sites) {						
+				Page.cmd("mergerSiteList", {query_site_info: true}, function(sites) {		
+					console.log('get merger sites');
+					console.log(sites);
+					console.log('--------------------------');
 					// for each site in merger site list
 					for (var site in sites) {
 						if (!$scope.sites) $scope.sites = [];
@@ -57,29 +67,53 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 		    // get clusters
 		    $scope.getClusters = function(){
+				// loading
+				$scope.showLoadingMessage('Loading Clusters');
 				Page.cmd("fileGet",{"inner_path":"content/clusters.json"},function(data){
-					data = JSON.parse(data);
-					$scope.clusters = data.clusters;
-					$scope.clIndex = 0;
-					$scope.varifyClusters();
+					$scope.$apply(function() {
+						data = JSON.parse(data);
+						$scope.clusters = data.clusters;
+						console.log('get clusters');
+						console.log($scope.clusters);
+						console.log('--------------------------');
+						$scope.clIndex = 0;
+						$scope.varifyClusters();
+					})
 				});
 		    };
 
 		    // varify cluster
 		    $scope.varifyClusters = function(){
-		    	if ($scope.clIndex === $scope.clusters.length){
-					if ($scope.sites.indexOf($scope.clusters[$scope.clIndex].cluster_id) > -1){
-						$scope.clIndex += 1;
-						$scope.varifyClusters();
-					} else {
-						Page.cmd("mergerSiteAdd",{"addresses":$scope.clusters[$scope.clIndex].cluster_id},function(data){
-							$scope.cIndex += 1;
+				console.log('varify clusters');
+		    	console.log('cluster index - '+$scope.clIndex);
+		    	console.log('clusters length - '+$scope.clusters.length);
+		    	if ($scope.clIndex < $scope.clusters.length){
+		    		if ($scope.sites){
+						if ($scope.sites.indexOf($scope.clusters[$scope.clIndex].cluster_id) > -1){
+							console.log('cluster varfyied')
+							$scope.clIndex += 1;
 							$scope.varifyClusters();
-						});
-					}
+						} else {
+							console.log('cluster doesnt exist!');
+							$scope.addCluster();
+						}
+		    		} else {
+						console.log('cluster doesnt exist!');
+		    			$scope.addCluster();
+		    		}
 		    	} else {
+		    		console.log('finished varifying cluster');
+					console.log('--------------------------');
 		    		$scope.getChannels();
 		    	}
+		    };
+
+		    // add cluster to merger sites
+		    $scope.addCluster = function() {
+				console.log('adding cluster - ' + $scope.clusters[$scope.clIndex].cluster_id);
+				Page.cmd("mergerSiteAdd",{"addresses":$scope.clusters[$scope.clIndex].cluster_id},function(data){
+					Page.cmd("wrapperNotification", ["info", "refresh this site to view new content", 10000]);
+				});
 		    };
 
 			// get channels
@@ -196,19 +230,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				if ($scope.filters) delete $scope.filters.channel_address;
 			};
 
-			// main remove filter function
-			$scope.mainRemoveFilter = function() {
-				// render items before finish loading
-				if ($scope.config.listing.type === 'by content type'){
-					// render items by media types
-					$scope = Central.listItemsByMediaType($scope);
-				} else if ($scope.config.listing.type === 'by file type'){
-					// render items by file type
-					$scope = Central.listItemsByFileType($scope);
-				}
-			};
-
-
 		/* /FILTER */
 
 		/* UI */
@@ -227,9 +248,19 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 		    // select user
 		    $scope.selectUser = function(){
-		    	Page.cmd("certSelect", [["zeroid.bit"]]);
+		    	Page.selectUser();
+				Page.onRequest = function(cmd, message) {
+				    if (cmd == "setSiteInfo") {
+						// site info
+						Page.site_info = message;
+						// attach to scope
+						$scope.page = Page;
+						// update site
+						$scope.$apply();
+					}
+				};
 		    };
-
+	    
 		    // load script dynamically
 			$scope.loadScript = function(url, type, charset) {
 			    if (type===undefined) type = 'text/javascript';
