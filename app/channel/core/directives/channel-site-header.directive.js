@@ -100,6 +100,8 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 										    			'<label flex="30">Channel Description</label>' +
 										    			'<textarea flex="70" class="form-control" ng-model="channel.channel_description"></textarea>' +
 													'</div>' +
+													'<hr/>' +
+													'<md-button class="md-primary md-raised edgePadding pull-left" style="margin:0;" ng-click="hide()">Cancel</md-button>' +
 													'<md-button class="md-primary md-raised edgePadding pull-right" style="margin:0;" ng-click="createNewChannel(channel,items.scope)">Create Channel</md-button>' + 				       
 										    	'</div>' +
 										    '</md-dialog-content>' +
