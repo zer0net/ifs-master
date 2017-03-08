@@ -105,7 +105,7 @@
                                             <uib-tab index="0" heading="All ({{items.total}})">
                                                 <item-list ng-init="initItemListAll(items)"></item-list> 
                                             </uib-tab>
-                                            <uib-tab index="$index + 1" ng-repeat="media_type in media_types" heading="{{media_type}} ({{items[media_type].length}})">
+                                            <uib-tab index="$index + 1" ng-repeat="media_type in media_types" heading="{{(media_type=='audios')?'audio':media_type}} ({{items[media_type].length}})">
                                                 <item-list ng-init="initItemListByMediaType(media_type)"></item-list>
                                             </uib-tab>
                                         </uib-tabset>
