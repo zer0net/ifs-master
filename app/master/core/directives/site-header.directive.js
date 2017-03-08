@@ -18,19 +18,19 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope','$location',
 			    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
 			    // dialog template
 			    var dialogTemplate = 
-			    	'<md-dialog class="fullscreen-dialog" >' +
+			    	'<md-dialog class="dialog">' +
 					    '<md-toolbar>' +
 					    	'<div class="md-toolbar-tools">' +
-					    	  '<md-button class="md-icon-button" ng-click="hide()">'+
-					            '<span class="glyphicon glyphicon-remove"></span>'+
-					          '</md-button>'+
 						        '<h2>FAQ</h2>' +
-						        '<span flex></span>' +						        
+						        '<span flex></span>' +
+								'<md-button class="md-icon-button pull-right" ng-click="hide()">'+
+									'<span class="glyphicon glyphicon-remove"></span>'+
+								'</md-button>'+
 					    	'</div>' +
 					    '</md-toolbar>' +
-					    '<md-dialog-content channel-register>' +
-					    	'<p> comming soon ... '+
-					    	'<p><button  ng-click="handleCloneClick(items.scope)"> new Channel </button> click on button to create new channel'+							
+					    '<md-dialog-content layout-padding>' +
+					    	'<img style="width:100%;" src="/{{items.scope.page.site_info.address}}/assets/master/img/faq-banner.jpg"/>' +
+					    	'<p>Visit our Blog: <a href="{{page.site_info.address}}/1Cd1SqtZUUpK8e8KUUqBttHzwPfbG1CU6y">1Cd1SqtZUUpK8e8KUUqBttHzwPfbG1CU6y</a>' +
 					    '</md-dialog-content>' +
 					'</md-dialog>';
 				// show dialog
