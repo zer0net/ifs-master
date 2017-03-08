@@ -1456,3 +1456,11 @@ th {
   width: 33%;
   float: left;
 }
+.new-channel-form {
+  width: 500px;
+  float: left;
+  margin-bottom: 5px;
+}
+.new-channel-form .form-row {
+  margin-bottom: 15px;
+}

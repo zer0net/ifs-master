@@ -4,25 +4,39 @@ app.directive('channelRegister', ['Channel','$rootScope','$window',
 		// channel register controller
 		var controller = function($scope,$element) {
 
+			// init new channel
+			$scope.initNewChannelForm = function() {
+				$scope.channel = {
+					channel_name:'New Channel',
+					channel_description:'channel description'
+				};
+			}
+
 			// on create channel
-			$scope.createNewChannel = function() {
-				console.log('create channel start');				
-				// channel record
-				var channel = {
-					channel_name:'Default channel name',
-					user_id:$scope.page.site_info.auth_address
-				};				
-				// 0. check if user directory exists in clusters
-				$scope.findUserDirectory(channel);
+			$scope.createNewChannel = function(channel,scope) {
+				console.log('create new channel');
+				console.log('-------------------------------');
+				// if scope var is passed in function
+				if (scope){
+					$scope.clusters = scope.clusters;
+					$scope.config = scope.config;
+					$scope.merger_name = scope.merger_name;
+					$scope.page = scope.page;
+				}
+
+				// if no user cert id
+				if (!$scope.page.site_info.cert_user_id){
+					console.log('no user certificate id');
+					console.log('-------------------------------');
+					$rootScope.$broadcast('onSelectUser');
+				} else {
+					$scope.findUserDirectory(channel);
+				}
 			};
 
-			// on create channel rootScope
-			$rootScope.$on('onCreateChannel',function(event,scope){
-				$scope.clusters = scope.clusters;
-				$scope.config = scope.config;
-				$scope.merger_name = scope.merger_name;
-				$scope.page = scope.page;
-				$scope.createNewChannel();
+			$rootScope.$on('onChangeUserCertId',function(event,mass){
+				console.log(mass);
+				$scope.page = mass;
 			});
 
 			// find user directory in clusters

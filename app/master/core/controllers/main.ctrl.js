@@ -256,11 +256,18 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 						// attach to scope
 						$scope.page = Page;
 						// update site
-						$scope.$apply();
+						$scope.$apply(function(){
+							$rootScope.$broadcast('onChangeUserCertId',$scope.page);
+						});
 					}
 				};
 		    };
-	    
+
+		    // on select user
+		    $rootScope.$on('onSelectUser',function(event,mass) {
+		    	$scope.selectUser();
+		    });
+
 		    // load script dynamically
 			$scope.loadScript = function(url, type, charset) {
 			    if (type===undefined) type = 'text/javascript';

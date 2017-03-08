@@ -78,6 +78,48 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 			    });
 			};
 
+
+			// open edit channel dialog
+			$scope.openNewChannelDialog = function(ev) {
+				$scope.status = '';
+				$scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
+			    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
+			    var dialogTemplate = 	'<md-dialog aria-label="New Channel">' +
+										    '<md-toolbar>' +
+										    	'<div class="md-toolbar-tools">' +
+											        '<h2>Create New Channel</h2>' +
+										    	'</div>' +
+										    '</md-toolbar>' +
+										    '<md-dialog-content layout-padding>' +
+										    	'<div class="new-channel-form" ng-init="initNewChannelForm()" channel-register>' +
+										    		'<div class="form-row" layout="row" flex="100">' +
+											    		'<label flex="30">Channel Name</label>' +
+											    		'<input flex="70" class="form-control" type="text" ng-model="channel.channel_name">' +
+										    		'</div>' +
+										    		'<div class="form-row" layout="row" flex="100">' +
+										    			'<label flex="30">Channel Description</label>' +
+										    			'<textarea flex="70" class="form-control" ng-model="channel.channel_description"></textarea>' +
+													'</div>' +
+													'<md-button class="md-primary md-raised edgePadding pull-right" style="margin:0;" ng-click="createNewChannel(channel,items.scope)">Create Channel</md-button>' + 				       
+										    	'</div>' +
+										    '</md-dialog-content>' +
+										'</md-dialog>';
+
+			    $mdDialog.show({
+					controller: DialogController,
+					template: dialogTemplate,
+					parent: angular.element(document.body),
+					targetEvent: ev,
+					clickOutsideToClose:true,
+					fullscreen: useFullScreen,
+					locals: {
+						items:{
+							scope:$scope
+						}
+					}
+			    });
+			};
+
 		};
 
 		// site header template	
@@ -85,7 +127,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 							'<div class="container-fluid select-channel">' +
 								'<label>Select channel: </label>' +											
 								'<select class="form-control" ng-model="channel" value="channel.channel_address" ng-options="channel.option_label for channel in u_channels" ng-change="onSelectSite(channel)"></select>' +
-								'<md-button class="md-primary md-raised edgePadding pull-right" style="margin:0;" channel-register ng-click="createNewChannel()">New Channel</md-button>' + 				       
+								'<md-button class="md-primary md-raised edgePadding pull-right" style="margin:0;" ng-click="openNewChannelDialog()">New Channel</md-button>' + 				       
 							'</div>' +
 						'</div>' +
 						'<md-toolbar ng-if="u_channels" ng-init="init()" layout-padding class="md-hue-2 header" layout="row">' +

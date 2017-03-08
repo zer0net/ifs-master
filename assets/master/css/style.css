@@ -2061,3 +2061,6 @@ md-dialog.fullscreen-dialog {
   color: #777;
 }
 /** / STYLE EXTRA **/
+.new-channel-form .form-row {
+  margin-bottom: 15px;
+}

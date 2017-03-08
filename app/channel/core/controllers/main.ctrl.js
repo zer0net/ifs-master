@@ -40,6 +40,7 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 				if (path.indexOf('?cl=') > -1){
 					// channel address
 					var channel_address = path.split('+ch=')[1];
+					console.log(channel_address);					
 					// url suffix for inner links
 					$scope.url_suffix = '?cl=' + path.split('?cl=')[1];
 					// find channel by channel address
@@ -48,6 +49,7 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 					// apply first channel to scope
 					$scope.channel = $scope.u_channels[0];
 				}
+				console.log($scope.u_channels);
 				// url suffix for inner links
 				$scope.url_suffix = '?cl=' + $scope.channel.cluster_id + '+ch=' + $scope.channel.channel_address;
 				// set current channels cluster merged site info
