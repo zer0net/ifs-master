@@ -9,12 +9,12 @@ app.directive('channelEdit', ['$sce','$location',
 
 			// init
 			$scope.initChannelEdit = function (chJson,page,merger_name,channel) {
-				
 				// bind vars to scope
 				$scope.chJson = chJson;
 				$scope.page = page;
 				$scope.merger_name = merger_name;
 				$scope.channel = channel;
+				console.log($scope.chJson);
 				if ($scope.channel.logo_file) {
 					$scope.channel.logo_path = '/'+$scope.page.site_info.address+'/merged-'+$scope.page.site_info.content.merger_name + '/' + $scope.channel.cluster_id + '/data/users/' + $scope.channel.user_id + '/' + $scope.channel.logo_file;
 

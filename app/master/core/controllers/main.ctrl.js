@@ -118,10 +118,8 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// get channels
 			$scope.getChannels = function(){
-
 				// loading
 				$scope.showLoadingMessage('Loading Channels');
-
 				// get channels
 				var query = ["SELECT * FROM channel WHERE cluster_id IS NOT NULL"];
 				Page.cmd("dbQuery", query, function(channels) {
@@ -142,6 +140,9 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// get channel
 			$scope.getChannel = function(channel){
+				console.log('get channel');
+				console.log(channel);
+				console.log('--------------------------');				
 				// update cIndex
 				$scope.cIndex += 1;
 				if (channel.hide !== 1){
@@ -183,6 +184,8 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// finish loading channel
 			$scope.finishLoadingChannel = function(){
+				console.log('finish loading channel ' + $scope.cIndex);
+				console.log('--------------------------');
 				if ($scope.cIndex < $scope.channels.length){
 					$scope.getChannel($scope.channels[$scope.cIndex]);
 				} else {
@@ -192,6 +195,8 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// finish loading channels
 			$scope.finishLoadingChannels = function(){
+				console.log('finish loading channels!');
+				console.log('--------------------------');
 				// sort media types alphabetically
 				$scope.media_types.sort();
 				// finished loading & apply to scope
