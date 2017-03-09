@@ -1,5 +1,5 @@
-app.directive('channelEdit', ['$sce','$location',
-	function($sce,$location) {
+app.directive('channelEdit', ['$sce','$location','$rootScope',
+	function($sce,$location,$rootScope) {
 
 		// channel edit controller
 		var controller = function($scope,$element) {
@@ -32,6 +32,19 @@ app.directive('channelEdit', ['$sce','$location',
 				};
 			};
 
+			// select image as logo
+			$scope.selectImageAsLogo = function(image){
+				$scope.chJson.channel.logo_file = image.file_name;
+			};
+
+			// on upload click
+			$scope.onUploadClick = function(){
+				var view = 'upload';
+				$rootScope.$broadcast('onRouteUserView',view);
+				$scope.hide();			
+			};
+
+			/*
 			// show preview image
 			$scope.showPreviewImage = function(file){
 				// reader on load
@@ -55,41 +68,39 @@ app.directive('channelEdit', ['$sce','$location',
 					$scope.updateChannelRecord(chJson.channel);
 				});
 			};
+			*/
 
 			// save channel details
 			$scope.onUpdateChannel = function(chJson) {
-				console.log('on update channel');
-				if ($scope.imgSrc){ 
-					$scope.uploadLogoImage(chJson);
-				} else { 
-					$scope.updateChannelRecord(chJson.channel);
-				}
+				$scope.updateChannelRecord(chJson.channel);
 			};
 
 		};
 
-		var template = '<md-content>' +
-							'<div class="section-body" layout="row">' +
-								'<figure flex="20">' +
-									'<img  ng-if="channel.logo_file" style="width:100%;" ng-src="/{{page.site_info.address}}/{{channel.cluster_id}}/data/users/{{channel.user_id}}/{{chJson.channel.logo_file}}" id="current_image"/>' +
-									'<button dropzone="dropzoneConfig" ng-hide="imgSrc"> Drag and drop files here or click to upload</button>' +
-									'<img style="width:100%;" ng-src="{{imgSrc}}" ng-show="imgSrc" id="image"/>' +
-								'</figure>' +
-								'<div class="channel-info" flex="80" layout-padding>' +
-						        '<md-input-container class="md-block" flex-gt-sm>' +
-						          	'<label>Channel Name</label>' +
-									'<input type="text" ng-model="chJson.channel.channel_name">' +
-						        '</md-input-container>' +
-						        '<md-input-container class="md-block" flex-gt-sm>' +
-						          	'<label>Channel Description</label>' +
-									'<textarea ng-model="chJson.channel.channel_description"></textarea>' +
-						        '</md-input-container>' +
-								'<md-button class="md-primary md-raised edgePadding pull-right" ng-click="onUpdateChannel(chJson)">' +
-						        	'<label>Update Channel</label>' +
-						        '</md-button> ' +
+		var template = 	'<div class="section-body edit-channel-form form well" layout="column">' +
+					        '<div class="form-row" layout="row">' +
+					          	'<label flex="20">Channel Name</label>' +
+								'<input flex="80" type="text" class="form-control" ng-model="chJson.channel.channel_name" />' +
+					        '</div>' +
+					        '<div class="form-row" layout="row">' +
+					          	'<label flex="20">Channel Description</label>' +
+								'<input flex="80" type="text" class="form-control" ng-model="chJson.channel.channel_description">' +
+					        '</div>' +
+					        '<hr/>' +
+					        '<div class="form-row" layout="row">' +
+					          	'<label flex="20">Channel Logo</label>' +						        	
+								'<div class="logo-image-selection row" flex="80">' +
+									'<figure ng-repeat="image in chJson.items.images" class="col-xs-2">' +
+										'<img style="width:100%;" ng-click="selectImageAsLogo(image)" ng-class="{selected: image.file_name === chJson.channel.logo_file}" ng-src="/{{page.site_info.address}}/merged-{{page.site_info.content.merger_name}}/{{channel.cluster_id}}/data/users/{{channel.user_id}}/{{image.file_name}}"/>' +
+									'</figure>' +
+									'<a class="col-xs-12"  ng-if="!chJson.items.images" ng-click="onUploadClick()">you havent uploaded any images yet, upload an image to select a logo!</a>' +
 								'</div>' +
 							'</div>' +
-						'</md-content>';
+							'<md-button class="md-primary md-raised edgePadding pull-right" ng-click="onUpdateChannel(chJson)">' +
+					        	'<label>Update Channel</label>' +
+					        '</md-button> ' +
+							'</div>' +
+						'</div>';
 
 		return {
 			restrict: 'AE',

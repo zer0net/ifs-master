@@ -55,7 +55,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 											        '<h2>Edit Channel Info</h2>' +
 										    	'</div>' +
 										    '</md-toolbar>' +
-										    '<md-dialog-content layout-padding>' +
+										    '<md-dialog-content>' +
 										    	'<channel-edit ng-init="initChannelEdit(items.chJson,items.page,items.merger_name,items.channel)"></channel-edit>' +
 										    '</md-dialog-content>' +
 										'</md-dialog>';
