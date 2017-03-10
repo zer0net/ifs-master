@@ -106,6 +106,10 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 				$scope.finishLoading();
 			};
 
+			$rootScope.$on('onRouteUserView',function(event,mass){
+				$scope.routeUserView(mass);
+			});
+
 		/** INIT **/
 
 		/** UPDATE CHANNEL **/

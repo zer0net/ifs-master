@@ -1464,3 +1464,20 @@ th {
 .new-channel-form .form-row {
   margin-bottom: 15px;
 }
+.edit-channel-form {
+  width: 800px;
+  padding: 10px;
+  margin-bottom: 0;
+}
+.edit-channel-form .form-row {
+  margin-bottom: 10px;
+}
+.edit-channel-form hr {
+  margin: 5px 0 15px 0;
+}
+.edit-channel-form img.selected {
+  border: 2px solid #337ab7;
+}
+.edit-channel-form button {
+  margin: 5px 0;
+}
