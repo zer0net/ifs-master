@@ -150,8 +150,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 		    // on get channels
 		    $scope.onGetChannels = function(){
-	    		console.log('on get channels');
-				console.log('--------------------------');
 		    	$scope.udIndex = 0;
 		    	$scope.channels = [];
 		    	$scope.getUserChannels();
@@ -167,6 +165,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 						channelsJson = JSON.parse(channelsJson);
 						$scope.channels = $scope.channels.concat(channelsJson.channels);
 			    		$scope.udIndex += 1;
+
 			    		if ($scope.udIndex < $scope.userDirArray.length){
 			    			$scope.getUserChannels();
 			    		} else {
@@ -178,7 +177,9 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// get channels
 			$scope.getChannels = function(){
-				console.log($scope.channels);
+	    		console.log('get channels');
+	    		console.log(channels);
+				console.log('--------------------------');
 				// loading
 				$scope.showLoadingMessage('Loading Channels');
 				if ($scope.channels.length > 0){
