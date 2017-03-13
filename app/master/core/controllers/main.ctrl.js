@@ -172,12 +172,12 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 									var address = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/' + channel.channel_address + '.json';
 									$scope.channelsIdArray.push(address);
 								});
+							    $scope.udIndex += 1;
+			    				$scope.getUserChannels();								
 			    			} else {
 			    				console.log('no channels json for ' + $scope.userDirArray[$scope.udIndex] + ' was found');
 			    				$scope.getContentJson();
 			    			}
-						    $scope.udIndex += 1;
-		    				$scope.getUserChannels();
 			    		});
 					});
 	    		} else {
@@ -187,28 +187,14 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// force file download
 			$scope.getContentJson = function(){
-				var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/content.json';
-				Page.cmd("fileGet",{"inner_path":inner_path,"required": false },function(contentJson){
-	    			if (contentJson){
-	    				console.log(contentJson);
-						contentJson = JSON.parse(contentJson);
-						for (var i in contentJson.files){
-							if (i.indexOf('.json') > -1 && i.indexOf('channels.json') === -1){
-								var address = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/' + i;
-								if ($scope.channelsIdArray.indexOf(address) === -1){
-									$scope.channelsIdArray.push(address);							
-								}
-							}
-						}
-						if (contentJson.files_optional){
-							for (var i in contentJson.files_optional){
-								if (i.indexOf('.json') > -1 && i.indexOf('channels.json') === -1){
-									var address = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/' + i;
-									if ($scope.channelsIdArray.indexOf(address) === -1){
-										$scope.channelsIdArray.push(address);							
-									}
-								}
-							}
+				var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/'+'1_'+$scope.userDirArray[$scope.udIndex].split('/')[2]+'.json';
+				Page.cmd("fileGet",{"inner_path":inner_path,"required": false },function(channelJson){
+	    			if (channelJson){
+	    				console.log(channelJson.channel);
+	    				channelJson = JSON.parse(channelJson);
+						var address = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/' + channelJson.channel.channel_address;
+						if ($scope.channelsIdArray.indexOf(address) === -1){
+							$scope.channelsIdArray.push(address);							
 						}
 					}
 				    $scope.udIndex += 1;
@@ -354,6 +340,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// finished loading 
 			$scope.finishedLoading = function(){
+				$scope.site_ready = true;				
 				$scope.loading = false;
 				$scope.msg = '';				
 			};

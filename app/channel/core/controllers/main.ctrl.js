@@ -17,19 +17,22 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 
 			// get user channels
 			$scope.getUserChannels = function(){
-				var query = ["SELECT * FROM channel WHERE user_id='"+$scope.page.site_info.auth_address+"'"];
-				Page.cmd("dbQuery", query, function(channels) {
-					if (channels.length > 0){
-						// render channel list
-						$scope.u_channels = Channel.renderChannels(channels);
-						// assign current user channel
-						$scope.assignCurrentUserChannel();
-					} else {
-						// route user section
-						$scope.$apply();
-						$scope.routeUserView();
+				var channels = [];
+				$scope.channels.forEach(function(ch,index){
+					console.log(ch);
+					if (ch.channel_address.split('_')[1] === $scope.page.site_info.auth_address){
+						channels.push(ch);
 					}
 				});
+				if (channels.length > 0){
+					// render channel list
+					$scope.u_channels = Channel.renderChannels(channels);
+					// assign current user channel
+					$scope.assignCurrentUserChannel();
+				} else {
+					// route user section
+					$scope.routeUserView();
+				}
 			};
 
 			// assign current user site
@@ -84,11 +87,12 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 			$scope.getChannelFilesInfo = function(){
 				// get optional file list
 				Page.cmd("optionalFileList", { address: $scope.channel.cluster_id, limit:2000 }, function(site_files){
+					$scope.$apply(function(){
 					// render channel files
 					$scope.ch_files = Channel.renderChannelFiles(site_files,$scope.chJson.items);
 					// route user section
-					$scope.$apply();					
 					$scope.routeUserView();
+					});					
 				});
 			};
 

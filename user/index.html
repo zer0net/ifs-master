@@ -36,22 +36,21 @@
 
 						<!-- site header -->
 						<site-header></site-header>
-						<!-- /site header -->
-						
+						<!-- /site header -->						
+
+					    <!-- loading -->
+					    <div id="main-loading" layout="column" ng-show="loading" flex>
+					        <div layout="column" flex="100" style="text-align:center;">
+					            <span><b ng-bind="msg"></b></span>
+					        </div>
+					        <div layout="row" flex="100" layout-align="space-around">
+					            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+					        </div>
+					    </div>
+					    <!-- /loading -->
+
 						<!-- user area -->
-						<section class="wrapper" id="user-channel-wrapper" ng-controller="ChannelMainCtrl" ng-init="init()">
-
-						    <!-- loading -->
-						    <div id="main-loading" layout="column" ng-show="loading" flex>
-						        <div layout="column" flex="100" style="text-align:center;">
-						            <span><b ng-bind="msg"></b></span>
-						        </div>
-						        <div layout="row" flex="100" layout-align="space-around">
-						            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-						        </div>
-						    </div>
-						    <!-- /loading -->
-
+						<section ng-if="site_ready" class="wrapper" id="user-channel-wrapper" ng-controller="ChannelMainCtrl" ng-init="init()">
 							<!-- channel site header -->
 							<channel-site-header ng-hide="loading"></channel-site-header>
 							<!-- /channel site  header -->
