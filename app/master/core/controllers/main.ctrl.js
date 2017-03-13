@@ -187,12 +187,12 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// force file download
 			$scope.getContentJson = function(){
-				var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/'+'1_'+$scope.userDirArray[$scope.udIndex].split('/')[2]+'.json';
+				var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/'+'1_'+$scope.userDirArray[$scope.udIndex].split('/')[3]+'.json';
+				console.log(inner_path);
 				Page.cmd("fileGet",{"inner_path":inner_path,"required": false },function(channelJson){
 	    			if (channelJson){
-	    				console.log(channelJson.channel);
 	    				channelJson = JSON.parse(channelJson);
-						var address = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/' + channelJson.channel.channel_address;
+						var address = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/' + channelJson.channel.channel_address + '.json';
 						if ($scope.channelsIdArray.indexOf(address) === -1){
 							$scope.channelsIdArray.push(address);							
 						}
