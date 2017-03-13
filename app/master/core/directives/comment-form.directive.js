@@ -4,8 +4,14 @@ app.directive('commentForm', ['$rootScope','$sce','$location',
 		// comment form controller
 		var controller = function($scope,$element) {
 
+			// init comment form
+			$scope.initCommentForm = function(){
+				$scope.comment = '';
+			};
+
 		    // on text area focus
 		    $scope.onTextAreaFocus = function(){
+		 		console.log('hello');
 		    	// query site info
 		    	Page.cmd('siteInfo',{},function(site_info) {
 		    		Page.site_info = site_info;
@@ -20,6 +26,22 @@ app.directive('commentForm', ['$rootScope','$sce','$location',
 					}
 					$scope.$apply();
 		    	});
+		    };
+
+		    // on text area key down
+		    $scope.onTextAreaKeyDown = function($event,comment){
+		    	$scope.comment = $scope.renderKeyDownEvent($scope.comment,$event.originalEvent.key);
+		    };
+
+		    // render key down event
+		    $scope.renderKeyDownEvent = function(text,key){
+		    	if (key === 'Backspace'){
+		    		text = text.slice(0,-1);
+		    	} else {
+			    	text += key;
+		    	}
+
+		    	return text;
 		    };
 
 		    // on post comment
@@ -77,14 +99,14 @@ app.directive('commentForm', ['$rootScope','$sce','$location',
 
 		};
 
-		var template =  '<form layout="row" layout-padding>' +
+		var template =  '<form layout="row" ng-init="initCommentForm()" layout-padding>' +
 							'<div flex="10">' +
 			                	'<identicon class="md-whiteframe-1dp" username="user" size="64"></identicon>' +
 							'</div>' +
 							'<div flex="90">' +
 								'<md-input-container class="md-block" flex-gt-sm>' +
 					              	'<label>Add comment as {{user}}...</label>' +
-									'<textarea ng-model="comment" ng-focus="onTextAreaFocus()"></textarea>' +
+									'<textarea ng-model="comment" ng-keydown="onTextAreaKeyDown($event,comment)" ng-focus="onTextAreaFocus()"></textarea>' +
 					            '</md-input-container>' +
 						        '<md-button class="md-primary md-raised edgePadding pull-right" ng-click="onPostComment(comment,item)">' +
 						        	'<label>Post</label>' +

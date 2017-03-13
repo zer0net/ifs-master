@@ -109,11 +109,11 @@
                                                 <item-list ng-init="initItemListByMediaType(media_type)"></item-list>
                                             </uib-tab>
                                         </uib-tabset>
-                                        <uib-tabset ng-if="channel" active="activePill" vertical="true" type="pills">
-                                            <uib-tab index="0" ng-if="channel" heading="All ({{channel.items_total}})">
+                                        <uib-tabset ng-if="channel" active="activePill" type="pills">
+                                            <uib-tab index="0" heading="All ({{channel.items_total}})">
                                                 <item-list ng-init="initItemListAll(channel.items)"></item-list> 
                                             </uib-tab>
-                                            <uib-tab index="$index + 1" ng-if="channel" ng-repeat="media_type in channel.media_types" heading="{{media_type}} ({{channel.items[media_type].length}})">
+                                            <uib-tab index="$index + 1" ng-repeat="media_type in media_types" heading="{{media_type}} ({{channel.items[media_type].length}})" ng-if="channel.items[media_type]">
                                                 <item-list ng-init="initItemListByMediaType(media_type,channel)"></item-list>
                                             </uib-tab>
                                         </uib-tabset>

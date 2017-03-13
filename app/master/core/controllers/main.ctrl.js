@@ -52,15 +52,15 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// get merged sites
 			$scope.getMergerSites = function(){
-				Page.cmd("mergerSiteList", {query_site_info: true}, function(sites) {		
+				Page.cmd("mergerSiteList", {query_site_info: false}, function(sites) {		
 					console.log('get merger sites');
-					console.log(sites);
 					console.log('--------------------------');
 					// for each site in merger site list
 					for (var site in sites) {
 						if (!$scope.sites) $scope.sites = [];
 						$scope.sites.push(site);
 					}
+					console.log($scope.sites);
 					$scope.getClusters();
 				});	
 			};
@@ -90,9 +90,24 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    	if ($scope.clIndex < $scope.clusters.length){
 		    		if ($scope.sites){
 						if ($scope.sites.indexOf($scope.clusters[$scope.clIndex].cluster_id) > -1){
-							console.log('cluster varfyied')
-							$scope.clIndex += 1;
-							$scope.varifyClusters();
+							console.log('cluster varfyied');
+							var cluster_id = $scope.clusters[$scope.clIndex].cluster_id;
+							if (!$scope.userDirArray) $scope.userDirArray = [];
+							Page.cmd("optionalFileList", { address: cluster_id, limit:2000 }, function(site_files){
+								$scope.$apply(function(){
+									site_files.forEach(function(s_file,index){
+										if (s_file.inner_path.indexOf('channels.json') > -1){
+											console.log(s_file.inner_path);
+											var userDirPath = cluster_id + '/' + $scope.splitByLastSlash(s_file.inner_path);
+											if ($scope.userDirArray.indexOf(userDirPath) === -1){
+												$scope.userDirArray.push(userDirPath);
+											}
+										}
+									});
+									$scope.clIndex += 1;
+									$scope.varifyClusters();
+								});
+							});
 						} else {
 							console.log('cluster doesnt exist!');
 							$scope.addCluster();
@@ -108,6 +123,11 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    	}
 		    };
 
+		    $scope.splitByLastSlash = function(text){
+			    var index = text.lastIndexOf('/');
+			    return [text.slice(0, index), text.slice(index + 1)][0];
+		    };
+
 		    // add cluster to merger sites
 		    $scope.addCluster = function() {
 				console.log('adding cluster - ' + $scope.clusters[$scope.clIndex].cluster_id);
@@ -121,6 +141,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				// loading
 				$scope.showLoadingMessage('Loading Channels');
 				// get channels
+				console.log($scope.userDirArray);
 				var query = ["SELECT * FROM channel WHERE cluster_id IS NOT NULL"];
 				Page.cmd("dbQuery", query, function(channels) {
 					if (channels.length > 0){
@@ -148,7 +169,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				if (channel.hide !== 1){
 					// get channel.json
 					var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+channel.cluster_id+'/data/users/'+channel.user_id+'/'+channel.channel_address+'.json';
-					Page.cmd("fileGet",{"inner_path":inner_path},function(chJson){
+					Page.cmd("fileGet",{"inner_path":inner_path,"required": false },function(chJson){
 					    if (chJson){
 							chJson = JSON.parse(chJson);
 							$scope.addChannelItems(chJson,channel);
@@ -184,8 +205,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// finish loading channel
 			$scope.finishLoadingChannel = function(){
-				console.log('finish loading channel ' + $scope.cIndex);
-				console.log('--------------------------');
 				if ($scope.cIndex < $scope.channels.length){
 					$scope.getChannel($scope.channels[$scope.cIndex]);
 				} else {

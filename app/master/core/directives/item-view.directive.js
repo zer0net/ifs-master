@@ -80,6 +80,11 @@ app.directive('itemView', [
 									'<video-view ng-if="items"></video-view>' +
 									'<!-- /video -->' +
 								'</div>' +
+								'<div ng-if="item_type === \'book\'">' +
+									'<!-- book  -->' +
+									'<book-view ng-if="items"></book-view>' +
+									'<!-- /book -->' +
+								'</div>' +
 						    '</main>' +
 						'</section>';
 

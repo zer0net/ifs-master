@@ -9,7 +9,6 @@ app.directive('comments', ['$rootScope','$sce','$location',
 				$scope.comments = [];
 				var query = ["SELECT * FROM comment WHERE item_id='"+item.item_id+"' ORDER BY date_added"];
 				Page.cmd("dbQuery", query, function(comments) {
-					console.log(comments);
 					$scope.comments = comments;
 					$scope.$apply();
 				});
