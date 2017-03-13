@@ -116,6 +116,14 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    	}
 		    };
 
+		    // add cluster to merger sites
+		    $scope.addCluster = function() {
+				console.log('adding cluster - ' + $scope.clusters[$scope.clIndex].cluster_id);
+				Page.cmd("mergerSiteAdd",{"addresses":$scope.clusters[$scope.clIndex].cluster_id},function(data){
+					Page.cmd("wrapperNotification", ["info", "refresh this site to view new content", 10000]);
+				});
+		    };
+
 		    // map cluster to user dir array
 		    $scope.mapClusterToUserDirArray = function(){
 				var cluster_id = $scope.clusters[$scope.clIndex].cluster_id;
@@ -141,14 +149,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			    return [text.slice(0, index), text.slice(index + 1)][0];
 		    };
 
-		    // add cluster to merger sites
-		    $scope.addCluster = function() {
-				console.log('adding cluster - ' + $scope.clusters[$scope.clIndex].cluster_id);
-				Page.cmd("mergerSiteAdd",{"addresses":$scope.clusters[$scope.clIndex].cluster_id},function(data){
-					Page.cmd("wrapperNotification", ["info", "refresh this site to view new content", 10000]);
-				});
-		    };
-
 		    // on get channels
 		    $scope.onGetChannels = function(){
 	    		console.log('on get channels - user dir list array:');
@@ -163,16 +163,26 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    // get user channels
 		    $scope.getUserChannels = function(){
 	    		if ($scope.udIndex < $scope.userDirArray.length){
-					var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/channels.json';
-					Page.cmd("fileGet",{"inner_path":inner_path,"required": false },function(channelsJson){
+					var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/content.json';
+					Page.cmd("fileGet",{"inner_path":inner_path,"required": false },function(contentJson){
 			    		$scope.$apply(function(){
-			    			if (channelsJson){
-								channelsJson = JSON.parse(channelsJson);
-								console.log(channelsJson);
-								channelsJson.channels.forEach(function(channel,index){
-									var address = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/' + channel.channel_address + '.json';
-									$scope.channelsIdArray.push(address);
-								});
+			    			if (contentJson){
+								contentJson = JSON.parse(contentJson);
+								for (var i in contentJson.files){
+									if (i.indexOf('.json') > -1 && i.indexOf('channels.json') === -1){
+										var address = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/' + i;
+										$scope.channelsIdArray.push(address);
+									}
+								}
+								for (var i in contentJson.files_optional){
+									if (i.indexOf('.json') > -1 && i.indexOf('channels.json') === -1){
+										var address = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/' + i;
+										$scope.channelsIdArray.push(address);
+									}
+								}
+								console.log(contentJson);
+			    			} else {
+			    				console.log('no content json for ' + $scope.userDirArray[$scope.udIndex] + ' was found');
 			    			}
 						    $scope.udIndex += 1;
 		    				$scope.getUserChannels();
@@ -181,8 +191,26 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 	    		} else {
 	    			$scope.getChannels();
 	    		}
-
 		    };
+
+			// force file download
+			$scope.forceFileDownload = function(userDir){
+				var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/content.json';
+				/*userDir = 'merged-' + $scope.page.site_info.content.merger_name + '/' + userDir + '/channels.json';
+				console.log(userDir);
+				// xhttp get dos file
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState === 4){
+						console.log("file ready");
+						$scope.getUserChannels();
+					} else {
+						console.log("file not found!");
+					}
+				};
+				xhttp.open("GET", userDir, true);
+				xhttp.send();*/
+			};		    
 
 			// get channels
 			$scope.getChannels = function(){
