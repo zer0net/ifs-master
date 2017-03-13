@@ -52,8 +52,9 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// get merged sites
 			$scope.getMergerSites = function(){
-				Page.cmd("mergerSiteList", {query_site_info: false}, function(sites) {		
+				Page.cmd("mergerSiteList", {query_site_info: true}, function(sites) {	
 					console.log('get merger sites');
+					console.log(sites);
 					console.log('--------------------------');
 					// for each site in merger site list
 					for (var site in sites) {
@@ -89,7 +90,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    		// find cluster in sites & bind it to scope
 		    		$scope.clusters.forEach(function(item,index){		    					    			
 		    			item = Channel.findClusterInMergerSiteList(sites,item.cluster_id);		    			
-		    			$scope.clusters[index].title=item.content.title;
+		    			$scope.clusters[index].title = item.content.title;
 		    		});		    				    		
 		    	});
 		    };
@@ -99,22 +100,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    	if ($scope.clIndex < $scope.clusters.length){
 		    		if ($scope.sites){
 						if ($scope.sites.indexOf($scope.clusters[$scope.clIndex].cluster_id) > -1){
-							var cluster_id = $scope.clusters[$scope.clIndex].cluster_id;
-							if (!$scope.userDirArray) $scope.userDirArray = [];
-							Page.cmd("optionalFileList", { address: cluster_id, limit:2000 }, function(site_files){
-								$scope.$apply(function(){
-									site_files.forEach(function(s_file,index){
-										if (s_file.inner_path.indexOf('data/users') > -1){
-											var userDirPath = cluster_id + '/' + $scope.splitByLastSlash(s_file.inner_path);
-											if ($scope.userDirArray.indexOf(userDirPath) === -1){
-												$scope.userDirArray.push(userDirPath);
-											}
-										}
-									});
-									$scope.clIndex += 1;
-									$scope.varifyClusters();
-								});
-							});
+							$scope.mapClusterToUserDirArray();
 						} else {
 							console.log('cluster doesnt exist!');
 							$scope.addCluster();
@@ -128,6 +114,27 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					console.log('--------------------------');
 		    		$scope.onGetChannels();
 		    	}
+		    };
+
+		    // map cluster to user dir array
+		    $scope.mapClusterToUserDirArray = function(){
+				var cluster_id = $scope.clusters[$scope.clIndex].cluster_id;
+				if (!$scope.userDirArray) $scope.userDirArray = [];
+				Page.cmd("fileGet",{"inner_path":"merged-"+$scope.page.site_info.content.merger_name+"/"+cluster_id+"/content.json"},function(data){
+					data = JSON.parse(data);
+					var optionalFiles = data.files_optional;
+					for (var i in optionalFiles){
+						if (i.indexOf('channels.json') > -1){
+							console.log(i);
+							var userDirPath = cluster_id + '/' + $scope.splitByLastSlash(i);
+							if ($scope.userDirArray.indexOf(userDirPath) === -1){
+								$scope.userDirArray.push(userDirPath);
+							}							
+						}
+					}
+					$scope.clIndex += 1;
+					$scope.varifyClusters();					
+				});
 		    };
 
 		    $scope.splitByLastSlash = function(text){
@@ -146,7 +153,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    // on get channels
 		    $scope.onGetChannels = function(){
 	    		console.log('on get channels - user dir list array:');
-	    		console.log($scope.userDirArray);
+	    		console.log($scope.userDirArray.length);
 				console.log('--------------------------');
 		    	$scope.udIndex = 0;
 		    	$scope.channels = [];
@@ -158,7 +165,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    $scope.getUserChannels = function(){
 	    		if ($scope.udIndex < $scope.userDirArray.length){
 					var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/channels.json';
-					console.log(inner_path);
 					Page.cmd("fileGet",{"inner_path":inner_path,"required": false },function(channelsJson){
 			    		$scope.$apply(function(){
 			    			if (channelsJson){
@@ -181,7 +187,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// get channels
 			$scope.getChannels = function(){
 	    		console.log('get channels');
-	    		console.log($scope.channelsIdArray);
+	    		console.log($scope.channelsIdArray.length);
 				console.log('--------------------------');
 				// loading
 				$scope.showLoadingMessage('Loading Channels');
@@ -202,7 +208,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					Page.cmd("fileGet",{"inner_path":$scope.channelsIdArray[$scope.cIndex],"required": false },function(chJson){
 					    if (chJson){
 							chJson = JSON.parse(chJson);
-					    	console.log(chJson.channel.channel_name);
 							$scope.addChannelItems(chJson);
 						} else {
 							console.log('No content.json found for '+channel.channel_address+'!');
@@ -218,7 +223,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 	
 			// add channels items
 			$scope.addChannelItems = function(chJson){
-				console.log('add channel items ' + chJson.channel.channel_address);
 				// list optional files
 				Page.cmd("optionalFileList", { address:chJson.channel.cluster_id, limit:2000 }, function(site_files){
 					// assign to each file in chJson.items its correspoding site_file
@@ -245,6 +249,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			$scope.finishLoadingChannels = function(){
 				console.log('finish loading channels!');
 				console.log($scope.channels);
+				console.log('total channels - ' + $scope.channels.length);
 				console.log('--------------------------');				
 				var query = ["SELECT * FROM moderation WHERE current = 1"];
 				Page.cmd("dbQuery", query ,function(moderations){

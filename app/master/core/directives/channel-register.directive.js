@@ -147,6 +147,7 @@ app.directive('channelRegister', ['Channel','$rootScope','$window',
 				channel.cluster_id = cluster_id;
 				channel.channel_id = $scope.channelsJson.next_channel_id;
 				channel.channel_address = $scope.channelsJson.next_channel_id + '_' + $scope.page.site_info.auth_address.toString();
+				channel.date_added = +(new Date);
 				// channel json obj
 				var chJson = {
 					channel:channel,

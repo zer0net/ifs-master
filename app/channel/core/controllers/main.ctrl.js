@@ -134,7 +134,8 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 				Page.cmd("fileGet", { "inner_path": $scope.inner_path + 'content.json', "required": false },function(contentJson) {
 					// add optional attribute if doesnt exist
 					contentJson = JSON.parse(contentJson);
-					if (!contentJson.optional) contentJson.optional = "((?!json).)*$";
+					contentJson.optional = ".*";
+					console.log(contentJson);
 					// write content.json to file
 					var json_raw = unescape(encodeURIComponent(JSON.stringify(contentJson, void 0, '\t')));
 					Page.cmd("fileWrite", [$scope.inner_path + 'content.json', btoa(json_raw)], function(res) {
