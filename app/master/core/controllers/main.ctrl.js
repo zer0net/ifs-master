@@ -205,7 +205,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// get channels
 			$scope.getChannels = function(){
 	    		console.log('get channels');
-	    		console.log($scope.channelsIdArray);
+	    		console.log('total channels - ' + $scope.channelsIdArray.length);
 				console.log('--------------------------');
 				// loading
 				$scope.showLoadingMessage('Loading Channels');
