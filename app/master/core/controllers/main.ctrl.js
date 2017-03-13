@@ -163,26 +163,18 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    // get user channels
 		    $scope.getUserChannels = function(){
 	    		if ($scope.udIndex < $scope.userDirArray.length){
-					var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/content.json';
-					Page.cmd("fileGet",{"inner_path":inner_path,"required": false },function(contentJson){
+					var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/channels.json';
+					Page.cmd("fileGet",{"inner_path":inner_path,"required": false },function(channelsJson){
 			    		$scope.$apply(function(){
-			    			if (contentJson){
-								contentJson = JSON.parse(contentJson);
-								for (var i in contentJson.files){
-									if (i.indexOf('.json') > -1 && i.indexOf('channels.json') === -1){
-										var address = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/' + i;
-										$scope.channelsIdArray.push(address);
-									}
-								}
-								for (var i in contentJson.files_optional){
-									if (i.indexOf('.json') > -1 && i.indexOf('channels.json') === -1){
-										var address = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/' + i;
-										$scope.channelsIdArray.push(address);
-									}
-								}
-								console.log(contentJson);
+			    			if (channelsJson){
+								channelsJson = JSON.parse(channelsJson);
+								channelsJson.channels.forEach(function(channel,index){
+									var address = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/' + channel.channel_address + '.json';
+									$scope.channelsIdArray.push(address);
+								});
 			    			} else {
-			    				console.log('no content json for ' + $scope.userDirArray[$scope.udIndex] + ' was found');
+			    				console.log('no channels json for ' + $scope.userDirArray[$scope.udIndex] + ' was found');
+			    				$scope.getContentJson();
 			    			}
 						    $scope.udIndex += 1;
 		    				$scope.getUserChannels();
@@ -194,22 +186,34 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    };
 
 			// force file download
-			$scope.forceFileDownload = function(userDir){
+			$scope.getContentJson = function(){
 				var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/content.json';
-				/*userDir = 'merged-' + $scope.page.site_info.content.merger_name + '/' + userDir + '/channels.json';
-				console.log(userDir);
-				// xhttp get dos file
-				var xhttp = new XMLHttpRequest();
-				xhttp.onreadystatechange = function() {
-					if (this.readyState === 4){
-						console.log("file ready");
-						$scope.getUserChannels();
-					} else {
-						console.log("file not found!");
+				Page.cmd("fileGet",{"inner_path":inner_path,"required": false },function(contentJson){
+	    			if (contentJson){
+	    				console.log(contentJson);
+						contentJson = JSON.parse(contentJson);
+						for (var i in contentJson.files){
+							if (i.indexOf('.json') > -1 && i.indexOf('channels.json') === -1){
+								var address = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/' + i;
+								if ($scope.channelsIdArray.indexOf(address) === -1){
+									$scope.channelsIdArray.push(address);							
+								}
+							}
+						}
+						if (contentJson.files_optional){
+							for (var i in contentJson.files_optional){
+								if (i.indexOf('.json') > -1 && i.indexOf('channels.json') === -1){
+									var address = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/' + i;
+									if ($scope.channelsIdArray.indexOf(address) === -1){
+										$scope.channelsIdArray.push(address);							
+									}
+								}
+							}
+						}
 					}
-				};
-				xhttp.open("GET", userDir, true);
-				xhttp.send();*/
+				    $scope.udIndex += 1;
+    				$scope.getUserChannels();
+				});
 			};		    
 
 			// get channels
@@ -238,7 +242,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 							chJson = JSON.parse(chJson);
 							$scope.addChannelItems(chJson);
 						} else {
-							console.log('No content.json found for '+channel.channel_address+'!');
+							console.log('No content.json found for '+channel_address+'!');
 							$scope.cIndex += 1;
 							$scope.getChannel();
 						}
