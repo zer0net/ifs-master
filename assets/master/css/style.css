@@ -2064,24 +2064,18 @@ md-dialog.fullscreen-dialog {
 .new-channel-form .form-row {
   margin-bottom: 15px;
 }
-.item-clusters{
-          position: absolute;
-          left: -150px;
-          padding: 0;
-          padding-top: 10px;
-          margin: 0;
-          list-style-type: none;
-          width: 150px;
-      }
-.item-clusters li{
-          padding: 5px;          
-      }                
-
-.item-clusters li a{
-          padding: 5px;          
-      }                
-
- .item-clusters a.selected {
-    background-color: #337ab7;
-    color: white;
+.item-clusters {
+  position: absolute;
+  left: -150px;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  width: 150px;
+}
+.item-clusters a {
+  padding: 5px;
+}
+.item-clusters a.selected {
+  background-color: #337ab7;
+  color: white;
 }

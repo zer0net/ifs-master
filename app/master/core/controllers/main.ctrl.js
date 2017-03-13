@@ -103,7 +103,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    	if ($scope.clIndex < $scope.clusters.length){
 		    		if ($scope.sites){
 						if ($scope.sites.indexOf($scope.clusters[$scope.clIndex].cluster_id) > -1){
-							console.log('cluster varfyied');
 							var cluster_id = $scope.clusters[$scope.clIndex].cluster_id;
 							if (!$scope.userDirArray) $scope.userDirArray = [];
 							Page.cmd("optionalFileList", { address: cluster_id, limit:2000 }, function(site_files){
@@ -132,7 +131,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    	} else {
 		    		console.log('finished varifying cluster');
 					console.log('--------------------------');
-		    		$scope.getChannels();
+		    		$scope.onGetChannels();
 		    	}
 		    };
 
@@ -149,34 +148,57 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				});
 		    };
 
+		    // on get channels
+		    $scope.onGetChannels = function(){
+	    		console.log('on get channels');
+				console.log('--------------------------');
+		    	$scope.udIndex = 0;
+		    	$scope.channels = [];
+		    	$scope.getUserChannels();
+		    };
+
+		    // get user channels
+		    $scope.getUserChannels = function(){
+	    		console.log('get ' + $scope.userDirArray[$scope.udIndex] + '/channels.json');
+				console.log('--------------------------');
+				var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/channels.json';
+				Page.cmd("fileGet",{"inner_path":inner_path,"required": false },function(channelsJson){
+		    		$scope.$apply(function(){
+						channelsJson = JSON.parse(channelsJson);
+						$scope.channels = $scope.channels.concat(channelsJson.channels);
+			    		$scope.udIndex += 1;
+			    		if ($scope.udIndex < $scope.userDirArray.length){
+			    			$scope.getUserChannels();
+			    		} else {
+			    			$scope.getChannels();
+			    		}
+		    		});
+				});	
+		    };
+
 			// get channels
 			$scope.getChannels = function(){
+				console.log($scope.channels);
 				// loading
 				$scope.showLoadingMessage('Loading Channels');
-				// get channels
-				console.log($scope.userDirArray);
-				var query = ["SELECT * FROM channel WHERE cluster_id IS NOT NULL"];
-				Page.cmd("dbQuery", query, function(channels) {
-					if (channels.length > 0){
-						var query = ["SELECT * FROM moderation WHERE current = 1"];
-						Page.cmd("dbQuery", query ,function(moderations){
-							$scope.channels = Central.joinChannelModeration(channels,moderations);
-							$scope.cIndex = 0;
-							$scope.getChannel($scope.channels[$scope.cIndex]);
-						});
-					} else {
-						$scope.showLoadingMessage('No Channels!');
-						$scope.finishedLoading();
-					}
-					$scope.$apply();
-				});
+				if ($scope.channels.length > 0){
+					var query = ["SELECT * FROM moderation WHERE current = 1"];
+					Page.cmd("dbQuery", query ,function(moderations){
+						$scope.channels = Central.joinChannelModeration($scope.channels,moderations);
+						$scope.cIndex = 0;
+						$scope.getChannel($scope.channels[$scope.cIndex]);
+						$scope.$apply();
+					});
+				} else {
+					$scope.showLoadingMessage('No Channels!');
+					$scope.finishedLoading();
+				}
 			};
 
 			// get channel
 			$scope.getChannel = function(channel){
-				console.log('get channel');
-				console.log(channel);
-				console.log('--------------------------');				
+				console.log('get channel ' + channel.channel_address);
+				console.log('--------------------------');
 				// update cIndex
 				$scope.cIndex += 1;
 				if (channel.hide !== 1){
