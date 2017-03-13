@@ -150,6 +150,9 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 		    // on get channels
 		    $scope.onGetChannels = function(){
+	    		console.log('on get channels');
+	    		console.log($scope.userDirArray);
+				console.log('--------------------------');
 		    	$scope.udIndex = 0;
 		    	$scope.channels = [];
 		    	$scope.getUserChannels();
@@ -178,7 +181,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// get channels
 			$scope.getChannels = function(){
 	    		console.log('get channels');
-	    		console.log(channels);
+	    		console.log($scope.channels);
 				console.log('--------------------------');
 				// loading
 				$scope.showLoadingMessage('Loading Channels');
