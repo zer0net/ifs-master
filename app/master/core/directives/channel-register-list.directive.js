@@ -6,7 +6,7 @@ app.directive('channelRegisterList', ['$location','$rootScope',
 			$scope.itemsPerPage = 10;
 			$scope.sortKey = 'date_added';
 			$scope.reverse = true;	
-			$scope.query=null;		
+			$scope.query='';		
 		    		    
 		    // on filter channel
 		    $scope.onFilterChannel = function(channel) {
@@ -38,7 +38,7 @@ app.directive('channelRegisterList', ['$location','$rootScope',
 							'</ul>' +
 							'<div class="section-header">'+
 								'<h2>Channels</h2>'+
-								'<span class="label" ng-hide="loading">total: <span ng-bind="channels.length"></span></span>'+
+								'<span class="label" ng-hide="loading">total: <span>{{(channels | filter:query).length }}</span></span>'+
 								'<hr/>'+
 							'</div>'+				
 							'<table class="table table-striped table-hover table-sm">' +
