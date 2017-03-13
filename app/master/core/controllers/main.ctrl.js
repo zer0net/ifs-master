@@ -108,14 +108,12 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 								$scope.$apply(function(){
 									site_files.forEach(function(s_file,index){
 										if (s_file.inner_path.indexOf('data/users') > -1){
-											console.log(s_file.inner_path);
 											var userDirPath = cluster_id + '/' + $scope.splitByLastSlash(s_file.inner_path);
 											if ($scope.userDirArray.indexOf(userDirPath) === -1){
 												$scope.userDirArray.push(userDirPath);
 											}
 										}
 									});
-									console.log($scope.userDirArray);
 									$scope.clIndex += 1;
 									$scope.varifyClusters();
 								});
@@ -150,38 +148,43 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 		    // on get channels
 		    $scope.onGetChannels = function(){
-	    		console.log('on get channels');
+	    		console.log('on get channels - user dir list array:');
 	    		console.log($scope.userDirArray);
 				console.log('--------------------------');
 		    	$scope.udIndex = 0;
 		    	$scope.channels = [];
+		    	$scope.channelsIdArray = [];
 		    	$scope.getUserChannels();
 		    };
 
 		    // get user channels
 		    $scope.getUserChannels = function(){
-				var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/channels.json';
-				console.log(inner_path);
-				Page.cmd("fileGet",{"inner_path":inner_path,"required": false },function(channelsJson){
-		    		$scope.$apply(function(){
-			    		$scope.udIndex += 1;		    			
-		    			if (channelsJson){
-							channelsJson = JSON.parse(channelsJson);
-							$scope.channels = $scope.channels.concat(channelsJson.channels);
-		    			}
-			    		if ($scope.udIndex < $scope.userDirArray.length){
-			    			$scope.getUserChannels();
-			    		} else {
-			    			$scope.getChannels();
-			    		}
-		    		});
-				});	
+			    $scope.udIndex += 1;
+	    		if ($scope.udIndex < $scope.userDirArray.length){
+					var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/channels.json';
+					Page.cmd("fileGet",{"inner_path":inner_path,"required": false },function(channelsJson){
+			    		$scope.$apply(function(){
+			    			if (channelsJson){
+								channelsJson = JSON.parse(channelsJson);
+								channelsJson.channels.forEach(function(channel,index){
+									var address = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/' + channel.channel_address + '.json';
+									$scope.channelsIdArray.push(address);
+								});
+								$scope.channels = $scope.channels.concat(channelsJson.channels);
+			    			}
+		    				$scope.getUserChannels();
+			    		});
+					});
+	    		} else {
+	    			$scope.getChannels();
+	    		}
+
 		    };
 
 			// get channels
 			$scope.getChannels = function(){
 	    		console.log('get channels');
-	    		console.log($scope.channels);
+	    		console.log($scope.channelsIdArray);
 				console.log('--------------------------');
 				// loading
 				$scope.showLoadingMessage('Loading Channels');
@@ -190,7 +193,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					Page.cmd("dbQuery", query ,function(moderations){
 						$scope.channels = Central.joinChannelModeration($scope.channels,moderations);
 						$scope.cIndex = 0;
-						$scope.getChannel($scope.channels[$scope.cIndex]);
+						$scope.getChannel($scope.channels[$scope.cIndex],$scope.channelsIdArray[$scope.cIndex]);
 						$scope.$apply();
 					});
 				} else {
@@ -200,20 +203,24 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			};
 
 			// get channel
-			$scope.getChannel = function(channel){
+			$scope.getChannel = function(channel,channel_address){
+				console.log($scope.channelsIdArray[$scope.cIndex]);
 				// update cIndex
 				$scope.cIndex += 1;
 				if (channel.hide !== 1){
 					// get channel.json
 					var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+channel.cluster_id+'/data/users/'+channel.user_id+'/'+channel.channel_address+'.json';
-					Page.cmd("fileGet",{"inner_path":inner_path,"required": false },function(chJson){
+					Page.cmd("fileGet",{"inner_path":$scope.channelsIdArray[$scope.cIndex],"required": false },function(chJson){
+					  	console.log(chJson);
 					    if (chJson){
 							chJson = JSON.parse(chJson);
+							channel = chJson.channel;
 							$scope.addChannelItems(chJson,channel);
 						} else {
 							console.log('No content.json found for '+channel.channel_address+'!');
 							$scope.finishLoadingChannel();
 						}
+						$scope.$apply();
 					});
 				} else {
 					$scope.finishLoadingChannel();
@@ -226,6 +233,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				Page.cmd("optionalFileList", { address: channel.cluster_id, limit:2000 }, function(site_files){
 					// assign to each file in chJson.items its correspoding site_file
 					chJson = Channel.matchItemsWithSiteFiles(chJson,site_files);
+					channel.channel_name = chJson.channel.name;
 					channel.items_total = chJson.items_total;
 					channel.items = chJson.items;
 					// merge chJson.items to $scope.items
@@ -252,6 +260,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// finish loading channels
 			$scope.finishLoadingChannels = function(){
 				console.log('finish loading channels!');
+				console.log($scope.channels);
 				console.log('--------------------------');
 				// sort media types alphabetically
 				$scope.media_types.sort();
