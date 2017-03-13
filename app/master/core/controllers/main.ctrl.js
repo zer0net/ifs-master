@@ -125,7 +125,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					var optionalFiles = data.files_optional;
 					for (var i in optionalFiles){
 						if (i.indexOf('channels.json') > -1){
-							console.log(i);
 							var userDirPath = cluster_id + '/' + $scope.splitByLastSlash(i);
 							if ($scope.userDirArray.indexOf(userDirPath) === -1){
 								$scope.userDirArray.push(userDirPath);
@@ -169,6 +168,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			    		$scope.$apply(function(){
 			    			if (channelsJson){
 								channelsJson = JSON.parse(channelsJson);
+								console.log(channelsJson);
 								channelsJson.channels.forEach(function(channel,index){
 									var address = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/' + channel.channel_address + '.json';
 									$scope.channelsIdArray.push(address);
