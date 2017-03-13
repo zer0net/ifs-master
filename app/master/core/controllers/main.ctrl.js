@@ -78,8 +78,21 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 						console.log('--------------------------');
 						$scope.clIndex = 0;
 						$scope.varifyClusters();
+						$scope.getClusterSiteInfo();
 					})
 				});
+		    };
+
+		    // get cluster site info
+		    $scope.getClusterSiteInfo = function(){
+		    	// query merger site list
+		    	Page.cmd("mergerSiteList", {query_site_info: true}, function(sites) {
+		    		// find cluster in sites & bind it to scope
+		    		$scope.clusters.forEach(function(item,index){		    					    			
+		    			item = Channel.findClusterInMergerSiteList(sites,item.cluster_id);		    			
+		    			$scope.clusters[index].title=item.content.title;
+		    		});		    				    		
+		    	});
 		    };
 
 		    // varify cluster
@@ -229,6 +242,22 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 		/* FILTER */
 
+			// filter Cluster
+			$scope.onFilterCluster = function(cluster){
+				alert(1);
+				/*
+				$scope.loading_list = true;
+				if (!$scope.filters) {
+					$scope.filters = {cluster_id:cluster.cluster_id}	
+				} 
+				else {
+					$scope.filters.cluster_id = cluster.cluster_id;
+				}
+				$scope.cluster = cluster;
+				$scope.loading_list = false;
+				*/
+			};
+
 			// filter channel
 			$scope.filterChannel = function(channel){
 				$scope.loading_list = true;
@@ -242,6 +271,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				$scope.mainFilter();
 			};
 
+		
 			// main filter function
 			$scope.mainFilter = function() {
 				$scope.channel = Central.filterItemsByChannel($scope.channel,$scope.items,$scope.filters);
