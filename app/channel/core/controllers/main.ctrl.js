@@ -87,6 +87,7 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 			$scope.getChannelFilesInfo = function(){
 				// get optional file list
 				Page.cmd("optionalFileList", { address: $scope.channel.cluster_id, limit:2000 }, function(site_files){
+					console.log(site_files);
 					$scope.$apply(function(){
 					// render channel files
 					$scope.ch_files = Channel.renderChannelFiles(site_files,$scope.chJson.items);

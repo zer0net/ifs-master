@@ -205,7 +205,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// get channels
 			$scope.getChannels = function(){
 	    		console.log('get channels');
-	    		console.log('total channels - ' + $scope.channelsIdArray.length);
+	    		console.log($scope.channelsIdArray);
 				console.log('--------------------------');
 				// loading
 				$scope.showLoadingMessage('Loading Channels');
@@ -345,28 +345,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				$scope.msg = '';				
 			};
 
-		    // select user
-		    $scope.selectUser = function(){
-		    	Page.selectUser();
-				Page.onRequest = function(cmd, message) {
-				    if (cmd == "setSiteInfo") {
-						// site info
-						Page.site_info = message;
-						// attach to scope
-						$scope.page = Page;
-						// update site
-						$scope.$apply(function(){
-							$rootScope.$broadcast('onChangeUserCertId',$scope.page);
-						});
-					}
-				};
-		    };
-
-		    // on select user
-		    $rootScope.$on('onSelectUser',function(event,mass) {
-		    	$scope.selectUser();
-		    });
-
 		    // load script dynamically
 			$scope.loadScript = function(url, type, charset) {
 			    if (type===undefined) type = 'text/javascript';
@@ -382,24 +360,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			        return script;
 			    }
 			};
-
-			// clone file hub
-			$scope.cloneFileHub = function(){
-				if (Page.site_info.settings.permissions.indexOf("ADMIN") > -1){
-					Page.cmd("siteClone", ["1CG6obEGoFL1fjAoNaxUnemgKES7Zh9YBG", "template-new"]);		    		
-		    	} else {
-		    		// if not, ask user for ADMIN permission
-					Page.cmd("wrapperPermissionAdd", "ADMIN", function() {
-						Page.cmd("siteClone", ["1CG6obEGoFL1fjAoNaxUnemgKES7Zh9YBG", "template-new"]);	
-					});
-		    	}				
-			    return false;
-			};
-
-			// on clone file hub
-			$rootScope.$on('onCloneFileHub',function(event,mass){
-				// $scope.cloneFileHub();
-			});
 
 			// toggle menu
 			$scope.toggleMenu = function(ev) {
@@ -427,6 +387,53 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			};
 			
 	    /* /UI */
+
+	    /* IFS CERTIFICATE */
+
+		    // select user
+		    $scope.selectUser = function(){
+			    Page.cmd("certSelect", [["ifs.bit"]]);
+				Page.onRequest = function(cmd, message) {
+				    if (cmd == "setSiteInfo") {
+						// site info
+						Page.site_info = message;
+						// attach to scope
+						$scope.page = Page;
+						// update site
+						$scope.$apply(function(){
+							$rootScope.$broadcast('onChangeUserCertId',$scope.page);
+						});
+					}
+				};
+		    };
+
+		    // on select user
+		    $rootScope.$on('onSelectUser',function(event,mass) {
+		    	$scope.selectUser();
+		    });
+
+	    	// create ifs cert
+	    	$scope.createIfsCert = function(name){
+			    if (!name) {
+			        name = $scope.page.site_info.auth_address.slice(0, 13);
+			    }	    		
+		        var genkey = "KxGQR1gw2NVxmHTponv8ou9CVZq44p67Y7p3aMgvKm8CWJZPu7yj"
+		        var permissionaddress = "1KH5BdNnqxh2KRWMMT8wUXzUgz4vVQ4S8p"
+		        var certname = "ifs.bit"
+	    		var genid =  bitcoin.ECPair.fromWIF(genkey);
+    			var cert = bitcoin.message.sign(genid, ($scope.page.site_info.auth_address + "#web/") + name).toString("base64");
+    			Page.cmd("certAdd", [certname, "web", name, cert], function(res){
+    				Page.selectUser();
+    			});
+	    	};
+
+		    // on create ifs cert
+		    $rootScope.$on('onCreateIfsCert',function(event,mass) {
+		    	$scope.createIfsCert();
+		    });
+
+	    /* /IFS CERTIFICATE */
+
 
 	}
 ]);

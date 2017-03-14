@@ -11,27 +11,24 @@ app.directive('commentForm', ['$rootScope','$sce','$location',
 
 		    // on text area focus
 		    $scope.onTextAreaFocus = function(){
-		 		console.log('hello');
 		    	// query site info
 		    	Page.cmd('siteInfo',{},function(site_info) {
 		    		Page.site_info = site_info;
 					if (Page.site_info.cert_user_id) {
 						$scope.user = Page.site_info.cert_user_id;
 					} else {
-						$scope.user = Page.site_info.auth_address;
-						if (!$scope.focused){
-							$scope.focused = true;
-							$scope.selectUser();
-						}
+						$scope.createIfsCert();
 					}
 					$scope.$apply();
 		    	});
 		    };
 
-		    // on text area key down
-		    $scope.onTextAreaKeyDown = function($event,comment){
-		    	$scope.comment = $scope.renderKeyDownEvent($scope.comment,$event.originalEvent.key);
-		    };
+		    // on change user cert id
+		    $rootScope.$on('onChangeUserCertId',function(event,mass){
+		    	$scope.page = mass;
+		    	$scope.user = $scope.page.site_info.cert_user_id;
+		    	$scope.$apply();
+		    });
 
 		    // render key down event
 		    $scope.renderKeyDownEvent = function(text,key){

@@ -14,7 +14,7 @@
     }
 
     ZeroChat.prototype.selectUser = function() {
-      Page.cmd("certSelect", [["zeroid.bit", "zeroverse.bit"]]);
+      Page.cmd("certSelect", [["ifs.bit"]]);
       return false;
     };
 

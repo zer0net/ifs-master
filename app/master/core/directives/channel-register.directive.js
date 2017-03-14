@@ -28,7 +28,8 @@ app.directive('channelRegister', ['Channel','$rootScope','$window',
 				if (!$scope.page.site_info.cert_user_id){
 					console.log('no user certificate id');
 					console.log('-------------------------------');
-					$rootScope.$broadcast('onSelectUser');
+					//$rootScope.$broadcast('onSelectUser');
+					$rootScope.$broadcast('onCreateIfsCert');
 				} else {
 					$scope.findUserDirectory(channel);
 				}
