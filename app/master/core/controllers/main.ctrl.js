@@ -395,6 +395,11 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 						// update site
 						$scope.$apply(function(){
 							$rootScope.$broadcast('onChangeUserCertId',$scope.page);
+							if ($scope.page.site_info.cert_user_id && $scope.page.site_info.cert_user_id.split('@')[1] === 'ifs.bit'){
+								Page.cmd("wrapperNotification", ["done", "valid IFS Id selected!",10000]);
+							} else {
+								Page.cmd("wrapperNotification", ["info", "please select a valid IFS Id (@ifs.bit)",10000]);
+							}
 						});
 					}
 				};

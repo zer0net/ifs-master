@@ -134,6 +134,7 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope','$location',
 			  						'<li><a ng-click="showInfoModal(ev)" >FAQ</a></li>'+  
 			  						'<li><a href="/{{page.site_info.address}}/user/">My Channels</a></li>'+  
 									'<li><a href="/{{page.site_info.address}}/register.html">All Channels</button></a></li>'+
+			  						'<li><a ng-click="selectUser()" >Login</a></li>'+
 								'</ul>'+    					
 	  						'</div>' +
 	  					'</div>'+

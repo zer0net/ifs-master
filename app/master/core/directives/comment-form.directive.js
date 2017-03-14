@@ -27,7 +27,6 @@ app.directive('commentForm', ['$rootScope','$sce','$location',
 		    $rootScope.$on('onChangeUserCertId',function(event,mass){
 		    	$scope.page = mass;
 		    	$scope.user = $scope.page.site_info.cert_user_id;
-		    	$scope.$apply();
 		    });
 
 		    // render key down event
