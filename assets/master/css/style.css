@@ -2072,6 +2072,9 @@ md-dialog.fullscreen-dialog {
   list-style-type: none;
   width: 150px;
 }
+.item-clusters li {
+  margin-bottom: 10px;
+}
 .item-clusters a {
   padding: 5px;
 }
