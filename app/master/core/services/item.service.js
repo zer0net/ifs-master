@@ -45,6 +45,7 @@ app.factory('Item', [
 				catName = 'images';
 				file.media_type = 'image';
 			}
+			console.log(file.file_type);
 			// find category
 			categories.forEach(function(cat,index){
 				if (cat.category_name === catName){

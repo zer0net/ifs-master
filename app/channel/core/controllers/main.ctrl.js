@@ -19,7 +19,6 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 			$scope.getUserChannels = function(){
 				var channels = [];
 				$scope.channels.forEach(function(ch,index){
-					console.log(ch);
 					if (ch.channel_address.split('_')[1] === $scope.page.site_info.auth_address){
 						channels.push(ch);
 					}
@@ -43,7 +42,6 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 				if (path.indexOf('?cl=') > -1){
 					// channel address
 					var channel_address = path.split('+ch=')[1];
-					console.log(channel_address);					
 					// url suffix for inner links
 					$scope.url_suffix = '?cl=' + path.split('?cl=')[1];
 					// find channel by channel address
@@ -52,7 +50,6 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 					// apply first channel to scope
 					$scope.channel = $scope.u_channels[0];
 				}
-				console.log($scope.u_channels);
 				// url suffix for inner links
 				$scope.url_suffix = '?cl=' + $scope.channel.cluster_id + '+ch=' + $scope.channel.channel_address;
 				// set current channels cluster merged site info
@@ -72,7 +69,7 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 
 			// get channel json
 			$scope.getChannelJson = function(){
-				$scope.inner_path = 'merged-IFS/'+$scope.channel.cluster_id+'/data/users/'+$scope.channel.user_id+'/';
+				$scope.inner_path = 'merged-IFS/'+$scope.channel.cluster_id+'/data/users/'+$scope.page.site_info.auth_address+'/';
 				Page.cmd("fileGet", { "inner_path": $scope.inner_path + $scope.channel.channel_address+'.json', "required": false },function(chJson) {
 					$scope.$apply(function(){
 						// assign channel.json to scope
@@ -87,17 +84,16 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 			$scope.getChannelFilesInfo = function(){
 				// get optional file list
 				Page.cmd("optionalFileList", { address: $scope.channel.cluster_id, limit:2000 }, function(site_files){
-					console.log(site_files);
 					$scope.$apply(function(){
-					// render channel files
-					$scope.ch_files = Channel.renderChannelFiles(site_files,$scope.chJson.items);
-					// route user section
-					$scope.routeUserView();
+						// render channel files
+						$scope.ch_files = Channel.renderChannelFiles(site_files,$scope.chJson.items);
+						// route user view
+						$scope.routeUserView();
 					});					
 				});
 			};
 
-			// route user section
+			// route user view
 			$scope.routeUserView = function(view, item){
 				if (view) { 
 					$scope.user_view = view; 
@@ -107,7 +103,6 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 					$scope.user_view = 'main'; 
 					delete $scope.item;
 				}
-				console.log($scope.item);
 				$scope.finishLoading();
 			};
 

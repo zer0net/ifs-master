@@ -32,6 +32,12 @@ app.directive('channelEdit', ['$sce','$location','$rootScope',
 				};
 			};
 
+			// render image page
+			$scope.renderImagePath = function(image){
+				console.log(image);
+				image.src = '/'+$scope.page.site_info.address+'/merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.chJson.channel.cluster_id+'/data/users/'+$scope.page.site_info.auth_address+'/'+image.file_name;
+			};
+
 			// select image as logo
 			$scope.selectImageAsLogo = function(image){
 				$scope.chJson.channel.logo_file = image.file_name;
@@ -90,8 +96,8 @@ app.directive('channelEdit', ['$sce','$location','$rootScope',
 					        '<div class="form-row" layout="row">' +
 					          	'<label flex="20">Channel Logo</label>' +						        	
 								'<div class="logo-image-selection row" flex="80">' +
-									'<figure ng-repeat="image in chJson.items.images" class="col-xs-2">' +
-										'<img style="width:100%;" ng-click="selectImageAsLogo(image)" ng-class="{selected: image.file_name === chJson.channel.logo_file}" ng-src="/{{page.site_info.address}}/merged-{{page.site_info.content.merger_name}}/{{channel.cluster_id}}/data/users/{{channel.user_id}}/{{image.file_name}}"/>' +
+									'<figure ng-repeat="image in chJson.items.images" class="col-xs-2" ng-init="renderImagePath(image)">' +
+										'<img style="width:100%;" ng-click="selectImageAsLogo(image)" ng-class="{selected: image.file_name === chJson.channel.logo_file}" ng-src="{{image.src}}"/>' +
 									'</figure>' +
 									'<a class="col-xs-12"  ng-if="!chJson.items.images" ng-click="onUploadClick()">you havent uploaded any images yet, upload an image to select a logo!</a>' +
 								'</div>' +

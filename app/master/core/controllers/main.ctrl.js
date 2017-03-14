@@ -21,7 +21,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 					Page.cmd("fileGet",{"inner_path":"content/config.json"},function(data){
 						console.log('get config file');
 						$scope.config = JSON.parse(data);
-						console.log($scope.config);
 						console.log('--------------------------');
 						// get channels
 						$scope.getMergerPermission();	
@@ -54,7 +53,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			$scope.getMergerSites = function(){
 				Page.cmd("mergerSiteList", {query_site_info: true}, function(sites) {	
 					console.log('get merger sites');
-					console.log(sites);
 					console.log('--------------------------');
 					// for each site in merger site list
 					for (var site in sites) {
@@ -74,7 +72,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 						data = JSON.parse(data);
 						$scope.clusters = data.clusters;
 						console.log('get clusters');
-						console.log($scope.clusters);
 						console.log('--------------------------');
 						$scope.clIndex = 0;
 						$scope.varifyClusters();
@@ -151,8 +148,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 		    // on get channels
 		    $scope.onGetChannels = function(){
-	    		console.log('on get channels - user dir list array:');
-	    		console.log($scope.userDirArray.length);
+	    		console.log('on get channels');
 				console.log('--------------------------');
 		    	$scope.udIndex = 0;
 		    	$scope.channels = [];
@@ -188,7 +184,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// force file download
 			$scope.getContentJson = function(){
 				var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.userDirArray[$scope.udIndex] + '/'+'1_'+$scope.userDirArray[$scope.udIndex].split('/')[3]+'.json';
-				console.log(inner_path);
 				Page.cmd("fileGet",{"inner_path":inner_path,"required": false },function(channelJson){
 	    			if (channelJson){
 	    				channelJson = JSON.parse(channelJson);
@@ -205,7 +200,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// get channels
 			$scope.getChannels = function(){
 	    		console.log('get channels');
-	    		console.log($scope.channelsIdArray);
 				console.log('--------------------------');
 				// loading
 				$scope.showLoadingMessage('Loading Channels');
@@ -266,7 +260,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// finish loading channels
 			$scope.finishLoadingChannels = function(){
 				console.log('finish loading channels!');
-				console.log($scope.channels);
 				console.log('total channels - ' + $scope.channels.length);
 				console.log('--------------------------');				
 				var query = ["SELECT * FROM moderation WHERE current = 1"];

@@ -7,6 +7,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 			// init
 			$scope.init = function() {
 				$scope.publishButtonStatus = 'publish';
+				if ($scope.chJson.channel.logo_file) $scope.chJson.channel.logo_path = '/'+$scope.page.site_info.address+'/merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.chJson.channel.cluster_id+'/data/users/'+$scope.page.site_info.auth_address+'/'+$scope.chJson.channel.logo_file;
 			};
 
 			// on upload click
@@ -136,7 +137,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 							'<div class="col-xs-5">' + 
 								'<div class="channel-header-top">' + 
 									'<figure class="logo">' + 
-										'<img ng-if="chJson.channel.logo_file" ng-src="/{{page.site_info.address}}/merged-IFS/{{channel.cluster_id}}/data/users/{{channel.user_id}}/{{chJson.channel.logo_file}}"/>' + 
+										'<img ng-if="chJson.channel.logo_file" ng-src="{{chJson.channel.logo_path}}">' +
 									'</figure>' +
 									'<div class="site-title" ng-if="channel">' + 
 										'<h3>' + 
