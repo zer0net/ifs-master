@@ -6,7 +6,8 @@ app.directive('channelRegisterList', ['$location','$rootScope',
 			$scope.itemsPerPage = 10;
 			$scope.sortKey = 'date_added';
 			$scope.reverse = true;	
-			$scope.query='';		
+			$scope.query='';	
+			$scope.selectedCluster=null;	
 		    		    
 		    // on filter channel
 		    $scope.onFilterChannel = function(channel) {
@@ -16,8 +17,14 @@ app.directive('channelRegisterList', ['$location','$rootScope',
 
 		    // on filter cluster
 		    $scope.onFilterCluster = function(cluster) {
-		    	// on filter cluster		    	
-		    	$scope.query = {cluster_id:cluster.cluster_id};		    	
+		    	// on filter cluster		 
+		    	if(cluster=='all'){
+		    		$scope.query='';
+		    		$scope.selectedCluster=null;
+		    	}else{
+		    		$scope.query = {cluster_id:cluster.cluster_id};		 
+		    		$scope.selectedCluster=cluster;   		
+		    	}		    	
 		    };
 			// sort file list
 			$scope.sort = function(keyname){
@@ -33,18 +40,19 @@ app.directive('channelRegisterList', ['$location','$rootScope',
 
 		var template=  '<div class="container" id="channel-register-list">' +								
 							'<ul class="item-clusters">' +	
-								'<li><h3>Clusters</h3></li>' +							
-								'<li ng-repeat="c in clusters"><a class="selected" ng-bind="c.title" ng-click="onFilterCluster(c)"></a></li>' +							
+								'<li><h3>Clusters</h3></li>' +		
+								'<li><a ng-class="{selected:selectedCluster==null}"  ng-click="onFilterCluster(\'all\')">ALL</a></li>' +					
+								'<li ng-repeat="c in clusters"><a ng-class="{selected:selectedCluster.cluster_id==c.cluster_id}" ng-bind="c.title" ng-click="onFilterCluster(c)"></a></li>' +							
 							'</ul>' +
 							'<div class="section-header">'+
-								'<h2>Channels</h2>'+
+								'<h2><span ng-if="selectedCluster" ng-bind="selectedCluster.title"></span><span ng-if="!selectedCluster">ALL</span></h2>'+
 								'<span class="label" ng-hide="loading">total: <span>{{(channels | filter:query).length }}</span></span>'+
 								'<hr/>'+
 							'</div>'+				
 							'<table class="table table-striped table-hover table-sm">' +
 								'<thead>' +
 									'<tr>' +
-										'<th ng-click="sort(\'channel_name\')">Name<span class="glyphicon sort-icon" ng-show="sortKey==\'channel_name\'" ng-class="{\'glyphicon-chevron-down\':reverse,\'glyphicon-chevron-up\':!reverse}"></span></th>' +										
+										'<th ng-click="sort(\'channel_name\')">Channel Name<span class="glyphicon sort-icon" ng-show="sortKey==\'channel_name\'" ng-class="{\'glyphicon-chevron-down\':reverse,\'glyphicon-chevron-up\':!reverse}"></span></th>' +										
 										'<th ng-click="sort(\'channel_description\')">Description<span class="glyphicon sort-icon" ng-show="sortKey==\'channel_description\'" ng-class="{\'glyphicon-chevron-down\':reverse,\'glyphicon-chevron-up\':!reverse}"></span></th>' +
 										'<th ng-click="sort(\'date_added\')">Date<span class="glyphicon sort-icon" ng-show="sortKey==\'date_added\'" ng-class="{\'glyphicon-chevron-up\':reverse,\'glyphicon-chevron-down\':!reverse}"></span></th>' +
 										'<th ng-click="sort(\'audios\')">Audios<span class="glyphicon sort-icon" ng-show="sortKey==\'audios\'" ng-class="{\'glyphicon-chevron-down\':reverse,\'glyphicon-chevron-up\':!reverse}"></span></th>' +
