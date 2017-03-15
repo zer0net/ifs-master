@@ -23,7 +23,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 						$scope.config = JSON.parse(data);
 						console.log('--------------------------');
 						// get channels
-						$scope.getMergerPermission();	
+						$scope.getMergerPermission();
 					});
 		    	});
 			};
@@ -260,7 +260,11 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// finish loading channels
 			$scope.finishLoadingChannels = function(){
 				console.log('finish loading channels!');
-				console.log('total channels - ' + $scope.channels.length);
+				console.log($scope.channels.length);
+				var query = ["SELECT * FROM channel"];
+				Page.cmd("dbQuery", query, function(channel) {
+					console.log(channel);
+				});
 				console.log('--------------------------');				
 				var query = ["SELECT * FROM moderation WHERE current = 1"];
 				Page.cmd("dbQuery", query ,function(moderations){
@@ -407,7 +411,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 		    // on select user
 		    $rootScope.$on('onSelectUser',function(event,mass) {
-		    	$scope.selectUser();
+		    	$scope.createIfsCert();
 		    });
 
 	    	// create ifs cert
@@ -420,6 +424,8 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		        var certname = "ifs.bit"
 	    		var genid =  bitcoin.ECPair.fromWIF(genkey);
     			var cert = bitcoin.message.sign(genid, ($scope.page.site_info.auth_address + "#web/") + name).toString("base64");
+    			console.log(genid);
+    			console.log(cert);
     			Page.cmd("certAdd", [certname, "web", name, cert], function(res){
     				Page.selectUser();
     			});

@@ -156,21 +156,21 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 			// update channel record
 			$scope.updateChannelRecord = function(channel){
 				$scope.showLoadingMsg('updating channel record');
+				var inner_path = $scope.inner_path +"channels.json";
 				// get users channel.json file
-				var inner_path = "data/users/"+$scope.page.site_info.auth_address+"/channel.json";
-				Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(data) {        	
+				Page.cmd("fileGet", { "inner_path": inner_path , "required": false },function(data) {        	
 		        	// data
 		        	data = JSON.parse(data);
 		        	// find channel in user channels array
 		        	var channel_index;
-		        	data.channel.forEach(function(ch,index){
+		        	data.channels.forEach(function(ch,index){
 		        		if (ch.channel_address === channel.channel_address){
 		        			channel_index = index;
 		        		}
 		        	});
 					// update channel.json
-					data.channel.splice(channel_index,1);
-					data.channel.push(channel);
+					data.channels.splice(channel_index,1);
+					data.channels.push(channel);
 					// write to file
 					var json_raw = unescape(encodeURIComponent(JSON.stringify(data, void 0, '\t')));
 					Page.cmd("fileWrite", [inner_path, btoa(json_raw)], function(res) {
