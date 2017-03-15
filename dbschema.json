@@ -1,6 +1,6 @@
 {
     "db_name": "IFS",
-    "db_file": "merged-IFS/ifs.db",
+    "db_file": "data/ifs.db",
     "version": 3,
     "maps": {
         "users/.+/content.json": {
@@ -10,7 +10,7 @@
             "to_table": ["category"],
             "to_keyvalue": ["next_category_id"]
         },
-        ".+/data/users/.+/channels.json":{
+        "users/.+/channels.json":{
             "to_table": [{"node": "channels", "table": "channel"}]
         },        
         "users/.+/comment.json":{
