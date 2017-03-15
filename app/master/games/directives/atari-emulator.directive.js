@@ -8,7 +8,7 @@ app.directive('atariEmulator', ['$location','$timeout',
 
 				// nes file url
 				if (item) { $scope.item = item; }
-				$scope.file = "/"+$scope.page.site_info.address+"/merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.item.channel.cluster_id+"/data/users/"+$scope.item.channel.user_id+"/"+$scope.item.file_name;
+				$scope.file = "/"+$scope.page.site_info.address+"/merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.item.channel.cluster_id+"/data/users/"+$scope.item.channel.channel_address.split('_')[1]+"/"+$scope.item.file_name;
 
 				$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/games/javatari/javatari.js', 'text/javascript', 'utf-8');
 

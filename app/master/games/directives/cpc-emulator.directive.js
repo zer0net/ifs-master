@@ -9,7 +9,7 @@ app.directive('cpcEmulator', ['$location','$rootScope','$timeout',
 				
 				// cpc file url
 				if (item) { $scope.item = item; }
-				$scope.file = "/"+$scope.page.site_info.address+"/merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.item.channel.cluster_id+"/data/users/"+$scope.item.channel.user_id+"/"+$scope.item.file_name;
+				$scope.file = "/"+$scope.page.site_info.address+"/merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.item.channel.cluster_id+"/data/users/"+$scope.item.channel.channel_address.split('_')[1]+"/"+$scope.item.file_name;
 
 				$timeout(function () {
 					$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/cpcbox/jquery-1.8.3.min.js', 'text/javascript', 'utf-8');

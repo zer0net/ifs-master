@@ -8,13 +8,9 @@ app.directive('snaEmulator', ['$location','$rootScope',
 				// init jsnes
 		        $("#snapshot").val('snapshots/fruity_frank.sna');
 				// sna file
-				var snaFile  = "/"+$scope.site_address+"/merged-"+$scope.merger_name+"/"+$scope.game.channel.address+"/uploads/games/"+$scope.game.file_name;				
-				
+				var snaFile = "/"+$scope.page.site_info.address+"/merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.item.channel.cluster_id+"/data/users/"+$scope.item.channel.channel_address.split('_')[1]+"/"+$scope.item.file_name;				
 				$( "#snapshot" ).trigger( "change" );	
-				console.log(snaFile);		
-
 			};
-
 
 		};
 

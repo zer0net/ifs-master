@@ -7,7 +7,7 @@ app.directive('dosbox', ['$location','$timeout',
 			$scope.initDosBox = function(item){
 				// render zip url
 				if (item) { $scope.item = item; }
-				var zipUrl = "/"+$scope.page.site_info.address+"/merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.item.channel.cluster_id+"/data/users/"+$scope.item.channel.user_id+"/"+$scope.item.file_name;
+				var zipUrl = "/"+$scope.page.site_info.address+"/merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.item.channel.cluster_id+"/data/users/"+$scope.item.channel.channel_address.split('_')[1]+"/"+$scope.item.file_name;
 				// script url
 				$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/games/js-dos/js-dos.js', 'text/javascript', 'utf-8');
 				// dosbox size

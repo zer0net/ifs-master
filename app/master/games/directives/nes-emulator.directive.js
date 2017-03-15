@@ -8,7 +8,7 @@ app.directive('nesEmulator', ['$location','$rootScope','$timeout',
 				console.log(item);
 				// nes file url
 				if (item) { $scope.item = item; }
-				var nesFile = "/"+$scope.page.site_info.address+"/merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.item.channel.cluster_id+"/data/users/"+$scope.item.channel.user_id+"/"+$scope.item.file_name;
+				var nesFile = "/"+$scope.page.site_info.address+"/merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.item.channel.cluster_id+"/data/users/"+$scope.item.channel.channel_address.split('_')[1]+"/"+$scope.item.file_name;
 				// load scripts 
 				$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/games/nes/lib/dynamicaudio-min.js', 'text/javascript', 'utf-8');
 				$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/games/nes/nes.js', 'text/javascript', 'utf-8');

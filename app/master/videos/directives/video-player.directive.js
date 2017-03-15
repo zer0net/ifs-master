@@ -21,7 +21,7 @@ app.directive('videoPlayer', ['$sce','$timeout',
 						autoPlay:true,
 						sources: [
 							{
-								src:'merged-'+$scope.page.site_info.content.merger_name+'/' + item.channel.cluster_id + '/data/users/' + item.channel.user_id + '/' + item.file_name,
+								src:'merged-'+$scope.page.site_info.content.merger_name+'/' + item.channel.cluster_id + '/data/users/' + item.channel.channel_address.split('_')[1] + '/' + item.file_name,
 								type:item.content_type + '/' + item.file_type
 							}
 						],
