@@ -110,6 +110,11 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 				$scope.routeUserView(mass);
 			});
 
+			$scope.uploadView = function(){
+				var view = 'upload';
+				$scope.routeUserView(view);
+			};
+
 		/** INIT **/
 
 		/** UPDATE CHANNEL **/

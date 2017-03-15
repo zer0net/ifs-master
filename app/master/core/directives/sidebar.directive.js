@@ -12,7 +12,7 @@ app.directive('sidebar', ['$rootScope','$timeout',
 
 			// render channel item
 			$scope.renderChannelItem = function(channel){
-				channel.logo_path = '/'+$scope.page.site_info.address+'/merged-'+$scope.page.site_info.content.merger_name + '/' + channel.cluster_id + '/data/users/' + channel.user_id + '/' + channel.logo_file;
+				channel.logo_path = '/'+$scope.page.site_info.address+'/merged-'+$scope.page.site_info.content.merger_name + '/' + channel.cluster_id + '/data/users/' + channel.channel_address.split('_')[1] + '/' + channel.logo_file;
 			};
 
 			// on filter channel

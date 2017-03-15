@@ -89,10 +89,12 @@ app.factory('Central', [
 
 		// merge channel items to scope items
 		Central.mergeChannelItems = function(items,items_total,media_types,chJson){
+			chJson.items_total = 0;
 			for (var i in chJson.items){
 				if (i !== 'images' && i !== 'total'){
 					if (!items[i]) items[i] = [];
 					items.total += chJson.items[i].length;
+					chJson.items_total += chJson.items[i].length;
 					items[i] = items[i].concat(chJson.items[i]);
 					chJson.items[i].forEach(function(item,index){
 						item.channel = chJson.channel;

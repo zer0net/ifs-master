@@ -67,7 +67,7 @@
 										<file-list ng-if="ch_files.total > 0"></file-list>
 										<!-- files list -->
 										<p ng-if="ch_files.total === 0">
-											no files found, <a href="/{{page.site_info.address}}/user/upload.html{{url_suffix}}">upload something!</a>
+											no files found, <a ng-click="uploadView()">upload something!</a>
 										</p>
 									</div>
 									<!-- /main view -->
