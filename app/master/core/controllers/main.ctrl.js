@@ -171,7 +171,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 								}
 								// check files
 								for (var i in contentJson.files){
-									if (i.indexOf('.json') > -1 && i !== 'channels.json' && i !== 'comments.json' && i !== 'votes.json' && i !== 'moderation.json'){
+									if (i.indexOf('.json') > -1 && i !== 'channels.json' && i !== 'comments.json' &&  i !== 'comment.json' && i !== 'votes.json' && i !== 'moderation.json'){
 										var channelJsonAddress = $scope.jsons[$scope.cJsonIndex] + '/' + i;
 										$scope.channelsAddressArray.push(channelJsonAddress);
 									}

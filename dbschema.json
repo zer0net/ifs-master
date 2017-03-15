@@ -13,11 +13,11 @@
         ".+/data/users/.+/channels.json":{
             "to_table": [{"node": "channels", "table": "channel"}]
         },        
-        "users/.+/comment.json":{
+        ".+/data/users/.+/comments.json":{
             "to_table": ["comment"],
             "to_keyvalue": ["next_comment_id"]
         },
-        "users/.+/moderation.json":{
+        "users/.+/moderations.json":{
             "to_table": ["moderation"],
             "to_keyvalue": ["next_moderation_id"]
         },        
@@ -25,7 +25,7 @@
             "to_table": ["view"],
             "to_keyvalue": ["next_view_id"]
         },
-        "users/.+/vote.json":{
+        "users/.+/votes.json":{
             "to_table": ["vote"],
             "to_keyvalue": ["next_vote_id"]
         }

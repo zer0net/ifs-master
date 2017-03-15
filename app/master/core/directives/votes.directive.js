@@ -72,7 +72,7 @@ app.directive('votes', ['$rootScope','$location',
 			// vote up
 			$scope.voteUp = function(item){
 				// get file
-				var inner_path = "data/users/"+Page.site_info.auth_address+"/vote.json";			
+				var inner_path = "merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.config.cluster.cluster_id+"/data/users/"+$scope.page.site_info.auth_address+"/votes.json";
 				Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(data) {
 					// data file
 					if (data) { data = JSON.parse(data); }
@@ -111,7 +111,7 @@ app.directive('votes', ['$rootScope','$location',
 			// vote down
 			$scope.voteDown = function(item){
 				// get file
-				var inner_path = "data/users/"+Page.site_info.auth_address+"/vote.json";			
+				var inner_path = "merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.config.cluster.cluster_id+"/data/users/"+$scope.page.site_info.auth_address+"/votes.json";
 				Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(data) {
 					// data file
 					if (data) { data = JSON.parse(data); } 
@@ -159,7 +159,7 @@ app.directive('votes', ['$rootScope','$location',
 					}
 				});
 				// get file
-				var inner_path = "data/users/"+Page.site_info.auth_address+"/vote.json";			
+				var inner_path = "merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.config.cluster.cluster_id+"/data/users/"+$scope.page.site_info.auth_address+"/votes.json";
 				Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(data) {
 					data = JSON.parse(data);
 					// find vote index in vote.json
@@ -205,7 +205,7 @@ app.directive('votes', ['$rootScope','$location',
 					}
 				});
 				// get file
-				var inner_path = "data/users/"+Page.site_info.auth_address+"/vote.json";			
+				var inner_path = "merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.config.cluster.cluster_id+"/data/users/"+$scope.page.site_info.auth_address+"/votes.json";
 				Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(data) {
 					data = JSON.parse(data);
 					// find vote index in vote.json

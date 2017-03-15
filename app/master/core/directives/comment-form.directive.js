@@ -29,17 +29,6 @@ app.directive('commentForm', ['$rootScope','$sce','$location',
 		    	$scope.user = $scope.page.site_info.cert_user_id;
 		    });
 
-		    // render key down event
-		    $scope.renderKeyDownEvent = function(text,key){
-		    	if (key === 'Backspace'){
-		    		text = text.slice(0,-1);
-		    	} else {
-			    	text += key;
-		    	}
-
-		    	return text;
-		    };
-
 		    // on post comment
 		    $scope.onPostComment = function(comment,item){
 		    	if (comment){
@@ -58,7 +47,7 @@ app.directive('commentForm', ['$rootScope','$sce','$location',
 			// post comment
 			$scope.postComment = function(comment,item){
 				// get user's comment.json
-				var inner_path = "data/users/"+$scope.page.site_info.auth_address+"/comment.json";			
+				var inner_path = "merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.config.cluster.cluster_id+"/data/users/"+$scope.page.site_info.auth_address+"/comments.json";			
 				Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(data) {
 					// data file
 					if (data) { data = JSON.parse(data); } 
