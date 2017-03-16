@@ -141,6 +141,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				Page.cmd("dbQuery", query, function(jsons) {
 					$scope.$apply(function(){
 						if (jsons){
+							console.log(jsons);
 							jsons.forEach(function(json,index){
 								if (json.file_name === 'content.json'){
 									var cJson = json.site + '/' + json.directory;
@@ -222,7 +223,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 							chJson = JSON.parse(chJson);
 							$scope.addChannelItems(chJson);
 						} else {
-							console.log('No content.json found for '+inner_path+'!');
+							console.log('missing channel json - '+inner_path+'!');
 							$scope.cIndex += 1;
 							$scope.getChannel();
 						}
@@ -406,9 +407,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
     				Page.local_storage['ifs_cert_created'] = true;
     				Page.cmd("wrapperSetLocalStorage",Page.local_storage);	
 	    			$scope.selectUser();
-
 	    		} else {
-
 	    			console.log('not using @ifs.bit certificate');
 	    			if ($scope.page.local_storage.ifs_cert_created === true){
 		    			console.log('ifs.bit certificate created');
