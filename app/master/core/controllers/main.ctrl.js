@@ -405,16 +405,21 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 	    	// create ifs cert
 	    	$scope.createIfsCert = function(name){
-	    		if ($scope.page.site_info.cert_user_id.split('@')[1] === 'ifs.bit'){
+
+	    		if ($scope.page.site_info.cert_user_id && $scope.page.site_info.cert_user_id.split('@')[1] === 'ifs.bit'){
 	    			console.log('allready using @ifs.bit certificate');
+    				Page.local_storage['ifs_cert_created'] = true;
+    				Page.cmd("wrapperSetLocalStorage",Page.local_storage);	
 	    			$scope.selectUser();
+
 	    		} else {
+	    			
 	    			console.log('not using @ifs.bit certificate');
 	    			if ($scope.page.local_storage.ifs_cert_created === true){
 		    			console.log('ifs.bit certificate created');
 		    			$scope.selectUser();
 	    			} else {
-				    if (!name) name = Central.generateRandomString(13);
+				    	if (!name) name = Central.generateRandomString(13);
 				        var certname = "ifs.bit"
 				        var genkey = bitcoin.ECPair.makeRandom().toWIF();
 			    		var genid =  bitcoin.ECPair.fromWIF(genkey);
