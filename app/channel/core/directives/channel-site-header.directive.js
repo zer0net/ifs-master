@@ -37,12 +37,6 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 				$window.location.href = '/'+ $scope.page.site_info.address +'/user/index.html?cl='+channel.cluster_id + '+ch=' + channel.channel_address;
 			};
 
-			// on create new channel
-			$scope.onCreateNewChannel = function(){
-				console.log('on create new channel');
-		    	$rootScope.$broadcast('onCreateChannel',$scope);
-			};
-
 			/** DIALOGS **/
 
 			// open edit channel dialog
@@ -92,7 +86,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 										    	'</div>' +
 										    '</md-toolbar>' +
 										    '<md-dialog-content layout-padding>' +
-										    	'<div class="new-channel-form" ng-init="initNewChannelForm()" channel-register>' +
+										    	'<div class="new-channel-form" ng-init="initNewChannelForm(items.scope.page,items.scope.u_channels)" channel-register>' +
 										    		'<div class="form-row" layout="row" flex="100">' +
 											    		'<label flex="30">Channel Name</label>' +
 											    		'<input flex="70" class="form-control" type="text" ng-model="channel.channel_name">' +
