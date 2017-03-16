@@ -4,11 +4,13 @@ app.directive('channelRegister', ['Channel','$rootScope','$window',
 		// channel register controller
 		var controller = function($scope,$element) {
 
+			$scope.clIndex = 0;
+
 			// init new channel
-			$scope.initNewChannelForm = function() {
+			$scope.initNewChannelForm = function(page) {
 				$scope.channel = {
-					channel_name:'New Channel',
-					channel_description:'channel description'
+					channel_name:page.site_info.cert_user_id.split('@')[0]+"'s channel",
+					channel_description:page.site_info.cert_user_id.split('@')[0]+"'s channel description"
 				};
 			}
 
@@ -23,14 +25,14 @@ app.directive('channelRegister', ['Channel','$rootScope','$window',
 					$scope.merger_name = scope.merger_name;
 					$scope.page = scope.page;
 				}
-
 				// if no user cert id
 				if (!$scope.page.site_info.cert_user_id){
 					console.log('no user certificate id');
 					console.log('-------------------------------');
-					//$rootScope.$broadcast('onSelectUser');
 					$rootScope.$broadcast('onCreateIfsCert');
 				} else {
+					console.log('find user directory');
+					$scope.clIndex = 0;
 					$scope.findUserDirectory(channel);
 				}
 			};
@@ -42,12 +44,11 @@ app.directive('channelRegister', ['Channel','$rootScope','$window',
 
 			// find user directory in clusters
 			$scope.findUserDirectory = function(channel){
-				console.log('find user directory');
-				// loop through clusters
-				$scope.clusters.forEach(function(cluster,index){
-					// get cluster content.json
-					var inner_path = "merged-"+$scope.page.site_info.content.merger_name+"/"+cluster.cluster_id+"/data/users/"+$scope.page.site_info.auth_address+"/content.json";
-					Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(contentJson) {
+				// get cluster content.json
+				var cluster = $scope.clusters[$scope.clIndex];
+				var inner_path = "merged-"+$scope.page.site_info.content.merger_name+"/"+cluster.cluster_id+"/data/users/"+$scope.page.site_info.auth_address+"/content.json";
+				Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(contentJson) {
+					$scope.$apply(function(){
 						if (contentJson){
 							// if a content.json in USERID directory exists
 							console.log(cluster.cluster_id + '/data/users/' + $scope.page.site_info.auth_address + '/content.json found!');
@@ -58,7 +59,10 @@ app.directive('channelRegister', ['Channel','$rootScope','$window',
 							// get users channels.json
 							$scope.getUserChannelsJson(channel,cluster.cluster_id);
 						} else {
-							if ((index + 1) === $scope.clusters.length){
+							if ($scope.clIndex < ( $scope.clusters.length - 1 )){
+								$scope.clIndex += 1;
+								$scope.findUserDirectory();
+							} else {
 								var cluster_id = $scope.config.cluster.cluster_id
 								// if no channels.json for user found
 								console.log('no user directory in registered clusters found');
@@ -68,7 +72,6 @@ app.directive('channelRegister', ['Channel','$rootScope','$window',
 								$scope.createUserChannelsJson(channel,cluster_id);
 							}
 						}
-						$scope.$apply();
 					});
 				});
 			};
@@ -127,7 +130,7 @@ app.directive('channelRegister', ['Channel','$rootScope','$window',
 			// create channel json
 			$scope.onCreateChannelJson = function(channel,cluster_id){
 				// add optional to content.json
-				if (!$scope.contentJson.optional) $scope.contentJson.optional = "((?!json).)*$";		
+				if (!$scope.contentJson.optional) $scope.contentJson.optional = ".*";		
 				// convert content json object to json raw
 				var json_raw = unescape(encodeURIComponent(JSON.stringify($scope.contentJson, void 0, '\t')));
 				Page.cmd("fileWrite", [$scope.inner_path + 'content.json', btoa(json_raw)], function(res) {
@@ -187,55 +190,16 @@ app.directive('channelRegister', ['Channel','$rootScope','$window',
 						// sign & publish
 						Page.cmd("sitePublish",{"inner_path":$scope.inner_path + 'channels.json'}, function(res) {
 							console.log(res);
-							// create channel record in master site
-							$scope.createChannelRecord(channel,cluster_id);
-							$scope.$apply();
+							$scope.$apply(function() {
+								Page.cmd("wrapperNotification", ["done", "Channel Created!", 10000]);
+								$window.location.href = '/'+ $scope.page.site_info.address +'/user/index.html?cl='+cluster_id+'+ch='+channel.channel_address;
+							});
 						});
 					} else {
 						console.log('failed to add channel! response :' + res);
 					}
 				});
 
-			};
-
-			// create channel
-			$scope.createChannelRecord = function(channel,cluster_id) {
-				// get users channel.json file
-				var inner_path = "data/users/"+Page.site_info.auth_address+"/channel.json";
-				Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(data) {
-		        	// data
-					if (data){ 
-						data = JSON.parse(data);
-						if (!data.channel){
-							data.channel = [];
-							data.next_channel_id = 1;
-						}
-					} else { 
-						data = { 
-							next_channel_id:1, 
-							channel:[] 
-						}; 
-					}
-					// adjust channel obj to a master db channel record
-					channel.channel_id = data.next_channel_id;
-					channel.cluster_id = cluster_id;
-					channel.date_added =  +(new Date);
-					// update channel.json
-					data.channel.push(channel);
-					data.next_channel_id += 1;
-					// write to file
-					var json_raw = unescape(encodeURIComponent(JSON.stringify(data, void 0, '\t')));
-					Page.cmd("fileWrite", [inner_path, btoa(json_raw)], function(res) {
-						// sign & publish site
-						Page.cmd("sitePublish",{"inner_path":inner_path}, function(res) {
-							// apply to scope
-							$scope.$apply(function() {
-								Page.cmd("wrapperNotification", ["done", "Channel Created!", 10000]);
-								$window.location.href = '/'+ $scope.page.site_info.address +'/user/index.html?cl='+cluster_id+'+ch='+channel.channel_address;
-							});
-						});
-					});
-			    });
 			};
 
 		}

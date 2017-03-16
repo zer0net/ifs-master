@@ -13,18 +13,26 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				$scope.showLoadingMessage('Loading');
 				// get site info
 				Page.cmd("siteInfo", {}, function(site_info) {
-					// apply site info to Page obj
-					Page.site_info = site_info;
-					// page
-					$scope.page = Page;
-					// get config
-					Page.cmd("fileGet",{"inner_path":"content/config.json"},function(data){
-						console.log('get config file');
-						$scope.config = JSON.parse(data);
-						console.log('--------------------------');
-						// get channels
-						$scope.getMergerPermission();
-					});
+					Page.cmd("wrapperGetLocalStorage",[],function(res){
+						if (res){
+							Page.local_storage = res;
+						} else {
+							Page.local_storage = {};
+						}
+						// apply site info to Page obj
+						Page.site_info = site_info;
+						// page
+						$scope.page = Page;
+						console.log($scope.page);
+						// get config
+						Page.cmd("fileGet",{"inner_path":"content/config.json"},function(data){
+							console.log('get config file');
+							$scope.config = JSON.parse(data);
+							console.log('--------------------------');
+							// get channels
+							$scope.getMergerPermission();
+						});
+					});					
 		    	});
 			};
 
@@ -140,6 +148,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 								}
 							});
 							if ($scope.jsons){
+								console.log('getting content jsons');
 								$scope.cJsonIndex = 0;
 								$scope.getContentJson();
 							} else {
@@ -164,21 +173,21 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 								contentJson = JSON.parse(contentJson);
 								// check files optional
 								for (var i in contentJson.files_optional){
-									if (i.indexOf('.json') > -1 && i !== 'channels.json' && i !== 'comments.json' && i !== 'votes.json' && i !== 'moderation.json'){
+									if (i.indexOf('.json') > -1 && i !== 'channels.json' && i !== 'comments.json' &&  i !== 'comment.json' && i !== 'votes.json' && i !== 'moderation.json'){
 										var channelJsonAddress = $scope.jsons[$scope.cJsonIndex] + '/' + i;
 										$scope.channelsAddressArray.push(channelJsonAddress);
 									}
 								}
 								// check files
 								for (var i in contentJson.files){
-									if (i.indexOf('.json') > -1 && i !== 'channels.json' && i !== 'comments.json' &&  i !== 'comment.json' && i !== 'votes.json' && i !== 'moderation.json'){
+									if (i.indexOf('.json') > -1 && i !== 'channels.json' && i !== 'comments.json' &&  i !== 'comment.json' && i !== 'votes.json' && i !== 'moderations.json'){
 										var channelJsonAddress = $scope.jsons[$scope.cJsonIndex] + '/' + i;
 										$scope.channelsAddressArray.push(channelJsonAddress);
 									}
 								}
-								$scope.cJsonIndex += 1;
-								$scope.getContentJson();
 							}
+							$scope.cJsonIndex += 1;
+							$scope.getContentJson();
 						});
 					});
 				} else {
@@ -192,8 +201,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				console.log('--------------------------');
 				$scope.cIndex = 0;
 				$scope.channels = [];
-				// loading
-				$scope.showLoadingMessage('Loading Channels');
 				if ($scope.channelsAddressArray.length > 0){
 					$scope.getChannel();
 				} else {
@@ -204,6 +211,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// get channel
 			$scope.getChannel = function(){
+					$scope.showLoadingMessage('Loading Channels ('+$scope.cIndex +'/'+($scope.channelsAddressArray.length-1)+')');
 				// update cIndex
 				if ($scope.cIndex < $scope.channelsAddressArray.length){
 					var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.channelsAddressArray[$scope.cIndex];
@@ -376,47 +384,54 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 		    // select user
 		    $scope.selectUser = function(){
-			    Page.cmd("certSelect");
+			    Page.cmd("certSelect",[['ifs.bit']]);
 				Page.onRequest = function(cmd, message) {
-				    if (cmd == "setSiteInfo") {
-						// site info
-						Page.site_info = message;
-						// attach to scope
-						$scope.page = Page;
-						// update site
-						$scope.$apply(function(){
-							$rootScope.$broadcast('onChangeUserCertId',$scope.page);
+					$scope.$apply(function(){
+					    if (cmd == "setSiteInfo") {
+							// site info
+							Page.site_info = message;
+							// attach to scope
+							$scope.page = Page;
+							// update site
 							if ($scope.page.site_info.cert_user_id && $scope.page.site_info.cert_user_id.split('@')[1] === 'ifs.bit'){
 								Page.cmd("wrapperNotification", ["done", "valid IFS Id selected!",10000]);
 							} else {
 								Page.cmd("wrapperNotification", ["info", "please select a valid IFS Id (@ifs.bit)",10000]);
 							}
-						});
-					}
+						}
+					});
 				};
 		    };
+
+	    	// create ifs cert
+	    	$scope.createIfsCert = function(name){
+	    		if ($scope.page.site_info.cert_user_id.split('@')[1] === 'ifs.bit'){
+	    			console.log('allready using @ifs.bit certificate');
+	    			$scope.selectUser();
+	    		} else {
+	    			console.log('not using @ifs.bit certificate');
+	    			if ($scope.page.local_storage.ifs_cert_created === true){
+		    			console.log('ifs.bit certificate created');
+		    			$scope.selectUser();
+	    			} else {
+				    if (!name) name = Central.generateRandomString(13);
+				        var certname = "ifs.bit"
+				        var genkey = bitcoin.ECPair.makeRandom().toWIF();
+			    		var genid =  bitcoin.ECPair.fromWIF(genkey);
+		    			var cert = bitcoin.message.sign(genid, ($scope.page.site_info.auth_address + "#web/") + name).toString("base64");
+		    			Page.cmd("certAdd", [certname, "web", name, cert], function(res){
+		    				Page.local_storage['ifs_cert_created'] = true;
+		    				Page.cmd("wrapperSetLocalStorage",Page.local_storage);	
+		    				$scope.selectUser();
+		    			});
+	    			}
+	    		}
+	    	};
 
 		    // on select user
 		    $rootScope.$on('onSelectUser',function(event,mass) {
 		    	$scope.createIfsCert();
 		    });
-
-	    	// create ifs cert
-	    	$scope.createIfsCert = function(name){
-			    if (!name) {
-			        name = $scope.page.site_info.auth_address.slice(0, 13);
-			    }	    		
-		        var genkey = "KxGQR1gw2NVxmHTponv8ou9CVZq44p67Y7p3aMgvKm8CWJZPu7yj"
-		        var permissionaddress = "1KH5BdNnqxh2KRWMMT8wUXzUgz4vVQ4S8p"
-		        var certname = "ifs.bit"
-	    		var genid =  bitcoin.ECPair.fromWIF(genkey);
-    			var cert = bitcoin.message.sign(genid, ($scope.page.site_info.auth_address + "#web/") + name).toString("base64");
-    			console.log(genid);
-    			console.log(cert);
-    			Page.cmd("certAdd", [certname, "web", name, cert], function(res){
-    				Page.selectUser();
-    			});
-	    	};
 
 		    // on create ifs cert
 		    $rootScope.$on('onCreateIfsCert',function(event,mass) {
