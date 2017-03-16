@@ -211,7 +211,8 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// get channel
 			$scope.getChannel = function(){
-					$scope.showLoadingMessage('Loading Channels ('+$scope.cIndex +'/'+($scope.channelsAddressArray.length-1)+')');
+					console.log( ) ;
+					$scope.showLoadingMessage('Loading Channels ('+parseInt(($scope.cIndex / $scope.channelsAddressArray.length) * 100)+'%)');
 				// update cIndex
 				if ($scope.cIndex < $scope.channelsAddressArray.length){
 					var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.channelsAddressArray[$scope.cIndex];
@@ -413,7 +414,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 	    			$scope.selectUser();
 
 	    		} else {
-	    			
+
 	    			console.log('not using @ifs.bit certificate');
 	    			if ($scope.page.local_storage.ifs_cert_created === true){
 		    			console.log('ifs.bit certificate created');
