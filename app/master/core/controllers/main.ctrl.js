@@ -13,17 +13,13 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				$scope.showLoadingMessage('Loading');
 				// get site info
 				Page.cmd("siteInfo", {}, function(site_info) {
+					// apply site info to Page obj
+					Page.site_info = site_info;			
 					Page.cmd("wrapperGetLocalStorage",[],function(res){
-						if (res){
-							Page.local_storage = res;
-						} else {
-							Page.local_storage = {};
-						}
-						// apply site info to Page obj
-						Page.site_info = site_info;
+						if (res){ Page.local_storage = res; } 
+						else { Page.local_storage = {}; }
 						// page
 						$scope.page = Page;
-						console.log($scope.page);
 						// get config
 						Page.cmd("fileGet",{"inner_path":"content/config.json"},function(data){
 							console.log('get config file');
@@ -73,31 +69,18 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 		    // get clusters
 		    $scope.getClusters = function(){
+				console.log('get clusters');
+				console.log('--------------------------');
 				// loading
 				$scope.showLoadingMessage('Loading Clusters');
 				Page.cmd("fileGet",{"inner_path":"content/clusters.json"},function(data){
 					$scope.$apply(function() {
 						data = JSON.parse(data);
 						$scope.clusters = data.clusters;
-						console.log('get clusters');
-						console.log('--------------------------');
 						$scope.clIndex = 0;
 						$scope.varifyClusters();
-						$scope.getClusterSiteInfo();
 					})
 				});
-		    };
-
-		    // get cluster site info
-		    $scope.getClusterSiteInfo = function(){
-		    	// query merger site list
-		    	Page.cmd("mergerSiteList", {query_site_info: true}, function(sites) {
-		    		// find cluster in sites & bind it to scope
-		    		$scope.clusters.forEach(function(item,index){		    					    			
-		    			item = Channel.findClusterInMergerSiteList(sites,item.cluster_id);		    			
-		    			$scope.clusters[index].title = item.content.title;
-		    		});		    				    		
-		    	});
 		    };
 
 		    // varify cluster
@@ -119,7 +102,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    	} else {
 		    		console.log('finished varifying cluster');
 					console.log('--------------------------');
-		    		$scope.onGetChannels();
+		    		$scope.getClusterSiteInfo();
 		    	}
 		    };
 
@@ -131,31 +114,33 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				});
 		    };
 
+		    // get cluster site info
+		    $scope.getClusterSiteInfo = function(){
+		    	// query merger site list
+		    	Page.cmd("mergerSiteList", {query_site_info: true}, function(sites) {
+		    		// find cluster in sites & bind it to scope
+		    		$scope.clusters.forEach(function(item,index){		    					    			
+		    			item = Channel.findClusterInMergerSiteList(sites,item.cluster_id);		    			
+		    			$scope.clusters[index].title = item.content.title;
+		    		});
+		    		// on get channels
+		    		$scope.onGetChannels();				    		
+		    	});
+		    };
+
 		    // on get channels
 		    $scope.onGetChannels = function(){
 	    		console.log('on get channels');
 				console.log('--------------------------');
-		    	$scope.jsons = [];
-		    	$scope.channelsAddressArray = [];
-				var query = ["SELECT * FROM json"];
-				Page.cmd("dbQuery", query, function(jsons) {
+				// query db for channels
+				var query = ["SELECT * FROM channel"];
+				Page.cmd("dbQuery", query, function(channels){
+					console.log(channels);
 					$scope.$apply(function(){
-						if (jsons){
-							console.log(jsons);
-							jsons.forEach(function(json,index){
-								if (json.file_name === 'content.json'){
-									var cJson = json.site + '/' + json.directory;
-									$scope.jsons.push(cJson);
-								}
-							});
-							if ($scope.jsons){
-								console.log('getting content jsons');
-								$scope.cJsonIndex = 0;
-								$scope.getContentJson();
-							} else {
-								$scope.showLoadingMessage('No Channels!');
-								$scope.finishedLoading();
-							}					
+						if (channels.length > 0){
+							$scope.channels = channels;
+							$scope.cIndex = 0;
+							$scope.getChannel();
 						} else {
 							$scope.showLoadingMessage('No Channels!');
 							$scope.finishedLoading();
@@ -164,70 +149,27 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				});
 		    };
 
-		    // get content json
-		    $scope.getContentJson = function(){
-		    	if ($scope.cJsonIndex < $scope.jsons.length){
-					// get content.json
-					Page.cmd("fileGet",{"inner_path":'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.jsons[$scope.cJsonIndex] + '/content.json',"required": false },function(contentJson){
-						$scope.$apply(function(){
-							if (contentJson){
-								contentJson = JSON.parse(contentJson);
-								// check files optional
-								for (var i in contentJson.files_optional){
-									if (i.indexOf('.json') > -1 && i !== 'channels.json' && i !== 'comments.json' &&  i !== 'comment.json' && i !== 'votes.json' && i !== 'moderation.json'){
-										var channelJsonAddress = $scope.jsons[$scope.cJsonIndex] + '/' + i;
-										$scope.channelsAddressArray.push(channelJsonAddress);
-									}
-								}
-								// check files
-								for (var i in contentJson.files){
-									if (i.indexOf('.json') > -1 && i !== 'channels.json' && i !== 'comments.json' &&  i !== 'comment.json' && i !== 'votes.json' && i !== 'moderations.json'){
-										var channelJsonAddress = $scope.jsons[$scope.cJsonIndex] + '/' + i;
-										$scope.channelsAddressArray.push(channelJsonAddress);
-									}
-								}
-							}
-							$scope.cJsonIndex += 1;
-							$scope.getContentJson();
-						});
-					});
-				} else {
-					$scope.getChannels();
-				}    	
-		    };
-
-			// get channels
-			$scope.getChannels = function(){
-	    		console.log('get channels');
-				console.log('--------------------------');
-				$scope.cIndex = 0;
-				$scope.channels = [];
-				if ($scope.channelsAddressArray.length > 0){
-					$scope.getChannel();
-				} else {
-					$scope.showLoadingMessage('No Channels!');
-					$scope.finishedLoading();
-				}
-			};
-
 			// get channel
 			$scope.getChannel = function(){
-					console.log( ) ;
-					$scope.showLoadingMessage('Loading Channels ('+parseInt(($scope.cIndex / $scope.channelsAddressArray.length) * 100)+'%)');
+				var chPercentage = parseInt(($scope.cIndex / $scope.channels.length) * 100);
+				$scope.showLoadingMessage('Loading Channels ('+chPercentage+'%)');
 				// update cIndex
-				if ($scope.cIndex < $scope.channelsAddressArray.length){
-					var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.channelsAddressArray[$scope.cIndex];
+				if ($scope.cIndex < $scope.channels.length){
+					// inner path
+					var channel = $scope.channels[$scope.cIndex];
+					var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+channel.cluster_id+'/data/users/'+channel.channel_address.split('_')[1] +'/'+channel.channel_address+'.json';
 					// get channel.json
 					Page.cmd("fileGet",{"inner_path":inner_path,"required": false },function(chJson){
-					    if (chJson){
-							chJson = JSON.parse(chJson);
-							$scope.addChannelItems(chJson);
-						} else {
-							console.log('missing channel json - '+inner_path+'!');
-							$scope.cIndex += 1;
-							$scope.getChannel();
-						}
-						$scope.$apply();
+						$scope.$apply(function(){
+						    if (chJson){
+								chJson = JSON.parse(chJson);
+								$scope.addChannelItems(chJson,channel);
+							} else {
+								console.log('missing channel json - '+inner_path+'!');
+								$scope.cIndex += 1;
+								$scope.getChannel();
+							}
+						});
 					});
 				} else {
 					$scope.finishLoadingChannels();
@@ -235,23 +177,17 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			};
 	
 			// add channels items
-			$scope.addChannelItems = function(chJson){
+			$scope.addChannelItems = function(chJson,channel){
 				// list optional files
 				Page.cmd("optionalFileList", { address:chJson.channel.cluster_id, limit:2000 }, function(site_files){
 					$scope.$apply(function(){
 						// assign to each file in chJson.items its correspoding site_file
 						chJson = Channel.matchItemsWithSiteFiles(chJson,site_files);
+						channel = chJson.channel;
 						// merge chJson.items to $scope.items
-						if (!$scope.items) {
-							$scope.items = {
-								total:0
-							};	
-						}
+						if (!$scope.items) $scope.items = { total:0 };
 						if (!$scope.media_types) $scope.media_types = [];
 						$scope.items = Central.mergeChannelItems($scope.items,$scope.items_total,$scope.media_types,chJson);
-						var channel = chJson.channel;
-						channel.items_total = chJson.items_total;
-						$scope.channels.push(channel);
 						$scope.cIndex += 1;
 						$scope.getChannel();
 					});
@@ -322,6 +258,21 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				if ($scope.filters) delete $scope.filters.channel_address;
 			};
 
+			// set channel
+			$scope.setChannel = function(channel){
+				// if channel has logo
+				if (channel.logo){
+					channel.logo_src = '/'+$scope.page.site_info.address+'/merged-'+$scope.merger_name+'/'+channel.channel_address+'/uploads/images/'+channel.logo;
+				}
+				// set channel
+				$scope.channel = channel;
+			};
+
+			// remove channel
+			$scope.removeChannel = function(){
+				delete $scope.channel;
+			};
+
 		/* /FILTER */
 
 		/* UI */
@@ -339,6 +290,16 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 				$scope.msg = '';				
 			};
 
+			// toggle menu
+			$scope.toggleMenu = function(ev) {
+				ev.preventDefault();
+				if (!$scope.toggled || $scope.toggled === false){
+					$scope.toggled = true;
+				} else {
+					$scope.toggled = false;
+				}
+			}
+
 		    // load script dynamically
 			$scope.loadScript = function(url, type, charset) {
 			    if (type===undefined) type = 'text/javascript';
@@ -354,31 +315,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			        return script;
 			    }
 			};
-
-			// toggle menu
-			$scope.toggleMenu = function(ev) {
-				ev.preventDefault();
-				if (!$scope.toggled || $scope.toggled === false){
-					$scope.toggled = true;
-				} else {
-					$scope.toggled = false;
-				}
-			}
-
-			// set channel
-			$scope.setChannel = function(channel){
-				// if channel has logo
-				if (channel.logo){
-					channel.logo_src = '/'+$scope.page.site_info.address+'/merged-'+$scope.merger_name+'/'+channel.channel_address+'/uploads/images/'+channel.logo;
-				}
-				// set channel
-				$scope.channel = channel;
-			};
-
-			// remove channel
-			$scope.removeChannel = function(){
-				delete $scope.channel;
-			};
 			
 	    /* /UI */
 
@@ -386,7 +322,7 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 		    // select user
 		    $scope.selectUser = function(){
-			    Page.cmd("certSelect",[['ifs.bit']]);
+			    Page.cmd("certSelect",[]);
 				Page.onRequest = function(cmd, message) {
 					$scope.$apply(function(){
 					    if (cmd == "setSiteInfo") {
@@ -401,7 +337,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 	    	// create ifs cert
 	    	$scope.createIfsCert = function(name){
-
 	    		if ($scope.page.site_info.cert_user_id && $scope.page.site_info.cert_user_id.split('@')[1] === 'ifs.bit'){
 	    			console.log('allready using @ifs.bit certificate');
     				Page.local_storage['ifs_cert_created'] = true;
@@ -409,13 +344,14 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 	    			$scope.selectUser();
 	    		} else {
 	    			console.log('not using @ifs.bit certificate');
-	    			if ($scope.page.local_storage.ifs_cert_created === true){
+	    			if ($scope.page.local_storage && $scope.page.local_storage.ifs_cert_created === true){
 		    			console.log('ifs.bit certificate created');
 		    			$scope.selectUser();
 	    			} else {
 				    	if (!name) name = Central.generateRandomString(13);
-				        var certname = "ifs.bit"
-				        var genkey = bitcoin.ECPair.makeRandom().toWIF();
+				        var certname = "ifs.bit";
+				        // var genkey = bitcoin.ECPair.makeRandom().toWIF();
+				        var genkey = "5JxRNCL3WTqjHuSivNBqDkaMvVkgzShWDotXYw2rXRmJFrd9RuV";
 			    		var genid =  bitcoin.ECPair.fromWIF(genkey);
 		    			var cert = bitcoin.message.sign(genid, ($scope.page.site_info.auth_address + "#web/") + name).toString("base64");
 		    			Page.cmd("certAdd", [certname, "web", name, cert], function(res){

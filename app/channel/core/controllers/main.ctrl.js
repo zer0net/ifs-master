@@ -3,20 +3,8 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 
 		/** INIT **/
 
-			// init
-			$scope.init = function(){
-				Page.cmd("siteInfo", {}, function(site_info) {
-					// site info
-					Page.site_info = site_info;
-					// apply to scope
-					$scope.page = Page;
-					// get user channels
-					$scope.getUserChannels();
-				});	
-			};
-
 			// get user channels
-			$scope.getUserChannels = function(){
+			$scope.init = function(){
 				var channels = [];
 				$scope.channels.forEach(function(ch,index){
 					if (ch.channel_address.split('_')[1] === $scope.page.site_info.auth_address){
@@ -98,8 +86,7 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 				if (view) { 
 					$scope.user_view = view; 
 					if (item) $scope.item = item;
-				}
-				else { 
+				} else { 
 					$scope.user_view = 'main'; 
 					delete $scope.item;
 				}

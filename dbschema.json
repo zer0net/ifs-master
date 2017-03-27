@@ -1,48 +1,32 @@
 {
     "db_name": "IFS",
     "db_file": "merged-IFS/ifs.db",
-    "version": 3,
+    "version": 4,
     "maps": {
-        ".+/data/users/.+/content.json": {
-            "to_keyvalue": [ "cert_user_id" ]
-        },
-        "users/.+/category.json":{
-            "to_table": ["category"],
-            "to_keyvalue": ["next_category_id"]
-        },
         ".+/data/users/.+/channels.json":{
             "to_table": [{"node": "channels", "table": "channel"}]
-        },        
+        },            
         ".+/data/users/.+/comments.json":{
             "to_table": ["comment"],
             "to_keyvalue": ["next_comment_id"]
         },
-        "users/.+/moderations.json":{
+        ".+/data/users/.+/data.json":{
+            "to_table": [{"node": "channel", "table": "channels"}]
+        },
+        ".+/data/users/.+/items.json": {
+            "to_table": ["item"],
+            "to_keyvalue": [ "cert_user_id"]
+        },       
+        ".+/data/users/.+/moderations.json":{
             "to_table": ["moderation"],
             "to_keyvalue": ["next_moderation_id"]
-        },        
-        "users/.+/view.json":{
-            "to_table": ["view"],
-            "to_keyvalue": ["next_view_id"]
         },
-        "users/.+/votes.json":{
+        ".+/data/users/.+/votes.json":{
             "to_table": ["vote"],
             "to_keyvalue": ["next_vote_id"]
         }
     },
     "tables": {
-        "category": {
-            "cols": [
-                ["category_id", "TEXT"],
-                ["category_name", "TEXT"],
-                ["category_parent", "TEXT"],
-                ["date_added", "INTEGER"],
-                ["visible", "INTEGER"],
-                ["json_id", "INTEGER REFERENCES json (json_id)"]
-            ],
-            "indexes": ["CREATE UNIQUE INDEX category_key ON category(json_id, date_added)"],
-            "schema_changed": 1
-        },
         "channel": {
             "cols": [
                 ["channel_id", "TEXT"],
@@ -73,6 +57,23 @@
             "indexes": ["CREATE UNIQUE INDEX comment_key ON comment(json_id, date_added)"],
             "schema_changed": 1
         },
+        "item": {
+            "cols": [
+                ["item_id", "TEXT"],
+                ["category", "INTEGER"],
+                ["subcategory", "INTEGER"],
+                ["channel", "TEXT"],
+                ["content_type", "TEXT"],
+                ["date_added", "INTEGER"],
+                ["file_name", "TEXT"],
+                ["file_size", "INTEGER"],
+                ["file_type", "TEXT"],
+                ["title", "TEXT"],                
+                ["json_id", "INTEGER REFERENCES json (json_id)"]
+            ],
+            "indexes": ["CREATE UNIQUE INDEX item_key ON item(json_id, date_added)"],
+            "schema_changed": 1
+        },        
         "moderation": {
             "cols": [
                 ["moderation_id", "INTEGER"],
@@ -84,29 +85,6 @@
                 ["json_id", "INTEGER REFERENCES json (json_id)"]
             ],
             "indexes": ["CREATE UNIQUE INDEX moderation_key ON moderation(json_id, date_added)"],
-            "schema_changed": 1
-        },
-        "subcategory": {
-            "cols": [
-                ["subcategory_id", "TEXT"],
-                ["subcategory_name", "TEXT"],
-                ["date_added", "INTEGER"],
-                ["hide", "INTEGER"],
-                ["json_id", "INTEGER REFERENCES json (json_id)"]
-            ],
-            "indexes": ["CREATE UNIQUE INDEX subcategory_key ON subcategory(json_id, date_added)"],
-            "schema_changed": 1
-        },
-        "view": {
-            "cols": [
-                ["view_id", "INTEGER"],
-                ["item_id", "INTEGER"],
-                ["channel", "TEXT"],
-                ["user_id", "TEXT"],
-                ["date_added", "INTEGER"],
-                ["json_id", "INTEGER REFERENCES json (json_id)"]
-            ],
-            "indexes": ["CREATE UNIQUE INDEX view_key ON view(json_id, date_added)"],
             "schema_changed": 1
         },
         "vote": {

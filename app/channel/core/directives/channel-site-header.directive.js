@@ -86,19 +86,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 										    	'</div>' +
 										    '</md-toolbar>' +
 										    '<md-dialog-content layout-padding>' +
-										    	'<div class="new-channel-form" ng-init="initNewChannelForm(items.scope.page,items.scope.u_channels)" channel-register>' +
-										    		'<div class="form-row" layout="row" flex="100">' +
-											    		'<label flex="30">Channel Name</label>' +
-											    		'<input flex="70" class="form-control" type="text" ng-model="channel.channel_name">' +
-										    		'</div>' +
-										    		'<div class="form-row" layout="row" flex="100">' +
-										    			'<label flex="30">Channel Description</label>' +
-										    			'<textarea flex="70" class="form-control" ng-model="channel.channel_description"></textarea>' +
-													'</div>' +
-													'<hr/>' +
-													'<md-button class="md-primary md-raised edgePadding pull-left" style="margin:0;" ng-click="hide()">Cancel</md-button>' +
-													'<md-button class="md-primary md-raised edgePadding pull-right" style="margin:0;" ng-click="createNewChannel(channel,items.scope)">Create Channel</md-button>' + 				       
-										    	'</div>' +
+										    	'<channel-register  ng-init="initNewChannelForm(items.scope.page,items.scope.u_channels)"></channel-register>' +
 										    '</md-dialog-content>' +
 										'</md-dialog>';
 
