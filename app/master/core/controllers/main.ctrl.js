@@ -6,26 +6,25 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// init
 			$scope.init = function(){
 				console.log('Init');
-				console.log('--------------------------');
-				// site ready var to fix loading inconsistancies
-				$scope.site_ready = false;
 				// loading
 				$scope.showLoadingMessage('Loading');
+				// site ready var to fix loading inconsistancies
+				$scope.site_ready = false;
 				// get site info
 				Page.cmd("siteInfo", {}, function(site_info) {
 					// apply site info to Page obj
-					Page.site_info = site_info;			
+					Page.site_info = site_info;
+					// get local storage	
 					Page.cmd("wrapperGetLocalStorage",[],function(res){
+						// local storage response
 						if (res){ Page.local_storage = res; } 
 						else { Page.local_storage = {}; }
 						// page
 						$scope.page = Page;
 						// get config
 						Page.cmd("fileGet",{"inner_path":"content/config.json"},function(data){
-							console.log('get config file');
 							$scope.config = JSON.parse(data);
-							console.log('--------------------------');
-							// get channels
+							// get merger permission
 							$scope.getMergerPermission();
 						});
 					});					
@@ -35,7 +34,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 			// get merger site permission
 			$scope.getMergerPermission = function(){
 				console.log('get merger permission');
-				console.log('--------------------------');
 				// if user allready has permission for merger type
 		    	if (Page.site_info.settings.permissions.indexOf("Merger:"+$scope.page.site_info.content.merger_name) > -1){
 		    		$scope.$apply(function(){
@@ -55,9 +53,8 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 
 			// get merged sites
 			$scope.getMergerSites = function(){
+				console.log('get merger sites');
 				Page.cmd("mergerSiteList", {query_site_info: true}, function(sites) {	
-					console.log('get merger sites');
-					console.log('--------------------------');
 					// for each site in merger site list
 					for (var site in sites) {
 						if (!$scope.sites) $scope.sites = [];
@@ -70,25 +67,18 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    // get clusters
 		    $scope.getClusters = function(){
 				console.log('get clusters');
-				console.log('--------------------------');
 				// loading
-				$scope.showLoadingMessage('Loading Clusters');
-				Page.cmd("fileGet",{"inner_path":"content/clusters.json"},function(data){
-					$scope.$apply(function() {
-						data = JSON.parse(data);
-						$scope.clusters = data.clusters;
-						$scope.clIndex = 0;
-						$scope.varifyClusters();
-					})
-				});
+				$scope.showLoadingMessage('Loading Clusters');		    	
+				$scope.clusters = $scope.config.clusters;
+				$scope.clIndex = 0;
+				$scope.varifyClusters();
 		    };
 
 		    // varify cluster
 		    $scope.varifyClusters = function(){
-		    	if ($scope.clIndex < $scope.clusters.length){
+		    	if ($scope.clIndex < $scope.config.clusters.length){
 		    		if ($scope.sites){
 						if ($scope.sites.indexOf($scope.clusters[$scope.clIndex].cluster_id) > -1){
-							console.log('cluster '+ $scope.clusters[$scope.clIndex].cluster_id +' exists!');
 							$scope.clIndex += 1;
 							$scope.varifyClusters();
 						} else {
@@ -101,7 +91,6 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    		}
 		    	} else {
 		    		console.log('finished varifying cluster');
-					console.log('--------------------------');
 		    		$scope.getClusterSiteInfo();
 		    	}
 		    };
@@ -119,98 +108,68 @@ app.controller('MainCtrl', ['$rootScope','$scope','$location','$mdDialog', '$mdM
 		    	// query merger site list
 		    	Page.cmd("mergerSiteList", {query_site_info: true}, function(sites) {
 		    		// find cluster in sites & bind it to scope
-		    		$scope.clusters.forEach(function(item,index){		    					    			
-		    			item = Channel.findClusterInMergerSiteList(sites,item.cluster_id);		    			
-		    			$scope.clusters[index].title = item.content.title;
+		    		$scope.clusters.forEach(function(item,index){
+		    			$scope.clusters[index] = Channel.findClusterInMergerSiteList(sites,item.cluster_id);
 		    		});
-		    		// on get channels
-		    		$scope.onGetChannels();				    		
+		    		// get channels
+		    		$scope.getChannels();
 		    	});
 		    };
 
-		    // on get channels
-		    $scope.onGetChannels = function(){
-	    		console.log('on get channels');
-				console.log('--------------------------');
-				// query db for channels
+		    // get channels
+		    $scope.getChannels = function(){
+	    		console.log('get channels');
+				// query channels
 				var query = ["SELECT * FROM channel"];
 				Page.cmd("dbQuery", query, function(channels){
-					console.log(channels);
-					$scope.$apply(function(){
-						if (channels.length > 0){
-							$scope.channels = channels;
-							$scope.cIndex = 0;
-							$scope.getChannel();
-						} else {
-							$scope.showLoadingMessage('No Channels!');
-							$scope.finishedLoading();
+					$scope.channels = channels;
+					// query old channels
+					var query = ["SELECT * FROM channel_old"];
+					Page.cmd("dbQuery", query, function(channel_old){
+						if (channel_old){
+							// channel_old = Channel.renderLegacyChannels();
 						}
+						$scope.channels = $scope.channels.concat(channel_old);
+						console.log($scope.channels);
+						$scope.$apply(function(){
+							console.log($scope.channels);
+							if (channels.length > 0 && $scope.route === 'main'){
+								$scope.getModerations();
+							} else {
+								$scope.routeView();
+							}
+						});
 					});
 				});
 		    };
 
-			// get channel
-			$scope.getChannel = function(){
-				var chPercentage = parseInt(($scope.cIndex / $scope.channels.length) * 100);
-				$scope.showLoadingMessage('Loading Channels ('+chPercentage+'%)');
-				// update cIndex
-				if ($scope.cIndex < $scope.channels.length){
-					// inner path
-					var channel = $scope.channels[$scope.cIndex];
-					var inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+channel.cluster_id+'/data/users/'+channel.channel_address.split('_')[1] +'/'+channel.channel_address+'.json';
-					// get channel.json
-					Page.cmd("fileGet",{"inner_path":inner_path,"required": false },function(chJson){
-						$scope.$apply(function(){
-						    if (chJson){
-								chJson = JSON.parse(chJson);
-								$scope.addChannelItems(chJson,channel);
-							} else {
-								console.log('missing channel json - '+inner_path+'!');
-								$scope.cIndex += 1;
-								$scope.getChannel();
-							}
-						});
-					});
-				} else {
-					$scope.finishLoadingChannels();
-				}
-			};
-	
-			// add channels items
-			$scope.addChannelItems = function(chJson,channel){
-				// list optional files
-				Page.cmd("optionalFileList", { address:chJson.channel.cluster_id, limit:2000 }, function(site_files){
-					$scope.$apply(function(){
-						// assign to each file in chJson.items its correspoding site_file
-						chJson = Channel.matchItemsWithSiteFiles(chJson,site_files);
-						channel = chJson.channel;
-						// merge chJson.items to $scope.items
-						if (!$scope.items) $scope.items = { total:0 };
-						if (!$scope.media_types) $scope.media_types = [];
-						$scope.items = Central.mergeChannelItems($scope.items,$scope.items_total,$scope.media_types,chJson);
-						$scope.cIndex += 1;
-						$scope.getChannel();
-					});
-			    });
-			};
-
 			// finish loading channels
-			$scope.finishLoadingChannels = function(){
-				console.log('finish loading channels!');
-				console.log($scope.channels);
-				console.log('--------------------------');				
+			$scope.getModerations = function(){
+				console.log('get moderations');
 				var query = ["SELECT * FROM moderation WHERE current = 1"];
 				Page.cmd("dbQuery", query ,function(moderations){
-					$scope.channels = Central.joinChannelModeration($scope.channels,moderations);
-					// sort media types alphabetically
-					$scope.media_types.sort();
-					// finished loading & apply to scope
-					$scope.$apply(function(){
+					console.log(moderations);
+					$scope.$apply(function(){					
+						// channels & moderations
+						$scope.channels = Central.joinChannelModeration($scope.channels,moderations);
 						// finish loading
-						$scope.finishedLoading();
+						$scope.routeView();
 					});
 				});
 			};
+
+		    // config site route
+		    $scope.routeView = function(){
+	    		console.log('route view');		    	
+		    	var path = $location.$$absUrl.split($scope.page.site_info.address+'/')[1].split('?')[0];
+		    	if (path === '' || path === 'index.html'){
+		    		$scope.route = 'main';
+		    	} else if (path.indexOf('user/') > -1 ) {
+		    		$scope.route = 'user';
+		    	}
+		    	console.log('route view : ' + $scope.route);
+		    	$scope.finishedLoading();
+		    };
 
 		/* /INIT SITE */
 

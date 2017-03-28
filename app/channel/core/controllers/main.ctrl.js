@@ -3,19 +3,24 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 
 		/** INIT **/
 
-			// get user channels
+			// init user section
 			$scope.init = function(){
-				var channels = [];
-				$scope.channels.forEach(function(ch,index){
-					if (ch.channel_address.split('_')[1] === $scope.page.site_info.auth_address){
-						channels.push(ch);
+				if ($scope.channels){
+					var u_channels = [];
+					$scope.channels.forEach(function(ch,index){
+						if (ch.user === $scope.page.site_info.cert_user_id){
+							u_channels.push(ch);
+						}
+					});
+					if (u_channels.length > 0){
+						// render channel list
+						$scope.u_channels = Channel.renderChannels(u_channels);
+						// assign current user channel
+						$scope.assignCurrentUserChannel();
+					} else {
+						// route user section
+						$scope.routeUserView();
 					}
-				});
-				if (channels.length > 0){
-					// render channel list
-					$scope.u_channels = Channel.renderChannels(channels);
-					// assign current user channel
-					$scope.assignCurrentUserChannel();
 				} else {
 					// route user section
 					$scope.routeUserView();
@@ -38,31 +43,26 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 					// apply first channel to scope
 					$scope.channel = $scope.u_channels[0];
 				}
+				// cluster
+				$scope.clusters.forEach(function(cluster,index){
+					if ($scope.channel.cluster_id === cluster.address){
+						$scope.cluster = cluster;
+					}
+				});
+				// inner path
+				$scope.inner_path = 'merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.cluster.address+'/data/users/'+$scope.page.site_info.auth_address+'/';
 				// url suffix for inner links
 				$scope.url_suffix = '?cl=' + $scope.channel.cluster_id + '+ch=' + $scope.channel.channel_address;
-				// set current channels cluster merged site info
-				$scope.getClusterSiteInfo();
+				// get channel items
+				$scope.getChannelItems();
 			};
 
-			// get cluster site info
-			$scope.getClusterSiteInfo = function(){
-				// query merger site list
-				Page.cmd("mergerSiteList", {query_site_info: true}, function(sites) {
-					// find cluster in sites & bind it to scope
-					$scope.cluster = Channel.findClusterInMergerSiteList(sites,$scope.channel.cluster_id);
-					// set current (viewed) user channel
-					$scope.getChannelJson();
-				});
-			};
-
-			// get channel json
-			$scope.getChannelJson = function(){
-				$scope.inner_path = 'merged-IFS/'+$scope.channel.cluster_id+'/data/users/'+$scope.page.site_info.auth_address+'/';
-				Page.cmd("fileGet", { "inner_path": $scope.inner_path + $scope.channel.channel_address+'.json', "required": false },function(chJson) {
+			// get channel items
+			$scope.getChannelItems = function(){
+				var query = ["SELECT * FROM item WHERE item.channel='"+$scope.channel.channel_address+"'"];
+				Page.cmd("dbQuery", query, function(items){
 					$scope.$apply(function(){
-						// assign channel.json to scope
-						$scope.chJson = JSON.parse(chJson);
-						// get channel files info
+						$scope.items = items;
 						$scope.getChannelFilesInfo();
 					});
 				});
@@ -72,9 +72,11 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 			$scope.getChannelFilesInfo = function(){
 				// get optional file list
 				Page.cmd("optionalFileList", { address: $scope.channel.cluster_id, limit:2000 }, function(site_files){
+					console.log(site_files);
 					$scope.$apply(function(){
 						// render channel files
-						$scope.ch_files = Channel.renderChannelFiles(site_files,$scope.chJson.items);
+						$scope.ch_files = Channel.renderChannelFiles(site_files,$scope.items);
+						console.log($scope.ch_files);
 						// route user view
 						$scope.routeUserView();
 					});					
@@ -127,19 +129,14 @@ app.controller('ChannelMainCtrl', ['$scope','$rootScope','$location','$window','
 					// add optional attribute if doesnt exist
 					contentJson = JSON.parse(contentJson);
 					contentJson.optional = ".*";
-					console.log(contentJson);
 					// write content.json to file
 					var json_raw = unescape(encodeURIComponent(JSON.stringify(contentJson, void 0, '\t')));
 					Page.cmd("fileWrite", [$scope.inner_path + 'content.json', btoa(json_raw)], function(res) {
 						console.log(res);
-						// sign & publish
-						Page.cmd("sitePublish",{"inner_path":$scope.inner_path + $scope.chJson.channel.channel_address + '.json' }, function(res) {
-							console.log(res);
-							// apply to scope
-							$scope.$apply(function(){
-								Page.cmd("wrapperNotification", ["done", "Channel Updated!",10000]);
-								$window.location.href = '/'+ $scope.page.site_info.address +'/user/index.html?cl='+$scope.chJson.channel.cluster_id + '+ch=' + $scope.chJson.channel.channel_address;
-							});
+						// apply to scope
+						$scope.$apply(function(){
+							Page.cmd("wrapperNotification", ["done", "Channel Updated!",10000]);
+							$window.location.href = '/'+ $scope.page.site_info.address +'/user/index.html?cl='+$scope.channel.cluster_id + '+ch=' + $scope.channel.channel_address;
 						});
 					});
 				});

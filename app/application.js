@@ -5,6 +5,7 @@ var app = angular.module('PPLOAD_MASTER',[
 	'angularMoment',
 	'ui.identicon',
 	'angularUtils.directives.dirPagination',
+	'angular.filter',	
     'com.2fdevs.videogular',
     'com.2fdevs.videogular.plugins.controls',
     'com.2fdevs.videogular.plugins.overlayplay',

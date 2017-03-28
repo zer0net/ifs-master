@@ -24,7 +24,6 @@ app.factory('Item', [
 			// get category name by file type
 			var catName;
 			var subCatName;
-
 			if (file.file_type === 'zip' ||  file.file_type === 'nes' ||  file.file_type === 'sna' ||  file.file_type === 'dsk' || file.file_type === 'bin') {
 				catName = 'games';
 				file.media_type = 'game';
@@ -65,7 +64,7 @@ app.factory('Item', [
 		};
 
 		// create new item
-		Item.createNewItem = function(file,chJson,channel){
+		Item.createNewItem = function(file,next_item_id,channel){
 
 			// render file name
 			var file_name = file.name.split(' ').join('_').normalize('NFKD').replace(/[\u0300-\u036F]/g, '').replace(/ß/g,"ss").split('.' + file.file_type)[0].replace(/[^\w\s]/gi, '_') + '.' + file.file_type;
@@ -88,12 +87,7 @@ app.factory('Item', [
 				item.inner_file = file.inner_file;
 			}
 
-			// item id
-			var next_item_id;
-			if (!chJson){ next_item_id = 1; } 
-			else { next_item_id = chJson.next_item_id; }
-			item.item_id = chJson.channel.channel_address + '_' + next_item_id;
-			console.log(item);
+			item.item_id = channel.channel_address + '_' + next_item_id;
 			return item;
 		};
 

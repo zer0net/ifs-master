@@ -39,7 +39,6 @@ app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
 				$scope.reader.onload = function(){
 					// render file on read
 					file = Item.renderFileOnRead(file,this);
-
 					// if zip file, get inner file
 					if (file.file_type === 'zip'){
 						// js zip instance
@@ -78,12 +77,6 @@ app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
 			// assign default category
 			$scope.assignDefaultCategory = function(file,categories){
 				file = Item.assignDefaultCategory(file,categories);
-			};
-
-			// on select category
-			$scope.onSelectCategory = function(category){
-				$scope.getSubcategories(category);
-				console.log($scope.subcategories);
 			};
 
 			// remove error
@@ -125,30 +118,27 @@ app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
 				});
 				// if no error check
 				if ($scope.errors === false){
-					$scope.uploadFiles();
+					$scope.onUploadFiles();
 				}
 			};
 
 			// upload files
-			$scope.uploadFiles = function(){
-				$scope.file_index = 0;
-				$scope.uploadFile($scope.files[$scope.file_index]);
+			$scope.onUploadFiles = function(){
+				Page.cmd("fileGet",{"inner_path":$scope.inner_path + 'data.json'},function(data){
+					if (data) { 
+						data = JSON.parse(data);
+						if (!data.item){
+							data.next_item_id = 1;
+							data.item = [];
+						}
+					}
+					else (data = {"next_item_id":1,"item":[]})
+					$scope.dataJson = data;
+					$scope.file_index = 0;
+					$scope.uploadFile($scope.files[$scope.file_index]);
+				});
 			};
 			
-			// check if file existing
-			$scope.ifFileExist = function(file){
-				var b = false;
-				if ($scope.chJson[file.media_type + 's']){
-					for (var i = 0, len = $scope.chJson[file.media_type + 's'].length; i < len; i++) {
-					    if ($scope.chJson[file.media_type + 's'][i].file_name == file.name) {
-					   		b = true;
-					    	break;
-					    }
-					}
-				}
-				return b;
-			};
-
 			// upload  file
 			$scope.uploadFile = function(file){
 				if ($scope.ifFileExist(file)) {
@@ -158,19 +148,15 @@ app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
 					// file state
 					file.state = 'uploading';
 					// create new item
-					var item = Item.createNewItem(file,$scope.chJson,$scope.channel);
-					var inner_path = 'merged-IFS/'+$scope.channel.cluster_id+'/data/users/'+$scope.page.site_info.auth_address+'/'+item.file_name;
+					var item = Item.createNewItem(file,$scope.dataJson.next_item_id,$scope.channel);
 					// write to file
-					Page.cmd("fileWrite",[inner_path, file.data.split('base64,')[1]], function(res) {
+					Page.cmd("fileWrite",[$scope.inner_path + item.file_name, file.data.split('base64,')[1]], function(res) {
 						$scope.$apply(function(){
 							// file state
 							file.state = 'done';
-							// item id update
-							$scope.chJson.next_item_id += 1;
 							// push item to channel json items
-							var media_type = item.content_type + 's';
-							if (!$scope.chJson.items[media_type]){$scope.chJson.items[media_type] = [];}
-							$scope.chJson.items[media_type].push(item);
+							$scope.dataJson.item.push(item);
+							$scope.dataJson.next_item_id += 1;
 							// upload next file
 							$scope.uploadNextFile();
 						});
@@ -178,14 +164,42 @@ app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
 				}	
 			};
 			
+			// check if file existing
+			$scope.ifFileExist = function(file){
+				var b = false;
+				if ($scope.items){
+					$scope.items.forEach(function(item,index){
+						if (item.file_name === file.file_name){
+							b = true;
+						}
+					});
+				}
+				return b;
+			};
+
 			// upload next file
 			$scope.uploadNextFile = function(){
 				$scope.file_index += 1;
 				if (($scope.file_index + 1) <= $scope.files.length){
 					$scope.uploadFile($scope.files[$scope.file_index]);
 				} else {
-					$scope.updateChannelJson();
+					$scope.finishUploadingFiles();
 				}
+			};
+
+			// finish uploading files
+			$scope.finishUploadingFiles = function(){
+				var json_raw = unescape(encodeURIComponent(JSON.stringify($scope.dataJson, void 0, '\t')));					
+				Page.cmd("fileWrite", [$scope.inner_path + 'data.json', btoa(json_raw)], function(res) {
+					// sign & publish site
+					Page.cmd("sitePublish",{"inner_path":$scope.inner_path + 'data.json'}, function(res) {
+						// apply to scope
+						$scope.$apply(function() {
+							Page.cmd("wrapperNotification", ["done", "Finished Uploading Files!", 10000]);
+							$scope.publishSite();
+						});
+					});
+				});			
 			};
 			
 

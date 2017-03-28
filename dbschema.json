@@ -1,35 +1,39 @@
 {
-    "db_name": "IFS",
+    "db_name": "ifs",
     "db_file": "merged-IFS/ifs.db",
-    "version": 4,
+    "version": 2,
     "maps": {
-        ".+/data/users/.+/channels.json":{
-            "to_table": [{"node": "channels", "table": "channel"}]
-        },            
-        ".+/data/users/.+/comments.json":{
-            "to_table": ["comment"],
-            "to_keyvalue": ["next_comment_id"]
-        },
         ".+/data/users/.+/data.json":{
-            "to_table": [{"node": "channel", "table": "channels"}]
+            "to_table": [
+                {"node": "channel", "table": "channel"},
+                {"node": "item", "table": "item"}
+            ]
         },
-        ".+/data/users/.+/items.json": {
-            "to_table": ["item"],
-            "to_keyvalue": [ "cert_user_id"]
-        },       
-        ".+/data/users/.+/moderations.json":{
-            "to_table": ["moderation"],
-            "to_keyvalue": ["next_moderation_id"]
+        ".+/data/users/.+/channels.json":{
+            "to_table": [{"node": "channels", "table": "channel_old"}]
         },
-        ".+/data/users/.+/votes.json":{
-            "to_table": ["vote"],
-            "to_keyvalue": ["next_vote_id"]
+        "content/config.json":{
+            "to_table": [
+                {"node": "categories", "table": "category"},
+                {"node": "clusters", "table": "cluster"}                
+            ]
         }
     },
     "tables": {
+        "category": {
+            "cols": [
+                ["category_name", "TEXT"],
+                ["category_parent", "INTEGER"],
+                ["date_added", "INTEGER"],
+                ["hide", "INTEGER"],
+                ["visible", "INTEGER"],
+                ["json_id", "INTEGER REFERENCES json (json_id)"]
+            ],
+            "indexes": ["CREATE UNIQUE INDEX category_key ON category(json_id, date_added)"],
+            "schema_changed": 1
+        },
         "channel": {
             "cols": [
-                ["channel_id", "TEXT"],
                 ["channel_address", "TEXT"],
                 ["channel_name", "TEXT"],
                 ["channel_description", "TEXT"],
@@ -44,6 +48,34 @@
             "indexes": ["CREATE UNIQUE INDEX channel_key ON channel(json_id, date_added)"],
             "schema_changed": 1
         },
+        "channel_old": {
+            "cols": [
+                ["channel_address", "TEXT"],
+                ["channel_name", "TEXT"],
+                ["channel_description", "TEXT"],
+                ["logo_file", "TEXT"],
+                ["cluster_id", "TEXT"],
+                ["date_added", "INTEGER"],
+                ["hide", "INTEGER"],
+                ["user", "TEXT"],
+                ["user_id", "TEXT"],
+                ["json_id", "INTEGER REFERENCES json (json_id)"]
+            ],
+            "indexes": ["CREATE UNIQUE INDEX channel_old_key ON channel_old(json_id, date_added)"],
+            "schema_changed": 1
+        },
+        "category": {
+            "cols": [
+                ["category_name", "TEXT"],
+                ["category_parent", "INTEGER"],
+                ["date_added", "INTEGER"],
+                ["hide", "INTEGER"],
+                ["visible", "INTEGER"],
+                ["json_id", "INTEGER REFERENCES json (json_id)"]
+            ],
+            "indexes": ["CREATE UNIQUE INDEX category_key ON category(json_id, date_added)"],
+            "schema_changed": 1
+        },         
         "comment": {
             "cols": [
                 ["comment_id", "INTEGER"],
@@ -73,7 +105,7 @@
             ],
             "indexes": ["CREATE UNIQUE INDEX item_key ON item(json_id, date_added)"],
             "schema_changed": 1
-        },        
+        },
         "moderation": {
             "cols": [
                 ["moderation_id", "INTEGER"],

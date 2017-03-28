@@ -99,8 +99,9 @@
 
                             <!-- item listing by media type -->
                             <section class="wrap-section main-listing-container" ng-if="config.listing.type === 'by content type'">
-                                <md-content class="container" ng-if="items">
-                                    <div ng-if="!loading_list">
+                               <md-content class="container">
+                                    <items ng-init="getItems()"></items>
+                                    <!--<div ng-if="!loading_list">
                                         <uib-tabset ng-if="!channel" active="activePill" type="pills">
                                             <uib-tab index="0" heading="All ({{items.total}})">
                                                 <item-list ng-init="initItemListAll(items)"></item-list> 
@@ -117,7 +118,7 @@
                                                 <item-list ng-init="initItemListByMediaType(media_type,channel)"></item-list>
                                             </uib-tab>
                                         </uib-tabset>
-                                    </div>
+                                    </div>-->
                                 </md-content>
                             </section>
                             <!-- /item listing by media type -->
@@ -158,6 +159,7 @@
         <script type="text/javascript" src="assets/lib/identicon/pnglib.js"></script>
         <script type="text/javascript" src="assets/lib/identicon/identicon.js"></script>
         <script type="text/javascript" src="assets/lib/angular-identicon/angular-identicon.min.js"></script>
+        <script type="text/javascript" src="assets/lib/angular-filter/angular-filter.min.js"></script>
         <script type="text/javascript" src="assets/lib/angular-fullscreen/angular-fullscreen.js"></script>
         <script type="text/javascript" src="assets/lib/util/dirPagination.js"></script>
 
@@ -175,16 +177,17 @@
         <script type="text/javascript" src="app/master/core/directives/sidebar.directive.js"></script>
         <script type="text/javascript" src="app/master/core/directives/site-header.directive.js"></script>
         <script type="text/javascript" src="app/master/core/directives/site-search.directive.js"></script>
-        <script type="text/javascript" src="app/master/core/directives/channel-register.directive.js"></script>
         <script type="text/javascript" src="app/master/core/directives/comments.directive.js"></script>
         <script type="text/javascript" src="app/master/core/directives/votes.directive.js"></script>
         <script type="text/javascript" src="app/master/core/directives/views.directive.js"></script>
+        <script type="text/javascript" src="app/master/core/directives/items.directive.js"></script>
         <script type="text/javascript" src="app/master/core/directives/item-list.directive.js"></script>
         <script type="text/javascript" src="app/master/core/services/item.service.js"></script>
         <script type="text/javascript" src="app/master/core/services/central.service.js"></script>
         <script type="text/javascript" src="app/master/core/services/channel.service.js"></script>
         <script type="text/javascript" src="app/master/core/filters/file-size.filter.js"></script>
         <script type="text/javascript" src="app/master/core/filters/start-from.filter.js"></script>
+        <script type="text/javascript" src="app/channel/core/directives/channel-register.directive.js"></script>
 
         <!-- app games -->  
         <script type="text/javascript" src="app/master/games/directives/game-list.directive.js"></script>

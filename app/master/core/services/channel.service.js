@@ -62,25 +62,19 @@ app.factory('Channel', [
 		Channel.renderChannelFiles = function(ch_optional_files,ch_items){
 			// channel files object
 			var ch_files = {
-				files:[],
-				total:0,
+				files:ch_items,
+				total:ch_items.length,
 				total_downloaded:0,
 				total_size:0,
 				total_downloaded_size:0
 			};
-			// populate files total list from chJson.items					
-			for (var i in ch_items){
-				// add number of current array to files_total count
-				ch_files.total += ch_items[i].length;	
-				// merge current array to files
-				ch_files.files = ch_files.files.concat(ch_items[i]);
-			}
+
 			// loop channel files
 			ch_files.files.forEach(function(file,index){
 				file.is_loaded = false;
 				file.peers = 0;	
 				for (var i in ch_optional_files) {
-				    if (ch_optional_files[i].inner_path === 'data/users/'+file.item_id.split('_')[1]+'/'+file.file_name) {
+				    if (ch_optional_files[i].inner_path === 'data/users/'+file.channel.split('_')[1]+'/'+file.file_name) {
 						file.is_loaded = true;
 						file.peers = ch_optional_files[i].peer;
 						ch_files.total_size += ch_optional_files[i].size;

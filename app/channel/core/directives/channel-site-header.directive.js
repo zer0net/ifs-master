@@ -7,7 +7,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 			// init
 			$scope.init = function() {
 				$scope.publishButtonStatus = 'publish';
-				if ($scope.chJson.channel.logo_file) $scope.chJson.channel.logo_path = '/'+$scope.page.site_info.address+'/merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.chJson.channel.cluster_id+'/data/users/'+$scope.page.site_info.auth_address+'/'+$scope.chJson.channel.logo_file;
+				if ($scope.channel.logo_file) $scope.channel.logo_path = '/'+$scope.page.site_info.address+'/merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.channel.cluster_id+'/data/users/'+$scope.page.site_info.auth_address+'/'+$scope.channel.logo_file;
 			};
 
 			// on upload click
@@ -119,14 +119,14 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 							'<div class="col-xs-5">' + 
 								'<div class="channel-header-top">' + 
 									'<figure class="logo">' + 
-										'<img ng-if="chJson.channel.logo_file" ng-src="{{chJson.channel.logo_path}}">' +
+										'<img ng-if="channel.logo_file" ng-src="{{channel.logo_path}}">' +
 									'</figure>' +
 									'<div class="site-title" ng-if="channel">' + 
 										'<h3>' + 
 											'<a ng-click="onChannelMainClick()"> {{channel.channel_name}} </a>' + 
-											'<small><a ng-click="openChannelEditDialog(chJson)"><span class="glyphicon glyphicon-pencil"></span></a></small>' + 
+											'<small><a ng-click="openChannelEditDialog(channel)"><span class="glyphicon glyphicon-pencil"></span></a></small>' + 
 										'</h3>' + 										
-										'<div class="channel-description">{{chJson.channel.channel_description}}</div>' +
+										'<div class="channel-description">{{channel.channel_description}}</div>' +
 									'</div>' + 
 								'</div>' +
 								'<div class="channel-header-bottom" ng-if="channel">' + 

@@ -6,12 +6,7 @@ app.directive('categories', [
 
 			// get categories
 			$scope.getCategories = function(){
-				var inner_path = "content/categories.json";			
-				Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(catJson) {
-					catJson = JSON.parse(catJson);
-					$scope.categories = catJson.categories;
-					$scope.$apply();
-				});
+				$scope.categories = $scope.config.categories;
 			};
 
 			// create category

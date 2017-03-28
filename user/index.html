@@ -50,14 +50,14 @@
 					    <!-- /loading -->
 
 						<!-- user area -->
-						<section ng-if="site_ready" class="wrapper" id="user-channel-wrapper" ng-controller="ChannelMainCtrl" ng-init="init()">
+						<section ng-if="channels" class="wrapper" id="user-channel-wrapper" ng-controller="ChannelMainCtrl" ng-init="init()">
 							<!-- channel site header -->
 							<channel-site-header ng-hide="loading"></channel-site-header>
 							<!-- /channel site  header -->
 
 							<!-- channel site main  -->
 							<section ng-hide="loading" ng-if="u_channels" ng-controller="ItemsCtrl" layout="row" class="container">
-							    <md-content ng-if="chJson" ng-hide="loading" flex layout-padding class="main-content">
+							    <md-content ng-if="channel" ng-hide="loading" flex layout-padding class="main-content">
 									<div ng-if="user_view !== 'main'" class="inner-nav">
 										<md-button class="md-primary md-raised edgePadding pull-left" ng-click="routeUserView()">Back</md-button>
 									</div>
@@ -142,6 +142,7 @@
         <script type="text/javascript" src="../assets/lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>	    
 		<script type="text/javascript" src="../assets/lib/angular-sanitize/angular-sanitize.min.js"></script>
 		<script type="text/javascript" src="../assets/lib/angular-material/angular-material.min.js"></script>
+        <script type="text/javascript" src="../assets/lib/angular-filter/angular-filter.min.js"></script>
 		<script type="text/javascript" src="../assets/lib/moment/moment.js"></script>
 		<script type="text/javascript" src="../assets/lib/angular-moment/angular-moment.min.js"></script>
 	    <script type="text/javascript" src="../assets/lib/identicon/pnglib.js"></script>
