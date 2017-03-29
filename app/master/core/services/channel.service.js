@@ -121,6 +121,14 @@ app.factory('Channel', [
 			return chJson;
 		};
 
+		Channel.generateChannelAddressArray = function(channels_old){
+			var c = [];
+			channels_old.forEach(function(ch,index){
+				c.push(ch.channel_address);
+			});
+			return c;
+		};
+
 		return Channel;
 	}
 ]);

@@ -11,12 +11,6 @@
         },
         ".+/data/users/.+/channels.json":{
             "to_table": [{"node": "channels", "table": "channel_old"}]
-        },
-        "content/config.json":{
-            "to_table": [
-                {"node": "categories", "table": "category"},
-                {"node": "clusters", "table": "cluster"}                
-            ]
         }
     },
     "tables": {

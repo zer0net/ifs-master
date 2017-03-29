@@ -44,7 +44,7 @@ app.directive('sidebar', ['$rootScope','$timeout',
 							            '<div>' +
 							                '<a href="#">' +
 												'<figure class="channel-list-item-logo"><img ng-if="channel.logo_file" ng-src="{{channel.logo_path}}"/></figure>' +
-							                	'<span>{{channel.channel_name}} [{{channel.items_total}}]</span>' +
+							                	'<span>{{channel.channel_name}} <b ng-if="channel.legacy">[{{channel.items.length}}]</b></span>' +
 							                '</a>' +
 							            '</div>' +
 							        '</li>' +

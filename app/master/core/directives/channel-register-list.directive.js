@@ -22,7 +22,7 @@ app.directive('channelRegisterList', ['$location','$rootScope',
 		    		$scope.query='';
 		    		$scope.selectedCluster=null;
 		    	}else{
-		    		$scope.query = {cluster_id:cluster.cluster_id};		 
+		    		$scope.query = {cluster_id:cluster.address};
 		    		$scope.selectedCluster=cluster;   		
 		    	}		    	
 		    };
@@ -42,10 +42,10 @@ app.directive('channelRegisterList', ['$location','$rootScope',
 							'<ul class="item-clusters">' +	
 								'<li><h3>Clusters</h3></li>' +		
 								'<li><a ng-class="{selected:selectedCluster==null}"  ng-click="onFilterCluster(\'all\')">ALL</a></li>' +					
-								'<li ng-repeat="c in clusters"><a ng-class="{selected:selectedCluster.cluster_id==c.cluster_id}" ng-bind="c.title" ng-click="onFilterCluster(c)"></a></li>' +							
+								'<li ng-repeat="c in clusters"><a ng-class="{selected:selectedCluster.address==c.address}" ng-bind="c.content.title" ng-click="onFilterCluster(c)"></a></li>' +							
 							'</ul>' +
 							'<div class="section-header">'+
-								'<h2><span ng-if="selectedCluster" ng-bind="selectedCluster.title"></span><span ng-if="!selectedCluster">ALL</span></h2>'+
+								'<h2><span ng-if="selectedCluster" ng-bind="selectedCluster.content.title"></span><span ng-if="!selectedCluster">ALL</span></h2>'+
 								'<span class="label" ng-hide="loading">total: <span>{{(channels | filter:query).length }}</span></span>'+
 								'<hr/>'+
 							'</div>'+				

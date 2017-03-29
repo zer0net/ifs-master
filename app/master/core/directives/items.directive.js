@@ -1,11 +1,31 @@
-app.directive('items', ['$rootScope',
-	function($rootScope) {
+app.directive('items', ['$rootScope','Channel',
+	function($rootScope,Channel) {
 
 		// item list directive controller
 		var controller = function($scope,$element) {
 
+			// init items 
+			$scope.initItems = function(){
+				if ($scope.legacy){
+					$scope.lcIndex = 0;
+					$scope.getLegacyItems();
+				} else {
+					$scope.getItems();
+				}
+			};
+
+			// get legacy items
+			$scope.getLegacyItems = function(){
+				$scope.items_old = [];
+				$scope.channels_old.forEach(function(och,index){
+					$scope.items_old = $scope.items_old.concat(och.items);
+				});
+				$scope.getItems();
+			};
+
 			// get items
 			$scope.getItems = function(){
+
 				var query;
 				if ($scope.channel){
 					query = ["SELECT * FROM item WHERE item.channel='"+$scope.channel.channel_address+"'"];
@@ -14,6 +34,7 @@ app.directive('items', ['$rootScope',
 				}
 				Page.cmd("dbQuery", query, function(items){
 					$scope.$apply(function(){
+						if ($scope.items_old) items = items.concat($scope.items_old);
 						if (items){
 							$scope.items = items;
 						}
@@ -46,28 +67,16 @@ app.directive('items', ['$rootScope',
 			};
 		};
 
-		var template =  '<uib-tabset id="main-tabs" active="activePill" type="pills" ng-if="items">' +
+		var template =  '<div ng-init="initItems()">' +
+						'<uib-tabset id="main-tabs" active="activePill" type="pills" ng-if="items">' +
 						    '<uib-tab index="0" heading="All ({{items.length}})">' +
-								'<section class="item-list-section container">' +
-										'<ul class="item-list-categories" ng-if="categories.length > 0">' +
-											'<li><a class="selected" ng-if="!subcategoryId" ng-click="filterItemListByCategory(categories)">all</a></li>' +
-											'<li><a ng-if="subcategoryId" ng-click="filterItemListByCategory(categories)">all</a></li>' +
-											'<li ng-repeat="category in categories |orderBy:\'category_name\'"><a ng-class="{selected:category.selected}" ng-click="filterItemListByCategory(categories,category)" ng-bind="category.title"></a></li>' +
-										'</ul>' +
-										'<item-list ng-init="initItemList(items)"></item-list>' +
-								'</section>' +
+								'<item-list ng-init="initItemList(items)"></item-list>' +
 						    '</uib-tab>' +
 						    '<uib-tab index="$index + 1"  ng-repeat="(key, value) in items | groupBy: \'content_type\'" heading="{{key}} ({{value.length}})">' +
-								'<section class="item-list-section container">' +
-										'<ul class="item-list-categories" ng-if="categories.length > 0">' +
-											'<li><a class="selected" ng-if="!subcategoryId" ng-click="filterItemListByCategory(categories)">all</a></li>' +
-											'<li><a ng-if="subcategoryId" ng-click="filterItemListByCategory(categories)">all</a></li>' +
-											'<li ng-repeat="category in categories |orderBy:\'category_name\'"><a ng-class="{selected:category.selected}" ng-click="filterItemListByCategory(categories,category)" ng-bind="category.title"></a></li>' +
-										'</ul>' +
-										'<item-list ng-init="initItemList(items)"></item-list>' +
-								'</section>' +
+								'<item-list ng-init="initItemList(value,key)"></item-list>' +
 						    '</uib-tab>' +
-						'</uib-tabset>';
+						'</uib-tabset>' + 
+						'</div>';
 
 		return {
 			restrict: 'AE',

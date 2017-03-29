@@ -957,6 +957,9 @@ div[type="pills"] .tab-content {
 }
 /* /item view */
 /* register channel */
+#channel-register-view #channels-section {
+  width: 960px;
+}
 #channel-register-view .section-header .label {
   background: #337ab7;
   font-size: 100%;
