@@ -39,4 +39,17 @@
 
   window.Page = new ZeroChat();
 
+  
+  // Add ajax_key get parameter to all ajax requests
+  Page.cmd("wrapperGetAjaxKey", [], function (res) {
+    Page.ajax_key = res
+  })
+  XMLHttpRequest.prototype.realOpen = XMLHttpRequest.prototype.open;
+  var newOpen = function(method, url, async) {
+     url += "?ajax_key=" + Page.ajax_key;
+     console.log(url, this.realOpen)
+     return this.realOpen(method, url, async);
+  };
+  XMLHttpRequest.prototype.open = newOpen;
+
 }).call(this);

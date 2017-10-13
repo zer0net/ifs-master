@@ -119,7 +119,7 @@ app.directive('siteSearch', ['$rootScope','$location','$window',
 				$scope.ppFilter = {
 					channel:{},
 				};
-				$scope.mainRemoveFilter();
+				// $scope.mainRemoveFilter();
 			}
 		
 		};

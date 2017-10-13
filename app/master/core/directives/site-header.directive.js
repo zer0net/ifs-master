@@ -5,9 +5,26 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope','$location',
 		var controller = function($scope,$element) {
 
 			$scope.initHeader = function(){
-				if ($location.$$absUrl.indexOf('view.html') > -1 && $location.$$absUrl.indexOf('type') > -1){
-					$scope.media_type = $location.$$absUrl.split('?type=')[1].split('+')[0] + 's';
+				if ($location.$$absUrl.indexOf('view.html') > -1 && $location.$$absUrl.indexOf('type') > -1 ){
+					$scope.content_type = $location.$$absUrl.split('?type=')[1].split('+')[0] + 's';
 				}
+			};
+
+			// on search title
+			$scope.onSearchTitle = function(title){
+				$rootScope.$broadcast('onSearchTitle',title);
+			};
+
+			// on all channels view
+			$scope.viewAllChannels = function(){
+				var route = 'channels';
+				$scope.routeSite(route);
+			};
+
+			// on all channels view
+			$scope.viewUserChannels = function(){
+				var route = 'user';
+				$scope.routeSite(route);
 			};
 
 		    // show info modal
@@ -18,10 +35,10 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope','$location',
 			    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
 			    // dialog template
 			    var dialogTemplate = 
-			    	'<md-dialog class="dialog">' +
+			    	'<md-dialog class="dialog" style="width:500px;">' +
 					    '<md-toolbar>' +
 					    	'<div class="md-toolbar-tools">' +
-						        '<h2>FAQ</h2>' +
+						        '<h2>FAQ / Rules</h2>' +
 						        '<span flex></span>' +
 								'<md-button class="md-icon-button pull-right" ng-click="hide()">'+
 									'<span class="glyphicon glyphicon-remove"></span>'+
@@ -30,7 +47,11 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope','$location',
 					    '</md-toolbar>' +
 					    '<md-dialog-content layout-padding>' +
 					    	'<img style="width:100%;" src="/{{items.scope.page.site_info.address}}/assets/master/img/faq-banner.jpg"/>' +
-					    	'<p>Visit our Blog: <a href="{{page.site_info.address}}/1Cd1SqtZUUpK8e8KUUqBttHzwPfbG1CU6y">1Cd1SqtZUUpK8e8KUUqBttHzwPfbG1CU6y</a>' +
+					    	'<div>' +
+					    	'Here is a list of what is NOT accepted on this server:<br/>' +
+					    	'<ul><li>NO CP/Porn</li></ul>' +
+					    	'Visit our Blog: <a href="{{page.site_info.address}}/1Cd1SqtZUUpK8e8KUUqBttHzwPfbG1CU6y">1Cd1SqtZUUpK8e8KUUqBttHzwPfbG1CU6y</a>' +
+					    	'</div>' +
 					    '</md-dialog-content>' +
 					'</md-dialog>';
 				// show dialog
@@ -113,31 +134,23 @@ app.directive('siteHeader', ['$mdDialog', '$mdMedia','$rootScope','$location',
 				$mdDialog.cancel();
 			};
 
-			// handle clone click
-			$scope.handleCloneClick = function() {
-				console.log('handle clone click')
-		    	$rootScope.$broadcast('onCreateChannel',$scope.items.scope);
-			};
-
 		};
 
 		var template ='<nav class="navbar navbar-default navbar-fixed-top" id="navbar-fixed-top" ng-init="initHeader()">'+
-  						'<div class="container-fluid" style="background-color:#041b2c">'+
-	  						'<div class="navbar-header">' + 
+	  						'<div class="header-left pull-left">' + 
 	  							'<span class="glyphicon glyphicon-menu-hamburger navbar-brand" id="menu-toggle" ng-click="toggleMenu($event)"></span>' +
-	  							'<a class="navbar-brand" href="/{{page.site_info.address}}">IFS - Intergalactic File Server</a>' + 
-	  							'<a class="navbar-brand" href="/{{page.site_info.address}}/index.html?media_type={{media_type}}" ng-if="media_type"><span>/ {{media_type}}</span></a>' +
+	  							'<a class="navbar-brand" ng-click="routeSite()">IFS <b>- Intergalactic File Server</b></a>' + 
+	  							'<a class="navbar-brand" ng-click="routeSite()" ng-if="content_type"><span>/ {{content_type}}</span></a>' +
 	  						'</div>'+
-	  						'<div class="container">' + 
-		  						'<site-search ng-if="!loading"></site-search>' +
-		  						'<ul class="nav navbar-nav navbar-right">'+			  						
-			  						'<li><a ng-click="showInfoModal(ev)" >FAQ</a></li>'+  
-			  						'<li><a href="/{{page.site_info.address}}/user/">My Channels</a></li>'+  
-									'<li><a href="/{{page.site_info.address}}/register.html">All Channels</button></a></li>'+
-			  						'<li><a ng-click="createIfsCert()" >Check ID</a></li>'+
-								'</ul>'+    					
+	  						'<div class="header-right pull-right">' + 
+								'<form class="pull-left">'+
+		        					'<div class="form-group">'+
+		          					'<input type="text" class="form-control" placeholder="Search" ng-model="ppFilter.title" ng-keyup="onSearchTitle(ppFilter.title)">'+  					
+		          					'</div>' +
+		      					'</form>' +
+		  						'<user-menu ng-if="page.site_info"></user-menu>'+    					
 	  						'</div>' +
-	  					'</div>'+
+
 					'</nav>';
 		
 		return {

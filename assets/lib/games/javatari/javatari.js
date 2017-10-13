@@ -20,7 +20,7 @@
         SCREEN_CONTROL_BAR:             0,                          // 0 = Always, 1 = Hover, 2 = Original Javatari
         SCREEN_NATURAL_FPS:             60,                         // 60, 50 fps
         AUDIO_BUFFER_SIZE:              1024,                       // 256, 512, 1024, 2048, 4096, 8192. More buffer = more delay
-        IMAGES_PATH:                    window.Javatari_IMAGES_PATH || "http://127.0.0.1:43110/1AudNexptNDTGAwxFf2jnE8CX8UUks8NGD/assets/lib/games/javatari/"
+        IMAGES_PATH:                    window.Javatari_IMAGES_PATH || "http://127.0.0.1:43110/12MVkvYGcRW6u2NYbpfwVad1oQeyG4s9Er/assets/lib/games/javatari/"
 
     };
 

@@ -1,55 +1,68 @@
-app.directive('sidebar', ['$rootScope','$timeout',
-	function($rootScope,$timeout) {
+app.directive('sidebar', ['$rootScope','$timeout','Channel',
+	function($rootScope,$timeout,Channel) {
 
 		// header directive controller
 		var controller = function($scope,$element) {
-			
-			$scope.initSideBar = function(){
-				/*$scope.channels.forEach(function(channel,index){
-					console.log(channel.channel_name);
-				});*/
-			};
 
 			// render channel item
 			$scope.renderChannelItem = function(channel){
-				channel.logo_path = '/'+$scope.page.site_info.address+'/merged-'+$scope.page.site_info.content.merger_name + '/' + channel.cluster_id + '/data/users/' + channel.channel_address.split('_')[1] + '/' + channel.logo_file;
+				// channel logo
+				if (channel.logo_file !== null){
+					channel.logo_path = '/'+$scope.page.site_info.address+'/merged-'+$scope.page.site_info.content.merger_name + '/' + channel.cluster_id + '/data/users/' + channel.channel_address.split('_')[1] + '/' + channel.logo_file;
+					var logo_file = Channel.getChannelLogoSiteFile(channel,$scope.clusters);
+					if (!logo_file){
+						$scope.forceFileDownload(channel.logo_path);
+					}
+				}
+			};
+
+			// force file download
+			$scope.forceFileDownload = function(inner_path,item){
+				// xhttp get dos file
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState === 4){
+						console.log("file ready");
+					} else {
+						console.log("file not found!");
+					}
+				};
+				xhttp.open("GET", inner_path, true);
+				xhttp.send();
 			};
 
 			// on filter channel
 			$scope.onFilterChannel = function(channel) {
+				$scope.channel_id = channel.channel_address;
+				var route = 'main';
+				$scope.routeSite(route);
 				if ($scope.channel){
 					$scope.removeFilterChannel();
 					$timeout(function () {
 						$scope.filterChannel(channel);
+						$rootScope.$broadcast('onFilterChannel',$scope.channel);
 					});
 				} else {
 					$scope.filterChannel(channel);
+					$rootScope.$broadcast('onFilterChannel',$scope.channel);				
 				}
 			};
 
 			// on remove filter channel
 			$scope.onRemoveFilterChannel = function(){
+				delete $scope.channel_id;
 				$scope.removeFilterChannel();
+				$rootScope.$broadcast('onRemoveFilterChannel',$scope.channel);
 			};
 
 		};
 
-		var template =  '<div id="sidebar-wrapper" ng-init="initSideBar()">' +
-						    '<div ng-if="channels.length > 0">' +
-						    	'<ul class="sidebar-nav">' +
-							       '<li class="sidebar-brand">' +
-							          'Channels  <span class="glyphicon glyphicon-refresh"  ng-click="onRemoveFilterChannel()" ></span>' +
-							        '</li>' +
-							       	'<li ng-repeat="channel in channels | orderBy:\'_id\'" ng-if="channel.hide !== 1" ng-init="renderChannelItem(channel)" ng-click="onFilterChannel(channel)">' +
-							            '<div>' +
-							                '<a href="#">' +
-												'<figure class="channel-list-item-logo"><img ng-if="channel.logo_file" ng-src="{{channel.logo_path}}"/></figure>' +
-							                	'<span>{{channel.channel_name}} <b ng-if="channel.legacy">[{{channel.items.length}}]</b></span>' +
-							                '</a>' +
-							            '</div>' +
-							        '</li>' +
-						        '</ul>' +
-						    '</div>' +
+		var template =  '<div ng-if="!loading" id="sidebar-wrapper">' + 
+							'<ul class="sidebar-nav">' +
+								'<li>Clusters<br/><hr/></li>' +
+								'<li><a href="/{{page.site_info.address}}/index.html?route:channels">All</a></li>' +
+								'<li ng-repeat="cluster in clusters"><a href="/{{page.site_info.address}}/index.html?route:channels+cluster:{{cluster.cluster_id}}">{{cluster.content.title}}</button></a></li>' 
+							'</ul>'+ //
 						'</div>';
 		
 		return {

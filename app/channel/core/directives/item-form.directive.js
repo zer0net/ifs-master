@@ -36,6 +36,9 @@ app.directive('itemForm', [
 												'<!-- /player -->' +
 											'</div>' +
 										'</div>' +
+										'<div ng-if="item.content_type === \'image\'">' +
+											'<img ng-src="{{item.image_path}}" style="width:100%;" />' +
+										'</div>' +
 					    			'</md-content>' +
 						    	'</md-tab>' +
 						    '</md-tabs>' +

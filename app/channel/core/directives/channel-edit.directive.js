@@ -4,21 +4,15 @@ app.directive('channelEdit', ['$sce','$location','$rootScope',
 		// channel edit controller
 		var controller = function($scope,$element) {
 
-			// file reader instance
-			var reader = new FileReader();
-
 			// init
-			$scope.initChannelEdit = function (chJson,page,merger_name,channel) {
-				// bind vars to scope
-				$scope.chJson = chJson;
-				$scope.page = page;
-				$scope.merger_name = merger_name;
-				$scope.channel = channel;
-				console.log($scope.chJson);
-				if ($scope.channel.logo_file) {
-					$scope.channel.logo_path = '/'+$scope.page.site_info.address+'/merged-'+$scope.page.site_info.content.merger_name + '/' + $scope.channel.cluster_id + '/data/users/' + $scope.channel.user_id + '/' + $scope.channel.logo_file;
+			$scope.initChannelEdit = function (scope) {
 
-				}
+				// bind vars to scope
+				$scope.page = scope.page;
+				$scope.channel = scope.channel;
+				$scope.inner_path = scope.inner_path;
+				$scope.cluster = scope.cluster;
+
 				// dropzone config
 				$scope.dropzoneConfig = {	
 				    'options': { // passed into the Dropzone constructor
@@ -30,17 +24,24 @@ app.directive('channelEdit', ['$sce','$location','$rootScope',
 						}
 					}
 				};
+
+				// query channel images
+				var query = ["SELECT * FROM item WHERE channel='"+$scope.channel.channel_address+"' AND content_type='image'"];
+				Page.cmd("dbQuery",query,function(images){
+					$scope.$apply(function(){
+						$scope.images = images;
+					});
+				});
 			};
 
 			// render image page
 			$scope.renderImagePath = function(image){
-				console.log(image);
-				image.src = '/'+$scope.page.site_info.address+'/merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.chJson.channel.cluster_id+'/data/users/'+$scope.page.site_info.auth_address+'/'+image.file_name;
+				image.src = '/'+$scope.page.site_info.address+'/merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.cluster.cluster_id+'/data/users/'+$scope.page.site_info.auth_address+'/'+image.file_name;
 			};
 
 			// select image as logo
 			$scope.selectImageAsLogo = function(image){
-				$scope.chJson.channel.logo_file = image.file_name;
+				$scope.channel.logo_file = image.file_name;
 			};
 
 			// on upload click
@@ -50,35 +51,50 @@ app.directive('channelEdit', ['$sce','$location','$rootScope',
 				$scope.hide();			
 			};
 
-			/*
-			// show preview image
-			$scope.showPreviewImage = function(file){
-				// reader on load
-				reader.onload = function(){
-					var file_name = file.name.split(' ').join('_').normalize('NFKD').replace(/[\u0300-\u036F]/g, '').replace(/ß/g,"ss").split('.' + file.file_type)[0].replace(/[^\w\s]/gi, '') + '.' + file.type.split('/')[1];
-					$scope.chJson.channel.logo_file = file_name;
-					$scope.imgSrc = reader.result;
-					// apply to scope
-					$scope.$apply();
-				};
-				reader.readAsDataURL(file);
-			};
-
-			// upload logo image
-			$scope.uploadLogoImage = function(chJson){
-				var inner_path = 'merged-IFS/'+chJson.channel.cluster_id+'/data/users/'+$scope.page.site_info.auth_address+'/'+chJson.channel.logo_file;
-				console.log(chJson.channel.logo_file);
-				console.log(inner_path);
-				Page.cmd("fileWrite",[inner_path, $scope.imgSrc.split('base64,')[1] ], function(res) {
-					console.log(res);
-					$scope.updateChannelRecord(chJson.channel);
-				});
-			};
-			*/
-
 			// save channel details
-			$scope.onUpdateChannel = function(chJson) {
-				$scope.updateChannelRecord(chJson.channel);
+			$scope.onUpdateChannel = function(channel) {
+				console.log('on update channel');
+				$scope.channel_update = true;
+				$scope.data_json_path = $scope.inner_path + 'data.json';
+				Page.cmd("fileGet",{"inner_path":$scope.data_json_path},function(data){
+					
+					// data file
+					if (data) { 
+						data = JSON.parse(data); 
+						if (!data.channel){
+							data.channel = [];
+							data.next_channel_id = 1;
+						}
+					} else {
+						data = {"next_channel_id":1,"channel":[]}; 
+					}
+
+					var channelIndex;
+					data.channel.forEach(function(ch,index){
+						if (ch.channel_address === $scope.channel.channel_address){
+							channelIndex = index;
+						}
+					});
+
+					// remove vote from vote.json
+					data.channel.splice(channelIndex,1);
+					data.channel.push(channel);
+
+					// write to file
+					var json_raw = unescape(encodeURIComponent(JSON.stringify(data, void 0, '\t')));					
+					Page.cmd("fileWrite", [$scope.data_json_path, btoa(json_raw)], function(res) {
+						// sign & publish site
+						Page.cmd("sitePublish",{"inner_path":$scope.data_json_path}, function(res) {
+							Page.cmd("wrapperNotification", ["done", "Channel Updated!", 10000]);
+							$scope.hide();
+							var mass = {
+								inner_path:$scope.inner_path,
+								channel:channel
+							};
+							$rootScope.$broadcast('onPublishSite',mass);
+						});
+					});
+				});
 			};
 
 		};
@@ -86,26 +102,30 @@ app.directive('channelEdit', ['$sce','$location','$rootScope',
 		var template = 	'<div class="section-body edit-channel-form form well" layout="column">' +
 					        '<div class="form-row" layout="row">' +
 					          	'<label flex="20">Channel Name</label>' +
-								'<input flex="80" type="text" class="form-control" ng-model="chJson.channel.channel_name" />' +
+								'<input flex="80" type="text" class="form-control" ng-model="channel.channel_name" />' +
 					        '</div>' +
 					        '<div class="form-row" layout="row">' +
 					          	'<label flex="20">Channel Description</label>' +
-								'<input flex="80" type="text" class="form-control" ng-model="chJson.channel.channel_description">' +
+								'<input flex="80" type="text" class="form-control" ng-model="channel.channel_description">' +
 					        '</div>' +
 					        '<hr/>' +
 					        '<div class="form-row" layout="row">' +
 					          	'<label flex="20">Channel Logo</label>' +						        	
 								'<div class="logo-image-selection row" flex="80">' +
-									'<figure ng-repeat="image in chJson.items.images" class="col-xs-2" ng-init="renderImagePath(image)">' +
-										'<img style="width:100%;" ng-click="selectImageAsLogo(image)" ng-class="{selected: image.file_name === chJson.channel.logo_file}" ng-src="{{image.src}}"/>' +
+									'<figure ng-repeat="image in images" class="col-xs-2" ng-init="renderImagePath(image)" ng-class="{selected: image.file_name === channel.logo_file}">' +
+										'<img style="width:100%;" ng-click="selectImageAsLogo(image)" ng-src="{{image.src}}"/>' +
+										'<i class="fa fa-check-square" aria-hidden="true"></i>' +
 									'</figure>' +
-									'<a class="col-xs-12"  ng-if="!chJson.items.images" ng-click="onUploadClick()">you havent uploaded any images yet, upload an image to select a logo!</a>' +
+									'<a class="col-xs-12"  ng-if="!images || images.length === 0" ng-click="onUploadClick()">you havent uploaded any images yet, upload an image to select a logo!</a>' +
 								'</div>' +
 							'</div>' +
-							'<md-button class="md-primary md-raised edgePadding pull-right" ng-click="onUpdateChannel(chJson)">' +
+					        '<hr/>' +
+							'<md-button ng-if="!channel_update" class="md-primary md-raised edgePadding pull-right" ng-click="onUpdateChannel(channel)">' +
 					        	'<label>Update Channel</label>' +
 					        '</md-button> ' +
-							'</div>' +
+					        '<div layout="row" ng-if="channel_update" flex="100" layout-align="space-around" style="margin-top:-10px;">' +
+					            '<md-progress-circular md-mode="indeterminate"></md-progress-circular>' +
+					        '</div>' +
 						'</div>';
 
 		return {

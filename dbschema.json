@@ -1,31 +1,21 @@
 {
     "db_name": "ifs",
-    "db_file": "merged-IFS/ifs.db",
+    "db_file": "merged-CDN/ifs.db",
     "version": 2,
     "maps": {
         ".+/data/users/.+/data.json":{
             "to_table": [
                 {"node": "channel", "table": "channel"},
-                {"node": "item", "table": "item"}
+                {"node": "comment", "table": "comment"},                
+                {"node": "item", "table": "item"},
+                {"node": "moderation", "table": "moderation"},
+                {"node": "moderator", "table": "moderator"},
+                {"node": "vote", "table": "vote"},
+                {"node":"user","table":"user"}
             ]
-        },
-        ".+/data/users/.+/channels.json":{
-            "to_table": [{"node": "channels", "table": "channel_old"}]
         }
     },
     "tables": {
-        "category": {
-            "cols": [
-                ["category_name", "TEXT"],
-                ["category_parent", "INTEGER"],
-                ["date_added", "INTEGER"],
-                ["hide", "INTEGER"],
-                ["visible", "INTEGER"],
-                ["json_id", "INTEGER REFERENCES json (json_id)"]
-            ],
-            "indexes": ["CREATE UNIQUE INDEX category_key ON category(json_id, date_added)"],
-            "schema_changed": 1
-        },
         "channel": {
             "cols": [
                 ["channel_address", "TEXT"],
@@ -40,22 +30,6 @@
                 ["json_id", "INTEGER REFERENCES json (json_id)"]
             ],
             "indexes": ["CREATE UNIQUE INDEX channel_key ON channel(json_id, date_added)"],
-            "schema_changed": 1
-        },
-        "channel_old": {
-            "cols": [
-                ["channel_address", "TEXT"],
-                ["channel_name", "TEXT"],
-                ["channel_description", "TEXT"],
-                ["logo_file", "TEXT"],
-                ["cluster_id", "TEXT"],
-                ["date_added", "INTEGER"],
-                ["hide", "INTEGER"],
-                ["user", "TEXT"],
-                ["user_id", "TEXT"],
-                ["json_id", "INTEGER REFERENCES json (json_id)"]
-            ],
-            "indexes": ["CREATE UNIQUE INDEX channel_old_key ON channel_old(json_id, date_added)"],
             "schema_changed": 1
         },
         "category": {
@@ -94,6 +68,11 @@
                 ["file_name", "TEXT"],
                 ["file_size", "INTEGER"],
                 ["file_type", "TEXT"],
+                ["inner_file", "TEXT"],
+                ["poster_file", "TEXT"],
+                ["publisher", "TEXT"],
+                ["year", "TEXT"],
+                ["genre", "TEXT"],
                 ["title", "TEXT"],                
                 ["json_id", "INTEGER REFERENCES json (json_id)"]
             ],
@@ -113,6 +92,18 @@
             "indexes": ["CREATE UNIQUE INDEX moderation_key ON moderation(json_id, date_added)"],
             "schema_changed": 1
         },
+        "moderator": {
+            "cols": [
+                ["moderator_id", "INTEGER"],
+                ["privilege", "TEXT"],
+                ["user_id", "TEXT"],
+                ["user_name", "TEXT"],
+                ["date_added", "INTEGER"],
+                ["json_id", "INTEGER REFERENCES json (json_id)"]
+            ],
+            "indexes": ["CREATE UNIQUE INDEX moderator_key ON moderator(json_id, date_added)"],
+            "schema_changed": 1
+        },
         "vote": {
             "cols": [
                 ["vote_id", "INTEGER"],
@@ -125,6 +116,19 @@
             ],
             "indexes": ["CREATE UNIQUE INDEX vote_key ON vote(json_id, date_added)"],
             "schema_changed": 1
-        }
+        },
+        "user": {
+            "cols": [
+                ["user_id", "INTEGER"],
+                ["user_auth_address", "TEXT"],
+                ["user_name", "TEXT"],
+                ["user_old_auth_address", "TEXT"],
+                ["date_added", "INTEGER"],
+                ["cluster","TEXT"],
+                ["json_id", "INTEGER REFERENCES json (json_id)"]
+            ],
+            "indexes": ["CREATE UNIQUE INDEX user_key ON user(json_id, date_added)"],
+            "schema_changed": 1
+        }        
     }
 }

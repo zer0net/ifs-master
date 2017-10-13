@@ -14,9 +14,9 @@ app.directive('itemViewComments', ['$rootScope','$sce','$location',
 		var template =	'<comments ng-if="item" ng-init="getComments(item)">' +
 							'<div class="item-comments">' +
 								'<!-- comment form -->' +
-								'<section class="comment-form section md-whiteframe-1dp"  style="margin-top:16px;">' +
+								'<section class="comment-form "  style="margin-top:16px;">' +
 									'<div class="section-header" layout-padding>' +
-										'<h2>Comments</h2>' +
+										'<h3>Comments</h3>' +
 										'<span class="comment-counter">' +
 											'<span class="glyphicon glyphicon-comment"></span>' +
 											'<span class="number">{{comments.length}}</span>' +
@@ -27,13 +27,13 @@ app.directive('itemViewComments', ['$rootScope','$sce','$location',
 								'</section>' +
 								'<!-- /comment form -->' +
 								'<!-- comment list -->' +
-								'<section class="comment-list md-whiteframe-1dp" id="comments-section" layout-padding ng-show="comments.length > 0">' +
+								'<section class="comment-list " id="comments-section" layout-padding ng-show="comments.length > 0">' +
 									'<ul>' +
 										'<li ng-repeat="comment in comments | orderBy:\'-date_added\'" layout="row">' +
-											'<div flex="10">' +
-							                	'<identicon class="md-whiteframe-1dp" username="comment.user_id" size="56"></identicon>' +
+											'<div class="identicon-container">' +
+							                	'<identicon class="" username="comment.user_id" size="56"></identicon>' +
 											'</div>' +
-											'<div flex="90">' +
+											'<div class="comment-content">' +
 												'<span ng-bind="comment.user_id" class="user-name"></span> • ' +
 												'<span am-time-ago="comment.date_added" class="time-ago"></span>' +
 												'<p ng-bind="comment.comment"></p>' +

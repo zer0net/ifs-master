@@ -6,10 +6,7 @@ app.directive('videoPlayer', ['$sce','$timeout',
 
 		    // load video
 		    $scope.loadVideo = function(item){
-		    	console.log(item);
-		    	if (item.file_type === 'ogv'){
-		    		item.file_type = 'ogg';
-		    	}
+		    	if (item.file_type === 'ogv'){ item.file_type = 'ogg'; }
 
 		    	$scope.playerErrors = 0;
 		    	$scope.item = item;
@@ -21,7 +18,7 @@ app.directive('videoPlayer', ['$sce','$timeout',
 						autoPlay:true,
 						sources: [
 							{
-								src:'merged-'+$scope.page.site_info.content.merger_name+'/' + item.channel.cluster_id + '/data/users/' + item.channel.channel_address.split('_')[1] + '/' + item.file_name,
+								src:'merged-'+$scope.page.site_info.content.merger_name+'/' + item.cluster_id + '/data/users/' + item.channel_address.split('_')[1] + '/' + item.file_name,
 								type:item.content_type + '/' + item.file_type
 							}
 						],
@@ -33,12 +30,14 @@ app.directive('videoPlayer', ['$sce','$timeout',
 
 		    // on player ready
 		    $scope.onPlayerReady = function(API){
+		    	console.log(API);
 				$scope.API = API;
 				$scope.API.finishedLoading = true;
 		    };
 
 		    // on player error
 		    $scope.onPlayerError = function(state){
+		    	console.log(state);
 	    		$scope.player.error = true;
 	    		$scope.player.message = 'File not found'
 		    };
@@ -50,7 +49,6 @@ app.directive('videoPlayer', ['$sce','$timeout',
 
 		    // on full screen click
 			$scope.onFullScreenClick = function() {
-				console.log($scope.screenSize);
 				if ($scope.screenSize === 'full-screen'){
 					$scope.screenSize = 'normal';
 				} else {
@@ -60,24 +58,22 @@ app.directive('videoPlayer', ['$sce','$timeout',
 
 		};
 
-		var template =	'<section ng-init="loadVideo(item)">' +
+		var template =	'<section ng-init="loadVideo(item)" style="height: 400px;background-color:black;">' +
 							'<videogular ng-if="player" class="md-whiteframe-1dp {{screenSize}}"' +
 								'vg-auto-play="player.autoPlay" ' +
 								'vg-player-ready="onPlayerReady($API)" ' +
 								'vg-error="onPlayerError($event)"' +
-								'vg-theme="player.theme" ' +
-								'class="{{screenSize}}"' +
-								'style="width:100%; height:400px;">' +
+								'vg-theme="player.theme">' +
 									'<vg-media vg-src="player.sources" vg-tracks="player.tracks"></vg-media>' +
 									'<vg-controls>' +
 										'<vg-play-pause-button></vg-play-pause-button>' +
-										'<vg-time-display>{{ currentTime | date:"mm:ss" }}</vg-time-display>' +
+										'<vg-time-display>{{ currentTime | timeFilter }}</vg-time-display>' +
 										'<vg-scrub-bar>' +
 											'<vg-scrub-bar-buffer ng-if="!player.Buffer"></vg-scrub-bar-buffer>' +
 											'<div class="vg-scrub-bar-buffered" ng-if="player.Buffer" style="width:{{item.loadingPercent}}%;"></div>' +
 											'<vg-scrub-bar-current-time></vg-scrub-bar-current-time>' +
 										'</vg-scrub-bar>' +
-										'<vg-time-display>{{ timeLeft | date:"mm:ss" }}</vg-time-display>' +
+										'<vg-time-display>{{ timeLeft | timeFilter }}</vg-time-display>' +
 										'<vg-volume>' +
 											'<vg-mute-button></vg-mute-button>' +
 											'<vg-volume-bar></vg-volume-bar>' +

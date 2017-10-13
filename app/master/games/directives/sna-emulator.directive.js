@@ -180,13 +180,12 @@ app.directive('snaEmulator', ['$location','$rootScope',
 								'<input type="file" id="driveb-input" />'+
 								'<div id="driveb-led" class="led"></div>'+
 								'<div id="driveb-eject" class="button-size2 disabled-button guifx2">\'</div>'+
-								'</fieldset>'+
 								'<div id="browser-nfo" class="nfo">'+
-								'<div>CPC joystick mapped to <i>Ctrl, Alt and arrow keys.</i><br />'+
-								'Another fine release by h.p.tuttle.'+
-								'</div>'+
-								'</div>'+
-							'</div>';
+									'<div>CPC joystick mapped to <i>Ctrl, Alt and arrow keys.</i><br />'+
+									'Another fine release by h.p.tuttle.</div>'+
+								'</div>' +
+							'</fieldset>'+
+						'</div>';
 
 		
 

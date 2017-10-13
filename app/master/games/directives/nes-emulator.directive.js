@@ -5,37 +5,26 @@ app.directive('nesEmulator', ['$location','$rootScope','$timeout',
 
 			// init nes emulator
 			$scope.initNesEmulator = function(item){
-				console.log(item);
 				// nes file url
 				if (item) { $scope.item = item; }
-				var nesFile = "/"+$scope.page.site_info.address+"/merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.item.channel.cluster_id+"/data/users/"+$scope.item.channel.channel_address.split('_')[1]+"/"+$scope.item.file_name;
-				// load scripts 
-				$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/games/nes/lib/dynamicaudio-min.js', 'text/javascript', 'utf-8');
-				$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/games/nes/nes.js', 'text/javascript', 'utf-8');
-				$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/games/nes/utils.js', 'text/javascript', 'utf-8');
-				$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/games/nes/cpu.js', 'text/javascript', 'utf-8');
-				$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/games/nes/keyboard.js', 'text/javascript', 'utf-8');
-				$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/games/nes/mappers.js', 'text/javascript', 'utf-8');
-				$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/games/nes/papu.js', 'text/javascript', 'utf-8');
-				$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/games/nes/ppu.js', 'text/javascript', 'utf-8');
-				$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/games/nes/rom.js', 'text/javascript', 'utf-8');
-				$scope.loadScript('/'+$scope.page.site_info.address + '/assets/lib/games/nes/ui.js', 'text/javascript', 'utf-8');
-
+				var nesFile = "/"+$scope.page.site_info.address+"/merged-"+$scope.page.site_info.content.merger_name+"/"+$scope.item.cluster_id+"/data/users/"+$scope.item.channel_address.split('_')[1]+"/"+$scope.item.file_name;
 				$timeout(function () {
-					// init jsnes
-			        var nes = new JSNES({
-			            'ui': $('#emulator').JSNESUI({
-			                "Working": [ ]
-			            })
-			        });
-			        // remove select options
-					nes.ui.romSelect.children().remove();
-					// create select option
-					$('<option value="'+nesFile+'">'+$scope.item.title+'</option>').appendTo(nes.ui.romSelect);
-					// select rom
-					nes.ui.romSelect.val(nesFile);
-					// load nes
-					nes.ui.loadROM();
+					$scope.$apply(function(){
+						// init jsnes
+				        var nes = new JSNES({
+				            'ui': $('#emulator').JSNESUI({
+				                "Working": [ ]
+				            })
+				        });
+				        // remove select options
+						nes.ui.romSelect.children().remove();
+						// create select option
+						$('<option value="'+nesFile+'">'+$scope.item.title+'</option>').appendTo(nes.ui.romSelect);
+						// select rom
+						nes.ui.romSelect.val(nesFile);
+						// load nes
+						nes.ui.loadROM();
+					});
 				});
 			};
 
@@ -50,19 +39,19 @@ app.directive('nesEmulator', ['$location','$rootScope','$timeout',
 							    '<section class="section md-whiteframe-1dp item-info">' +
 							    	'<ul>' +
 							    		'<li>' +
-								            '<span>Button</span>' +
-								            '<span>Player 1</span>' +
-								            '<span>Player 2</span>' +
+								            '<span><b>Button</b></span>' +
+								            '<span><b>Player 1</b></span>' +
+								            '<span><b>Player 2</b></span>' +
 							            '</li>' + 
 							            '<li>' +
-								            '<td>Left</td>' +
-								            '<td>Left</td>' +
-								            '<td>Num-4</td>' +
+								            '<span>Left</span>' +
+								            '<span>Left</span>' +
+								            '<span>Num-4</span>' +
 							            '</li>' +
 							    		'<li>' +
-								            '<td>Right</td>' +
-								            '<td>Right</td>' +
-								            '<td>Num-6</td>' +
+								            '<span>Right</span>' +
+								            '<span>Right</span>' +
+								            '<span>Num-6</span>' +
 							            '</li>' + 
 								        '<li>' +
 								            '<span>Up</span>' +

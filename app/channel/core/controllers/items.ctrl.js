@@ -18,57 +18,19 @@
 				});
 			};
 
-			// init list
-			$scope.initList = function(){
-				// if channel json has items
-				if ($scope.chJson[$scope.media_type]){
-					// loop through items in channel.json
-					$scope.chJson[$scope.media_type].forEach(function(item,index){
-						// if at least one item is unpublished, show unpublished items section
-						if (item.published === false){
-							var item_id_name;
-							var item_type;
-							if (item.file_type === 'zip' || item.file_type === 'nes'){
-								item_id_name = 'game_id';
-								item.item_type = 'game';
-							} else {
-								item_id_name = 'video_id';
-								item.item_type = 'video';
-							}
-							item.edit_url = 'edit.html?item='+item[item_id_name]+'type='+item.item_type;
-							console.log(item);
-							$scope.unpublished_items = true;
-						}
-					});
-				}
-			};
-
 		/** /INIT **/
 
-		/** UPLOAD **/
-
-			// upload item
-			$scope.uploadItem = function() {
-				// loading
-				$scope.showLoadingMsg('uploading ' + $scope.item.media_type );
-				// prepare item				
-				$scope.item = $scope.prepareItem($scope.item);
-				// file path
-				Page.cmd("fileWrite",[$scope.item.path, $scope.item.file.split('base64,')[1] ], function(res) {
-					console.log(res);
-					if ($scope.item.img){
-						$scope.uploadPosterImage();
-					} else {
-						$scope.createItem();
-					}
-				});
-			};
+		/** CRUD **/
 
 			// upload poster image
 			$scope.uploadPosterImage = function(item,mode){
+				// set timeout for info message
+				$scope.setInfoMsgTimeOut();							
 				$scope.showLoadingMsg('uploading poster image');
-				var poster_path = 'merged-IFS/'+$scope.channel.cluster_id+'/data/users/'+$scope.page.site_info.auth_address+'/'+item.poster_file;
+				var poster_path = $scope.inner_path + item.poster_file;
 				Page.cmd("fileWrite",[poster_path, item.poster.split('base64,')[1] ], function(res) {
+					// hide info msg
+					$scope.hideInfoMsg();
 					delete item.poster;
 					if (mode === 'create'){
 						$scope.createItem(item);
@@ -78,37 +40,77 @@
 				});
 			};
 
-		/** /UPLOAD **/
-
-		/** CRUD **/
-
 			// update item
 			$scope.updateItem = function(item){
-				$scope.showLoadingMsg('updating ' + item.content_type + ' record');
-				// prepare item				
-				$scope.chJson.items[item.content_type + 's'].splice($scope.itemIndex,1);
-				$scope.chJson.items[item.content_type + 's'].push(item);
-				$scope.updateChannelJson();
+				// set timeout for info message
+				$scope.setInfoMsgTimeOut();				
+				$scope.showLoadingMsg('updating ' + item.content_type);
+				Page.cmd("fileGet",{"inner_path": $scope.inner_path + 'data.json'},function(data){
+					// hide info msg
+					$scope.hideInfoMsg();
+					data = JSON.parse(data);
+					var itemIndex;
+					data.item.forEach(function(itm,index){
+						if (item.channel === itm.channel){
+							itemIndex = index;
+						}
+					});
+					// remove vote from vote.json
+					data.item.splice(itemIndex,1);
+					data.item.push(item);
+					// write to file
+					var json_raw = unescape(encodeURIComponent(JSON.stringify(data, void 0, '\t')));					
+					Page.cmd("fileWrite", [$scope.inner_path + 'data.json', btoa(json_raw)], function(res) {
+						// sign & publish site
+						Page.cmd("sitePublish",{"inner_path": $scope.inner_path + 'data.json'}, function(res) {
+							Page.cmd("wrapperNotification", ["done", "Channel Updated!", 10000]);
+							$scope.publishSite();
+						});
+					});
+				});
+			};
+
+			// delete item
+			$scope.onDeleteItem = function(item) {
+				// loading				
+				$scope.showLoadingMsg('deleting ' + item.content_type);
+				$scope.deleteItem(item);
 			};
 
 			// delete item
 			$scope.deleteItem = function(item) {
-				// loading				
-				$scope.showLoadingMsg('deleting ' + item.content_type);
-				// get item index
-				var itemIndex;
-				$scope.chJson.items[item.content_type + 's'].forEach(function(itm,index) {
-					if (item.item_id === itm.item_id){
-						itemIndex = index;
-					}
-				});
-				// remove item from channel.json
-				$scope.chJson.items[item.content_type + 's'].splice(itemIndex,1);
-				// delete item file
-				var inner_path = 'merged-IFS/'+$scope.channel.cluster_id+'/data/users/'+$scope.page.site_info.auth_address+'/'+item.file_name;
-				Page.cmd("fileDelete", [inner_path], function(res) {	
-					console.log(res);
-					$scope.updateChannelJson();
+				// set timeout for info message
+				$scope.setInfoMsgTimeOut();				
+				Page.cmd("fileGet",{"inner_path":$scope.inner_path+'data.json'},function(data){
+					// hide info msg
+					$scope.hideInfoMsg();
+					data = JSON.parse(data);
+					// get item index
+					var itemIndex;
+					data.item.forEach(function(itm,index) {
+						if (item.item_id === itm.item_id){
+							itemIndex = index;
+						}
+					});
+					// remove item from data.json
+					data.item.splice(itemIndex,1);
+					// delete item file
+					console.log($scope.inner_path);
+					Page.cmd("fileDelete", [$scope.inner_path+item.file_name], function(res) {	
+						console.log(res);
+						var json_raw = unescape(encodeURIComponent(JSON.stringify(data, void 0, '\t')));
+						// update data.json
+						Page.cmd("fileWrite", [$scope.inner_path+'data.json', btoa(json_raw)], function(res) {
+							// delete optional file
+							Page.cmd("optionalFileDelete" ,{"inner_path":$scope.inner_path+'data.json'}, function(res){
+								// sign & publish site
+								Page.cmd("sitePublish",{"inner_path":$scope.inner_path+'data.json'}, function(res) {
+									Page.cmd("wrapperNotification", ["done", "Item Deleted!",10000]);								
+									$scope.publishSite();
+								});
+							});
+						});
+					});
 				});
 			};
 

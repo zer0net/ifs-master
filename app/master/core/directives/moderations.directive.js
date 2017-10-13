@@ -1,5 +1,5 @@
-app.directive('moderations', ['Item',
-	function(Item) {
+app.directive('moderations', ['Item','Channel',
+	function(Item,Channel) {
 
 		// comments controller
 		var controller = function($scope,$element) {
@@ -26,13 +26,42 @@ app.directive('moderations', ['Item',
 				$scope.createModeration(moderation);
 			};
 
+			// toggle user channels visibility
+			$scope.toggleUserChannelsVisibility = function(channel){
+				// new moderation object
+				var moderation = {
+					moderation_type:'user_channels',
+					item_id:channel.user_id,
+					current:1
+				};
+				if (channel.user_hide === 1){
+					moderation.hide = 0;
+					channel.user_hide = 0;
+				} else {
+					moderation.hide = 1;
+					channel.user_hide = 1;
+				}
+				$scope.createModeration(moderation);
+			};
+
 			// create moderation
 			$scope.createModeration = function(moderation){
-				// get user's comment.json
-				var inner_path = "data/users/"+$scope.page.site_info.auth_address+"/moderation.json";			
+				// find user cluster 
+				var cluster_id = Channel.findUserCluster($scope.page.site_info.auth_address,$scope.clusters);
+				if (cluster_id === false){
+					cluster_id = $scope.config.cluster.cluster_id;
+				}
+				// get user's data.json
+				var inner_path = "merged-"+$scope.page.site_info.content.merger_name+"/"+cluster_id+"/data/users/"+$scope.page.site_info.auth_address+"/data.json";	
 				Page.cmd("fileGet", { "inner_path": inner_path, "required": false },function(data) {
 					// data file
-					if (data) { data = JSON.parse(data); } 
+					if (data) { 
+						data = JSON.parse(data); 
+						if (!data.moderation){
+							data.moderation = [];
+							next_moderation_id = 1;
+						}
+					} 
 					else { data = {"next_moderation_id":1,"moderation":[]}; }
 					// moderation
 					moderation.date_added = +(new Date)
@@ -62,7 +91,7 @@ app.directive('moderations', ['Item',
 		return {
 			restrict: 'AE',
 			replace:false,
-			controller: controller,
+			controller: controller
 		}
 
 	}

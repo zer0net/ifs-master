@@ -5,8 +5,8 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 		var controller = function($scope,$element) {
 
 			// init
-			$scope.init = function() {
-				$scope.publishButtonStatus = 'publish';
+			$scope.initChannelHeader = function() {
+				$scope.publishButtonStatus = 'republish';
 				if ($scope.channel.logo_file) $scope.channel.logo_path = '/'+$scope.page.site_info.address+'/merged-'+$scope.page.site_info.content.merger_name+'/'+$scope.channel.cluster_id+'/data/users/'+$scope.page.site_info.auth_address+'/'+$scope.channel.logo_file;
 			};
 
@@ -17,24 +17,51 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 			};
 
 			// on channel main click
-			$scope.onChannelMainClick = function(){
-				var view = 'main';
-				$scope.routeUserView(view);
+			$scope.onChannelMainClick = function(channel){
+				if ($scope.path.indexOf('route:user') > -1){
+					if ($scope.path.split('+ch:')[1] === channel.channel_address){
+						var view = 'main';
+						$scope.routeUserView(view);
+					} else {
+						$window.location.href = '/'+$scope.page.site_info.address+'/index.html?route:user+cl:'+channel.cluster_id+'+ch:'+channel.channel_address;
+					}
+				} else {
+					var view = 'main';
+					$scope.routeUserView(view);
+				}
 			};
 
+			// get channel logo path
+			$scope.getChannelLogoPath = function(channel){
+				if (channel.logo_file){
+					channel.logo_path = '/'+$scope.page.site_info.address+'/merged-CDN/'+channel.cluster_id+'/data/users/'+channel.channel_address.split('_')[1]+'/'+channel.logo_file;
+				} else {
+					channel.logo_path = '/'+$scope.page.site_info.address+'/assets/channel/img/x-avatar.png';
+				}
+			}
+
 			// on publish site
-			$scope.onPublishSite = function() {
+			$scope.onRepublishSite = function() {
 				$scope.publishButtonStatus = 'Now Updating and Publishing...';
-				$scope.publishSite();
+				console.log($scope.inner_path);
+				console.log($scope.channel);
+				$scope.republishSite($scope.inner_path,$scope.channel);
 			};
 
 			$rootScope.$on('resetPublishButton',function(event,mass) {
 				$scope.publishButtonStatus = 'publish';
 			});
 
-			// on select site
-			$scope.onSelectSite = function(channel){
-				$window.location.href = '/'+ $scope.page.site_info.address +'/user/index.html?cl='+channel.cluster_id + '+ch=' + channel.channel_address;
+			// on select cluster
+			$scope.onSelectCluster = function(cluster){
+				$scope.setCluster(cluster);				
+				if ($scope.u_channels){
+					$scope.u_channels.forEach(function(channel,index){
+						if (channel.cluster_id === cluster.address){
+							$window.location.href = '/'+$scope.page.site_info.address+'/index.html?route:user+cl:'+channel.cluster_id+'+ch:'+channel.channel_address;						
+						}
+					});
+				}
 			};
 
 			/** DIALOGS **/
@@ -51,42 +78,7 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 										    	'</div>' +
 										    '</md-toolbar>' +
 										    '<md-dialog-content>' +
-										    	'<channel-edit ng-init="initChannelEdit(items.chJson,items.page,items.merger_name,items.channel)"></channel-edit>' +
-										    '</md-dialog-content>' +
-										'</md-dialog>';
-
-			    $mdDialog.show({
-					controller: DialogController,
-					template: dialogTemplate,
-					parent: angular.element(document.body),
-					targetEvent: ev,
-					clickOutsideToClose:true,
-					fullscreen: useFullScreen,
-					locals: {
-						items:{
-							chJson:$scope.chJson,
-							page:$scope.page,
-							merger_name:$scope.page.site_info.content.merger_name,
-							channel:$scope.channel
-						}
-					}
-			    });
-			};
-
-
-			// open edit channel dialog
-			$scope.openNewChannelDialog = function(ev) {
-				$scope.status = '';
-				$scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
-			    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs'))  && $scope.customFullscreen;
-			    var dialogTemplate = 	'<md-dialog aria-label="New Channel">' +
-										    '<md-toolbar>' +
-										    	'<div class="md-toolbar-tools">' +
-											        '<h2>Create New Channel</h2>' +
-										    	'</div>' +
-										    '</md-toolbar>' +
-										    '<md-dialog-content layout-padding>' +
-										    	'<channel-register  ng-init="initNewChannelForm(items.scope.page,items.scope.u_channels)"></channel-register>' +
+										    	'<channel-edit ng-init="initChannelEdit(items.scope)"></channel-edit>' +
 										    '</md-dialog-content>' +
 										'</md-dialog>';
 
@@ -109,45 +101,35 @@ app.directive('channelSiteHeader', ['$rootScope','$location','$mdDialog','$mdMed
 
 		// site header template	
 		var template = 	'<div class="wrapper channel-menu">'+
-							'<div class="container-fluid select-channel">' +
-								'<label>Select channel: </label>' +											
-								'<select class="form-control" ng-model="channel" value="channel.channel_address" ng-options="channel.option_label for channel in u_channels" ng-change="onSelectSite(channel)"></select>' +
-								'<md-button class="md-primary md-raised edgePadding pull-right" style="margin:0;" ng-click="openNewChannelDialog()">New Channel</md-button>' + 				       
+							'<div class="channel-site-header-left">' +
+								'<figure class="logo" ng-init="getChannelLogoPath(channel)">' +
+									'<img ng-if="channel.logo_path" ng-src="{{channel.logo_path}}"/>' + 
+								'</figure>' +
+								'<div class="site-title">' + 
+									'<h3>' + 
+										'<a ng-click="onChannelMainClick(channel)"> {{channel.channel_name}} </a>' + 
+										'<small><a ng-click="openChannelEditDialog(channel)"><span class="glyphicon glyphicon-pencil"></span></a></small>' + 
+									'</h3>' +
+								'</div>' + 
 							'</div>' +
-						'</div>' +
-						'<md-toolbar ng-if="u_channels" ng-init="init()" layout-padding class="md-hue-2 header" layout="row">' +
-							'<div class="col-xs-5">' + 
-								'<div class="channel-header-top">' + 
-									'<figure class="logo">' + 
-										'<img ng-if="channel.logo_file" ng-src="{{channel.logo_path}}">' +
-									'</figure>' +
-									'<div class="site-title" ng-if="channel">' + 
-										'<h3>' + 
-											'<a ng-click="onChannelMainClick()"> {{channel.channel_name}} </a>' + 
-											'<small><a ng-click="openChannelEditDialog(channel)"><span class="glyphicon glyphicon-pencil"></span></a></small>' + 
-										'</h3>' + 										
-										'<div class="channel-description">{{channel.channel_description}}</div>' +
-									'</div>' + 
-								'</div>' +
-								'<div class="channel-header-bottom" ng-if="channel">' + 
-									'<div class="sub-title">' + 
-										'<small>' + 
-											'Cluster : &nbsp;{{cluster.content.title}} &nbsp; • &nbsp; Files &nbsp;  {{ch_files.total_downloaded}} / {{ch_files.total}} Total &nbsp;• &nbsp; Size : &nbsp;{{ch_files.total_downloaded_size|filesize}} / {{ch_files.total_size|filesize}} Total' +
-										'</small>' + 
-									'</div>' + 
-								'</div>' +
-							'</div>' + 
-							'<div class="pull-right col-xs-7">' + 
-								'<ul>' +	
+							'<div class="channel-site-header-right">' +
+								'<ul ng-if="u_channels && channel" ng-init="initChannelHeader()">' +
 						        	'<li>' +
-										'<md-button class="md-primary md-raised edgePadding pull-left" ng-click="onUploadClick()">Upload</md-button>' + 				       
+						        		'<a ng-click="onUploadClick()">'  +
+						        			'<i class="fa fa-cloud-upload fa-25x"></i>' +
+						        			'<span class="txt">Upload</span>' +
+						        		'</a>' +
 						        	'</li>' +
 						        	'<li>' +
-										'<md-button class="md-primary md-raised edgePadding pull-left" ng-click="onPublishSite()">{{publishButtonStatus}}</md-button>' + 				       
-						        	'</li>' + 						        	
+						        		'<a ng-click="onRepublishSite()">'  +
+						        			'<i class="fa fa-refresh fa-25x"></i>' +
+						        			'<span class="txt">{{publishButtonStatus}}</span>' +
+						        		'</a>' +					        	
+						        	'</li>' + 	        	
 								'</ul>' + 
-					        '</div>' + 
-						'</md-toolbar>';
+							'</div>' +
+						'</div>';
+
 		return {
 			restrict: 'AE',
 			replace:false,

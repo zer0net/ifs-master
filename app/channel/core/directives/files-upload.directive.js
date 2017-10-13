@@ -1,11 +1,11 @@
-app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
-	function($location,Item,$mdDialog,$mdMedia) {
+app.directive('filesUpload', ['$location','Item','File','$mdDialog','$mdMedia',
+	function($location,Item,File,$mdDialog,$mdMedia) {
 
 		// image upload controller
 		var controller = function($scope,$element) {
 
 			// init
-			$scope.init = function(chJson,site,merger_name){
+			$scope.init = function(){
 				// items upload config
 				$scope.itemsUploadConfig = {
 				    'options': { // passed into the Dropzone constructor
@@ -14,20 +14,11 @@ app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
 				    },
 					'eventHandlers': {
 						'sending': function (file, xhr, formData) {
+							$scope.loading_files = true;
 							$scope.readFile(file,xhr,formData);
 						}
 					}
 				};
-			};
-
-			// loading & msg
-			$scope.showUploadImg = function(){				
-				$scope.uploading = true;
-			};
-
-			// finish loading
-			$scope.finishUploadImg = function(){
-				$scope.uploading = false;
 			};
 
 			// read files
@@ -37,32 +28,8 @@ app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
 				$scope.reader = new FileReader();
 				// reader onload
 				$scope.reader.onload = function(){
-					// render file on read
-					file = Item.renderFileOnRead(file,this);
-					// if zip file, get inner file
-					if (file.file_type === 'zip'){
-						// js zip instance
-						var zip = new JSZip();
-						// js zip - loop through files in zip in file
-						zip.loadAsync(file).then(function(zip) {
-							file.zip_files = [];
-							// for every file in zip
-							for (var i in zip.files){ 
-								var f = zip.files[i];
-								file.zip_files.push(f);
-								// if file is .com / .exe
-								if (f.name.indexOf(".COM") > -1 || 
-									f.name.indexOf(".EXE") > -1 || 
-									f.name.indexOf(".com") > -1 ||
-									f.name.indexOf(".exe") > -1){
-									// inner file
-									file.inner_file  = f.name;
-									$scope.$apply();
-								}
-							}
-						});
-					}
-
+					// check folder for duplicate file name etc'
+					file = File.onFileRead($scope.cluster,$scope.channel,this,file);
 					// files array
 					if (!$scope.files) $scope.files = [];
 					// push file to files array
@@ -72,6 +39,12 @@ app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
 				};
 				// reader read file
 				$scope.reader.readAsDataURL(file);
+			};
+
+			// remove file
+			$scope.removeFile = function(index){
+				$scope.files.splice(index,1);
+				if ($scope.files.length === 0) delete $scope.files;
 			};
 
 			// assign default category
@@ -95,9 +68,9 @@ app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
 				// error check
 				$scope.errors = false;
 				$scope.files.forEach(function(file,index){
+					file.errors = [];
 					// if no category
 					if (!file.category){
-						if (!file.errors) file.errors = [];
 						$scope.errors = true;
 						var error = {
 							type:'category',
@@ -107,7 +80,6 @@ app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
 					}
 					// if no subcategory
 					if (!file.subcategory){
-						if (!file.errors) file.errors = [];
 						$scope.errors = true;
 						var error = {
 							type:'subcategory',
@@ -115,33 +87,51 @@ app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
 						};
 						file.errors.push(error);						
 					}
+					// if file type nor allowed
+					if ($scope.config.file_types.indexOf(file.file_type) === -1){
+						$scope.errors = true;
+						var error = {
+							type:'file_type',
+							msg:'file type .'+file.file_type+' not supported'
+						};
+						file.errors.push(error);
+					}
 				});
 				// if no error check
 				if ($scope.errors === false){
-					$scope.onUploadFiles();
+					$scope.file_index = 0;					
+					$scope.uploadFiles();
 				}
 			};
 
 			// upload files
-			$scope.onUploadFiles = function(){
-				Page.cmd("fileGet",{"inner_path":$scope.inner_path + 'data.json'},function(data){
-					if (data) { 
-						data = JSON.parse(data);
-						if (!data.item){
-							data.next_item_id = 1;
-							data.item = [];
+			$scope.uploadFiles = function(){
+				// set timeout for info message
+				$scope.setInfoMsgTimeOut();				
+				$scope.uploading = true;
+				$scope.data_json_path = $scope.inner_path + 'data.json';
+				Page.cmd("fileGet",{"inner_path":$scope.data_json_path},function(data){
+					// hide info msg
+					$scope.hideInfoMsg();					
+					$scope.$apply(function(){
+						if (data) { 
+							data = JSON.parse(data);
+							if (!data.item){
+								data.next_item_id = 1;
+								data.item = [];
+							}
+							$scope.dataJson = data;
+							$scope.uploadFile($scope.files[$scope.file_index]);
+						} else {
+							$scope.fixWrongCluster();
 						}
-					}
-					else (data = {"next_item_id":1,"item":[]})
-					$scope.dataJson = data;
-					$scope.file_index = 0;
-					$scope.uploadFile($scope.files[$scope.file_index]);
+					});
 				});
 			};
 			
 			// upload  file
 			$scope.uploadFile = function(file){
-				if ($scope.ifFileExist(file)) {
+				if (File.ifFileExist(file,$scope.items)) {
 					file.state = 'exists';
 					$scope.uploadNextFile();
 				} else {
@@ -161,20 +151,7 @@ app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
 							$scope.uploadNextFile();
 						});
 					});
-				}	
-			};
-			
-			// check if file existing
-			$scope.ifFileExist = function(file){
-				var b = false;
-				if ($scope.items){
-					$scope.items.forEach(function(item,index){
-						if (item.file_name === file.file_name){
-							b = true;
-						}
-					});
 				}
-				return b;
 			};
 
 			// upload next file
@@ -189,19 +166,68 @@ app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
 
 			// finish uploading files
 			$scope.finishUploadingFiles = function(){
-				var json_raw = unescape(encodeURIComponent(JSON.stringify($scope.dataJson, void 0, '\t')));					
-				Page.cmd("fileWrite", [$scope.inner_path + 'data.json', btoa(json_raw)], function(res) {
+				$scope.showLoadingMsg('updating data.json');
+				var json_raw = unescape(encodeURIComponent(JSON.stringify($scope.dataJson, void 0, '\t')));
+				Page.cmd("fileWrite", [$scope.data_json_path, btoa(json_raw)], function(res) {
 					// sign & publish site
-					Page.cmd("sitePublish",{"inner_path":$scope.inner_path + 'data.json'}, function(res) {
-						// apply to scope
-						$scope.$apply(function() {
-							Page.cmd("wrapperNotification", ["done", "Finished Uploading Files!", 10000]);
-							$scope.publishSite();
-						});
+					Page.cmd("sitePublish",{"inner_path":$scope.data_json_path}, function(res) {
+						Page.cmd("wrapperNotification", ["done", "Finished Uploading Files!", 10000]);
+						$scope.publishSite();
 					});
 				});			
 			};
 			
+			// loading & msg
+			$scope.showUploadImg = function(){				
+				$scope.uploading = true;
+			};
+
+			// finish loading
+			$scope.finishUploadImg = function(){
+				$scope.uploading = false;
+			};
+
+			// fix wrong cluster
+			$scope.fixWrongCluster = function(){
+				var inner_path = 'merged-IFS/1MzV32sv55VSD5Vr7u3mcMPsX2oG9PHusr/data/users/'+$scope.page.site_info.auth_address+'/data.json';
+				Page.cmd("fileGet",{"inner_path":inner_path},function(data){
+					if (data){
+						data = JSON.parse(data);
+						var chIndex;
+						data.channel.forEach(function(ch,index){
+							if (ch.channel_address === $scope.channel.channel_address){
+								chIndex = index;
+							}
+						});
+						data.channel.splice(chIndex,1);
+						var json_raw = unescape(encodeURIComponent(JSON.stringify(data, void 0, '\t')));
+						Page.cmd("fileWrite", [inner_path, btoa(json_raw)], function(res) {
+							// sign & publish site
+							Page.cmd("sitePublish",{"inner_path":inner_path}, function(res) {
+								$scope.dataJson = {
+									channel:$scope.channel,
+									next_channel_id:2,
+									item:[],
+									next_item_id:1
+								};
+								$scope.$apply(function(){
+									$scope.uploadFile($scope.files[$scope.file_index]);
+								});
+							});
+						});
+					} else {
+						$scope.dataJson = {
+							channel:$scope.channel,
+							next_channel_id:2,
+							item:[],
+							next_item_id:1
+						};
+						$scope.$apply(function(){
+							$scope.uploadFile($scope.files[$scope.file_index]);
+						});
+					}
+				});
+			};
 
 			// select inner file dialog
 			$scope.selectInnerFileDialog = function(ev,file){
@@ -266,37 +292,65 @@ app.directive('filesUpload', ['$location','Item','$mdDialog','$mdMedia',
 		var template = '<div id="files-upload" ng-init="init()">' +
 							'<h2>Upload</h2>' + 
 							'<hr/>' + 
-							'<button style="width:100%;height:200px;" dropzone="itemsUploadConfig" ng-hide="files" multiple>Click here to upload OR Drag & drop files</button>' +
+							'<button style="width:100%;height:200px;" dropzone="itemsUploadConfig" ng-if="!files" multiple>Click here to upload OR Drag & drop files</button>' +
 							'<ul ng-show="files" categories ng-init="getCategories()">'+
-								'<li class="list-header" layout="row"><span flex="35">File</span><span flex="5">Type</span><span flex="10">Size</span><span flex="20">Category</span><span flex="20">Sub</span><span flex="5">State</span>' +
+								'<li class="list-header" layout="row">' +
+									'<span flex="20">Title</span>' +
+									'<span flex="20">File Name</span>' +
+									'<span flex="5">Type</span>' +
+									'<span flex="5">Filetype</span>' +
+									'<span flex="10">Size</span>' +
+									'<span flex="15">Category</span>' +
+									'<span flex="15">Sub</span>' +
+									'<span style="text-align:center;" flex="5">Actions</span>' +
+									'<span style="text-align:center;" flex="5">State</span>' +
+								'</li>' +
 								'<li ng-repeat="file in files" layout="column">' +
-									'<div layout="row">' + 
-										'<div flex="35" class="file-title">' +  
-											'<span ng-bind="file.f_name"></span><br/>' + 
-											'<a ng-click="selectInnerFileDialog($event,file)"><small ng-if="file.inner_file">Inner file: ({{file.inner_file}})</small></a>' + 
+									'<div layout="row" class="file-item-row">' + 
+										'<div flex="20" class="file-title">' +  
+											'<span>{{file.title}}</span>' + 
 										'</div>' +
-										'<div flex="5" ng-bind="file.file_type" class="file-type"></div>' +
+										'<div flex="20" class="file-name">' +
+												'<span>' +
+													'{{file.file_name}}<br/>' + 
+													'<a ng-click="selectInnerFileDialog($event,file)"><small class="inner-file-name" ng-if="file.inner_file">Inner file: ({{file.inner_file}})</small></a>' + 
+												'</span>' +
+											'</div>' +
+										'<div flex="5" class="file-type">{{file.content_type}}</div>' +
+										'<div flex="5" class="file-filetype">{{file.file_type}}</div>' +
 										'<div flex="10" class="file-size">{{file.size|filesize}}</div>' +
-										'<div flex="20" class="file-category" ng-init="assignDefaultCategory(file,categories)">' +
+										'<div flex="15" class="file-category" ng-init="assignDefaultCategory(file,categories)">' +
 											'<select class="form-control" ng-model="file.category" value="category.category_name" ng-options="category.category_name for category in categories"></select>' +
 										'</div>' +
-										'<div flex="20" class="file-subcategory" ng-if="file.category">' +
+										'<div flex="15" class="file-subcategory" ng-if="file.category">' +
 											'<select class="form-control" ng-model="file.subcategory" value="subcategory.category_name" ng-options="subcategory.category_name for subcategory in file.category.subcategories"></select>' +
 										'</div>' +
 										'<div flex="5" class="file-actions">' +
+											'<a ng-click="removeFile($index)"><span class="glyphicon glyphicon-remove"></span></a>' +
+										'</div>' +
+										'<div flex="5" class="file-state">' +
 											'<span ng-if="file.state === \'pending\'" class="glyphicon glyphicon-option-horizontal"></span>' +
 											'<md-progress-circular ng-if="file.state==\'uploading\'" md-diameter="20px" style="float:left;width: 20px; height: 20px;" md-mode="indeterminate"></md-progress-circular>' +
 											'<span ng-if="file.state === \'done\'" style="rgb(63,81,181)" class="glyphicon glyphicon-ok-circle"></span>' +
-										'</div>' +	
+										'</div>' +
 									'</div>' + 
 									'<div layout="row" class="errors">' + 
 										'<span ng-repeat="error in file.errors">* {{error.msg}}</span>' +
 									'</div>' +								
 								'</li>' +
 							'</ul>' +
-	            			'<md-button ng-if="files" flex="100" style="margin: 16px 0 0 0; width:100%;" class="md-primary md-raised edgePadding pull-right" ng-click="onUploadFiles()">' +
-	            				'<label>Upload files</label>' +
-	            			'</md-button>'
+							'<hr style="margin-top: 20px;margin-bottom: 0;"/>' +
+	            			'<md-button ng-hide="uploading" ng-if="files" flex="100" style="margin: 16px 0 0 0; width:100%;" class="md-primary md-raised edgePadding pull-right" ng-click="onUploadFiles()">Upload files</md-button>' +
+	            			'<!-- loading -->' +
+							'<div id="upload-loading" layout="column" ng-show="uploading" flex>' +
+							    '<div layout="column" flex="100" style="text-align:center;">' +
+							        '<span>uploading files..</span>' +
+							    '</div>' +
+							    '<div layout="row" flex="100" layout-align="space-around">' +
+							        '<md-progress-circular md-mode="indeterminate"></md-progress-circular>' +
+							    '</div>' +
+							'</div>' +
+							'<!-- /loading -->' +
 						'</div>';
 
 		return {
